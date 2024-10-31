@@ -394,6 +394,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725775470ae19ca47bff9ed3bdefea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentUser:
+    email: 
+    username: 
+    password: 
+    coin: 0
+    ownedSkins: []
+    selectedSkin: 
 --- !u!114 &377455271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +413,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00efa8143442cce4c8ce69c541e26fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skinModelPrefab: {fileID: 22846015}
+  btnBuy: {fileID: 1313526111}
+  btnSelect: {fileID: 1979229550}
+  btnPrev: {fileID: 1982347475}
+  btnNext: {fileID: 381453126}
+  btnBuyText: {fileID: 1135369357}
+  btnSelectText: {fileID: 1900577639}
+  txtUserCoin: {fileID: 1332097242}
+  txtSkinName: {fileID: 649776085}
+  txtUsername: {fileID: 1600352796}
+  rotationSpeed: 250
 --- !u!1 &381453124
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +944,7 @@ GameObject:
   - component: {fileID: 1135369358}
   - component: {fileID: 1135369357}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtBuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1571,7 +1589,7 @@ GameObject:
   - component: {fileID: 1900577640}
   - component: {fileID: 1900577639}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: txtSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
