@@ -155,8 +155,9 @@ namespace SlimUI.ModernMenu{
 		public void Position1(){
 			CameraObject.SetFloat("Animate",0);
 		}
+       
 
-		void DisablePanels(){
+        void DisablePanels(){
 			PanelControls.SetActive(false);
 			PanelVideo.SetActive(false);
 			PanelGame.SetActive(false);
