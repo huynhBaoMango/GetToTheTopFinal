@@ -25,7 +25,7 @@ public class GridMaker : MonoBehaviour
         if (tilePrefab != null)
         {
             CreateGrid();
-            PlaceRandomObject();
+            PlaceRandomObject1();
         }
         else
         {
@@ -120,4 +120,46 @@ public class GridMaker : MonoBehaviour
         }
         return false;
     }
+
+    void PlaceRandomObject1()
+    {
+        List<Vector2Int> positions = GetPositionsFromOutsideToInside();
+
+        int objectCount = 0;
+        foreach (Vector2Int pos in positions)
+        {
+            if (CheckIfValidToSpawn(pos))
+            {
+                objectCount++;
+                if (objectCount >= 10) break; // Dừng lại khi đã đặt đủ 10 vật thể
+            }
+        }
+    }
+
+    List<Vector2Int> GetPositionsFromOutsideToInside()
+    {
+        List<Vector2Int> positions = new List<Vector2Int>();
+
+        for (int layer = 0; layer < (width + height) / 2; layer++)
+        {
+            // Duyệt theo các cạnh của hình chữ nhật từ ngoài vào trong
+            for (int x = layer; x < width - layer; x++)
+            {
+                positions.Add(new Vector2Int(x, layer)); // Top edge
+                if (layer != height - layer - 1) // tránh lặp lại hàng dưới
+                    positions.Add(new Vector2Int(x, height - layer - 1)); // Bottom edge
+            }
+            for (int y = layer + 1; y < height - layer - 1; y++)
+            {
+                positions.Add(new Vector2Int(layer, y)); // Left edge
+                if (layer != width - layer - 1) // tránh lặp lại cột phải
+                    positions.Add(new Vector2Int(width - layer - 1, y)); // Right edge
+            }
+        }
+
+        return positions;
+    }
 }
+
+
+
