@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 370994057}
   - component: {fileID: 370994056}
   - component: {fileID: 370994061}
-  - component: {fileID: 370994062}
   - component: {fileID: 370994060}
   m_Layer: 0
   m_Name: Cube (2)
@@ -337,19 +336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ba70048f3d415419092476cd9b9023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &370994062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370994055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb6c1d83ba095b449e02c052ef15e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionIcon: {fileID: 637992636}
 --- !u!1 &637992636
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +634,6 @@ GameObject:
   - component: {fileID: 730020472}
   - component: {fileID: 730020471}
   - component: {fileID: 730020476}
-  - component: {fileID: 730020477}
   - component: {fileID: 730020475}
   m_Layer: 0
   m_Name: Cube (1)
@@ -782,19 +767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ba70048f3d415419092476cd9b9023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &730020477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730020470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb6c1d83ba095b449e02c052ef15e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionIcon: {fileID: 637992636}
 --- !u!1 &854421076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,7 +1377,6 @@ GameObject:
   - component: {fileID: 23566072284818530}
   - component: {fileID: 65568926737017872}
   - component: {fileID: 2141185100}
-  - component: {fileID: 65568926737017873}
   - component: {fileID: 2141185093}
   m_Layer: 0
   m_Name: Little cactus 1
@@ -1427,7 +1398,6 @@ GameObject:
   - component: {fileID: 23736903514894823}
   - component: {fileID: 65084040611702919}
   - component: {fileID: 723504011}
-  - component: {fileID: 65084040611702920}
   - component: {fileID: 723504004}
   m_Layer: 0
   m_Name: Little cactus 2
@@ -1587,19 +1557,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0020629398, y: 0.0020629393, z: 0.003313727}
   m_Center: {x: -3.4924597e-10, y: 0.000000002793967, z: 0.0016544712}
---- !u!114 &65084040611702920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860128525915337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb6c1d83ba095b449e02c052ef15e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionIcon: {fileID: 637992636}
 --- !u!65 &65568926737017872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1621,19 +1578,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0021958607, y: 0.0021846849, z: 0.00340246}
   m_Center: {x: 0.00000010576332, y: 0.0000058927094, z: 0.0016988376}
---- !u!114 &65568926737017873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470685760327734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb6c1d83ba095b449e02c052ef15e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionIcon: {fileID: 637992636}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
