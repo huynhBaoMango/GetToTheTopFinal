@@ -122,11 +122,12 @@ namespace scgFullBodyController
             originalCamPos = mainCam.transform.localPosition;
         }
 
-        public void initiliazeOrigPositions()
+        public void initializeOrigPositions()
         {
             originalAimPos = mainHandTransform.localPosition;
             originalAimRot = mainHandTransform.localEulerAngles;
         }
+
 
         void Update()
         {
