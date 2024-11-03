@@ -1,10 +1,13 @@
-﻿using NaughtyAttributes;
+﻿using FishNet.Component.Transforming;
+using FishNet.Object;
+using FishNet.Object.Synchronizing;
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonCreator : MonoBehaviour
+public class DungeonCreator : NetworkBehaviour
 {
     public int dungeonWidth, dungeonLength;
     public int roomWidthMin, roomLengthMin;
@@ -23,15 +26,15 @@ public class DungeonCreator : MonoBehaviour
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
 
-
-    // Start is called before the first frame update
-    void Start()
+    [Button]
+    [ServerRpc(RequireOwnership = false)]
+    public void CreateDungeon()
     {
-        //CreateDungeon();
+        CreateDungeonServerRpc();
     }
 
-    [Button]
-    public void CreateDungeon()
+    
+    public void CreateDungeonServerRpc()
     {
         DestroyAllChildren();
         DugeonGenerator generator = new DugeonGenerator(dungeonWidth, dungeonLength);
@@ -42,7 +45,8 @@ public class DungeonCreator : MonoBehaviour
             roomTopCornerMidifier,
             roomOffset,
             corridorWidth);
-        GameObject wallParent = new GameObject("WallParent");
+        GameObject wallParent = new GameObject("WallParent", typeof(NetworkObject));
+        ServerManager.Spawn(wallParent);
         wallParent.transform.parent = transform;
         possibleDoorVerticalPosition = new List<Vector3Int>();
         possibleDoorHorizontalPosition = new List<Vector3Int>();
@@ -69,7 +73,8 @@ public class DungeonCreator : MonoBehaviour
 
     private void CreateWall(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
-        Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+        GameObject wall = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+        ServerManager.Spawn(wall);
     }
 
     private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner, Node.NodeType thistype)
@@ -107,7 +112,8 @@ public class DungeonCreator : MonoBehaviour
         mesh.uv = uvs;
         mesh.triangles = triangles;
 
-        GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer));
+        GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(NetworkObject), typeof(NetworkTransform));
+        ServerManager.Spawn(dungeonFloor);
         if (thistype.Equals(Node.NodeType.Room))
         {
             var GridMaker = dungeonFloor.AddComponent<GridMaker>();
@@ -118,6 +124,7 @@ public class DungeonCreator : MonoBehaviour
         dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
         dungeonFloor.GetComponent<MeshRenderer>().material = material;
         dungeonFloor.transform.parent = transform;
+        dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
 
         for (int row = (int)bottomLeftV.x; row < (int)bottomRightV.x; row++)
         {
@@ -139,6 +146,7 @@ public class DungeonCreator : MonoBehaviour
             var wallPosition = new Vector3(bottomRightV.x, 0, col);
             AddWallPositionToList(wallPosition, possibleWallVerticalPosition, possibleDoorVerticalPosition);
         }
+        
     }
 
     private void AddWallPositionToList(Vector3 wallPosition, List<Vector3Int> wallList, List<Vector3Int> doorList)
@@ -154,16 +162,31 @@ public class DungeonCreator : MonoBehaviour
         }
     }
 
-    
 
     private void DestroyAllChildren()
     {
-        while(transform.childCount != 0)
+        // Lưu danh sách GameObject con
+        List<GameObject> children = new List<GameObject>();
+
+        // Lưu tất cả GameObject con vào danh sách
+        foreach (Transform child in transform)
         {
-            foreach(Transform item in transform)
+            children.Add(child.gameObject);
+        }
+
+        // Duyệt qua danh sách và xóa từng GameObject
+        foreach (GameObject child in children)
+        {
+            if (child.TryGetComponent<NetworkObject>(out var networkObject))
             {
-                DestroyImmediate(item.gameObject);
+                ServerManager.Despawn(networkObject);
+                Destroy(child);
+            }
+            else
+            {
+                Destroy(child); // Nếu không có NetworkObject, có thể dùng Destroy
             }
         }
     }
+
 }

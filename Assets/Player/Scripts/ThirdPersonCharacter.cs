@@ -1,3 +1,4 @@
+using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace scgFullBodyController
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(Animator))]
-    public class ThirdPersonCharacter : MonoBehaviour
+    public class ThirdPersonCharacter : NetworkBehaviour
     {
         //IMPORTANT, this script needs to be on the root transform
 

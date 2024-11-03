@@ -1,3 +1,4 @@
+using FishNet.Object;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 namespace scgFullBodyController
 {
     [RequireComponent(typeof(ThirdPersonCharacter))]
-    public class ThirdPersonUserControl : MonoBehaviour
+    public class ThirdPersonUserControl : NetworkBehaviour
     {
         //IMPORTANT, this script needs to be on the root transform
 
@@ -76,7 +77,7 @@ namespace scgFullBodyController
         private void Update()
         {
             //Input sensing
-
+            if(!base.IsOwner) return;
             verticalInput = Input.GetAxis("Vertical");
             horizontalInput = Input.GetAxis("Horizontal");
 

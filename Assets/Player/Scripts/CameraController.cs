@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using FishNet.Object;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace scgFullBodyController
 {
-    public class CameraController : MonoBehaviour
+    public class CameraController : NetworkBehaviour
     {
         public float Sensitivity = 10f;
         public float minPitch = -30f;

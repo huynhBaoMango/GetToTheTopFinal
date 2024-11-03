@@ -50413,6 +50413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97b00607e06c994e863dbf8c0db3a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   dungeonWidth: 100
   dungeonLength: 100
   roomWidthMin: 30
@@ -50423,8 +50426,10 @@ MonoBehaviour:
   roomBottomCornerModifier: 0
   roomTopCornerMidifier: 0.705
   roomOffset: 0
-  wallVertical: {fileID: 8753675751577585064, guid: 76257fc4964cd484989e3a56a342b94e, type: 3}
-  wallHorizontal: {fileID: 2983560248429768675, guid: 0b84e1940b269ca4fbec190d930348ae, type: 3}
+  wallVertical: {fileID: 8753675751577585064, guid: 76257fc4964cd484989e3a56a342b94e,
+    type: 3}
+  wallHorizontal: {fileID: 2983560248429768675, guid: 0b84e1940b269ca4fbec190d930348ae,
+    type: 3}
 --- !u!1 &4062527348024379140
 GameObject:
   m_ObjectHideFlags: 0
