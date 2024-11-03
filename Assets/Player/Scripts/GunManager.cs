@@ -114,7 +114,7 @@ namespace scgFullBodyController
             //Initialize the correct original aim position if it is the first time swapping
             if (!weapons[index].GetComponent<GunController>().aimPosSet)
             {
-                weapons[index].GetComponent<GunController>().initiliazeOrigPositions();
+                weapons[index].GetComponent<GunController>().initializeOrigPositions();
                 weapons[index].GetComponent<GunController>().aimPosSet = true;
             }
 
