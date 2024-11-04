@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using FishNet.Object;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace scgFullBodyController
 {
-    public class CameraControlledIK : MonoBehaviour
+    public class CameraControlledIK : NetworkBehaviour
     {
         public Transform spineToOrientate;
 
