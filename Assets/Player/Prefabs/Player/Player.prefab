@@ -819,7 +819,7 @@ Transform:
   m_GameObject: {fileID: 1613237891443721541}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1217258, z: -0.087927654}
+  m_LocalPosition: {x: -0.017, y: 1.1217258, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -838,6 +838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efe17073618cf541930b3e51a7f60a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 5
+  _addedNetworkObject: {fileID: 7495925464286843270}
+  _networkObjectCache: {fileID: 7495925464286843270}
   spineToOrientate: {fileID: 7211634404034403468}
 --- !u!114 &224803275416036933
 MonoBehaviour:
@@ -851,7 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5799ff13f70ed4eac99b620e1c5928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 7495925464286843270}
   _networkObjectCache: {fileID: 7495925464286843270}
   Sensitivity: 2
@@ -1432,7 +1435,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.913, y: 1.438, z: -1.845}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 369318418288536012}
@@ -1762,6 +1765,7 @@ MonoBehaviour:
   - {fileID: 2825457075662183555}
   - {fileID: 6174251142368145633}
   - {fileID: 1844123866115793431}
+  - {fileID: 544282582545735097}
   - {fileID: 224803275416036933}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
@@ -1771,6 +1775,7 @@ MonoBehaviour:
   _isSpawnable: 1
   _isGlobal: 0
   _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0

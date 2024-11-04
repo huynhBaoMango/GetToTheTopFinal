@@ -1,11 +1,13 @@
 ﻿using FishNet.Component.Transforming;
 using FishNet.Object;
+using FishNet.Connection;
 using FishNet.Object.Synchronizing;
 using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DungeonCreator : NetworkBehaviour
 {
@@ -20,14 +22,22 @@ public class DungeonCreator : NetworkBehaviour
     public float roomTopCornerMidifier;
     [Range(0, 2)]
     public int roomOffset;
-    public GameObject wallVertical, wallHorizontal;
+    public GameObject wallVertical, wallHorizontal, ground;
     List<Vector3Int> possibleDoorVerticalPosition;
     List<Vector3Int> possibleDoorHorizontalPosition;
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
 
+
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        CreateDungeonServerRpc();
+    }
+
     [Button]
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc(RequireOwnership =false)]
     public void CreateDungeon()
     {
         CreateDungeonServerRpc();
@@ -36,7 +46,7 @@ public class DungeonCreator : NetworkBehaviour
     
     public void CreateDungeonServerRpc()
     {
-        DestroyAllChildren();
+        //DestroyAllChildren();
         DugeonGenerator generator = new DugeonGenerator(dungeonWidth, dungeonLength);
         var listOfRooms = generator.CalculateDungeon(maxIterations,
             roomWidthMin,
@@ -45,9 +55,9 @@ public class DungeonCreator : NetworkBehaviour
             roomTopCornerMidifier,
             roomOffset,
             corridorWidth);
-        GameObject wallParent = new GameObject("WallParent", typeof(NetworkObject));
-        ServerManager.Spawn(wallParent);
-        wallParent.transform.parent = transform;
+        
+        //GameObject wallParent = new GameObject("WallParent", typeof(NetworkObject));
+        //wallParent.transform.parent = transform;
         possibleDoorVerticalPosition = new List<Vector3Int>();
         possibleDoorHorizontalPosition = new List<Vector3Int>();
         possibleWallHorizontalPosition = new List<Vector3Int>();
@@ -56,7 +66,7 @@ public class DungeonCreator : NetworkBehaviour
         {
             CreateMesh(listOfRooms[i].BottomLeftAreaCorner, listOfRooms[i].TopRightAreaCorner, listOfRooms[i].thisMeshType);
         }
-        CreateWalls(wallParent);
+        CreateWalls(gameObject);
     }
 
     private void CreateWalls(GameObject wallParent)
@@ -73,8 +83,9 @@ public class DungeonCreator : NetworkBehaviour
 
     private void CreateWall(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
-        GameObject wall = Instantiate(wallPrefab, wallPosition, Quaternion.identity, wallParent.transform);
+        GameObject wall = Instantiate(wallPrefab, wallPosition, Quaternion.identity);
         ServerManager.Spawn(wall);
+        wall.transform.parent = wallParent.transform;
     }
 
     private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner, Node.NodeType thistype)
@@ -112,8 +123,11 @@ public class DungeonCreator : NetworkBehaviour
         mesh.uv = uvs;
         mesh.triangles = triangles;
 
-        GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(NetworkObject), typeof(NetworkTransform));
+        //GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(NetworkObject), typeof(NetworkTransform));
+        GameObject dungeonFloor = Instantiate(ground);
         ServerManager.Spawn(dungeonFloor);
+        
+        dungeonFloor.transform.parent = transform;
         if (thistype.Equals(Node.NodeType.Room))
         {
             var GridMaker = dungeonFloor.AddComponent<GridMaker>();
@@ -123,9 +137,9 @@ public class DungeonCreator : NetworkBehaviour
         dungeonFloor.transform.localScale = Vector3.one;
         dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
         dungeonFloor.GetComponent<MeshRenderer>().material = material;
-        dungeonFloor.transform.parent = transform;
         dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
-
+        dungeonFloor.transform.parent = transform;
+        
         for (int row = (int)bottomLeftV.x; row < (int)bottomRightV.x; row++)
         {
             var wallPosition = new Vector3(row, 0, bottomLeftV.z);
@@ -169,9 +183,12 @@ public class DungeonCreator : NetworkBehaviour
         List<GameObject> children = new List<GameObject>();
 
         // Lưu tất cả GameObject con vào danh sách
-        foreach (Transform child in transform)
+        if (children != null)
         {
-            children.Add(child.gameObject);
+            foreach (Transform child in transform)
+            {
+                children.Add(child.gameObject);
+            }
         }
 
         // Duyệt qua danh sách và xóa từng GameObject
