@@ -33,17 +33,29 @@ public class DungeonCreator : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+        if (IsServer)
+        {
+            DugeonGenerator generator = new DugeonGenerator(dungeonWidth, dungeonLength);
+            var listOfRooms = generator.CalculateDungeon(maxIterations,
+                roomWidthMin,
+                roomLengthMin,
+                roomBottomCornerModifier,
+                roomTopCornerMidifier,
+                roomOffset,
+                corridorWidth);
+
+        }
+
         CreateDungeonServerRpc();
     }
 
     [Button]
-    [ServerRpc(RequireOwnership =false)]
     public void CreateDungeon()
     {
         CreateDungeonServerRpc();
     }
 
-    
+    [ObserversRpc(BufferLast = true)]
     public void CreateDungeonServerRpc()
     {
         //DestroyAllChildren();
@@ -124,22 +136,18 @@ public class DungeonCreator : NetworkBehaviour
         mesh.triangles = triangles;
 
         //GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(NetworkObject), typeof(NetworkTransform));
-        GameObject dungeonFloor = Instantiate(ground);
+        var dungeonFloor = Instantiate(ground);
         ServerManager.Spawn(dungeonFloor);
-        
-        dungeonFloor.transform.parent = transform;
-        if (thistype.Equals(Node.NodeType.Room))
-        {
-            var GridMaker = dungeonFloor.AddComponent<GridMaker>();
-        }
 
-        dungeonFloor.transform.position = Vector3.zero;
-        dungeonFloor.transform.localScale = Vector3.one;
+        if(dungeonFloor.TryGetComponent(out MeshFilter filter)) filter.mesh = mesh;
+        if (dungeonFloor.TryGetComponent(out MeshRenderer renderer)) renderer.material = material;
+        if (dungeonFloor.TryGetComponent(out MeshCollider collider)) collider.sharedMesh = mesh;
+
         dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
         dungeonFloor.GetComponent<MeshRenderer>().material = material;
         dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
         dungeonFloor.transform.parent = transform;
-        
+
         for (int row = (int)bottomLeftV.x; row < (int)bottomRightV.x; row++)
         {
             var wallPosition = new Vector3(row, 0, bottomLeftV.z);
