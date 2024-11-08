@@ -1,4 +1,4 @@
-// Designed by KINEMATION, 2024.
+﻿// Designed by KINEMATION, 2024.
 
 using KINEMATION.FPSAnimationFramework.Runtime.Camera;
 using KINEMATION.FPSAnimationFramework.Runtime.Core;
@@ -11,11 +11,21 @@ using Demo.Scripts.Runtime.AttachmentSystem;
 using System.Collections.Generic;
 using Demo.Scripts.Runtime.Character;
 using UnityEngine;
+using scgFullBodyController;
 
 namespace Demo.Scripts.Runtime.Item
 {
     public class Weapon : FPSItem
     {
+        [Header("Audio")]
+        [SerializeField] private AudioClip fireSound;
+        [SerializeField] private AudioClip reloadSound;
+        private AudioSource _audioSource;
+
+        [Header("Shoot")]
+        public GameObject Bullet;
+        public GameObject shootPoint;
+
         [Header("General")]
         [SerializeField] [Range(0f, 120f)] private float fieldOfView = 90f;
         
@@ -156,6 +166,10 @@ namespace Demo.Scripts.Runtime.Item
             }
             
             _fpsAnimator.LinkAnimatorLayer(equipMotion);
+
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.clip = fireSound;
+            _audioSource.playOnAwake = false;
         }
 
         public override void OnUnEquip()
@@ -232,7 +246,11 @@ namespace Demo.Scripts.Runtime.Item
             {
                 _fpsCameraController.PlayCameraAnimation(cameraReloadAnimation);
             }
-            
+            if (_audioSource != null && reloadSound != null)
+            {
+                _audioSource.PlayOneShot(reloadSound);
+            }
+
             Invoke(nameof(OnActionEnded), reloadClip.clip.length * 0.85f);
 
             OnFireReleased();
@@ -256,47 +274,84 @@ namespace Demo.Scripts.Runtime.Item
             Invoke(nameof(OnActionEnded), grenadeClip.clip.length * 0.8f);
             return true;
         }
-        
+
         private void OnFire()
         {
             if (_weaponAnimator != null)
             {
                 _weaponAnimator.Play("Fire", 0, 0f);
             }
-            
-            _fpsCameraController.PlayCameraShake(cameraShake);
-            
-            if(fireClip != null) _playablesController.PlayAnimation(fireClip);
 
+            // Create a bullet object when the weapon is fired
+            FireBullet();
+
+            // Camera shake effect for the recoil
+            _fpsCameraController.PlayCameraShake(cameraShake);
+
+            // Play fire animation if provided
+            if (fireClip != null)
+                _playablesController.PlayAnimation(fireClip);
+
+            // Play fire sound if provided
+            if (_audioSource != null && fireSound != null)
+            {
+                _audioSource.Play();
+            }
+
+            // Handle recoil animation if recoil data exists
             if (_recoilAnimation != null && recoilData != null)
             {
                 _recoilAnimation.Play();
             }
 
+            // Start the recoil pattern if defined
             if (_recoilPattern != null)
             {
                 _recoilPattern.OnFireStart();
             }
 
+            // Semi-auto fire mode logic
             if (_recoilAnimation.fireMode == FireMode.Semi)
             {
                 Invoke(nameof(OnFireReleased), 60f / fireRate);
                 return;
             }
-            
+
+            // Burst mode logic
             if (_recoilAnimation.fireMode == FireMode.Burst)
             {
                 _bursts--;
-                
+
                 if (_bursts == 0)
                 {
                     OnFireReleased();
                     return;
                 }
             }
-            
+
+            // Continuously fire based on the fire rate (auto-fire)
             Invoke(nameof(OnFire), 60f / fireRate);
         }
+
+        private void FireBullet()
+        {
+            if (Bullet == null || shootPoint == null)
+            {
+                Debug.LogError("Bullet prefab or shootPoint is not set!");
+                return;
+            }
+
+            GameObject bulletInstance = Instantiate(Bullet, shootPoint.transform.position, shootPoint.transform.rotation);
+
+            Rigidbody bulletRb = bulletInstance.GetComponent<Rigidbody>();
+            if (bulletRb != null)
+            {
+                bulletRb.AddForce(shootPoint.transform.forward * 10000f); 
+            }
+        }
+
+
+
 
         public override void OnCycleScope()
         {
