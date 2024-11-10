@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using FishNet.Object;
 
-public class Zombie : MonoBehaviour
+public class ZombieControler : NetworkBehaviour
 {
     private enum ZombieState
     {
@@ -12,34 +13,47 @@ public class Zombie : MonoBehaviour
     }
 
     [SerializeField]
-    private Camera _camera;
-    [SerializeField]
-    private Transform _player;
-    [SerializeField]
     private float attackRange = 2f;
     [SerializeField]
     private float attackCooldown = 2f;
+    [SerializeField]
+    private float moveForce = 3, maxMoveSpeed = 5;
 
     private Rigidbody[] _ragdollRigidbodies;
     private ZombieState _currentState = ZombieState.Walking;
     private Animator _animator;
-    private CharacterController _characterController;
     private NavMeshAgent _navMeshAgent;
-
+    private Rigidbody _rigid;
     private float _lastAttackTime;
 
-    void Awake()
+    private void Awake()
     {
         _ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
         _animator = GetComponent<Animator>();
-        _characterController = GetComponent<CharacterController>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
         DisableRagdoll();
     }
 
-    void Update()
+    public override void OnStartClient()
     {
+        base.OnStartClient();
+
+        if (!IsServer) // Chỉ để server xử lý AI
+        {
+            enabled = false;
+            return;
+        }
+
+        if (TryGetComponent(out Rigidbody rigidbody))
+            _rigid = rigidbody;
+    }
+
+    private void Update()
+    {
+        if (!IsServer) // Đảm bảo chỉ server điều khiển zombie
+            return;
+
         switch (_currentState)
         {
             case ZombieState.Walking:
@@ -58,8 +72,7 @@ public class Zombie : MonoBehaviour
     {
         EnableRagdoll();
 
-        Rigidbody hitRigidbody = _ragdollRigidbodies.OrderBy(rigidbody => Vector3.Distance(rigidbody.position, hitPoint)).First();
-
+        Rigidbody hitRigidbody = _ragdollRigidbodies.OrderBy(rb => Vector3.Distance(rb.position, hitPoint)).First();
         hitRigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
 
         _currentState = ZombieState.Ragdoll;
@@ -73,7 +86,6 @@ public class Zombie : MonoBehaviour
         }
 
         _animator.enabled = true;
-        _characterController.enabled = true;
         _navMeshAgent.enabled = true;
     }
 
@@ -85,25 +97,27 @@ public class Zombie : MonoBehaviour
         }
 
         _animator.enabled = false;
-        _characterController.enabled = false;
         _navMeshAgent.enabled = false;
     }
 
     private void WalkingBehaviour()
     {
-        if (_currentState != ZombieState.Attacking)
+        Transform closestPlayer = GetClosestPlayer();
+        if (closestPlayer == null) return;
+
+        if (_currentState != ZombieState.Attacking && _navMeshAgent.enabled)
         {
-            _navMeshAgent.SetDestination(_player.position);  // Thiết lập đích đến là player
+            _navMeshAgent.SetDestination(closestPlayer.position);
         }
 
-        Vector3 direction = _camera.transform.position - transform.position;
+        // Loại bỏ đoạn sử dụng _camera
+        Vector3 direction = closestPlayer.position - transform.position;
         direction.y = 0;
         direction.Normalize();
-
         Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 20 * Time.deltaTime);
 
-        float distanceToPlayer = Vector3.Distance(transform.position, _player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, closestPlayer.position);
         if (distanceToPlayer <= attackRange && Time.time - _lastAttackTime >= attackCooldown)
         {
             _currentState = ZombieState.Attacking;
@@ -114,7 +128,6 @@ public class Zombie : MonoBehaviour
     {
         if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
         {
-            // Nếu zombie đang trong animation tấn công, không làm gì thêm
             return;
         }
 
@@ -129,6 +142,25 @@ public class Zombie : MonoBehaviour
 
     private void RagdollBehaviour()
     {
-        // Cần thêm các hành vi cho ragdoll ở đây nếu cần
+        // Cần thêm các hành vi cho Ragdoll ở đây nếu cần
+    }
+
+    private Transform GetClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Transform closestPlayer = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var player in players)
+        {
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlayer = player.transform;
+            }
+        }
+
+        return closestPlayer;
     }
 }

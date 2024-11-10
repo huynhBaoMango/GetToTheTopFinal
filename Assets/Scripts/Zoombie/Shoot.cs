@@ -9,11 +9,11 @@ public class Shoot : MonoBehaviour
 
     [SerializeField]
     private float _maximumForceTime;
-    
+
     private float _timeMouseButtonDown;
-    
+
     private Camera _camera;
-    
+
     void Awake()
     {
         _camera = GetComponent<Camera>();
@@ -30,11 +30,11 @@ public class Shoot : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-             
+
             if (Physics.Raycast(ray, out RaycastHit hitInfo))
             {
                 Zombie zombie = hitInfo.collider.GetComponentInParent<Zombie>();
-                 
+
                 if (zombie != null)
                 {
                     float mouseButtonDownDuration = Time.time - _timeMouseButtonDown;
