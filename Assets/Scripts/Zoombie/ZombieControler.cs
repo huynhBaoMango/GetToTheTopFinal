@@ -130,14 +130,11 @@ public class ZombieControler : NetworkBehaviour
             _navMeshAgent.isStopped = false;
         }
 
-
         Vector3 direction = _currentTarget.position - transform.position;
         direction.y = 0;
         direction.Normalize();
         Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 20 * Time.deltaTime);
-
-
     }
 
     private void AttackingBehaviour()
@@ -149,27 +146,20 @@ public class ZombieControler : NetworkBehaviour
             return;
         }
 
-
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
-
 
         _animator.SetFloat("Distance", distanceToTarget);
 
-
         if (Time.time - _lastAttackTime >= attackCooldown && distanceToTarget <= attackRange)
         {
-
             if (_currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage(attackDamage);
+                playerHealth.TakeDamage(attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
             }
-
 
             _animator.SetTrigger("Attack");
             _lastAttackTime = Time.time;
         }
-
-
 
         Vector3 direction = _currentTarget.position - transform.position;
         direction.y = 0;
@@ -179,12 +169,10 @@ public class ZombieControler : NetworkBehaviour
 
         if (distanceToTarget > attackRange)
         {
-
             _currentState = ZombieState.Walking;
             _navMeshAgent.isStopped = false;
         }
     }
-
 
     private void RagdollBehaviour()
     {

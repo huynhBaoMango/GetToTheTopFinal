@@ -1,65 +1,22 @@
-﻿using FishNet.Object;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerHealth : NetworkBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 100f;
-    private float currentHealth;
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        if (IsOwner)
-        {
-            currentHealth = maxHealth;
-        }
-    }
-
-    [ServerRpc]
-    public void TakeDamageServerRpc(float damage)
-    {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        TakeDamageObserverRpc(damage); // Đồng bộ hóa cho các client khác
-
-        if (currentHealth <= 0f)
-        {
-            Despawn(); // Hủy object trên server
-        }
-    }
-
-
-    [ObserversRpc]
-    private void TakeDamageObserverRpc(float damage)
-    {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-
-    }
+    public float health = 100f;
 
     public void TakeDamage(float damage)
     {
-
-
-        TakeDamageServerRpc(damage);
-
-
-
-
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
-
-
-    // Hàm Despawn để hủy object
-    [ServerRpc]
-    private void Despawn()
+    private void Die()
     {
-
-        if (IsServer) ServerManager.Despawn(gameObject);
-
-
-
+        // Xử lý khi người chơi chết
+        Debug.Log("Player died!");
+        // Có thể thêm hiệu ứng chết, respawn, hoặc kết thúc trò chơi tại đây.
     }
 }
