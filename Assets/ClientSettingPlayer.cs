@@ -1,13 +1,11 @@
 using FishNet.Object;
-using FishNet.Connection;
-using scgFullBodyController;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ClientSettingPlayer : NetworkBehaviour
 {
     [SerializeField] public GameObject CamPlayer;
+    [SerializeField] private PlayerInput playerInput;
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -15,6 +13,7 @@ public class ClientSettingPlayer : NetworkBehaviour
         {
             gameObject.GetComponent<ClientSettingPlayer>().enabled = false;
             CamPlayer.SetActive(false);
+            //playerInput.enabled = false;
         }
     }
 }

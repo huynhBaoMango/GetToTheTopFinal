@@ -544,9 +544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d0c9cae953fca4ab9737e1caf87cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6676961799204941221}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6676961799204941221}
   settings: {fileID: 11400000, guid: 0c5416fd02cdf824988cdb6a02d47482, type: 2}
 --- !u!114 &3993768384377359538
 MonoBehaviour:
@@ -560,9 +560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed2e60975b014a14bee2ee51f674b480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 6676961799204941221}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6676961799204941221}
   movementSettings: {fileID: 11400000, guid: 7d33a2d0b337ad54e8d85db297de9b26, type: 2}
 --- !u!114 &2548584475153158755
 MonoBehaviour:
@@ -827,7 +827,12 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
+  NetworkBehaviours:
+  - {fileID: 7969280533768704513}
+  - {fileID: 3993768384377359538}
+  - {fileID: 8670014584138813841}
+  - {fileID: 799544020344377935}
+  - {fileID: 5091724920367596896}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -838,6 +843,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
+  _initializedValusSet: 1
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -852,14 +858,14 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
+  <PrefabId>k__BackingField: 12
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 14454074803417043599
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    LocalScale: {x: 0, y: 0, z: 0}
+    Position: {x: 0, y: 0, z: -3.323}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    LocalScale: {x: 1, y: 1, z: 1}
 --- !u!114 &8670014584138813841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,12 +878,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 6676961799204941221}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6676961799204941221}
   IgnoredParameters: []
   _animator: {fileID: 4312920965945070187}
-  _synchronizeWhenDisabled: 0
+  _synchronizeWhenDisabled: 1
   _smoothFloats: 1
   _interpolation: 2
   _clientAuthoritative: 1
@@ -894,9 +900,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 6676961799204941221}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6676961799204941221}
   _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:
@@ -1450,10 +1456,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba3cec796a91c74f9ac8313f0114a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 4
   _addedNetworkObject: {fileID: 6676961799204941221}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6676961799204941221}
   CamPlayer: {fileID: 1060362849689330029}
+  playerInput: {fileID: 2548584475153158755}
 --- !u!1 &1572995344912539336
 GameObject:
   m_ObjectHideFlags: 0

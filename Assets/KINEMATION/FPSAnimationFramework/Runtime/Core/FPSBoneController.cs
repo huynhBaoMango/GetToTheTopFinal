@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace KINEMATION.FPSAnimationFramework.Runtime.Core
 {
+
     public struct CachedPose
     {
         public KPose[] poses;

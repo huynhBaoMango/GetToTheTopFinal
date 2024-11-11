@@ -6,7 +6,6 @@ using KINEMATION.KAnimationCore.Runtime.Input;
 
 using System;
 using UnityEngine;
-
 namespace KINEMATION.FPSAnimationFramework.Runtime.Core
 {
     [HelpURL("https://kinemation.gitbook.io/scriptable-animation-system/workflow/components")]
