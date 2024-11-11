@@ -1,16 +1,18 @@
 ﻿using FishNet.Object;
-using FishNet.Object.Synchronizing;
 using UnityEngine;
 
 public class PlayerHealth : NetworkBehaviour
 {
     [SerializeField] private float maxHealth = 100f;
-    [SyncVar(OnChange = nameof(OnHealthChange))] private float currentHealth;
+    private float currentHealth;
 
-    public override void OnStartServer()
+    public override void OnStartClient()
     {
-        base.OnStartServer();
-        currentHealth = maxHealth;
+        base.OnStartClient();
+        if (IsOwner)
+        {
+            currentHealth = maxHealth;
+        }
     }
 
     [ServerRpc]
@@ -19,44 +21,45 @@ public class PlayerHealth : NetworkBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
+        TakeDamageObserverRpc(damage); // Đồng bộ hóa cho các client khác
+
         if (currentHealth <= 0f)
         {
-            Despawn();
+            Despawn(); // Hủy object trên server
         }
     }
 
-    [ServerRpc]
-    private void Despawn()
+
+    [ObserversRpc]
+    private void TakeDamageObserverRpc(float damage)
     {
-        if (IsServer) ServerManager.Despawn(gameObject);
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+
     }
 
     public void TakeDamage(float damage)
     {
+
+
         TakeDamageServerRpc(damage);
+
+
+
+
     }
-    private void OnHealthChange(float oldValue, float newValue, bool asServer)
+
+
+
+    // Hàm Despawn để hủy object
+    [ServerRpc]
+    private void Despawn()
     {
-        if (newValue <= 0f)
-        {
 
-            Debug.Log($"Player died with new health: {newValue} / old value: {oldValue} ");
-
-            if (IsServer)
-            {
-
-                Despawn();
-
-            }
+        if (IsServer) ServerManager.Despawn(gameObject);
 
 
 
-
-        }
     }
-
-
-
-
-
 }
