@@ -30,23 +30,10 @@ public class DungeonCreator : NetworkBehaviour
 
 
 
-    public override void OnStartClient()
+    public override void OnStartServer()
     {
-        base.OnStartClient();
-        if (IsServer)
-        {
-            DugeonGenerator generator = new DugeonGenerator(dungeonWidth, dungeonLength);
-            var listOfRooms = generator.CalculateDungeon(maxIterations,
-                roomWidthMin,
-                roomLengthMin,
-                roomBottomCornerModifier,
-                roomTopCornerMidifier,
-                roomOffset,
-                corridorWidth);
-
-        }
-
-        CreateDungeonServerRpc();
+        base.OnStartServer();
+        //CreateDungeonServerRpc();
     }
 
     [Button]
@@ -55,7 +42,7 @@ public class DungeonCreator : NetworkBehaviour
         CreateDungeonServerRpc();
     }
 
-    [ObserversRpc(BufferLast = true)]
+    [Server]
     public void CreateDungeonServerRpc()
     {
         //DestroyAllChildren();
@@ -99,7 +86,7 @@ public class DungeonCreator : NetworkBehaviour
         ServerManager.Spawn(wall);
         wall.transform.parent = wallParent.transform;
     }
-
+    [ObserversRpc(ExcludeOwner = true, BufferLast = true)]
     private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner, Node.NodeType thistype)
     {
         Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, 0, bottomLeftCorner.y);
@@ -139,14 +126,21 @@ public class DungeonCreator : NetworkBehaviour
         var dungeonFloor = Instantiate(ground);
         ServerManager.Spawn(dungeonFloor);
 
-        if(dungeonFloor.TryGetComponent(out MeshFilter filter)) filter.mesh = mesh;
-        if (dungeonFloor.TryGetComponent(out MeshRenderer renderer)) renderer.material = material;
-        if (dungeonFloor.TryGetComponent(out MeshCollider collider)) collider.sharedMesh = mesh;
+        if(dungeonFloor.TryGetComponent(out MeshFilter filter))
+        {
+            filter.mesh = new Mesh();
+            filter.mesh.vertices = vertices;
+            filter.mesh.uv = uvs;
+            filter.mesh.triangles = triangles;
+        }
 
-        dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
-        dungeonFloor.GetComponent<MeshRenderer>().material = material;
-        dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
-        dungeonFloor.transform.parent = transform;
+        if (dungeonFloor.TryGetComponent(out MeshRenderer renderer)) renderer.material = material;
+        //if (dungeonFloor.TryGetComponent(out MeshCollider collider)) collider.sharedMesh = mesh;
+
+        //dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
+        //dungeonFloor.GetComponent<MeshRenderer>().material = material;
+        //dungeonFloor.GetComponent<MeshCollider>().sharedMesh = mesh;
+        //dungeonFloor.transform.parent = transform;
 
         for (int row = (int)bottomLeftV.x; row < (int)bottomRightV.x; row++)
         {

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FishNet.Object;
 
 namespace Demo.Scripts.Runtime.Character
 {
@@ -30,7 +31,7 @@ namespace Demo.Scripts.Runtime.Character
     }
 
     [RequireComponent(typeof(CharacterController), typeof(FPSMovement))]
-    public class FPSController : MonoBehaviour
+    public class FPSController : NetworkBehaviour
     {
         //~ Legacy Controller Interface
         [SerializeField] private FPSControllerSettings settings;
@@ -293,6 +294,7 @@ namespace Demo.Scripts.Runtime.Character
 
         private void Update()
         {
+            if (!IsOwner) return;
             Time.timeScale = settings.timeScale;
             UpdateLookInput();
             OnMovementUpdated();

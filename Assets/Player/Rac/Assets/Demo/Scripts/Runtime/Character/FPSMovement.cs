@@ -1,5 +1,6 @@
 // Designed by KINEMATION, 2024.
 
+using FishNet.Object;
 using KINEMATION.FPSAnimationFramework.Runtime.Core;
 using KINEMATION.KAnimationCore.Runtime.Core;
 using KINEMATION.KAnimationCore.Runtime.Input;
@@ -25,7 +26,7 @@ namespace Demo.Scripts.Runtime.Character
         Prone
     }
     
-    public class FPSMovement : MonoBehaviour
+    public class FPSMovement : NetworkBehaviour
     {
         public delegate bool ActionConditionDelegate();
         public delegate void OnActionCallback();
@@ -413,6 +414,7 @@ namespace Demo.Scripts.Runtime.Character
         
         private void Update()
         {
+            if(!IsOwner) return;
             UpdateMovementState();
             
             if (_cachedMovementState != MovementState)
