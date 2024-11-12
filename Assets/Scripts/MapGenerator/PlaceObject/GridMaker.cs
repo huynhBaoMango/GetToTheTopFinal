@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridMaker : MonoBehaviour
 {
-    int width, height;
+    public int width, height;
 
     public tileInfo tilePrefab; // prefab cho tile
     public float tileSize = 1f; // kích thước của tile
@@ -25,7 +25,7 @@ public class GridMaker : MonoBehaviour
         if (tilePrefab != null)
         {
             CreateGrid();
-            PlaceRandomObject1();
+            PlaceRandomObject();
         }
         else
         {
@@ -95,25 +95,33 @@ public class GridMaker : MonoBehaviour
     {
         PropInfo newProp = props[Random.Range(0, props.Count)];
         bool isOkay = true;
-        for(int x = pos.x; x <= pos.x + newProp.x -1; x++)
+        if (pos.x + newProp.x > width || pos.y + newProp.y > height)
         {
-            for (int y = pos.y; y <= pos.y + newProp.y - 1; y++)
+            isOkay = false;
+        }
+        else
+        {
+            for (int x = pos.x; x <= pos.x + newProp.x; x++)
             {
-                if (!tilesMatrix[x,y].GetComponent<tileInfo>().isEmpty || tilesMatrix[x, y].GetComponent<tileInfo>() == null) isOkay = false;
+                for (int y = pos.y; y <= pos.y + newProp.y; y++)
+                {
+                    if (!tilesMatrix[x, y].GetComponent<tileInfo>().isEmpty || tilesMatrix[x, y].GetComponent<tileInfo>() == null) isOkay = false;
+                }
             }
         }
+        
 
         if (isOkay)
         {
             Transform stile = tilesMatrix[pos.x, pos.y].transform;
             Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y, stile.position.z - 0.5f);
             Instantiate(newProp, cornerPos, Quaternion.identity, gameObject.transform);
-            for (int x = pos.x; x <= pos.x + newProp.x - 1; x++)
+            for (int x = pos.x; x <= pos.x + newProp.x; x++)
             {
-                for (int y = pos.y; y <= pos.y + newProp.y - 1; y++)
+                for (int y = pos.y; y <= pos.y + newProp.y; y++)
                 {
                     tilesMatrix[x,y].GetComponentInParent<tileInfo>().isEmpty = false;
-                    tilesMatrix[x, y].GetComponent<Renderer>().material = selectedMaterial;
+                    //tilesMatrix[x, y].GetComponent<Renderer>().material = selectedMaterial;
                 }
             }
             return true;
