@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Connection;
 using FishNet.Object;
 
-//This is made by Bobsi Unity - Youtube
+// This is made by Bobsi Unity - Youtube
 public class PlayerController : NetworkBehaviour
 {
     [Header("Base setup")]
@@ -26,24 +26,57 @@ public class PlayerController : NetworkBehaviour
     private float cameraYOffset = 0.4f;
     private Camera playerCamera;
 
-
     public override void OnStartClient()
     {
         base.OnStartClient();
+
+        // Kiểm tra nếu là chủ sở hữu và camera tồn tại
         if (base.IsOwner)
         {
-            playerCamera = Camera.main;
-            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
-            playerCamera.transform.SetParent(transform);
+            InitializeCamera();
+
+            if (TryGetComponent(out PlayerWeapon plWeapon))
+            {
+                if (playerCamera != null)
+                {
+                    plWeapon.InitializeWeapons(playerCamera.transform);
+                    Debug.Log("PlayerWeapon initialized.");
+                }
+                else
+                {
+                    Debug.LogError("Camera not available for PlayerWeapon initialization.");
+                }
+            }
         }
         else
         {
             gameObject.GetComponent<PlayerController>().enabled = false;
+            Debug.Log("Player is not owner. Controller disabled.");
+        }
+    }
+
+    private void InitializeCamera()
+    {
+        playerCamera = Camera.main;
+
+        if (playerCamera == null)
+        {
+            playerCamera = FindObjectOfType<Camera>();
+            if (playerCamera != null)
+            {
+                Debug.LogWarning("Main camera not found, using first available camera.");
+            }
+            else
+            {
+                Debug.LogError("No camera found in the scene.");
+            }
         }
 
-        if(TryGetComponent(out PlayerWeapon plWeapon))
+        if (playerCamera != null)
         {
-            plWeapon.InitializeWeapons(playerCamera.transform);
+            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+            playerCamera.transform.SetParent(transform);
+            Debug.Log("Camera assigned and positioned.");
         }
     }
 
@@ -54,6 +87,7 @@ public class PlayerController : NetworkBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Debug.Log("Cursor locked.");
     }
 
     void Update()
@@ -96,6 +130,8 @@ public class PlayerController : NetworkBehaviour
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+
+            Debug.Log("Player and camera rotation updated.");
         }
     }
 }

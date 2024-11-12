@@ -10,7 +10,7 @@ public class PlayerWeapon : NetworkBehaviour
     [SerializeField] private List<APlayerWeapon> weapons = new List<APlayerWeapon>();
     [SerializeField] private APlayerWeapon currentWeapon;
     private int currentIndexWeapon = 0;
-    private readonly SyncVar<int> _currentWeaponIndex = new();
+    private readonly SyncVar<int> _currentWeaponIndex = new(-1);
 
     private void Awake()
     {
