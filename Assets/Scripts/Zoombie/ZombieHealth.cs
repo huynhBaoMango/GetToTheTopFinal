@@ -29,15 +29,23 @@ public class ZombieHealth : NetworkBehaviour
     private void Die()
     {
         Debug.Log("Zombie is dead");
+        // Gọi Rpc để kích hoạt ragdoll trên client
+        RpcEnableRagdoll();
         // Bắt đầu Coroutine để đợi 3 giây trước khi destroy
         StartCoroutine(DieAfterDelay(3f));
     }
 
     private IEnumerator DieAfterDelay(float delay)
     {
-        EnableRagdoll(); // Kích hoạt ragdoll
         yield return new WaitForSeconds(delay);
         ServerManager.Despawn(gameObject);
+    }
+
+
+    [ObserversRpc]
+    private void RpcEnableRagdoll()
+    {
+        EnableRagdoll();
     }
 
     private void EnableRagdoll()
@@ -48,5 +56,4 @@ public class ZombieHealth : NetworkBehaviour
             zombieControler.TriggerRagdoll(Vector3.zero, transform.position);
         }
     }
-
 }
