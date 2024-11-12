@@ -121,7 +121,7 @@ public class GridMaker : MonoBehaviour
                 for (int y = pos.y; y <= pos.y + newProp.y; y++)
                 {
                     tilesMatrix[x,y].GetComponentInParent<tileInfo>().isEmpty = false;
-                    //tilesMatrix[x, y].GetComponent<Renderer>().material = selectedMaterial;
+                    tilesMatrix[x, y].GetComponent<Renderer>().material = selectedMaterial;
                 }
             }
             return true;
