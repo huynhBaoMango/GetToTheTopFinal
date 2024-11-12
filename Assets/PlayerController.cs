@@ -13,7 +13,7 @@ public class PlayerController : NetworkBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public float lookSpeed = 2.0f;
-    public float lookXLimit = 45.0f;
+    public float lookXLimit = 50.0f;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
