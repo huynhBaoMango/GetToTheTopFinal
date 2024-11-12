@@ -947,6 +947,7 @@ GameObject:
   - component: {fileID: 770942470}
   - component: {fileID: 770942468}
   - component: {fileID: 770942474}
+  - component: {fileID: 770942475}
   m_Layer: 12
   m_Name: Plane (4)
   m_TagString: Untagged
@@ -1122,6 +1123,27 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     LocalScale: {x: 0, y: 0, z: 0}
+--- !u!114 &770942475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770942467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8908c0a5ee5894abd68cfe5c95a9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 770942474}
+  _networkObjectCache: {fileID: 0}
+  width: 0
+  height: 0
+  tilePrefab: {fileID: 0}
+  tileSize: 1
+  tiles: []
+  props: []
 --- !u!1 &847155840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1917,6 +1939,7 @@ GameObject:
   - component: {fileID: 1503212353}
   - component: {fileID: 1503212351}
   - component: {fileID: 1503212357}
+  - component: {fileID: 1503212358}
   m_Layer: 12
   m_Name: Plane (2)
   m_TagString: Untagged
@@ -2092,6 +2115,27 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     LocalScale: {x: 0, y: 0, z: 0}
+--- !u!114 &1503212358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503212350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8908c0a5ee5894abd68cfe5c95a9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1503212357}
+  _networkObjectCache: {fileID: 0}
+  width: 0
+  height: 0
+  tilePrefab: {fileID: 0}
+  tileSize: 1
+  tiles: []
+  props: []
 --- !u!1 &1564539597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,6 +2268,7 @@ GameObject:
   - component: {fileID: 1589896310}
   - component: {fileID: 1589896315}
   - component: {fileID: 1589896316}
+  - component: {fileID: 1589896317}
   m_Layer: 12
   m_Name: Plane
   m_TagString: Untagged
@@ -2399,6 +2444,27 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     LocalScale: {x: 0, y: 0, z: 0}
+--- !u!114 &1589896317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589896309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8908c0a5ee5894abd68cfe5c95a9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1589896316}
+  _networkObjectCache: {fileID: 0}
+  width: 0
+  height: 0
+  tilePrefab: {fileID: 0}
+  tileSize: 1
+  tiles: []
+  props: []
 --- !u!222 &1685627558
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2590,6 +2656,7 @@ GameObject:
   - component: {fileID: 1705213150}
   - component: {fileID: 1705213148}
   - component: {fileID: 1705213154}
+  - component: {fileID: 1705213155}
   m_Layer: 12
   m_Name: Plane (3)
   m_TagString: Untagged
@@ -2765,6 +2832,27 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
     LocalScale: {x: 0, y: 0, z: 0}
+--- !u!114 &1705213155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705213147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa8908c0a5ee5894abd68cfe5c95a9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1705213154}
+  _networkObjectCache: {fileID: 0}
+  width: 0
+  height: 0
+  tilePrefab: {fileID: 0}
+  tileSize: 1
+  tiles: []
+  props: []
 --- !u!1 &1826736407
 GameObject:
   m_ObjectHideFlags: 0
@@ -3068,36 +3156,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4288007434983100504}
   m_CullTransparentMesh: 1
---- !u!114 &3307057743156569425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4058119044285039839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b97b00607e06c994e863dbf8c0db3a1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 8969792557541250859}
-  _networkObjectCache: {fileID: 8969792557541250859}
-  dungeonWidth: 100
-  dungeonLength: 100
-  roomWidthMin: 30
-  roomLengthMin: 30
-  maxIterations: 10
-  corridorWidth: 4
-  material: {fileID: 2100000, guid: bdc24348df3cbd44cbf9e61ceecaf274, type: 2}
-  roomBottomCornerModifier: 0
-  roomTopCornerMidifier: 0.705
-  roomOffset: 0
-  wallVertical: {fileID: 8753675751577585064, guid: 76257fc4964cd484989e3a56a342b94e,
-    type: 3}
-  wallHorizontal: {fileID: 2983560248429768675, guid: 0b84e1940b269ca4fbec190d930348ae,
-    type: 3}
-  ground: {fileID: 1823020266865943439, guid: 8987bde844ee36243a431a6919eebf2a, type: 3}
 --- !u!224 &3414662638107636416
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3118,24 +3176,6 @@ RectTransform:
   m_AnchoredPosition: {x: 78.1, y: -121.4}
   m_SizeDelta: {x: 145, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &4058119044285039839
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8428752893197940379}
-  - component: {fileID: 3307057743156569425}
-  - component: {fileID: 8969792557541250859}
-  m_Layer: 0
-  m_Name: MapGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4143776449434756483
 Transform:
   m_ObjectHideFlags: 0
@@ -3704,21 +3744,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!4 &8428752893197940379
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4058119044285039839}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.10186, y: 0, z: -44.724728}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8525056661232693341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3794,57 +3819,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8969792557541250859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4058119044285039839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsNested>k__BackingField: 0
-  <ComponentIndex>k__BackingField: 0
-  <PredictedSpawn>k__BackingField: {fileID: 0}
-  <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours:
-  - {fileID: 3307057743156569425}
-  InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
-  RuntimeParentNetworkBehaviour: {fileID: 0}
-  RuntimeChildNetworkBehaviours: []
-  _isNetworked: 1
-  _isSpawnable: 1
-  _isGlobal: 0
-  _initializeOrder: 0
-  _preventDespawnOnDisconnect: 0
-  _defaultDespawnType: 0
-  _initializedValusSet: 1
-  NetworkObserver: {fileID: 0}
-  _enablePrediction: 0
-  _predictionType: 0
-  _graphicalObject: {fileID: 0}
-  _detachGraphicalObject: 0
-  _enableStateForwarding: 1
-  _networkTransform: {fileID: 0}
-  _ownerInterpolation: 1
-  _ownerSmoothedProperties: 255
-  _adaptiveInterpolation: 3
-  _spectatorSmoothedProperties: 255
-  _spectatorInterpolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  <PrefabId>k__BackingField: 19
-  <SpawnableCollectionId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 18136062358960488763
-  <SceneId>k__BackingField: 4211007324
-  SerializedTransformProperties:
-    Position: {x: 0.18031265, y: 0.9510373, z: 1.8714496}
-    Rotation: {x: 0, y: 0, z: 0, w: 1}
-    LocalScale: {x: 1, y: 1, z: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3859,4 +3833,3 @@ SceneRoots:
   - {fileID: 1343428824}
   - {fileID: 470755750156759233}
   - {fileID: 7443408888522461181}
-  - {fileID: 8428752893197940379}
