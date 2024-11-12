@@ -8,6 +8,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using FishNet.Managing;
+using FishNet.CodeGenerating;
+using scgFullBodyController;
 
 public class DungeonCreator : NetworkBehaviour
 {
@@ -16,6 +19,7 @@ public class DungeonCreator : NetworkBehaviour
     public int maxIterations;
     public int corridorWidth;
     public Material material;
+
     [Range(0.0f, 0.3f)]
     public float roomBottomCornerModifier;
     [Range(0.7f, 1.0f)]
@@ -28,12 +32,12 @@ public class DungeonCreator : NetworkBehaviour
     List<Vector3Int> possibleWallHorizontalPosition;
     List<Vector3Int> possibleWallVerticalPosition;
 
-
+    private readonly SyncList<GameObject> floorList = new SyncList<GameObject>();
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        //CreateDungeonServerRpc();
+        CreateDungeonServerRpc();
     }
 
     [Button]
@@ -41,7 +45,6 @@ public class DungeonCreator : NetworkBehaviour
     {
         CreateDungeonServerRpc();
     }
-
     [Server]
     public void CreateDungeonServerRpc()
     {
@@ -82,11 +85,18 @@ public class DungeonCreator : NetworkBehaviour
 
     private void CreateWall(GameObject wallParent, Vector3Int wallPosition, GameObject wallPrefab)
     {
-        GameObject wall = Instantiate(wallPrefab, wallPosition, Quaternion.identity);
+        NetworkObject wall = NetworkManager.GetPooledInstantiated(wallPrefab, wallPosition, Quaternion.identity, true);
+        //GameObject wall = Instantiate(wallPrefab, wallPosition, Quaternion.identity);
         ServerManager.Spawn(wall);
-        wall.transform.parent = wallParent.transform;
+       // wall.transform.parent = wallParent.transform;
     }
-    [ObserversRpc(ExcludeOwner = true, BufferLast = true)]
+
+    IEnumerator waitToChange(NetworkObject dungeonFloor)
+    {
+        yield return new WaitForSeconds(0.4f);
+        if (dungeonFloor.TryGetComponent(out MeshRenderer renderer)) renderer.material = material;
+    }
+    [Client]
     private void CreateMesh(Vector2 bottomLeftCorner, Vector2 topRightCorner, Node.NodeType thistype)
     {
         Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, 0, bottomLeftCorner.y);
@@ -121,20 +131,14 @@ public class DungeonCreator : NetworkBehaviour
         mesh.vertices = vertices;
         mesh.uv = uvs;
         mesh.triangles = triangles;
-
+        
         //GameObject dungeonFloor = new GameObject("Mesh" + bottomLeftCorner, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider), typeof(NetworkObject), typeof(NetworkTransform));
-        var dungeonFloor = Instantiate(ground);
+        NetworkObject dungeonFloor = NetworkManager.GetPooledInstantiated(ground, true);
         ServerManager.Spawn(dungeonFloor);
-
-        if(dungeonFloor.TryGetComponent(out MeshFilter filter))
-        {
-            filter.mesh = new Mesh();
-            filter.mesh.vertices = vertices;
-            filter.mesh.uv = uvs;
-            filter.mesh.triangles = triangles;
-        }
-
+        floorList.Add(dungeonFloor.gameObject);
+        if (dungeonFloor.TryGetComponent(out MeshFilter filter)) filter.mesh = mesh;
         if (dungeonFloor.TryGetComponent(out MeshRenderer renderer)) renderer.material = material;
+        UpdateMeshObserver(dungeonFloor, bottomLeftCorner, topRightCorner);
         //if (dungeonFloor.TryGetComponent(out MeshCollider collider)) collider.sharedMesh = mesh;
 
         //dungeonFloor.GetComponent<MeshFilter>().mesh = mesh;
@@ -178,6 +182,48 @@ public class DungeonCreator : NetworkBehaviour
         }
     }
 
+    void UpdateMeshObserver(NetworkObject dungeonFloor, Vector2 bottomLeftCorner, Vector2 topRightCorner)
+    {
+        Debug.Log(bottomLeftCorner);
+        Vector3 bottomLeftV = new Vector3(bottomLeftCorner.x, 0, bottomLeftCorner.y);
+        Vector3 bottomRightV = new Vector3(topRightCorner.x, 0, bottomLeftCorner.y);
+        Vector3 topLeftV = new Vector3(bottomLeftCorner.x, 0, topRightCorner.y);
+        Vector3 topRightV = new Vector3(topRightCorner.x, 0, topRightCorner.y);
+
+        Vector3[] vertices = new Vector3[]
+        {
+            topLeftV,
+            topRightV,
+            bottomLeftV,
+            bottomRightV
+        };
+
+        Vector2[] uvs = new Vector2[vertices.Length];
+        for (int i = 0; i < uvs.Length; i++)
+        {
+            uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
+        }
+
+        int[] triangles = new int[]
+        {
+            0,
+            1,
+            2,
+            2,
+            1,
+            3
+        };
+        Mesh mesh = new Mesh();
+        mesh.vertices = vertices;
+        mesh.uv = uvs;
+        mesh.triangles = triangles;
+        if (dungeonFloor.TryGetComponent(out MeshFilter filter))
+        {
+            filter.mesh.Clear();
+            filter.mesh = mesh;
+        }
+        if (dungeonFloor.TryGetComponent(out MeshRenderer renderer)) renderer.material = material;
+    }
 
     private void DestroyAllChildren()
     {
