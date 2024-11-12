@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using FishNet.Managing;
+using FishNet.Managing.Server;
+using FishNet.Object;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GridMaker : MonoBehaviour
+public class GridMaker : NetworkBehaviour
 {
     public int width, height;
 
@@ -101,9 +104,9 @@ public class GridMaker : MonoBehaviour
         }
         else
         {
-            for (int x = pos.x; x <= pos.x + newProp.x; x++)
+            for (int x = pos.x; x < pos.x + newProp.x; x++)
             {
-                for (int y = pos.y; y <= pos.y + newProp.y; y++)
+                for (int y = pos.y; y < pos.y + newProp.y; y++)
                 {
                     if (!tilesMatrix[x, y].GetComponent<tileInfo>().isEmpty || tilesMatrix[x, y].GetComponent<tileInfo>() == null) isOkay = false;
                 }
@@ -115,10 +118,11 @@ public class GridMaker : MonoBehaviour
         {
             Transform stile = tilesMatrix[pos.x, pos.y].transform;
             Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y, stile.position.z - 0.5f);
-            Instantiate(newProp, cornerPos, Quaternion.identity, gameObject.transform);
-            for (int x = pos.x; x <= pos.x + newProp.x; x++)
+            NetworkObject newz = NetworkManager.GetPooledInstantiated(newProp.gameObject, cornerPos, Quaternion.identity, gameObject.transform);
+            ServerManager.Spawn(newz.gameObject);
+            for (int x = pos.x; x < pos.x + newProp.x; x++)
             {
-                for (int y = pos.y; y <= pos.y + newProp.y; y++)
+                for (int y = pos.y; y < pos.y + newProp.y; y++)
                 {
                     tilesMatrix[x,y].GetComponentInParent<tileInfo>().isEmpty = false;
                     tilesMatrix[x, y].GetComponent<Renderer>().material = selectedMaterial;
