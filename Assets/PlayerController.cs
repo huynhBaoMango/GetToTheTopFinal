@@ -4,108 +4,68 @@ using UnityEngine;
 using FishNet.Connection;
 using FishNet.Object;
 
-// This is made by Bobsi Unity - Youtube
-public class PlayerController : NetworkBehaviour
+public class PlayerControler : NetworkBehaviour
 {
-    [Header("Base setup")]
+    [Header("base setup")]
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
-    public float jumpSpeed = 8.0f;
+    public float jumpSpeed = 8f;
     public float gravity = 20.0f;
     public float lookSpeed = 2.0f;
-    public float lookXLimit = 50.0f;
-
+    public float lookXLimit = 45.0f;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
-    float rotationX = 0;
-
+    float rotationX = 0f;
     [HideInInspector]
     public bool canMove = true;
-
     [SerializeField]
     private float cameraYOffset = 0.4f;
-    private Camera playerCamera;
-
+    private Camera PlayerCamera;
+    [Header("Animator setup")]
+    public Animation anim;
+    [SerializeField] private int PlayerSelfLayer = 6;
     public override void OnStartClient()
     {
         base.OnStartClient();
-
-        // Kiểm tra nếu là chủ sở hữu và camera tồn tại
         if (base.IsOwner)
         {
-            InitializeCamera();
+            PlayerCamera = Camera.main;
+            PlayerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+            PlayerCamera.transform.SetParent(transform);
 
-            if (TryGetComponent(out PlayerWeapon plWeapon))
+            if (TryGetComponent(out PlayerWeapon playerWeapone))
+                playerWeapone.InitializeWeapons(PlayerCamera.transform);
+            gameObject.layer = PlayerSelfLayer;
+            foreach (Transform child in transform)
             {
-                if (playerCamera != null)
-                {
-                    plWeapon.InitializeWeapons(playerCamera.transform);
-                    Debug.Log("PlayerWeapon initialized.");
-                }
-                else
-                {
-                    Debug.LogError("Camera not available for PlayerWeapon initialization.");
-                }
-            }
+                child.gameObject.layer = PlayerSelfLayer;
+            }    
         }
         else
         {
-            gameObject.GetComponent<PlayerController>().enabled = false;
-            Debug.Log("Player is not owner. Controller disabled.");
+            gameObject.GetComponent<PlayerControler>().enabled = false;
         }
     }
-
-    private void InitializeCamera()
-    {
-        playerCamera = Camera.main;
-
-        if (playerCamera == null)
-        {
-            playerCamera = FindObjectOfType<Camera>();
-            if (playerCamera != null)
-            {
-                Debug.LogWarning("Main camera not found, using first available camera.");
-            }
-            else
-            {
-                Debug.LogError("No camera found in the scene.");
-            }
-        }
-
-        if (playerCamera != null)
-        {
-            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
-            playerCamera.transform.SetParent(transform);
-            Debug.Log("Camera assigned and positioned.");
-        }
-    }
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
 
-        // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        Debug.Log("Cursor locked.");
+        Cursor.visible = true;
     }
+
 
     void Update()
     {
         bool isRunning = false;
 
-        // Press Left Shift to run
         isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        // We are grounded, so recalculate move direction based on axis
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-
         float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-
         if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
         {
             moveDirection.y = jumpSpeed;
@@ -114,24 +74,18 @@ public class PlayerController : NetworkBehaviour
         {
             moveDirection.y = movementDirectionY;
         }
-
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
-        // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
-
-        // Player and Camera rotation
-        if (canMove && playerCamera != null)
+        if (canMove && PlayerCamera != null)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            PlayerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-
-            Debug.Log("Player and camera rotation updated.");
         }
     }
 }

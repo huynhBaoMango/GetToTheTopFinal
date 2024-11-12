@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using FishNet.Object;
@@ -15,7 +16,7 @@ public class ZombieControler : NetworkBehaviour
     [SerializeField] private float moveForce = 3f;
     [SerializeField] private float maxMoveSpeed = 5f;
     [SerializeField] private float attackRange = 1.5f;
-    [SerializeField] private float attackDamage = 10f;
+    [SerializeField] private int attackDamage = 10;  // Sửa thành int
     [SerializeField] private float attackCooldown = 1f;
 
     private Rigidbody[] _ragdollRigidbodies;
@@ -25,6 +26,7 @@ public class ZombieControler : NetworkBehaviour
     private Rigidbody _rigid;
     private float _lastAttackTime;
     private Transform _currentTarget;
+    private Coroutine _despawnCoroutine;
 
     private void Awake()
     {
@@ -80,6 +82,19 @@ public class ZombieControler : NetworkBehaviour
         hitRigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
 
         _currentState = ZombieState.Ragdoll;
+
+        // Bắt đầu Coroutine để đợi 3 giây trước khi hủy đối tượng
+        if (_despawnCoroutine != null)
+        {
+            StopCoroutine(_despawnCoroutine);
+        }
+        _despawnCoroutine = StartCoroutine(DespawnAfterDelay(5f));
+    }
+
+    private IEnumerator DespawnAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ServerManager.Despawn(gameObject);
     }
 
     private void DisableRagdoll()
@@ -154,9 +169,8 @@ public class ZombieControler : NetworkBehaviour
         {
             if (_currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage(attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
+                playerHealth.TakeDamage(attackDamage);
             }
-
             _animator.SetTrigger("Attack");
             _lastAttackTime = Time.time;
         }
@@ -197,5 +211,4 @@ public class ZombieControler : NetworkBehaviour
 
         return closestPlayer;
     }
-
 }

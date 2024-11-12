@@ -36,6 +36,10 @@ public class PlayerWeapon : NetworkBehaviour
 
             InitializeWeapon(currentIndexWeapon);
         }
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            FireWeapon();
+        }    
     }
 
     private void OnCurrentWeaponIndexChange(int oldIndex, int newIndex, bool asServer)
