@@ -146,7 +146,7 @@ public class FirebaseAuthManager : MonoBehaviour
             yield return StartCoroutine(Common.instance.GetCurrentUser());
 
 
-            SceneManager.LoadScene("SkinScene");
+            SceneManager.LoadScene("Menu");
         }
         else
         {
