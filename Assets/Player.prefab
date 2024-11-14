@@ -1398,6 +1398,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attachmentLayerSettings:
   - {fileID: 11400000, guid: 43b2fae3354ec2947a0fff922a983651, type: 2}
+--- !u!1 &2672774640760261412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544766143749611147}
+  m_Layer: 0
+  m_Name: pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &544766143749611147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2672774640760261412}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.07, y: 0.471, z: 1.241}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4109607846696017090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2732996689156266016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,7 +1561,8 @@ MonoBehaviour:
   weaponHitLayers:
     serializedVersion: 2
     m_Bits: 1153
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2908401798268721083, guid: 4de0ba263c839aa4fb01d0803ae7e054,
+    type: 3}
 --- !u!1 &3116220982625727915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,6 +2957,7 @@ Transform:
   m_Children:
   - {fileID: 5956221685351524366}
   - {fileID: 5761941165582048316}
+  - {fileID: 544766143749611147}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3223182877490601382
@@ -3072,9 +3105,15 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 3223182877490601382}
   pickUpRange: 4
   pickUpKey: 102
+  dropButton: 99
   pickUpLayers:
     serializedVersion: 2
+    m_Bits: 1024
+  raycastDistance: 4
+  pickupLayer:
+    serializedVersion: 2
     m_Bits: 16384
+  pickupPosition: {fileID: 544766143749611147}
 --- !u!114 &8563883137832624401
 MonoBehaviour:
   m_ObjectHideFlags: 0
