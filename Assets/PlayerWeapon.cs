@@ -1,8 +1,6 @@
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerWeapon : NetworkBehaviour
@@ -31,38 +29,37 @@ public class PlayerWeapon : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(currentIndexWeapon == weapons.Count-1) currentIndexWeapon = 0;
-            else currentIndexWeapon++;
-
+            currentIndexWeapon = (currentIndexWeapon == weapons.Count - 1) ? 0 : currentIndexWeapon + 1;
             InitializeWeapon(currentIndexWeapon);
         }
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            FireWeapon();
-        }    
+            currentWeapon.Fire();
+        }
     }
 
     private void OnCurrentWeaponIndexChange(int oldIndex, int newIndex, bool asServer)
     {
-        for (int i = 0; i < weapons.Count; i++)
+        foreach (var weapon in weapons)
         {
-            weapons[i].gameObject.SetActive(false);
+            weapon.gameObject.SetActive(false);
         }
 
-        if (weapons.Count > newIndex)
+        if (newIndex < weapons.Count)
         {
             currentWeapon = weapons[newIndex];
             currentWeapon.gameObject.SetActive(true);
         }
     }
 
-    [ServerRpc] private void SetWeaponIndex (int weaponIndex) => _currentWeaponIndex.Value = weaponIndex;
+    [ServerRpc]
+    private void SetWeaponIndex(int weaponIndex) => _currentWeaponIndex.Value = weaponIndex;
 
     public void InitializeWeapons(Transform parentOfWeapons)
     {
-        for (int i = 0; i < weapons.Count; i++)
+        foreach (var weapon in weapons)
         {
-            weapons[i].transform.parent = parentOfWeapons;
+            weapon.transform.parent = parentOfWeapons;
         }
 
         InitializeWeapon(0);
@@ -71,10 +68,5 @@ public class PlayerWeapon : NetworkBehaviour
     public void InitializeWeapon(int weaponIndex)
     {
         SetWeaponIndex(weaponIndex);
-    }
-
-    private void FireWeapon()
-    {
-        currentWeapon.Fire();
     }
 }

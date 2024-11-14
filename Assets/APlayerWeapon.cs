@@ -1,32 +1,27 @@
-using FishNet.Object;
-using System.Collections;
-using System.Collections.Generic;
+﻿using FishNet.Object;
 using UnityEngine;
 
 public abstract class APlayerWeapon : NetworkBehaviour
 {
     public int damage;
-    private LayerMask enemyLayer;
+    public Transform muzzleTransform;
     private Transform _cameraTransform;
     public float maxRange = 20f;
     public LayerMask weaponHitLayers;
+    private Bullet bullet;
 
     private void Awake()
     {
         _cameraTransform = Camera.main.transform;
+        bullet = GetComponent<Bullet>();
     }
 
     public void Fire()
     {
         AnimateWeapon();
-        if (!Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, maxRange, weaponHitLayers))
-            return;
-
-        if (hit.transform.TryGetComponent(out ZombieHealth zombieHealth))
-        {
-            Debug.Log($"Hit zombie at position: {hit.point}");
-            zombieHealth.TakeDamage(damage);
-        }
+        Vector3 startPosition = muzzleTransform.position; 
+        Vector3 direction = muzzleTransform.forward; 
+        bullet.Shoot(startPosition, direction, damage);
     }
 
     public abstract void AnimateWeapon();
