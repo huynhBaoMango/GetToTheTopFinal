@@ -22,7 +22,7 @@ public class PlayerControler : NetworkBehaviour
     private float cameraYOffset = 0.4f;
     private Camera PlayerCamera;
     [Header("Animator setup")]
-    public Animation anim;
+    public Animator anim;
     [SerializeField] private int PlayerSelfLayer = 6;
     public override void OnStartClient()
     {
@@ -43,7 +43,7 @@ public class PlayerControler : NetworkBehaviour
         }
         else
         {
-            gameObject.GetComponent<PlayerControler>().enabled = false;
+            enabled = false;
         }
     }
     void Start()
@@ -80,6 +80,10 @@ public class PlayerControler : NetworkBehaviour
         }
 
         characterController.Move(moveDirection * Time.deltaTime);
+
+        anim.SetFloat("VelocityX", characterController.velocity.x);
+        anim.SetFloat("VelocityY", characterController.velocity.y);
+
         if (canMove && PlayerCamera != null)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
