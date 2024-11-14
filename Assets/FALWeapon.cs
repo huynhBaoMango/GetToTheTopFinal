@@ -8,4 +8,9 @@ public class FALWeapon : APlayerWeapon
     {
         Debug.Log("FAL Fire");
     }
+
+    public override void Fire()
+    {
+        throw new System.NotImplementedException();
+    }
 }

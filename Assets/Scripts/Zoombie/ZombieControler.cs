@@ -147,7 +147,7 @@ public class ZombieControler : NetworkBehaviour
         {
             if (_currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage(attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
+                playerHealth.TakeDamage((int)attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
             }
 
             _animator.SetTrigger("Attack");

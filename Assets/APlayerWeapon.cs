@@ -8,21 +8,16 @@ public abstract class APlayerWeapon : NetworkBehaviour
     private Transform _cameraTransform;
     public float maxRange = 20f;
     public LayerMask weaponHitLayers;
-    private Bullet bullet;
+    public GameObject bulletPrefab;
 
     private void Awake()
     {
         _cameraTransform = Camera.main.transform;
-        bullet = GetComponent<Bullet>();
     }
 
-    public void Fire()
-    {
-        AnimateWeapon();
-        Vector3 startPosition = muzzleTransform.position; 
-        Vector3 direction = muzzleTransform.forward; 
-        bullet.Shoot(startPosition, direction, damage);
-    }
+    public abstract void Fire();
 
     public abstract void AnimateWeapon();
+
+
 }

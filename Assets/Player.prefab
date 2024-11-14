@@ -1411,7 +1411,6 @@ GameObject:
   - component: {fileID: 3892506132775267651}
   - component: {fileID: 6906941826329489652}
   - component: {fileID: 1204734830371986350}
-  - component: {fileID: 3397583702123934028}
   m_Layer: 7
   m_Name: FAL_Scriptable
   m_TagString: Untagged
@@ -1531,24 +1530,7 @@ MonoBehaviour:
   weaponHitLayers:
     serializedVersion: 2
     m_Bits: 1153
---- !u!114 &3397583702123934028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2732996689156266016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a2a0987c14ca349863bd99cf9f4dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 3223182877490601382}
-  _networkObjectCache: {fileID: 0}
-  bulletPrefab: {fileID: 2908401798268721083, guid: 4de0ba263c839aa4fb01d0803ae7e054,
-    type: 3}
-  bulletSpeed: 5
+  bulletPrefab: {fileID: 0}
 --- !u!1 &3116220982625727915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,7 +2405,6 @@ GameObject:
   - component: {fileID: 7802959145546811699}
   - component: {fileID: 3211010405415743053}
   - component: {fileID: 2825791884901909521}
-  - component: {fileID: 5390874139698715769}
   m_Layer: 7
   m_Name: AK12_Scriptable 1
   m_TagString: Untagged
@@ -2633,29 +2614,13 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   damage: 15
-  muzzleTransform: {fileID: 5761941165582048316}
+  muzzleTransform: {fileID: 6603591714572526377}
   maxRange: 20
   weaponHitLayers:
     serializedVersion: 2
     m_Bits: 1153
---- !u!114 &5390874139698715769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7938805121743444670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a2a0987c14ca349863bd99cf9f4dda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 3223182877490601382}
-  _networkObjectCache: {fileID: 0}
   bulletPrefab: {fileID: 2908401798268721083, guid: 4de0ba263c839aa4fb01d0803ae7e054,
     type: 3}
-  bulletSpeed: 3
 --- !u!1 &8127167306794631198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,7 +2901,6 @@ GameObject:
   - component: {fileID: 1508157167747765952}
   - component: {fileID: 9015095330360450717}
   - component: {fileID: 535667782881504331}
-  - component: {fileID: 3639558402490187910}
   - component: {fileID: 8563883137832624401}
   - component: {fileID: 3990157515668608613}
   m_Layer: 7
@@ -2984,7 +2948,7 @@ MonoBehaviour:
   - {fileID: 1508157167747765952}
   - {fileID: 0}
   - {fileID: 535667782881504331}
-  - {fileID: 3639558402490187910}
+  - {fileID: 0}
   - {fileID: 8563883137832624401}
   - {fileID: 1204734830371986350}
   - {fileID: 2825791884901909521}
@@ -3111,22 +3075,6 @@ MonoBehaviour:
   pickUpLayers:
     serializedVersion: 2
     m_Bits: 16384
---- !u!114 &3639558402490187910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9066273262268406947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed8e4f9abb30a4247a7da4f0dd3b7171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 4
-  _addedNetworkObject: {fileID: 3223182877490601382}
-  _networkObjectCache: {fileID: 3223182877490601382}
-  maxHealth: 100
 --- !u!114 &8563883137832624401
 MonoBehaviour:
   m_ObjectHideFlags: 0
