@@ -1497,7 +1497,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1068795877}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1069460401}
+        m_TargetAssemblyTypeName: FirebaseAuthManager, Assembly-CSharp
+        m_MethodName: LoginUser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1068795877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1548,6 +1560,7 @@ GameObject:
   - component: {fileID: 1069460399}
   - component: {fileID: 1069460398}
   - component: {fileID: 1069460397}
+  - component: {fileID: 1069460401}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1639,6 +1652,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1069460401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069460396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdac75090ac711a49ac4addc6f4e1e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailInput: {fileID: 213087694}
+  passwordInput: {fileID: 762166439}
+  confirmPasswordInput: {fileID: 0}
+  usernameInput: {fileID: 0}
+  feedbackText: {fileID: 1415138001}
 --- !u!1 &1165257770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1813,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1248740721}
   - component: {fileID: 1248740720}
+  - component: {fileID: 1248740722}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1867,6 +1898,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1248740722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248740719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1260294174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2307,7 @@ GameObject:
   - component: {fileID: 1415138002}
   - component: {fileID: 1415138001}
   m_Layer: 5
-  m_Name: txtxfeedbackText
+  m_Name: feedbackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
