@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8060513681064524988}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SideScope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6991594045457619539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Safety
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 5331543824917277941}
   - component: {fileID: 4146614129776708784}
   - component: {fileID: 8303845793485315542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6486131399625747307}
   - component: {fileID: 4083417892396281715}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AK12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4026752094571379444}
   - component: {fileID: 938821547413747397}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EmptySuppressor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 580227919956284262}
   - component: {fileID: 7090604334402063810}
   - component: {fileID: 8187246173980362098}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2178490076782076301}
   - component: {fileID: 5235466087798556482}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 5212207709741036127}
   - component: {fileID: 3476454700283501992}
   - component: {fileID: 7191722782202875816}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RK-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4614269821299116629}
   - component: {fileID: 8247726041190002766}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trijicon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4680467805624002670}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AimPointBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 5190229570215147951}
   - component: {fileID: 7335271775030520368}
   - component: {fileID: 3630668146986554643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AngledGripMount_45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1903416109603448820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 6695183654267537186}
   - component: {fileID: 5346736968125722066}
   - component: {fileID: 3486676876404776028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Reddot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 6151742211288061275}
   - component: {fileID: 3577311350715182298}
   - component: {fileID: 8696255251469528912}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +943,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1223964699181782472}
@@ -1033,7 +1033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3452665943499022374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AimPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1055,6 +1055,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4614269821299116629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1788424010850636845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5761941165582048316}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5761941165582048316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788424010850636845}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.19, y: 0.185, z: 0.687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4109607846696017090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1880436851106208767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,7 +1095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1860846108960628209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1098,7 +1129,7 @@ GameObject:
   - component: {fileID: 6045131088358871966}
   - component: {fileID: 6283091363314078328}
   - component: {fileID: 3913353136415187269}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GripMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1194,7 +1225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1833220346953013246}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1228,7 +1259,7 @@ GameObject:
   - component: {fileID: 5425269795042753117}
   - component: {fileID: 6382565519785724913}
   - component: {fileID: 4242191711569162486}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Reddot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1331,7 +1362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904226830589523789}
   - component: {fileID: 666843508947648967}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EmptyGrip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1380,7 +1411,8 @@ GameObject:
   - component: {fileID: 3892506132775267651}
   - component: {fileID: 6906941826329489652}
   - component: {fileID: 1204734830371986350}
-  m_Layer: 0
+  - component: {fileID: 3397583702123934028}
+  m_Layer: 7
   m_Name: FAL_Scriptable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1490,9 +1522,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633481e4e494bd6408e815783b3c96d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
+  damage: 20
+  muzzleTransform: {fileID: 5761941165582048316}
+  maxRange: 20
+  weaponHitLayers:
+    serializedVersion: 2
+    m_Bits: 1153
+--- !u!114 &3397583702123934028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2732996689156266016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a2a0987c14ca349863bd99cf9f4dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3223182877490601382}
+  _networkObjectCache: {fileID: 0}
+  bulletPrefab: {fileID: 2908401798268721083, guid: 4de0ba263c839aa4fb01d0803ae7e054,
+    type: 3}
+  bulletSpeed: 5
 --- !u!1 &3116220982625727915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,7 +1558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4154887430863734838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1533,7 +1589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5783758268882698427}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cartridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1564,7 +1620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6603591714572526377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1595,7 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4298612033779084852}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AimPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1626,7 +1682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2126058081972798763}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1661,7 +1717,7 @@ GameObject:
   - component: {fileID: 5958103422610546444}
   - component: {fileID: 1344414719019830735}
   - component: {fileID: 8360525413502958050}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RMRMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1746,7 +1802,7 @@ GameObject:
   - component: {fileID: 5495732661940420203}
   - component: {fileID: 1908849819694726898}
   - component: {fileID: 4813091719539342463}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1849,7 +1905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5224509088069698820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1883,7 +1939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8862237166838630901}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1916,7 +1972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8469236398145500929}
   - component: {fileID: 3565951823481170664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AKHexagonSuppressor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1963,7 +2019,7 @@ GameObject:
   - component: {fileID: 5057309969789581332}
   - component: {fileID: 3509610827035387996}
   - component: {fileID: 7654903024493916469}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ACOG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2049,7 +2105,7 @@ GameObject:
   - component: {fileID: 4847993304994366781}
   - component: {fileID: 4887192094468108824}
   - component: {fileID: 8946176471459431950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rearsight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2130,7 +2186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3821223334777476835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AimPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2162,7 +2218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7556963799659262169}
   - component: {fileID: 1002019364634594578}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: W_AK12_ReloadEmpty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2216,7 +2272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2410841922745079340}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AimPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2247,7 +2303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2367671899078348577}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChargingHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2282,7 +2338,7 @@ GameObject:
   - component: {fileID: 1759289638935720154}
   - component: {fileID: 7239598611853870699}
   - component: {fileID: 6760715126989625046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RK-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2367,7 +2423,8 @@ GameObject:
   - component: {fileID: 7802959145546811699}
   - component: {fileID: 3211010405415743053}
   - component: {fileID: 2825791884901909521}
-  m_Layer: 0
+  - component: {fileID: 5390874139698715769}
+  m_Layer: 7
   m_Name: AK12_Scriptable 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2572,9 +2629,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c9df79e4136da47bcbad3ca19329f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
+  damage: 15
+  muzzleTransform: {fileID: 5761941165582048316}
+  maxRange: 20
+  weaponHitLayers:
+    serializedVersion: 2
+    m_Bits: 1153
+--- !u!114 &5390874139698715769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7938805121743444670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a2a0987c14ca349863bd99cf9f4dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3223182877490601382}
+  _networkObjectCache: {fileID: 0}
+  bulletPrefab: {fileID: 2908401798268721083, guid: 4de0ba263c839aa4fb01d0803ae7e054,
+    type: 3}
+  bulletSpeed: 3
 --- !u!1 &8127167306794631198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2586,7 +2667,7 @@ GameObject:
   - component: {fileID: 123798762911392220}
   - component: {fileID: 2123982954073112063}
   - component: {fileID: 8185656417533640010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2712,7 +2793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1217683025775823770}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AK12Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2747,7 +2828,7 @@ GameObject:
   - component: {fileID: 5909615688280010682}
   - component: {fileID: 6083295860532151960}
   - component: {fileID: 8446113038174671532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2855,8 +2936,10 @@ GameObject:
   - component: {fileID: 1508157167747765952}
   - component: {fileID: 9015095330360450717}
   - component: {fileID: 535667782881504331}
+  - component: {fileID: 3639558402490187910}
   - component: {fileID: 8563883137832624401}
-  m_Layer: 0
+  - component: {fileID: 3990157515668608613}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2877,6 +2960,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5956221685351524366}
+  - {fileID: 5761941165582048316}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3223182877490601382
@@ -2898,7 +2982,9 @@ MonoBehaviour:
   NetworkBehaviours:
   - {fileID: 5660657546338012911}
   - {fileID: 1508157167747765952}
+  - {fileID: 0}
   - {fileID: 535667782881504331}
+  - {fileID: 3639558402490187910}
   - {fileID: 8563883137832624401}
   - {fileID: 1204734830371986350}
   - {fileID: 2825791884901909521}
@@ -2927,7 +3013,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 15
+  <PrefabId>k__BackingField: 16
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 16799108592042421765
   <SceneId>k__BackingField: 0
@@ -2977,6 +3063,8 @@ MonoBehaviour:
   lookXLimit: 45
   canMove: 1
   cameraYOffset: 0.4
+  anim: {fileID: 0}
+  PlayerSelfLayer: 6
 --- !u!143 &9015095330360450717
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2997,7 +3085,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -3015,7 +3103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52cf529ed7fe2de42b3d06f3cf36c5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   pickUpRange: 4
@@ -3023,6 +3111,22 @@ MonoBehaviour:
   pickUpLayers:
     serializedVersion: 2
     m_Bits: 16384
+--- !u!114 &3639558402490187910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066273262268406947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8e4f9abb30a4247a7da4f0dd3b7171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 3223182877490601382}
+  _networkObjectCache: {fileID: 3223182877490601382}
+  maxHealth: 100
 --- !u!114 &8563883137832624401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3035,7 +3139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 3
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   _componentConfiguration: 0
@@ -3066,6 +3170,29 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
+--- !u!136 &3990157515668608613
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066273262268406947}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9211562302767535768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,7 +3204,7 @@ GameObject:
   - component: {fileID: 6165153106894500197}
   - component: {fileID: 6167354066256193956}
   - component: {fileID: 5679316672673718346}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AKHexagonSuppressor_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

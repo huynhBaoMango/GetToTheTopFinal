@@ -501,7 +501,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _playerPrefab
       value: 
-      objectReference: {fileID: 1911985395}
+      objectReference: {fileID: 0}
     - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1,
         type: 3}
       propertyPath: Spawns.Array.size
@@ -744,23 +744,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9144481623995990232, guid: 2975d75c13aba4749a16f07dec8ba01a,
+        type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 3217947519
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2975d75c13aba4749a16f07dec8ba01a, type: 3}
---- !u!114 &1911985395 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5361992010921441426, guid: 2975d75c13aba4749a16f07dec8ba01a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1824660797}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2068252740
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +814,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
+  _initializedValusSet: 0
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
