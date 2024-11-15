@@ -1,12 +1,21 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.InputSystem.WebGL;
 
 public class InGameManager : NetworkBehaviour
 {
     private GameState _currentState;
+
+    [Header("Heart Setup")]
+    public GameObject heartPrefab;
+    public Transform spawnHeartPoint;
+    public float spawnRange;
+    public LayerMask groundLayer;
+
 
     private void Start()
     {
@@ -71,6 +80,34 @@ public class InGameManager : NetworkBehaviour
     {
         Debug.Log("Restarting...");
         ChangeState(GameState.Loading);
+    }
+
+
+    void SpawnTheHeart()
+    {
+        bool spawned = false; // Biến kiểm tra xem đã spawn được đối tượng hay chưa
+        int attempts = 0;      // Số lần thử
+
+        while (!spawned && attempts < 10000)
+        {
+            attempts++;
+
+            // Tạo một vị trí ngẫu nhiên trong phạm vi đã chỉ định
+            Vector3 randomPosition = new Vector3(
+                UnityEngine.Random.Range(-spawnRange, spawnRange),
+                10f, // Bắt đầu ở một độ cao nhất định để Raycast xuống
+                UnityEngine.Random.Range(-spawnRange, spawnRange)
+            );
+
+            RaycastHit hit;
+
+
+            if (Physics.Raycast(randomPosition, Vector3.down, out hit, Mathf.Infinity, groundLayer))
+            {
+                Instantiate(heartPrefab, hit.point, Quaternion.identity);
+                spawned = true; // Đánh dấu là đã spawn
+            }
+        }
     }
 
     enum GameState
