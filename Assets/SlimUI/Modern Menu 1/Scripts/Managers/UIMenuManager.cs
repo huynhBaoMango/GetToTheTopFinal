@@ -18,6 +18,8 @@ namespace SlimUI.ModernMenu{
         public GameObject playMenu;
         [Tooltip("The Menu for when the EXIT button is clicked")]
         public GameObject exitMenu;
+        [Tooltip("The Menu for when the LOGOUT button is clicked")]
+        public GameObject logoutMenu;
         [Tooltip("Optional 4th Menu")]
         public GameObject extrasMenu;
 
@@ -85,6 +87,7 @@ namespace SlimUI.ModernMenu{
 
 			playMenu.SetActive(false);
 			exitMenu.SetActive(false);
+			logoutMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			firstMenu.SetActive(true);
 			mainMenu.SetActive(true);
@@ -119,13 +122,15 @@ namespace SlimUI.ModernMenu{
 
 		public void PlayCampaign(){
 			exitMenu.SetActive(false);
+			logoutMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			playMenu.SetActive(true);
 		}
 		
 		public void PlayCampaignMobile(){
 			exitMenu.SetActive(false);
-			if(extrasMenu) extrasMenu.SetActive(false);
+            logoutMenu.SetActive(false);
+            if (extrasMenu) extrasMenu.SetActive(false);
 			playMenu.SetActive(true);
 			mainMenu.SetActive(false);
 		}
@@ -134,7 +139,8 @@ namespace SlimUI.ModernMenu{
 			playMenu.SetActive(false);
 			if(extrasMenu) extrasMenu.SetActive(false);
 			exitMenu.SetActive(false);
-			mainMenu.SetActive(true);
+            logoutMenu.SetActive(false);
+            mainMenu.SetActive(true);
 		}
 
 		public void LoadScene(string scene){
@@ -237,16 +243,34 @@ namespace SlimUI.ModernMenu{
 		// Are You Sure - Quit Panel Pop Up
 		public void AreYouSure(){
 			exitMenu.SetActive(true);
-			if(extrasMenu) extrasMenu.SetActive(false);
+            logoutMenu.SetActive(false);
+            if (extrasMenu) extrasMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
 
 		public void AreYouSureMobile(){
 			exitMenu.SetActive(true);
-			if(extrasMenu) extrasMenu.SetActive(false);
+            logoutMenu.SetActive(false);
+            if (extrasMenu) extrasMenu.SetActive(false);
 			mainMenu.SetActive(false);
 			DisablePlayCampaign();
 		}
+
+		public void AreYouSureLogOut() 
+		{
+            exitMenu.SetActive(false);
+            logoutMenu.SetActive(true);
+            if (extrasMenu) extrasMenu.SetActive(false);
+            DisablePlayCampaign();
+        }
+		public void AreYouSureLogOutMobile() 
+		{
+            exitMenu.SetActive(false);
+            logoutMenu.SetActive(true);
+            if (extrasMenu) extrasMenu.SetActive(false);
+			mainMenu.SetActive(false);
+            DisablePlayCampaign();
+        }
 
 		public void ExtrasMenu(){
 			playMenu.SetActive(false);
