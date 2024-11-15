@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using FishNet.Object;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem.WebGL;
 
@@ -12,9 +13,9 @@ public class InGameManager : NetworkBehaviour
 
     [Header("Heart Setup")]
     public GameObject heartPrefab;
-    public Transform spawnHeartPoint;
-    public float spawnRange;
-    public LayerMask groundLayer;
+    public Transform[] floors;
+
+    public Transform CamPos;
 
 
     private void Start()
@@ -32,6 +33,11 @@ public class InGameManager : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
             ChangeState(_currentState + 1);
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+
+        }
+
     }
 
     void ChangeState(GameState state)
@@ -86,30 +92,8 @@ public class InGameManager : NetworkBehaviour
 
     void SpawnTheHeart()
     {
-        bool spawned = false; // Biến kiểm tra xem đã spawn được đối tượng hay chưa
-        int attempts = 0;      // Số lần thử
-
-        while (!spawned && attempts < 10000)
-        {
-            attempts++;
-
-            // Tạo một vị trí ngẫu nhiên trong phạm vi đã chỉ định
-            Vector3 randomPosition = new Vector3(
-                UnityEngine.Random.Range(spawnHeartPoint.position.x - spawnRange, spawnHeartPoint.position.x + spawnRange),
-                10f,
-                UnityEngine.Random.Range(spawnHeartPoint.position.z - spawnRange, spawnHeartPoint.position.z + spawnRange)
-            );
-
-            RaycastHit hit;
-
-
-            if (Physics.Raycast(randomPosition, Vector3.down, out hit, Mathf.Infinity, groundLayer))
-            {
-                GameObject heart = Instantiate(heartPrefab, hit.point, Quaternion.identity);
-                ServerManager.Spawn(heart);
-                spawned = true; // Đánh dấu là đã spawn
-            }
-        }
+        GameObject heart = Instantiate(heartPrefab, floors[UnityEngine.Random.Range(0, floors.Length)].position, Quaternion.identity);
+        ServerManager.Spawn(heart);
     }
 
     enum GameState
