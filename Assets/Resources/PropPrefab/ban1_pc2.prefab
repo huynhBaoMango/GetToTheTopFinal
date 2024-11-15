@@ -1267,7 +1267,6 @@ GameObject:
   - component: {fileID: 5430999524515173526}
   - component: {fileID: 2194479767299646688}
   - component: {fileID: 241703013251449915}
-  - component: {fileID: 2766106871468066965}
   - component: {fileID: 7023396487061375073}
   - component: {fileID: 3273932286806647684}
   m_Layer: 14
@@ -1387,7 +1386,7 @@ MonoBehaviour:
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
-  _isSpawnable: 0
+  _isSpawnable: 1
   _isGlobal: 0
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
@@ -1415,21 +1414,6 @@ MonoBehaviour:
     Position: {x: -0.02, y: 0, z: 0}
     Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
     LocalScale: {x: 100, y: 100.00006, z: 100.00006}
---- !u!114 &2766106871468066965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7265535456494194578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71fd7f855ec523429999fc4e14a1928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _overrideType: 3
-  _updateHostVisibility: 1
-  _observerConditions: []
 --- !u!54 &7023396487061375073
 Rigidbody:
   m_ObjectHideFlags: 0

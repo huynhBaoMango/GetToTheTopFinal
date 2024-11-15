@@ -1,6 +1,7 @@
 ﻿using FishNet.Managing;
 using FishNet.Managing.Server;
 using FishNet.Object;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
@@ -30,7 +31,8 @@ public class GridMaker : NetworkBehaviour
         
         
     }
-
+    [Button]
+    [Server]
     public void DotheSpawn()
     {
         if (tilePrefab != null)
@@ -83,7 +85,7 @@ public class GridMaker : NetworkBehaviour
             Debug.LogError("Không tìm thấy Renderer trên GameObject chính.");
         }
     }
-
+ 
     void PlaceRandomObject()
     {
         int objectCount = 0;
