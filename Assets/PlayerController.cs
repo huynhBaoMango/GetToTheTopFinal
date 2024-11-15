@@ -43,7 +43,7 @@ public class PlayerControler : NetworkBehaviour
         }
         else
         {
-            enabled = false;
+            GetComponent<PlayerControler>().enabled = false;
         }
     }
     void Start()

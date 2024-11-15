@@ -34,7 +34,10 @@ public class PlayerPickup : NetworkBehaviour
 
         cameraTransform = Camera.main.transform;
         cam = Camera.main;
-        worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
+        if(GameObject.FindGameObjectWithTag("WorldObjects") != null)
+        {
+            worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
+        }
 
         if (TryGetComponent(out PlayerWeapon plWeapon))
         {
