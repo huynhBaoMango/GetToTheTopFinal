@@ -66,7 +66,7 @@ public class InGameManager : NetworkBehaviour
         }
     }
 
-    [Client]
+    [ObserversRpc]
     void UpdateZombieSpawnRender()
     {
         foreach (GameObject go in zombieSpawns)

@@ -52,7 +52,7 @@ public class PlayerWeapon : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    
     private void SetWeaponIndex(int weaponIndex) => _currentWeaponIndex.Value = weaponIndex;
 
     public void InitializeWeapons(Transform parentOfWeapons)
@@ -65,6 +65,7 @@ public class PlayerWeapon : NetworkBehaviour
         InitializeWeapon(0);
     }
 
+    [ServerRpc]
     public void InitializeWeapon(int weaponIndex)
     {
         SetWeaponIndex(weaponIndex);
