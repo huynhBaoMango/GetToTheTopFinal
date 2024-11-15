@@ -25,11 +25,7 @@ public class GridMaker : NetworkBehaviour
         tilePrefab = Resources.Load<tileInfo>("TilePrefab");
         selectedMaterial = Resources.Load<Material>("LMaterial");
         props = Resources.LoadAll<PropInfo>("PropPrefab").ToList();
-        tiles = new List<tileInfo>();
-
-
-        
-        
+        tiles = new List<tileInfo>();     
     }
     [Button]
     [Server]
@@ -94,6 +90,10 @@ public class GridMaker : NetworkBehaviour
             Vector2Int randomPos = GetRandomPosOnMatrix();
             if (CheckIfValidToSpawn(randomPos)) objectCount++;
         }
+        foreach(tileInfo tileInfo in tiles)
+        {
+            Destroy(tileInfo.gameObject);
+        }
     }
 
     Vector2Int GetRandomPosOnMatrix()
@@ -130,7 +130,7 @@ public class GridMaker : NetworkBehaviour
         if (isOkay)
         {
             Transform stile = tilesMatrix[pos.x, pos.y].transform;
-            Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y, stile.position.z - 0.5f);
+            Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y+0.1f, stile.position.z - 0.5f);
             NetworkObject newz = NetworkManager.GetPooledInstantiated(newProp.gameObject, cornerPos, Quaternion.identity, gameObject.transform);
             ServerManager.Spawn(newz.gameObject);
             for (int x = pos.x; x < pos.x + newProp.x; x++)
