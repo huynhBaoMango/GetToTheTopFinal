@@ -62,6 +62,7 @@ public class InGameManager : NetworkBehaviour
     void StartLoading()
     {
         Debug.Log("Loading...");
+        SpawnTheHeart();
     }
 
     void StartRunning()
@@ -94,9 +95,9 @@ public class InGameManager : NetworkBehaviour
 
             // Tạo một vị trí ngẫu nhiên trong phạm vi đã chỉ định
             Vector3 randomPosition = new Vector3(
-                UnityEngine.Random.Range(-spawnRange, spawnRange),
-                10f, // Bắt đầu ở một độ cao nhất định để Raycast xuống
-                UnityEngine.Random.Range(-spawnRange, spawnRange)
+                UnityEngine.Random.Range(spawnHeartPoint.position.x - spawnRange, spawnHeartPoint.position.x + spawnRange),
+                10f,
+                UnityEngine.Random.Range(spawnHeartPoint.position.z - spawnRange, spawnHeartPoint.position.z + spawnRange)
             );
 
             RaycastHit hit;
@@ -104,7 +105,8 @@ public class InGameManager : NetworkBehaviour
 
             if (Physics.Raycast(randomPosition, Vector3.down, out hit, Mathf.Infinity, groundLayer))
             {
-                Instantiate(heartPrefab, hit.point, Quaternion.identity);
+                GameObject heart = Instantiate(heartPrefab, hit.point, Quaternion.identity);
+                ServerManager.Spawn(heart);
                 spawned = true; // Đánh dấu là đã spawn
             }
         }

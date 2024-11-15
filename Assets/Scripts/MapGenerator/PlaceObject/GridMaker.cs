@@ -27,11 +27,17 @@ public class GridMaker : NetworkBehaviour
         tiles = new List<tileInfo>();
 
 
+        
+        
+    }
+
+    public void DotheSpawn()
+    {
         if (tilePrefab != null)
         {
             CreateGrid();
             PlaceRandomObject();
-            if(TryGetComponent(out NavMeshSurface surface))
+            if (TryGetComponent(out NavMeshSurface surface))
             {
                 surface.BuildNavMesh();
             }
@@ -40,7 +46,6 @@ public class GridMaker : NetworkBehaviour
         {
             Debug.Log("no tile");
         }
-        
     }
 
     void CreateGrid()
@@ -82,7 +87,7 @@ public class GridMaker : NetworkBehaviour
     void PlaceRandomObject()
     {
         int objectCount = 0;
-        while(objectCount < 10)
+        while(objectCount < 5)
         {
             Vector2Int randomPos = GetRandomPosOnMatrix();
             if (CheckIfValidToSpawn(randomPos)) objectCount++;

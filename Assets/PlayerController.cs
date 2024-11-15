@@ -82,7 +82,7 @@ public class PlayerControler : NetworkBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
         anim.SetFloat("VelocityX", characterController.velocity.x);
-        anim.SetFloat("VelocityY", characterController.velocity.y);
+        anim.SetFloat("VelocityZ", characterController.velocity.z);
 
         if (canMove && PlayerCamera != null)
         {
