@@ -1,37 +1,66 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
 using FishNet.Object;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
-
+using FishNet.Connection;
 public class PlayerHealth : NetworkBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
-    private int _currnetHealt;
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private Slider healthBar;
 
-    private void wake()
-    {
-        _currnetHealt = maxHealth;
-    }
-    public void OnStartClient()
+    [SerializeField]
+    private float currentHealth;
+
+    public override void OnStartClient()
     {
         base.OnStartClient();
-        if(!IsOwner)
+        healthBar.maxValue = maxHealth;
+
+        if (IsOwner) // Chỉ owner mới gọi RPC để set health ban đầu
         {
-            enabled = false;
-            return;
-        }    
+            SetHealthServerRpc(maxHealth);
+        }
+
     }
+
+
+
+    [ServerRpc]
+    private void SetHealthServerRpc(float health)
+    {
+        currentHealth = health;
+        UpdateHealthClientRpc(base.Owner, currentHealth);
+
+    }
+
+    [TargetRpc]
+    private void UpdateHealthClientRpc(NetworkConnection conn, float health)
+    {
+
+
+        currentHealth = health;
+        UpdateHealthUI();
+    }
+
+
+
+
+
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        _currnetHealt -= damage;
-        Debug.Log($"New player health: {_currnetHealt}");
-        if (_currnetHealt <= 0)
-            Die();
-     }
-    private void Die()
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHealthClientRpc(base.Owner, currentHealth);
+
+
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player died!");
+        }
+    }
+
+    private void UpdateHealthUI()
     {
-        Debug.Log("player is dead");
-    }    
+        healthBar.value = currentHealth;
+    }
 }
