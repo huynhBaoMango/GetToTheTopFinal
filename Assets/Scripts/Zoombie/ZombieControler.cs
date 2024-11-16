@@ -14,7 +14,7 @@ public class ZombieControler : NetworkBehaviour
 
     [SerializeField] private float moveForce = 3f;
     [SerializeField] private float maxMoveSpeed = 5f;
-    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackRange;
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float attackCooldown = 1f;
 
@@ -31,7 +31,6 @@ public class ZombieControler : NetworkBehaviour
         _ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-
         DisableRagdoll();
     }
 
@@ -39,7 +38,7 @@ public class ZombieControler : NetworkBehaviour
     {
         base.OnStartClient();
 
-        if (!IsServer)
+        if (!IsServerInitialized)
         {
             enabled = false;
             return;
@@ -51,12 +50,8 @@ public class ZombieControler : NetworkBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!IsServer)
-        {
-            return;
-        }
 
         switch (_currentState)
         {
@@ -104,6 +99,8 @@ public class ZombieControler : NetworkBehaviour
         _navMeshAgent.enabled = false;
     }
 
+
+    [Server]
     private void WalkingBehaviour()
     {
         Transform closestPlayer = GetClosestPlayer();
@@ -120,14 +117,10 @@ public class ZombieControler : NetworkBehaviour
 
         if (distanceToTarget <= attackRange)
         {
+            _navMeshAgent.isStopped = false;
             _currentState = ZombieState.Attacking;
-            _navMeshAgent.isStopped = true;
             _animator.SetTrigger("Attack");
             _lastAttackTime = Time.time;
-        }
-        else
-        {
-            _navMeshAgent.isStopped = false;
         }
 
         Vector3 direction = _currentTarget.position - transform.position;
@@ -141,8 +134,8 @@ public class ZombieControler : NetworkBehaviour
     {
         if (_currentTarget == null)
         {
-            _currentState = ZombieState.Walking;
             _navMeshAgent.isStopped = false;
+            _currentState = ZombieState.Walking;
             return;
         }
 
@@ -154,7 +147,7 @@ public class ZombieControler : NetworkBehaviour
         {
             if (_currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage(attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
+                playerHealth.TakeDamage((int)attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
             }
 
             _animator.SetTrigger("Attack");

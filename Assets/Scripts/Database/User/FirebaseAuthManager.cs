@@ -146,12 +146,27 @@ public class FirebaseAuthManager : MonoBehaviour
             yield return StartCoroutine(Common.instance.GetCurrentUser());
 
 
-            SceneManager.LoadScene("SkinScene");
+            SceneManager.LoadScene("Menu");
         }
         else
         {
             feedbackText.text = "Login failed: " + request.error;
         }
+    }
+    public void LogoutUser()
+    {
+        // Xóa thông tin người dùng đã lưu trong PlayerPrefs
+        PlayerPrefs.DeleteKey("idToken");
+        PlayerPrefs.DeleteKey("userId");
+        PlayerPrefs.DeleteKey("username");
+        PlayerPrefs.DeleteKey("email");
+        PlayerPrefs.Save();
+
+        // Đặt lại dữ liệu người dùng trong Common (nếu có)
+        Common.instance.currentUser = null;
+
+        // Chuyển về scene đăng nhập
+        SceneManager.LoadScene("WelcomeScene"); // Đảm bảo "Login" là tên của scene đăng nhập
     }
 
 }
