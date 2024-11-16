@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using FishNet.Object;
+using FishNet.Component.Animating;
 
 public class ZombieControler : NetworkBehaviour
 {
@@ -21,6 +22,7 @@ public class ZombieControler : NetworkBehaviour
     private Rigidbody[] _ragdollRigidbodies;
     private ZombieState _currentState = ZombieState.Walking;
     private Animator _animator;
+    private NetworkAnimator _animator2;
     private NavMeshAgent _navMeshAgent;
     private Rigidbody _rigid;
     private float _lastAttackTime;
@@ -30,6 +32,7 @@ public class ZombieControler : NetworkBehaviour
     {
         _ragdollRigidbodies = GetComponentsInChildren<Rigidbody>();
         _animator = GetComponent<Animator>();
+        _animator2 = GetComponent<NetworkAnimator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         DisableRagdoll();
     }
@@ -100,7 +103,7 @@ public class ZombieControler : NetworkBehaviour
     }
 
 
-    [Server]
+
     private void WalkingBehaviour()
     {
         Transform closestPlayer = GetClosestPlayer();
@@ -132,6 +135,12 @@ public class ZombieControler : NetworkBehaviour
 
     private void AttackingBehaviour()
     {
+        AttackingObserver();
+    }
+
+
+    private void AttackingObserver()
+    {
         if (_currentTarget == null)
         {
             _navMeshAgent.isStopped = false;
@@ -147,10 +156,11 @@ public class ZombieControler : NetworkBehaviour
         {
             if (_currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage((int)attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
+                //playerHealth.TakeDamage((int)attackDamage); // Gọi phương thức TakeDamage để giảm máu của player
             }
 
             _animator.SetTrigger("Attack");
+            _animator2.SetTrigger("Attack");
             _lastAttackTime = Time.time;
         }
 
