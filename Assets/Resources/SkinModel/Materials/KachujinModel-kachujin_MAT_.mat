@@ -21,7 +21,13 @@ Material:
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
+<<<<<<< Updated upstream
   disabledShaderPasses: []
+=======
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
+>>>>>>> Stashed changes
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -81,6 +87,10 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
+<<<<<<< Updated upstream
+=======
+    - _BaseColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+>>>>>>> Stashed changes
     - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
