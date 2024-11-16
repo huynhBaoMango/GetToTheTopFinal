@@ -2934,7 +2934,7 @@ GameObject:
   - component: {fileID: 8563883137832624401}
   - component: {fileID: 3990157515668608613}
   - component: {fileID: 6767924222955539542}
-  - component: {fileID: 1327373428499482327}
+  - component: {fileID: -604731426567131249}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -3204,7 +3204,7 @@ MonoBehaviour:
   _interpolation: 2
   _clientAuthoritative: 1
   _sendToOwner: 0
---- !u!114 &1327373428499482327
+--- !u!114 &-604731426567131249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3213,12 +3213,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9066273262268406947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d331f979d46e8e4a9fc90070c596d44, type: 3}
+  m_Script: {fileID: 11500000, guid: c71fd7f855ec523429999fc4e14a1928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _overrideType: 3
   _updateHostVisibility: 1
-  _maximumTimedObserversDuration: 10
-  _defaultConditions: []
+  _observerConditions: []
 --- !u!1 &9211562302767535768
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,9 +21,7 @@ public class InGameManager : NetworkBehaviour
 
     [Header("Zombie Setup")]
     public NetworkObject zombiePrefab;
-    public List<GameObject> zombieSpawns;
     public List<Transform> zombieSpawnPosList;
-    private readonly SyncList<int> bools = new SyncList<int>();
 
 
 
@@ -54,9 +52,10 @@ public class InGameManager : NetworkBehaviour
             case GameState.None:
                 break;
             case GameState.Loading:
-                UpdateZombieSpawnRender();
+                
                 break;
             case GameState.Running:
+                UpdateZombieSpawnRender();
                 StartLoading();
                 StartRunning();
                 break;
@@ -73,18 +72,15 @@ public class InGameManager : NetworkBehaviour
 
     void UpdateZombieSpawnRender()
     {
-        foreach (GameObject go in zombieSpawns)
-        {
-            go.SetActive(false);
-            Debug.Log("AAAAA");
-        }
+        FindObjectOfType<ZombieSpawnController>().DisableAllZombieSpawns();
     }
+
+    
 
     void StartLoading()
     {
         Debug.Log("Loading...");
         SpawnTheHeart();
-        CreateZombieSpawns();
         
     }
 
@@ -127,27 +123,7 @@ public class InGameManager : NetworkBehaviour
         ServerManager.Spawn(zombie);
     }
 
-    void CreateZombieSpawns()
-    {
-        zombieSpawnPosList.Clear();
-        if(level > 2 && level % 3 == 0)
-        {
-            int spawnCount = (level / 3);
-            if(spawnCount > zombieSpawns.Count) spawnCount = zombieSpawns.Count;
-            for(int i = 0; i < spawnCount; i++)
-            {
-                int random = UnityEngine.Random.Range(0, zombieSpawns.Count);
-                zombieSpawns[random].SetActive(true);
-                zombieSpawnPosList.Add(zombieSpawns[random].transform.GetChild(0));
-            }
-        }
-        else
-        {
-            int random = UnityEngine.Random.Range(0, zombieSpawns.Count);
-            zombieSpawns[random].SetActive(true);
-            zombieSpawnPosList.Add(zombieSpawns[random].transform.GetChild(0));
-        }
-    }
+    
 
     enum GameState
     {
