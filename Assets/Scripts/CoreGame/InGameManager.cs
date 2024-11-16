@@ -8,6 +8,7 @@ using IO.Swagger.Model;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InGameManager : NetworkBehaviour
 {
@@ -22,6 +23,7 @@ public class InGameManager : NetworkBehaviour
     [Header("Zombie Setup")]
     public NetworkObject zombiePrefab;
     public List<Transform> zombieSpawnPosList;
+    public ZombieSpawnController zombieSpawnController;
 
 
 
@@ -43,6 +45,12 @@ public class InGameManager : NetworkBehaviour
         }
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        zombieSpawnController.DisableAllZombieSpawns();
+    }
+
     void ChangeState(GameState state)
     {
         _currentState = state;
@@ -55,7 +63,6 @@ public class InGameManager : NetworkBehaviour
                 
                 break;
             case GameState.Running:
-                UpdateZombieSpawnRender();
                 StartLoading();
                 StartRunning();
                 break;
@@ -70,16 +77,13 @@ public class InGameManager : NetworkBehaviour
         }
     }
 
-    void UpdateZombieSpawnRender()
-    {
-        FindObjectOfType<ZombieSpawnController>().DisableAllZombieSpawns();
-    }
 
     
 
     void StartLoading()
     {
         Debug.Log("Loading...");
+        SpawnZombieSpawns();
         SpawnTheHeart();
         
     }
@@ -103,6 +107,22 @@ public class InGameManager : NetworkBehaviour
         ChangeState(GameState.Loading);
     }
 
+    void SpawnZombieSpawns()
+    {
+        level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        if(level < 2 && level % 3 == 0)
+        {
+            int maxCount = level / 3;
+            for(int i = 0; i < maxCount; i++)
+            {
+                zombieSpawnController.EnableGivenSpawn(Random.Range(0, zombieSpawnController.zombieSpawns.Count));
+            }
+        }
+        else
+        {
+            zombieSpawnController.EnableGivenSpawn(Random.Range(0, zombieSpawnController.zombieSpawns.Count));
+        }
+    }
 
     void SpawnTheHeart()
     {

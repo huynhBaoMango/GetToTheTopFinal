@@ -19,10 +19,7 @@ public class ZombieSpawnController : NetworkBehaviour
         base.OnStartClient();
         if (base.IsOwner)
         {
-            foreach(GameObject t in transform)
-            {
-                zombieSpawns.Add(t);
-            }
+
         }
         else
         {
@@ -30,13 +27,13 @@ public class ZombieSpawnController : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+
     public void DisableAllZombieSpawns()
     {
         UpdateZombieSpawnRenderObserver();
     }
 
-
+    [ObserversRpc]
     public void UpdateZombieSpawnRenderObserver()
     {
         foreach (GameObject go in zombieSpawns)
@@ -45,5 +42,17 @@ public class ZombieSpawnController : NetworkBehaviour
             Debug.Log("AAAAA");
         }
     }
+
+    public void EnableGivenSpawn(int i)
+    {
+        EnableGivenSpawnObserver(i);
+    }
+
+    [ObserversRpc]
+    void EnableGivenSpawnObserver(int i)
+    {
+        zombieSpawns[i].SetActive(true);
+    }
+
 
 }
