@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using IO.Swagger.Model;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.WebGL;
 
 public class InGameManager : NetworkBehaviour
 {
@@ -23,6 +23,7 @@ public class InGameManager : NetworkBehaviour
     public NetworkObject zombiePrefab;
     public List<GameObject> zombieSpawns;
     public List<Transform> zombieSpawnPosList;
+    private readonly SyncList<int> bools = new SyncList<int>();
 
 
 
@@ -38,7 +39,10 @@ public class InGameManager : NetworkBehaviour
     {
         if (!base.IsServerInitialized)
             return;
-
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ChangeState(_currentState+1);
+        }
     }
 
     void ChangeState(GameState state)
@@ -50,9 +54,10 @@ public class InGameManager : NetworkBehaviour
             case GameState.None:
                 break;
             case GameState.Loading:
-                StartLoading();
+                UpdateZombieSpawnRender();
                 break;
             case GameState.Running:
+                StartLoading();
                 StartRunning();
                 break;
             case GameState.End:
@@ -66,22 +71,18 @@ public class InGameManager : NetworkBehaviour
         }
     }
 
-    [ObserversRpc]
     void UpdateZombieSpawnRender()
     {
         foreach (GameObject go in zombieSpawns)
         {
-            foreach (Transform t in go.transform.GetChild(1).transform)
-            {
-               t.GetComponent<Renderer>().enabled = false;
-            }
+            go.SetActive(false);
+            Debug.Log("AAAAA");
         }
     }
 
     void StartLoading()
     {
         Debug.Log("Loading...");
-        UpdateZombieSpawnRender();
         SpawnTheHeart();
         CreateZombieSpawns();
         
@@ -90,7 +91,7 @@ public class InGameManager : NetworkBehaviour
     void StartRunning()
     {
         Debug.Log("Running...");
-        InvokeTheSpawn();
+        //InvokeTheSpawn();
 
     }
 
@@ -109,7 +110,7 @@ public class InGameManager : NetworkBehaviour
 
     void SpawnTheHeart()
     {
-        GameObject heart = Instantiate(heartPrefab, floors[UnityEngine.Random.Range(0, floors.Length)].position, Quaternion.identity);
+        GameObject heart = Instantiate(heartPrefab, floors[UnityEngine.Random.Range(0, floors.Length-1)].position, Quaternion.identity);
         ServerManager.Spawn(heart);
     }
 
@@ -139,6 +140,12 @@ public class InGameManager : NetworkBehaviour
                 zombieSpawns[random].SetActive(true);
                 zombieSpawnPosList.Add(zombieSpawns[random].transform.GetChild(0));
             }
+        }
+        else
+        {
+            int random = UnityEngine.Random.Range(0, zombieSpawns.Count);
+            zombieSpawns[random].SetActive(true);
+            zombieSpawnPosList.Add(zombieSpawns[random].transform.GetChild(0));
         }
     }
 
