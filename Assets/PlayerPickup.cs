@@ -1,17 +1,16 @@
-using FishNet.Object;
-using System.Collections;
-using System.Collections.Generic;
+Ôªøusing FishNet.Object;
 using UnityEngine;
 
 public class PlayerPickup : NetworkBehaviour
 {
-    [Header("C‡i ??t Nh?t ?? Chung")]
+    [Header("C√†i ƒê·∫∑t Nh·∫∑t ƒê·ªì Chung")]
     [SerializeField] private float pickUpRange = 4f;
     [SerializeField] private KeyCode pickUpKey = KeyCode.F;
     [SerializeField] private KeyCode dropButton = KeyCode.Q;
+    [SerializeField] private KeyCode rotateButton = KeyCode.Z; // Key to switch rotation axis
     [SerializeField] private LayerMask pickUpLayers;
 
-    [Header("C‡i ??t Nh?t V?t Ph?m")]
+    [Header("C√†i ƒê·∫∑t Nh·∫∑t V·∫≠t Ph·∫©m")]
     [SerializeField] private float raycastDistance = 4f;
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private Transform pickupPosition;
@@ -22,6 +21,9 @@ public class PlayerPickup : NetworkBehaviour
     private bool hasObjectInHand;
     private GameObject objInHand;
     private Transform worldObjectHolder;
+    private float rotationAmount = 0f;
+    private enum RotationAxis { X, Y }
+    private RotationAxis currentRotationAxis = RotationAxis.Y;
 
     public override void OnStartClient()
     {
@@ -34,7 +36,7 @@ public class PlayerPickup : NetworkBehaviour
 
         cameraTransform = Camera.main.transform;
         cam = Camera.main;
-        if(GameObject.FindGameObjectWithTag("WorldObjects") != null)
+        if (GameObject.FindGameObjectWithTag("WorldObjects") != null)
         {
             worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
         }
@@ -56,11 +58,23 @@ public class PlayerPickup : NetworkBehaviour
         {
             Drop();
         }
+
+        if (Input.GetKeyDown(rotateButton))
+        {
+            // Toggle rotation axis
+            currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
+            rotationAmount = 0f; // Reset rotation amount when switching axes
+            RotateObject(0f); // Apply the rotation change immediately
+        }
+
+        if (hasObjectInHand && Input.GetAxis("Mouse ScrollWheel") != 0f)
+        {
+            RotateObject(Input.GetAxis("Mouse ScrollWheel") * 90f);
+        }
     }
 
     private void PickUp()
     {
-        // Ki?m tra n?u cÛ th? nh?t v? khÌ
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickUpRange, pickUpLayers))
         {
             if (hit.transform.TryGetComponent(out GroundWeapon weapon))
@@ -70,7 +84,6 @@ public class PlayerPickup : NetworkBehaviour
             }
         }
 
-        // Ki?m tra n?u cÛ th? nh?t c·c v?t ph?m kh·c
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitObj, raycastDistance, pickupLayer))
         {
             if (!hasObjectInHand)
@@ -78,6 +91,7 @@ public class PlayerPickup : NetworkBehaviour
                 SetObjectInHandServer(hitObj.transform.gameObject, pickupPosition.position, pickupPosition.rotation, gameObject);
                 objInHand = hitObj.transform.gameObject;
                 hasObjectInHand = true;
+                rotationAmount = 0; // Reset rotation amount here
             }
             else if (hasObjectInHand)
             {
@@ -85,7 +99,36 @@ public class PlayerPickup : NetworkBehaviour
                 SetObjectInHandServer(hitObj.transform.gameObject, pickupPosition.position, pickupPosition.rotation, gameObject);
                 objInHand = hitObj.transform.gameObject;
                 hasObjectInHand = true;
+                rotationAmount = 0; // Reset rotation amount here as well
             }
+        }
+    }
+
+    private void RotateObject(float amount)
+    {
+        if (!hasObjectInHand)
+            return;
+
+        rotationAmount += amount;
+        RotateObjectServer(objInHand, rotationAmount, currentRotationAxis);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void RotateObjectServer(GameObject obj, float amount, RotationAxis axis)
+    {
+        RotateObjectObserver(obj, amount, axis);
+    }
+
+    [ObserversRpc]
+    void RotateObjectObserver(GameObject obj, float amount, RotationAxis axis)
+    {
+        if (axis == RotationAxis.X)
+        {
+            obj.transform.localRotation = Quaternion.Euler(amount, 0f, 0f);
+        }
+        else // RotationAxis.Y
+        {
+            obj.transform.localRotation = Quaternion.Euler(0f, amount, 0f);
         }
     }
 
