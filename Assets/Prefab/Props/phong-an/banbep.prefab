@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000010622421404}
   - component: {fileID: 64000010371907114}
   - component: {fileID: 114000012102928952}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,12 +129,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000013553621506}
-  - component: {fileID: 65000011667778110}
   - component: {fileID: 95000011848008184}
   - component: {fileID: 114000014034127314}
-  m_Layer: 0
+  - component: {fileID: 4636214256049180254}
+  - component: {fileID: 8113551940992706113}
+  - component: {fileID: 573999882674072388}
+  - component: {fileID: 3025276931341338355}
+  - component: {fileID: 989823949342775878}
+  - component: {fileID: 1692699847104552986}
+  - component: {fileID: 530351380648336677}
+  m_Layer: 14
   m_Name: banbep
-  m_TagString: Untagged
+  m_TagString: WorldObjects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,27 +163,6 @@ Transform:
   - {fileID: 4000012333874914}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!65 &65000011667778110
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000010360530024}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.29, y: 1, z: 1.18}
-  m_Center: {x: 0, y: 0.63, z: 0.97}
 --- !u!95 &95000011848008184
 Animator:
   serializedVersion: 5
@@ -212,6 +197,221 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reachRange: 1.9
+--- !u!23 &4636214256049180254
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8113551940992706113
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!208 &573999882674072388
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!114 &3025276931341338355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
+  _initializedValusSet: 0
+  NetworkObserver: {fileID: 0}
+  _enablePrediction: 0
+  _predictionType: 0
+  _graphicalObject: {fileID: 0}
+  _detachGraphicalObject: 0
+  _enableStateForwarding: 1
+  _networkTransform: {fileID: 0}
+  _ownerInterpolation: 1
+  _ownerSmoothedProperties: 255
+  _adaptiveInterpolation: 3
+  _spectatorSmoothedProperties: 255
+  _spectatorInterpolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  <PrefabId>k__BackingField: 65535
+  <SpawnableCollectionId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 15030632458290944932
+  <SceneId>k__BackingField: 0
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    LocalScale: {x: 0, y: 0, z: 0}
+--- !u!114 &989823949342775878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3025276931341338355}
+  _networkObjectCache: {fileID: 0}
+  _componentConfiguration: 0
+  _synchronizeParent: 0
+  _packing:
+    Position: 1
+    Rotation: 1
+    Scale: 0
+  _interpolation: 2
+  _extrapolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  _clientAuthoritative: 1
+  _sendToOwner: 1
+  _interval: 1
+  _synchronizePosition: 1
+  _positionSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeRotation: 1
+  _rotationSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+  _synchronizeScale: 1
+  _scaleSnapping:
+    X: 0
+    Y: 0
+    Z: 0
+--- !u!54 &1692699847104552986
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &530351380648336677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010360530024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3025276931341338355}
+  _networkObjectCache: {fileID: 0}
 --- !u!1 &1000010414688484
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012368386014}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012815886320}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: grp_drawsDoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +494,7 @@ GameObject:
   - component: {fileID: 23000012618657854}
   - component: {fileID: 64000010236074398}
   - component: {fileID: 114000013791663824}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: draw04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012333874914}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: doors_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +650,7 @@ GameObject:
   - component: {fileID: 23000010598228528}
   - component: {fileID: 64000010983216806}
   - component: {fileID: 114000011547830256}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +768,7 @@ GameObject:
   - component: {fileID: 4000013824326978}
   - component: {fileID: 65000013192037608}
   - component: {fileID: 114000010544702582}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: 'door03_interact '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +835,7 @@ GameObject:
   - component: {fileID: 4000013981303584}
   - component: {fileID: 65000011586489906}
   - component: {fileID: 114000013249185804}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door01_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +904,7 @@ GameObject:
   - component: {fileID: 23000013423371178}
   - component: {fileID: 64000011894210142}
   - component: {fileID: 114000010202715106}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: draw03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -824,7 +1024,7 @@ GameObject:
   - component: {fileID: 23000013537687172}
   - component: {fileID: 64000013392780856}
   - component: {fileID: 114000013521273692}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +1143,7 @@ GameObject:
   - component: {fileID: 33000012556160086}
   - component: {fileID: 23000014083718480}
   - component: {fileID: 64000013934670732}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: KitchenBench_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1050,7 +1250,7 @@ GameObject:
   - component: {fileID: 23000014290892676}
   - component: {fileID: 64000012309380072}
   - component: {fileID: 114000010781489522}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1168,7 +1368,7 @@ GameObject:
   - component: {fileID: 4000010526601180}
   - component: {fileID: 65000013155712976}
   - component: {fileID: 114000010273773928}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door05_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1237,7 +1437,7 @@ GameObject:
   - component: {fileID: 23000012474295010}
   - component: {fileID: 64000013415296590}
   - component: {fileID: 114000012366746512}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1355,7 +1555,7 @@ GameObject:
   - component: {fileID: 4000011683072854}
   - component: {fileID: 65000010192667954}
   - component: {fileID: 114000012727304962}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door04_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1420,7 +1620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012922898716}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: draws
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1459,7 +1659,7 @@ GameObject:
   - component: {fileID: 23000011664944534}
   - component: {fileID: 64000012842132914}
   - component: {fileID: 114000014236037292}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: draw01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1579,7 +1779,7 @@ GameObject:
   - component: {fileID: 23000013527208680}
   - component: {fileID: 64000012823878324}
   - component: {fileID: 114000011119983824}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: draw02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,7 +1897,7 @@ GameObject:
   - component: {fileID: 4000013405082582}
   - component: {fileID: 65000014140085306}
   - component: {fileID: 114000012493084238}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: door02_interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
