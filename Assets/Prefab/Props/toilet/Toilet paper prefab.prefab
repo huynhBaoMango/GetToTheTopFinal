@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65596826831681986}
   - component: {fileID: 5842128921916451138}
   - component: {fileID: 5583427985114485648}
-  - component: {fileID: 2242999085987407373}
+  - component: {fileID: 2712635409420879710}
   m_Layer: 0
   m_Name: Toilet paper
   m_TagString: Untagged
@@ -202,22 +202,21 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0.0703}
     Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
     LocalScale: {x: 100, y: 99.99997, z: 99.99997}
---- !u!208 &2242999085987407373
-NavMeshObstacle:
+--- !u!114 &2712635409420879710
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007791630826660}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.001, y: 0.001, z: 0.001}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.001}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5583427985114485648}
+  _networkObjectCache: {fileID: 0}
 --- !u!1 &1858983553645158
 GameObject:
   m_ObjectHideFlags: 0

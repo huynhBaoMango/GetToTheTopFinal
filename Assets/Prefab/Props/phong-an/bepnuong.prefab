@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1449873614650997764}
   - component: {fileID: 5498163135053221653}
   - component: {fileID: 1245785259798361910}
+  - component: {fileID: 2949835947431269117}
   m_Layer: 14
   m_Name: bepnuong
   m_TagString: WorldObjects
@@ -245,3 +246,19 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 3755523816080827986}
   _networkObjectCache: {fileID: 0}
+--- !u!208 &2949835947431269117
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013331319894}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.462, y: 0.544, z: 0.47500002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.544, z: 0}
+  m_TimeToStationary: 0.5
