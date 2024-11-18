@@ -24,15 +24,14 @@ public class InGameManager : NetworkBehaviour
     public NetworkObject zombiePrefab;
     public List<Transform> zombieSpawnPosList;
     public ZombieSpawnController zombieSpawnController;
-
-
+ 
 
     private void Start()
     {
         if (!base.IsServerInitialized)
             return;
         level = PlayerPrefs.GetInt("CurrentLevel", 1);
-        ChangeState(GameState.Loading);
+        
     }
 
     private void Update()
@@ -48,7 +47,7 @@ public class InGameManager : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        zombieSpawnController.DisableAllZombieSpawns();
+        ChangeState(GameState.Loading);
     }
 
     void ChangeState(GameState state)
@@ -60,11 +59,13 @@ public class InGameManager : NetworkBehaviour
             case GameState.None:
                 break;
             case GameState.Loading:
-                
-                break;
-            case GameState.Running:
                 StartLoading();
-                StartRunning();
+                break;
+            case GameState.Prepare:
+                StartPreparing();
+                break;
+            case GameState.Shooting:
+                StartShooting();
                 break;
             case GameState.End:
                 StartEnd();
@@ -83,16 +84,21 @@ public class InGameManager : NetworkBehaviour
     void StartLoading()
     {
         Debug.Log("Loading...");
-        SpawnZombieSpawns();
+        zombieSpawnController.DisableAllZombieSpawns();
+        SpawnObject();
         SpawnTheHeart();
-        
     }
 
-    void StartRunning()
+    void StartPreparing()
     {
-        Debug.Log("Running...");
-        //InvokeTheSpawn();
+        Debug.Log("Preparing...");
+        SpawnZombieSpawns();
+    }
 
+    void StartShooting()
+    {
+        Debug.Log("Shooting...");
+        InvokeTheSpawn();
     }
 
     void StartEnd()
@@ -107,21 +113,36 @@ public class InGameManager : NetworkBehaviour
         ChangeState(GameState.Loading);
     }
 
+    void SpawnObject()
+    {
+        foreach(Transform t in floors)
+        {
+            t.GetComponent<GridMaker>().DotheSpawn();
+            //cái cuối thì gọi hàm buildnavmesh
+        }
+        floors[0].GetComponent<GridMaker>().BuidNavMesh();
+    }
+
     void SpawnZombieSpawns()
     {
         level = PlayerPrefs.GetInt("CurrentLevel", 0);
-        if(level < 2 && level % 3 == 0)
+        if(level > 2 && level % 3 == 0)
         {
             int maxCount = level / 3;
             for(int i = 0; i < maxCount; i++)
             {
-                zombieSpawnController.EnableGivenSpawn(Random.Range(0, zombieSpawnController.zombieSpawns.Count));
+                int random = Random.Range(0, zombieSpawnController.zombieSpawns.Count);
+                zombieSpawnController.EnableGivenSpawn(random);
+                zombieSpawnPosList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(0).transform);
             }
         }
         else
         {
-            zombieSpawnController.EnableGivenSpawn(Random.Range(0, zombieSpawnController.zombieSpawns.Count));
+            int random = Random.Range(0, zombieSpawnController.zombieSpawns.Count);
+            zombieSpawnController.EnableGivenSpawn(random);
+            zombieSpawnPosList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(0).transform);
         }
+       
     }
 
     void SpawnTheHeart()
@@ -149,8 +170,9 @@ public class InGameManager : NetworkBehaviour
     {
         None = 0,
         Loading = 1,
-        Running = 2,
-        End = 3,
-        Restart = 4
+        Prepare = 2,
+        Shooting = 3,
+        End = 4,
+        Restart = 5
     }
 }

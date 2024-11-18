@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class ZombieSpawnController : NetworkBehaviour
 {
-    public List<GameObject> zombieSpawns = new List<GameObject>();
+    public List<GameObject> zombieSpawns;
 
     private void Awake()
     {
+        zombieSpawns = new List<GameObject>();
         foreach (Transform t in transform)
         {
             zombieSpawns.Add(t.gameObject);
@@ -17,7 +18,7 @@ public class ZombieSpawnController : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (base.IsOwner)
+        if (base.IsServerInitialized)
         {
 
         }
@@ -33,25 +34,33 @@ public class ZombieSpawnController : NetworkBehaviour
         UpdateZombieSpawnRenderObserver();
     }
 
-    [ObserversRpc]
+
     public void UpdateZombieSpawnRenderObserver()
     {
         foreach (GameObject go in zombieSpawns)
         {
-            go.SetActive(false);
+            go.GetComponent<Renderer>().enabled = false;
             Debug.Log("AAAAA");
         }
     }
 
+
     public void EnableGivenSpawn(int i)
     {
+        if (zombieSpawns[i].TryGetComponent<Renderer>(out Renderer renderer))
+        {
+            renderer.enabled = true;
+        }
         EnableGivenSpawnObserver(i);
     }
 
     [ObserversRpc]
     void EnableGivenSpawnObserver(int i)
     {
-        zombieSpawns[i].SetActive(true);
+        if (zombieSpawns[i].TryGetComponent<Renderer>(out Renderer renderer))
+        {
+            renderer.enabled = true;
+        }
     }
 
 

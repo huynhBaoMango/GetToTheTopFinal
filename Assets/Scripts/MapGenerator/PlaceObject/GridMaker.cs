@@ -33,16 +33,21 @@ public class GridMaker : NetworkBehaviour
     {
         if (tilePrefab != null)
         {
-            //CreateGrid();
-            //PlaceRandomObject();
-            if (TryGetComponent(out NavMeshSurface surface))
-            {
-                surface.BuildNavMesh();
-            }
+            CreateGrid();
+            PlaceRandomObject();
+            
         }
         else
         {
             Debug.Log("no tile");
+        }
+    }
+
+    public void BuidNavMesh()
+    {
+        if (TryGetComponent(out NavMeshSurface surface))
+        {
+            surface.BuildNavMesh();
         }
     }
 
