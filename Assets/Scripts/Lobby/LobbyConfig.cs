@@ -61,18 +61,18 @@ public class LobbyConfig : MonoBehaviour
         {
             readyButton.gameObject.SetActive(true);
             startGameButton.onClick.AddListener(() => { LoadGameScene(); });
-            //GameplayManager.instance2.StartGameButton = startGameButton.gameObject;
+            GameplayManager.instance2.StartGameButton = startGameButton.gameObject;
 
             if (startedAsHost)
             {
                 readyButton.onClick.AddListener(() =>
                 {
-                    //if (!PlayerLobby.instance3)
-                    //    Debug.Log("Player not loaded yet");
-                    //else
-                    //    PlayerLobby.instance3.ToggleReadyState();
-                        readyButton.gameObject.SetActive(false);
-                        startGameButton.gameObject.SetActive(true);
+                    if (!PlayerLobby.instance3)
+                        Debug.Log("Player not loaded yet");
+                    else
+                        PlayerLobby.instance3.ToggleReadyState();
+                   
+                    startGameButton.;
                 });
             }
             else
@@ -85,10 +85,10 @@ public class LobbyConfig : MonoBehaviour
             readyButton.gameObject.SetActive(true);
             readyButton.onClick.AddListener(() =>
             {
-                //if (!PlayerLobby.instance3)
-                //    Debug.Log("Player not loaded yet");
-                //else
-                //    PlayerLobby.instance3.ToggleReadyState();
+                if (!PlayerLobby.instance3)
+                    Debug.Log("Player not loaded yet");
+                else
+                    PlayerLobby.instance3.ToggleReadyState();
             });
             if (!networkManager.IsServerStarted)
             {
@@ -125,9 +125,9 @@ public class LobbyConfig : MonoBehaviour
             if (!networkManager.ServerManager.OneServerStarted())
                 return;
 
-            SceneLoadData sld = new SceneLoadData(GetSceneName(gameScene));
-            sld.ReplaceScenes = ReplaceOption.None;
-            networkManager.SceneManager.LoadGlobalScenes(sld);
+            //SceneLoadData sld = new SceneLoadData(GetSceneName(gameScene));
+            //sld.ReplaceScenes = ReplaceOption.None;
+            //networkManager.SceneManager.LoadGlobalScenes(sld);
         }
         else if (serverState == LocalConnectionState.Stopped)
         {
