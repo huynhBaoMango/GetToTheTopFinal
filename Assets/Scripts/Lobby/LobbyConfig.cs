@@ -72,7 +72,7 @@ public class LobbyConfig : MonoBehaviour
                     else
                         PlayerLobby.instance3.ToggleReadyState();
                    
-                    startGameButton.;
+                    //startGameButton.;
                 });
             }
             else

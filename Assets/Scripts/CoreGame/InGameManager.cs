@@ -117,10 +117,16 @@ public class InGameManager : NetworkBehaviour
     {
         foreach(Transform t in floors)
         {
-            t.GetComponent<GridMaker>().DotheSpawn();
-            //cái cuối thì gọi hàm buildnavmesh
+            if(t.TryGetComponent<GridMaker>(out GridMaker grid1))
+            {
+                grid1.DotheSpawn();
+            }
+           
         }
-        floors[0].GetComponent<GridMaker>().BuidNavMesh();
+        if (floors[0].TryGetComponent<GridMaker>(out GridMaker grid))
+        {
+            grid.BuidNavMesh();
+        }
     }
 
     void SpawnZombieSpawns()

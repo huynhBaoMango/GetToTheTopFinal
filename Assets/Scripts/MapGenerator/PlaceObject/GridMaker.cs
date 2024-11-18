@@ -135,7 +135,7 @@ public class GridMaker : NetworkBehaviour
         if (isOkay)
         {
             Transform stile = tilesMatrix[pos.x, pos.y].transform;
-            Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y+0.1f, stile.position.z - 0.5f);
+            Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y+0.2f, stile.position.z - 0.5f);
             NetworkObject newz = NetworkManager.GetPooledInstantiated(newProp.gameObject, cornerPos, Quaternion.identity, gameObject.transform);
             ServerManager.Spawn(newz.gameObject);
             for (int x = pos.x; x < pos.x + newProp.x; x++)
