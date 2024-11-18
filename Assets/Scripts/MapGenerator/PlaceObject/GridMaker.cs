@@ -90,7 +90,7 @@ public class GridMaker : NetworkBehaviour
     void PlaceRandomObject()
     {
         int objectCount = 0;
-        while(objectCount < 5)
+        while(objectCount < 3)
         {
             Vector2Int randomPos = GetRandomPosOnMatrix();
             if (CheckIfValidToSpawn(randomPos)) objectCount++;
