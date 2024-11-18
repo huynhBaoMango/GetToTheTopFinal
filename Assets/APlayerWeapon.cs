@@ -8,7 +8,6 @@ public abstract class APlayerWeapon : NetworkBehaviour
     private Transform _cameraTransform;
     public float maxRange = 20f;
     public LayerMask weaponHitLayers;
-    public GameObject bulletPrefab;
 
     private void Awake()
     {
