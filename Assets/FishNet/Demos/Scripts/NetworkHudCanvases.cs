@@ -3,7 +3,7 @@ using FishNet.Transporting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using System.Collections;
 namespace FishNet.Example
 {
 
@@ -60,6 +60,13 @@ namespace FishNet.Example
         [Tooltip("Indicator for client state.")]
         [SerializeField]
         private Image _clientIndicator;
+        [Header("Loading")]
+        [SerializeField]
+        private GameObject _loadingPanel;
+        [SerializeField]
+        private Slider _loadingSlider;
+        [SerializeField]
+        private float _connectionDelay = 2f;
         #endregion
 
         #region Private.
@@ -152,7 +159,7 @@ namespace FishNet.Example
                 _networkManager.ServerManager.OnServerConnectionState += ServerManager_OnServerConnectionState;
                 _networkManager.ClientManager.OnClientConnectionState += ClientManager_OnClientConnectionState;
             }
-
+            _loadingPanel.SetActive(false);
             if (_autoStartType == AutoStartType.Host || _autoStartType == AutoStartType.Server)
                 OnClick_Server();
             if (!Application.isBatchMode && (_autoStartType == AutoStartType.Host || _autoStartType == AutoStartType.Client))
@@ -192,6 +199,18 @@ namespace FishNet.Example
         {
             _clientState = obj.ConnectionState;
             UpdateColor(obj.ConnectionState, ref _clientIndicator);
+
+            if (obj.ConnectionState == LocalConnectionState.Started)
+            {
+                StopCoroutine(ShowLoading()); // Make sure to stop coroutine if connected
+                _loadingPanel.SetActive(false);
+                StartCoroutine(DelayedGameEntry());
+            }
+            else if (obj.ConnectionState == LocalConnectionState.Stopped)
+            {
+                StopCoroutine(ShowLoading()); // Stop if connection fails/stops
+                _loadingPanel.SetActive(false);
+            }
         }
 
 
@@ -222,11 +241,37 @@ namespace FishNet.Example
                 return;
 
             if (_clientState != LocalConnectionState.Stopped)
+            {
                 _networkManager.ClientManager.StopConnection();
+                _loadingPanel.SetActive(false);
+            }
             else
-                _networkManager.ClientManager.StartConnection();
+                _networkManager.ClientManager.OnClientConnectionState += ClientManager_OnClientConnectionState;
+            _networkManager.ClientManager.StartConnection();
+            StartCoroutine(ShowLoading());
 
             DeselectButtons();
+        }
+        private IEnumerator ShowLoading()
+        {
+            _loadingPanel.SetActive(true);
+            _loadingSlider.value = 0;
+
+            while (_clientState == LocalConnectionState.Starting)
+            {
+                _loadingSlider.value += Time.deltaTime; // Or a more relevant progress indicator
+                yield return null;
+            }
+
+            _loadingPanel.SetActive(false);
+        }
+        private IEnumerator DelayedGameEntry()
+        {
+            yield return new WaitForSeconds(_connectionDelay);
+
+            // Put your game entry logic here.  For example:
+            Debug.Log("Game Entry After Delay");
+            // Load a new scene, activate game objects, etc.
         }
 
 
