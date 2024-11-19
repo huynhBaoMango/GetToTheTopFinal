@@ -120,7 +120,6 @@ public class PlayerLobby : NetworkBehaviour
     [ServerRpc]
     public void ChangePlayerName(string name)
     {
-        name = Common.instance.currentUser.username;
         playerName = name;
         UpdatePlayerNameText(); // Cap nhat ten nguoi choi
     }
