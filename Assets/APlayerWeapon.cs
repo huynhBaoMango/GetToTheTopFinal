@@ -14,6 +14,8 @@ public abstract class APlayerWeapon : NetworkBehaviour
         _cameraTransform = Camera.main.transform;
     }
 
+    public Transform RightHandIKTarget, LeftHandIKTarget, rightHintIK, leftHintIK;
+
     public abstract void Fire();
 
     public abstract void AnimateWeapon();

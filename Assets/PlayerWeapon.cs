@@ -10,6 +10,8 @@ public class PlayerWeapon : NetworkBehaviour
     private int currentIndexWeapon = 0;
     private readonly SyncVar<int> _currentWeaponIndex = new(-1);
 
+    [SerializeField] private Transform rightHandTarget, leftHandTarget, rightHint, leftHint;
+
     private void Awake()
     {
         _currentWeaponIndex.OnChange += OnCurrentWeaponIndexChange;
@@ -36,6 +38,11 @@ public class PlayerWeapon : NetworkBehaviour
         {
             currentWeapon.Fire();
         }
+        if(currentWeapon.RightHandIKTarget != null) rightHandTarget.SetPositionAndRotation(currentWeapon.RightHandIKTarget.position, currentWeapon.RightHandIKTarget.rotation);
+        if(currentWeapon.LeftHandIKTarget != null) leftHandTarget.SetPositionAndRotation(currentWeapon.LeftHandIKTarget.position, currentWeapon.LeftHandIKTarget.rotation);
+        if(currentWeapon.rightHintIK != null) rightHint.position = currentWeapon.rightHintIK.position;
+        if(currentWeapon.leftHintIK != null) leftHint.position = currentWeapon.leftHintIK.position;
+
     }
 
     private void OnCurrentWeaponIndexChange(int oldIndex, int newIndex, bool asServer)
@@ -50,6 +57,10 @@ public class PlayerWeapon : NetworkBehaviour
             currentWeapon = weapons[newIndex];
             currentWeapon.gameObject.SetActive(true);
         }
+        if (currentWeapon.RightHandIKTarget != null) rightHandTarget.SetPositionAndRotation(currentWeapon.RightHandIKTarget.position, currentWeapon.RightHandIKTarget.rotation);
+        if (currentWeapon.LeftHandIKTarget != null) leftHandTarget.SetPositionAndRotation(currentWeapon.LeftHandIKTarget.position, currentWeapon.LeftHandIKTarget.rotation);
+        if (currentWeapon.rightHintIK != null) rightHint.position = currentWeapon.rightHintIK.position;
+        if (currentWeapon.leftHintIK != null) leftHint.position = currentWeapon.leftHintIK.position;
     }
 
     
