@@ -2673,6 +2673,7 @@ GameObject:
   - component: {fileID: 8220846313589367992}
   - component: {fileID: 7860430148090649314}
   - component: {fileID: 495771021380666974}
+  - component: {fileID: 276540299249572592}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -2920,6 +2921,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &276540299249572592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457079028714105283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 8543677235317355734}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 5
 --- !u!1 &7617682023640726089
 GameObject:
   m_ObjectHideFlags: 0
