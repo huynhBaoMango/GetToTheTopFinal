@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 9
+  _componentIndexCache: 11
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &933805207062348890
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 4782389442660108339}
   - component: {fileID: -8036660670526358518}
   m_Layer: 0
-  m_Name: ban2_pc2
+  m_Name: ban2_pc2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,6 +409,7 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: -8036660670526358518}
+  - {fileID: 3195684468681492508}
   - {fileID: 3360193883691106725}
   - {fileID: 7713062576565839186}
   - {fileID: 863475094705216620}
@@ -417,14 +418,13 @@ MonoBehaviour:
   - {fileID: 3114821140809469315}
   - {fileID: 2526045099911486847}
   - {fileID: 7197158100139215172}
+  - {fileID: -8223587067613535735}
   - {fileID: 8049973424941424280}
   - {fileID: 4537238298564694888}
   - {fileID: 7339931193053844236}
   - {fileID: 456108079722249953}
   - {fileID: 6531575874058198644}
   - {fileID: 5729975893688206638}
-  - {fileID: 3195684468681492508}
-  - {fileID: -8223587067613535735}
   - {fileID: 6949109437763946141}
   - {fileID: 7522261748610558310}
   - {fileID: 1077161675588929021}
@@ -474,7 +474,7 @@ MonoBehaviour:
   _teleportThreshold: 1
   <PrefabId>k__BackingField: 33
   <SpawnableCollectionId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 11671873504371517393
+  <AssetPathHash>k__BackingField: 13460641593955844107
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
@@ -728,7 +728,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: -0, y: 0, z: 0}
-    Rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 123.00727, y: 123.0072, z: 123.0072}
 --- !u!54 &6404573579941169220
 Rigidbody:
@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &1403092289641688473
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0.051, y: 0, z: -0.161}
-    Rotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 100, z: 100}
 --- !u!1 &1887778992258369294
 GameObject:
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   <AssetPathHash>k__BackingField: 0
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0.07}
+    Position: {x: -0, y: 0, z: 0.1}
     Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 100, z: 100}
 --- !u!114 &5290523060128277451
@@ -2082,7 +2082,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0.051, y: 0, z: -0.161}
-    Rotation: {x: -0.70710677, y: -0, z: -0, w: 0.7071068}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 100, z: 100}
 --- !u!1 &2844700969436906616
 GameObject:
@@ -2129,7 +2129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 14
+  _componentIndexCache: 16
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &2974068292960542741
@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &3116497666713459283
@@ -2519,7 +2519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 13
+  _componentIndexCache: 15
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &3325865520676762846
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: -0.79, y: 0, z: 0}
-    Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 99.99991, z: 99.99991}
 --- !u!1 &3657199203918243861
 GameObject:
@@ -3009,7 +3009,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 99.99997, z: 99.99997}
 --- !u!65 &7256821578516985398
 BoxCollider:
@@ -3077,7 +3077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 10
+  _componentIndexCache: 12
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &3851356996320060542
@@ -3125,7 +3125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 7
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &3955904892518035049
@@ -3789,7 +3789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 12
+  _componentIndexCache: 14
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &5409474897160783230
@@ -4131,7 +4131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &5649391020232458941
@@ -4262,7 +4262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 11
+  _componentIndexCache: 13
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &5825711579538547673
@@ -4792,7 +4792,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: -0.79, y: 0, z: 0}
-    Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 99.99991, z: 99.99991}
 --- !u!1 &5977093297532289558
 GameObject:
@@ -5017,7 +5017,7 @@ MonoBehaviour:
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+    Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 99.99997, z: 99.99997}
 --- !u!65 &2333013623520754691
 BoxCollider:
@@ -5331,7 +5331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &6830183100869637409
@@ -5553,7 +5553,7 @@ MonoBehaviour:
   <AssetPathHash>k__BackingField: 0
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
-    Position: {x: 0, y: 0, z: 0.07}
+    Position: {x: -0, y: 0, z: 0.14}
     Rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
     LocalScale: {x: 100, y: 100, z: 100}
 --- !u!114 &3524915201315518013
@@ -5889,7 +5889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 16
+  _componentIndexCache: 10
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &7556012918477788194
@@ -5937,7 +5937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 15
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &7960320335528950668
@@ -5985,7 +5985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &8127977466759646414
@@ -6033,7 +6033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 3
+  _componentIndexCache: 4
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &8381104406610814196
@@ -6081,7 +6081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 8
+  _componentIndexCache: 9
   _addedNetworkObject: {fileID: 4782389442660108339}
   _networkObjectCache: {fileID: 4782389442660108339}
 --- !u!1 &8674889510449895515
