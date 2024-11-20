@@ -1019,6 +1019,7 @@ GameObject:
   - component: {fileID: 2356442603936076054}
   - component: {fileID: 2610650614991167149}
   - component: {fileID: 5794162857367767657}
+  - component: {fileID: 2077256912677597349}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -1266,6 +1267,22 @@ MonoBehaviour:
     Position: {x: -0.79, y: 0, z: 0}
     Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
     LocalScale: {x: 100, y: 99.99991, z: 99.99991}
+--- !u!114 &2077256912677597349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601773136098315455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5794162857367767657}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 5
 --- !u!1 &2664817209692867572
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,6 +3848,7 @@ GameObject:
   - component: {fileID: 5934209973807981859}
   - component: {fileID: 6714968237490356815}
   - component: {fileID: 6853444304433097525}
+  - component: {fileID: 7995929056382509014}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -4078,6 +4096,22 @@ MonoBehaviour:
     Position: {x: -0.79, y: 0, z: 0}
     Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
     LocalScale: {x: 100, y: 99.99991, z: 99.99991}
+--- !u!114 &7995929056382509014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354133344149110076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6853444304433097525}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 5
 --- !u!1 &6573411153214883358
 GameObject:
   m_ObjectHideFlags: 0

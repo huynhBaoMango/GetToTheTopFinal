@@ -2311,6 +2311,7 @@ GameObject:
   - component: {fileID: 3273932286806647684}
   - component: {fileID: 5905270990334370070}
   - component: {fileID: 1341987723531457784}
+  - component: {fileID: 6961561671475846314}
   m_Layer: 14
   m_Name: Office table
   m_TagString: WorldObjects
@@ -2558,6 +2559,22 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: -0.003, z: 0.004}
   m_TimeToStationary: 0.5
+--- !u!114 &6961561671475846314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265535456494194578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 241703013251449915}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 5
 --- !u!1 &7334606618837078383
 GameObject:
   m_ObjectHideFlags: 0
