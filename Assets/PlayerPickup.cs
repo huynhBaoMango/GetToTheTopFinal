@@ -7,13 +7,20 @@ public class PlayerPickup : NetworkBehaviour
     [SerializeField] private float pickUpRange = 4f;
     [SerializeField] private KeyCode pickUpKey = KeyCode.F;
     [SerializeField] private KeyCode dropButton = KeyCode.Q;
-    [SerializeField] private KeyCode rotateButton = KeyCode.Z; // Key to switch rotation axis
+    [SerializeField] private KeyCode rotateButton = KeyCode.Z;
     [SerializeField] private LayerMask pickUpLayers;
 
     [Header("Cài Đặt Nhặt Vật Phẩm")]
     [SerializeField] private float raycastDistance = 4f;
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private Transform pickupPosition;
+
+    [Header("Cài Đặt Thả Vật")]
+    [SerializeField] private float dropDistance = 1f;
+    [SerializeField] private LayerMask groundLayer;
+
+    [Header("Hiệu Ứng Hình Ảnh")]
+    [SerializeField] private Material transparentMaterial;
 
     private Transform cameraTransform;
     private PlayerWeapon _playerWeapon;
@@ -24,6 +31,9 @@ public class PlayerPickup : NetworkBehaviour
     private float rotationAmount = 0f;
     private enum RotationAxis { X, Y }
     private RotationAxis currentRotationAxis = RotationAxis.Y;
+    private Material originalMaterial;
+
+    private float groundOffset = 1f; // Thêm một offset nhỏ để đảm bảo vật phẩm nằm trên mặt đất
 
     public override void OnStartClient()
     {
@@ -61,15 +71,19 @@ public class PlayerPickup : NetworkBehaviour
 
         if (Input.GetKeyDown(rotateButton))
         {
-            // Toggle rotation axis
             currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
-            rotationAmount = 0f; // Reset rotation amount when switching axes
-            RotateObject(0f); // Apply the rotation change immediately
+            rotationAmount = 0f;
+            RotateObject(0f);
         }
 
         if (hasObjectInHand && Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
             RotateObject(Input.GetAxis("Mouse ScrollWheel") * 90f);
+        }
+
+        if (hasObjectInHand)
+        {
+            UpdateObjectPosition();
         }
     }
 
@@ -91,16 +105,50 @@ public class PlayerPickup : NetworkBehaviour
                 SetObjectInHandServer(hitObj.transform.gameObject, pickupPosition.position, pickupPosition.rotation, gameObject);
                 objInHand = hitObj.transform.gameObject;
                 hasObjectInHand = true;
-                rotationAmount = 0; // Reset rotation amount here
+                rotationAmount = 0;
+
+                originalMaterial = objInHand.GetComponent<Renderer>().material;
+                objInHand.GetComponent<Renderer>().material = transparentMaterial;
+
+                // Bật isKinematic và isTrigger khi nhặt vật phẩm
+                if (objInHand.GetComponent<Rigidbody>() != null)
+                    objInHand.GetComponent<Rigidbody>().isKinematic = true;
+
+                //if (objInHand.GetComponent<Collider>() != null)
+                //    objInHand.GetComponent<Collider>().isTrigger = true;
+
+                
+                PositionObjectOnGround();
             }
-            else if (hasObjectInHand)
+            else
             {
                 Drop();
                 SetObjectInHandServer(hitObj.transform.gameObject, pickupPosition.position, pickupPosition.rotation, gameObject);
                 objInHand = hitObj.transform.gameObject;
                 hasObjectInHand = true;
-                rotationAmount = 0; // Reset rotation amount here as well
+                rotationAmount = 0;
+
+                originalMaterial = objInHand.GetComponent<Renderer>().material;
+                objInHand.GetComponent<Renderer>().material = transparentMaterial;
+
+                // Bật isKinematic và isTrigger khi nhặt vật phẩm
+                if (objInHand.GetComponent<Rigidbody>() != null)
+                    objInHand.GetComponent<Rigidbody>().isKinematic = true;
+
+                if (objInHand.GetComponent<Collider>() != null)
+                    objInHand.GetComponent<Collider>().isTrigger = true;
+
+                // Đảm bảo vật phẩm nằm sát mặt đất khi nhặt
+                PositionObjectOnGround();
             }
+        }
+    }
+
+    private void UpdateObjectPosition()
+    {
+        if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        {
+            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Thêm offset để đảm bảo vật phẩm không lún vào mặt đất
         }
     }
 
@@ -111,6 +159,34 @@ public class PlayerPickup : NetworkBehaviour
 
         rotationAmount += amount;
         RotateObjectServer(objInHand, rotationAmount, currentRotationAxis);
+    }
+
+    void Drop()
+    {
+        if (!hasObjectInHand)
+            return;
+
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, dropDistance, groundLayer))
+        {
+            DropObjectServer(objInHand, hit.point + Vector3.up * groundOffset, worldObjectHolder); // Thêm offset khi thả vật phẩm
+        }
+        else
+        {
+            Vector3 dropPosition = cameraTransform.position + cameraTransform.forward * dropDistance;
+            DropObjectServer(objInHand, dropPosition + Vector3.up * groundOffset, worldObjectHolder); // Thêm offset khi thả vật phẩm
+        }
+
+        objInHand.GetComponent<Renderer>().material = originalMaterial;
+
+        // Tắt isKinematic và isTrigger khi thả vật phẩm
+        if (objInHand.GetComponent<Rigidbody>() != null)
+            objInHand.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (objInHand.GetComponent<Collider>() != null)
+            objInHand.GetComponent<Collider>().isTrigger = false;
+
+        hasObjectInHand = false;
+        objInHand = null;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -126,7 +202,7 @@ public class PlayerPickup : NetworkBehaviour
         {
             obj.transform.localRotation = Quaternion.Euler(amount, 0f, 0f);
         }
-        else // RotationAxis.Y
+        else
         {
             obj.transform.localRotation = Quaternion.Euler(0f, amount, 0f);
         }
@@ -147,30 +223,35 @@ public class PlayerPickup : NetworkBehaviour
 
         if (obj.GetComponent<Rigidbody>() != null)
             obj.GetComponent<Rigidbody>().isKinematic = true;
-    }
 
-    void Drop()
-    {
-        if (!hasObjectInHand)
-            return;
-
-        DropObjectServer(objInHand, worldObjectHolder);
-        hasObjectInHand = false;
-        objInHand = null;
+        if (obj.GetComponent<Collider>() != null)
+            obj.GetComponent<Collider>().isTrigger = true;
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void DropObjectServer(GameObject obj, Transform worldHolder)
+    void DropObjectServer(GameObject obj, Vector3 dropPosition, Transform worldHolder)
     {
-        DropObjectObserver(obj, worldHolder);
+        DropObjectObserver(obj, dropPosition, worldHolder);
     }
 
     [ObserversRpc]
-    void DropObjectObserver(GameObject obj, Transform worldHolder)
+    void DropObjectObserver(GameObject obj, Vector3 dropPosition, Transform worldHolder)
     {
         obj.transform.parent = worldHolder;
+        obj.transform.position = dropPosition;
 
         if (obj.GetComponent<Rigidbody>() != null)
             obj.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (obj.GetComponent<Collider>() != null)
+            obj.GetComponent<Collider>().isTrigger = false;
+    }
+
+    private void PositionObjectOnGround()
+    {
+        if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        {
+            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Thêm offset để đảm bảo vật phẩm không lún vào mặt đất
+        }
     }
 }
