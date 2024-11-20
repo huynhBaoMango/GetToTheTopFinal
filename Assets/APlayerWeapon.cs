@@ -4,13 +4,20 @@ using UnityEngine;
 public abstract class APlayerWeapon : NetworkBehaviour
 {
     public int damage;
+    public float delayBulletTime;
+    public int maxAmmo;
     public Transform muzzleTransform;
     private Transform _cameraTransform;
     public float maxRange = 20f;
     public LayerMask weaponHitLayers;
-    public float delayBulletTime;
+
     public GameObject muzzleFlash;
     public GameObject bloodImpactPref, norImpactPref;
+    public Transform magHoldPos, reloadPos;
+    public Transform tempLeftHandIK;
+
+    public Transform MagPos;
+    public GameObject MagPref;
 
     private void Awake()
     {
@@ -20,6 +27,8 @@ public abstract class APlayerWeapon : NetworkBehaviour
     public Transform RightHandIKTarget, LeftHandIKTarget, rightHintIK, leftHintIK;
 
     public abstract void Fire();
+
+    public abstract void Reload();
 
     public abstract void AnimateWeapon();
 

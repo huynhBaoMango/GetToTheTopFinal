@@ -38,6 +38,12 @@ public class FALWeapon : APlayerWeapon
             }
         }
     }
+
+    public override void Reload()
+    {
+        throw new System.NotImplementedException();
+    }
+
     [ObserversRpc]
     private void SpawnImpactEffect(Vector3 hitPoint, Vector3 hitNormal)
     {

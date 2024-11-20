@@ -123,14 +123,17 @@ public class ZombieControler : NetworkBehaviour
         {
             return;
         }
-
         _currentTarget = target;
 
-        if (_navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial && !_isAttackingObstacle && Time.time - _lastObstacleCheckTime >= obstacleDestroyDelay)
+        NavMeshPath sentiero = new NavMeshPath();
+        _navMeshAgent.CalculatePath(_currentTarget.position, sentiero);
+        if (sentiero.status == NavMeshPathStatus.PathPartial)
         {
             CheckAndDestroyObstacle();
             _lastObstacleCheckTime = Time.time;
+            return;
         }
+  
 
         _navMeshAgent.SetDestination(_currentTarget.position);
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
@@ -190,20 +193,18 @@ public class ZombieControler : NetworkBehaviour
 
     private void CheckAndDestroyObstacle()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, obstacleCheckDistance))
+        GameObject[] obj = GameObject.FindGameObjectsWithTag(worldObjectTag);
+        float lastDistance = 100f;
+        Transform taretObj = null;
+        foreach (GameObject obj2 in obj)
         {
-            _currentObstacle = hit.collider.CompareTag(worldObjectTag) ? hit.collider.gameObject : null;
-
+            if(Vector3.Distance(transform.position, obj2.transform.position) < lastDistance)
+            {
+                lastDistance = Vector3.Distance(transform.position, obj2.transform.position);
+                taretObj = obj2.transform;
+            }
         }
-        else
-        {
-
-
-            _currentObstacle = null;
-
-        }
-
-
+        if(taretObj != null) _navMeshAgent.SetDestination(taretObj.position);
     }
 
 
