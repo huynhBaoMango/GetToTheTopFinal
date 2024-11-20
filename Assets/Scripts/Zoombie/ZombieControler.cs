@@ -18,6 +18,8 @@ public class ZombieControler : NetworkBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private float attackCooldown = 1f;
+    [SerializeField] private string redPillarTag = "RedPillar"; // Tag của cột đỏ
+    [SerializeField] private float pillarFollowDistance = 6f;
 
     private Rigidbody[] _ragdollRigidbodies;
     private ZombieState _currentState = ZombieState.Walking;
@@ -55,7 +57,6 @@ public class ZombieControler : NetworkBehaviour
 
     private void FixedUpdate()
     {
-
         switch (_currentState)
         {
             case ZombieState.Walking:
@@ -102,30 +103,58 @@ public class ZombieControler : NetworkBehaviour
         _navMeshAgent.enabled = false;
     }
 
-
-
     private void WalkingBehaviour()
     {
+        Transform target = null;
         Transform closestPlayer = GetClosestPlayer();
-        if (closestPlayer == null)
+
+        if (closestPlayer != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, closestPlayer.position);
+
+            if (distanceToPlayer <= pillarFollowDistance)
+            {
+                target = closestPlayer;
+            }
+            else
+            {
+                GameObject redPillar = GameObject.FindGameObjectWithTag(redPillarTag);
+                if (redPillar != null)
+                {
+                    target = redPillar.transform;
+                }
+            }
+        }
+        else
+        {
+            GameObject redPillar = GameObject.FindGameObjectWithTag(redPillarTag);
+            if (redPillar != null)
+            {
+                target = redPillar.transform;
+            }
+        }
+
+        if (target == null)
         {
             return;
         }
 
-        _currentTarget = closestPlayer;
+        _currentTarget = target;
 
         _navMeshAgent.SetDestination(_currentTarget.position);
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
         _animator.SetFloat("Distance", distanceToTarget);
 
-        if (distanceToTarget <= attackRange)
+        if (distanceToTarget <= attackRange && _currentTarget == closestPlayer)
         {
-            _navMeshAgent.isStopped = false;
+            _navMeshAgent.isStopped = false; // Ensure agent isn't stopped before attacking
             _currentState = ZombieState.Attacking;
             _animator.SetTrigger("Attack");
+            _animator2.SetTrigger("Attack"); // Trigger NetworkAnimator as well
             _lastAttackTime = Time.time;
         }
 
+        // Rotate towards target
         Vector3 direction = _currentTarget.position - transform.position;
         direction.y = 0;
         direction.Normalize();
@@ -133,11 +162,12 @@ public class ZombieControler : NetworkBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 20 * Time.deltaTime);
     }
 
+
+
     private void AttackingBehaviour()
     {
         AttackingObserver();
     }
-
 
     private void AttackingObserver()
     {
@@ -170,12 +200,14 @@ public class ZombieControler : NetworkBehaviour
         Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 20 * Time.deltaTime);
 
+
         if (distanceToTarget > attackRange)
         {
             _currentState = ZombieState.Walking;
             _navMeshAgent.isStopped = false;
         }
     }
+
 
     private void RagdollBehaviour()
     {
@@ -200,5 +232,4 @@ public class ZombieControler : NetworkBehaviour
 
         return closestPlayer;
     }
-
 }
