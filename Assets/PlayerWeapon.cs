@@ -34,7 +34,7 @@ public class PlayerWeapon : NetworkBehaviour
             currentIndexWeapon = (currentIndexWeapon == weapons.Count - 1) ? 0 : currentIndexWeapon + 1;
             InitializeWeapon(currentIndexWeapon);
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             currentWeapon.Fire();
         }

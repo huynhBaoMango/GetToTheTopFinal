@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633481e4e494bd6408e815783b3c96d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   damage: 20
@@ -1750,6 +1750,10 @@ MonoBehaviour:
   weaponHitLayers:
     serializedVersion: 2
     m_Bits: 1153
+  delayBulletTime: 0
+  muzzleFlash: {fileID: 0}
+  bloodImpactPref: {fileID: 0}
+  norImpactPref: {fileID: 0}
   RightHandIKTarget: {fileID: 0}
   LeftHandIKTarget: {fileID: 0}
   rightHintIK: {fileID: 0}
@@ -3149,7 +3153,7 @@ Transform:
   m_GameObject: {fileID: 7938805121743444670}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15963578, y: -0.062036835, z: 0.06182122, w: 0.98328334}
-  m_LocalPosition: {x: 0.191, y: 0.513, z: 0.161}
+  m_LocalPosition: {x: 0.191, y: 0.45, z: 0.161}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3342,7 +3346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c9df79e4136da47bcbad3ca19329f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 5
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   damage: 15
@@ -3351,6 +3355,13 @@ MonoBehaviour:
   weaponHitLayers:
     serializedVersion: 2
     m_Bits: 1153
+  delayBulletTime: 0.1
+  muzzleFlash: {fileID: 39148481766341303, guid: 4385a793e032d634bb912f84a23d6db1,
+    type: 3}
+  bloodImpactPref: {fileID: 2629315510494466023, guid: 08e1696e31d137247891000360fc76cb,
+    type: 3}
+  norImpactPref: {fileID: 947488135204848535, guid: be2c95819fdf9a042ac7bdf1f6604765,
+    type: 3}
   RightHandIKTarget: {fileID: 1887332035607816851}
   LeftHandIKTarget: {fileID: 4623817578289761261}
   rightHintIK: {fileID: 4656575769410588910}
@@ -3722,6 +3733,7 @@ MonoBehaviour:
   - {fileID: 535667782881504331}
   - {fileID: 8563883137832624401}
   - {fileID: 6767924222955539542}
+  - {fileID: 665156733392249498}
   - {fileID: 2825791884901909521}
   - {fileID: 1204734830371986350}
   InitializedParentNetworkBehaviour: {fileID: 0}
@@ -3749,7 +3761,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 27
+  <PrefabId>k__BackingField: 55
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 16799108592042421765
   <SceneId>k__BackingField: 0
@@ -3802,7 +3814,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 90
   canMove: 1
-  cameraYOffset: 0.8
+  cameraYOffset: 0.7
   anim: {fileID: 7048877235210488549}
   PlayerSelfLayer: 6
 --- !u!143 &9015095330360450717
@@ -3973,9 +3985,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8e4f9abb30a4247a7da4f0dd3b7171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 3223182877490601382}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3223182877490601382}
   maxHealth: 100
   healthBar: {fileID: 2187140951539896997}
   currentHealth: 0
