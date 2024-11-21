@@ -1,3 +1,6 @@
+using FishNet.Component.Spawning;
+using FishNet.Connection;
+using FishNet.Transporting;
 using Steamworks;
 using System;
 using TMPro;
@@ -70,6 +73,6 @@ public class MainMenuManager : MonoBehaviour
             "Menu"
         };
 
-        BootstrapNetworkManager.ChangeNetworkScene("NewTest", scenesToClose);  
+        BootstrapNetworkManager.ChangeNetworkScene("NewTest", scenesToClose);
     }
 }
