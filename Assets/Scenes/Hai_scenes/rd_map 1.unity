@@ -4517,7 +4517,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -5453,7 +5453,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -8211,7 +8211,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -9569,7 +9569,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -10313,7 +10313,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -11293,7 +11293,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.13333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -13548,6 +13548,9 @@ MonoBehaviour:
   _startedColor: {r: 0, g: 0.5882353, b: 0.64705884, a: 1}
   _serverIndicator: {fileID: 2082126326}
   _clientIndicator: {fileID: 2082126324}
+  _loadingPanel: {fileID: 0}
+  _loadingSlider: {fileID: 0}
+  _connectionDelay: 2
 --- !u!114 &4393252310794793816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13877,17 +13880,8 @@ MonoBehaviour:
   - {fileID: 1705213153}
   zombiePrefab: {fileID: 9144481623995990232, guid: 2975d75c13aba4749a16f07dec8ba01a,
     type: 3}
-  zombieSpawns:
-  - {fileID: 1945757077}
-  - {fileID: 541557814}
-  - {fileID: 248804278}
-  - {fileID: 1731168457}
-  - {fileID: 529005726}
-  - {fileID: 543000806}
-  - {fileID: 2086324582}
-  - {fileID: 2104745093}
-  - {fileID: 150588645}
   zombieSpawnPosList: []
+  zombieSpawnController: {fileID: 0}
 --- !u!114 &6993888275165578959
 MonoBehaviour:
   m_ObjectHideFlags: 0
