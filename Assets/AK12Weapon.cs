@@ -10,6 +10,7 @@ public class AK12Weapon : APlayerWeapon
     float currentDelayBullet = 0;
     int currentAmmo;
     bool isReloading;
+    [SerializeField] private GameObject explosionImpactPref;
     private void Awake()
     {
         currentAmmo = maxAmmo;
@@ -88,6 +89,7 @@ public class AK12Weapon : APlayerWeapon
                         zombieHealth.TakeDamage(damage);
                         SpawnImpactEffect(hit.point, hit.normal, bloodImpactPref);
                     }
+                   
                     else
                     {
                         Debug.Log($"Hit: {hit.collider.gameObject.name}");
