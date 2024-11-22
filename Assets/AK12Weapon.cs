@@ -89,7 +89,7 @@ public class AK12Weapon : APlayerWeapon
                         zombieHealth.TakeDamage(damage);
                         SpawnImpactEffect(hit.point, hit.normal, bloodImpactPref);
                     }
-                   
+                    else if (hit.collider.TryGetComponent<GasTank>(out GasTank gastank)) { gastank.TakeDamage(damage); SpawnImpactEffect(hit.point, hit.normal, explosionImpactPref); }
                     else
                     {
                         Debug.Log($"Hit: {hit.collider.gameObject.name}");

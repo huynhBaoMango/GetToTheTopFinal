@@ -1,68 +1,34 @@
-using FishNet.Object;
 using UnityEngine;
+using FishNet.Object;
 
 public class GasTank : NetworkBehaviour
 {
+    [SerializeField] private int explosionDamage = 100;
     [SerializeField] private float explosionRadius = 5f;
-    [SerializeField] private float explosionForce = 100f;
     [SerializeField] private GameObject explosionEffect;
-    [SerializeField] private int explosionDamage = 50;
 
-
-    [ServerRpc]
     public void Explode()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach (Collider hit in colliders)
+        foreach (Collider nearbyObject in colliders)
         {
-            if (hit.CompareTag("Zombie"))
+            if (nearbyObject.TryGetComponent<ZombieHealth>(out ZombieHealth zombieHealth))
             {
-                ZombieHealth health = hit.GetComponent<ZombieHealth>();
-                if (health != null)
-                {
-                    //health.TakeDamage(explosionDamage, true);
-                }
-
-
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-
-
-                if (rb != null)
-
-
-                {
-
-
-                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, 1, ForceMode.Impulse);
-
-
-
-                }
-
+                zombieHealth.TakeDamage(explosionDamage);
             }
         }
 
+        if (explosionEffect != null)
+        {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+        }
 
-
-
-        SpawnExplosionEffectRpc(transform.position);
-        Despawn(gameObject);
-
-
-
+        ServerManager.Despawn(gameObject);
     }
 
-    [ObserversRpc(BufferLast = true)]
-    private void SpawnExplosionEffectRpc(Vector3 position)
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamage(int damage)
     {
-
-
-        Instantiate(explosionEffect, position, Quaternion.identity);
-
-
-
+        Explode();
     }
-
-
-
 }
