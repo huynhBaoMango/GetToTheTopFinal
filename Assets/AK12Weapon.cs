@@ -15,10 +15,29 @@ public class AK12Weapon : APlayerWeapon
     {
         currentAmmo = maxAmmo;
     }
+
+    
     public override void AnimateWeapon()
     {
         //anim luc ban sung
-        transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y -0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
+        AnimateWeaponServer();
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y - 0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
+        {
+            Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
+            transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.01f, transform.localPosition.z + 0.07f), 0.1f).SetEase(Ease.OutBack);
+        });
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void AnimateWeaponServer()
+    {
+        AnimateWeaponObserver();
+    }
+
+    [ObserversRpc(ExcludeOwner = true)]
+    void AnimateWeaponObserver()
+    {
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y - 0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
         {
             Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
             transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.01f, transform.localPosition.z + 0.07f), 0.1f).SetEase(Ease.OutBack);
@@ -35,7 +54,7 @@ public class AK12Weapon : APlayerWeapon
         if(!isReloading)
         {
             isReloading = true;
-
+            ReloadServer();
             //xu li tay
             LeftHandIKTarget.rotation = magHoldPos.rotation;
             LeftHandIKTarget.DOLocalMove(magHoldPos.transform.localPosition, 0.5f).OnComplete(() =>
@@ -68,6 +87,44 @@ public class AK12Weapon : APlayerWeapon
             });
         }
 
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void ReloadServer()
+    {
+        ReloadObserver();
+    }
+
+    [ObserversRpc(ExcludeOwner = true)]
+    void ReloadObserver()
+    {
+        LeftHandIKTarget.rotation = magHoldPos.rotation;
+        LeftHandIKTarget.DOLocalMove(magHoldPos.transform.localPosition, 0.5f).OnComplete(() =>
+        {
+            InvokeRepeating("KeepMagInHand", 0f, 0.001f);
+            LeftHandIKTarget.rotation = reloadPos.rotation;
+            LeftHandIKTarget.DOLocalMove(reloadPos.transform.localPosition, 1f).OnComplete(() =>
+            {
+                LeftHandIKTarget.rotation = magHoldPos.rotation;
+                LeftHandIKTarget.DOLocalMove(magHoldPos.localPosition, 0.5f).OnComplete(() =>
+                {
+                    MagPref.transform.position = MagPos.position;
+                    CancelInvoke("KeepMagInHand");
+                    LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
+                    LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
+                });
+            });
+        });
+
+        //xu li sung
+        transform.DOLocalRotate(new Vector3(transform.localRotation.x - 75f, transform.localRotation.y, transform.localRotation.z), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            transform.DOLocalRotate(new Vector3(transform.localRotation.x, transform.localRotation.y, transform.localRotation.z), 1f).SetEase(Ease.OutBack).SetDelay(1.5f);
+        });
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.2f, transform.localPosition.z - 0.07f), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y - 0.2f, transform.localPosition.z + 0.07f), 1f).SetEase(Ease.OutBack).SetDelay(1.5f);
+        });
     }
 
     public override void Fire()

@@ -47,6 +47,22 @@ public class PlayerWeapon : NetworkBehaviour
     }
     void ProcessAnimation()
     {
+        ProcessAnimationServer();
+        if (currentWeapon.RightHandIKTarget != null) rightHandTarget.SetPositionAndRotation(currentWeapon.RightHandIKTarget.position, currentWeapon.RightHandIKTarget.rotation);
+        if (currentWeapon.LeftHandIKTarget != null) leftHandTarget.SetPositionAndRotation(currentWeapon.LeftHandIKTarget.position, currentWeapon.LeftHandIKTarget.rotation);
+        if (currentWeapon.rightHintIK != null) rightHint.position = currentWeapon.rightHintIK.position;
+        if (currentWeapon.leftHintIK != null) leftHint.position = currentWeapon.leftHintIK.position;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void ProcessAnimationServer()
+    {
+        ProcessAnimationObserver();
+    }
+
+    [ObserversRpc(ExcludeOwner = true)]
+    void ProcessAnimationObserver()
+    {
         if (currentWeapon.RightHandIKTarget != null) rightHandTarget.SetPositionAndRotation(currentWeapon.RightHandIKTarget.position, currentWeapon.RightHandIKTarget.rotation);
         if (currentWeapon.LeftHandIKTarget != null) leftHandTarget.SetPositionAndRotation(currentWeapon.LeftHandIKTarget.position, currentWeapon.LeftHandIKTarget.rotation);
         if (currentWeapon.rightHintIK != null) rightHint.position = currentWeapon.rightHintIK.position;
