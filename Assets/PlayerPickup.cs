@@ -168,12 +168,12 @@ public class PlayerPickup : NetworkBehaviour
 
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, dropDistance, groundLayer))
         {
-            DropObjectServer(objInHand, hit.point + Vector3.up * groundOffset, worldObjectHolder); // Thêm offset khi thả vật phẩm
+            DropObjectServer(objInHand, hit.point + Vector3.up, worldObjectHolder); // Thêm offset khi thả vật phẩm
         }
         else
         {
             Vector3 dropPosition = cameraTransform.position + cameraTransform.forward * dropDistance;
-            DropObjectServer(objInHand, dropPosition + Vector3.up * groundOffset, worldObjectHolder); // Thêm offset khi thả vật phẩm
+            DropObjectServer(objInHand, dropPosition + Vector3.up, worldObjectHolder); // Thêm offset khi thả vật phẩm
         }
 
         objInHand.GetComponent<Renderer>().material = originalMaterial;
@@ -238,7 +238,7 @@ public class PlayerPickup : NetworkBehaviour
     void DropObjectObserver(GameObject obj, Vector3 dropPosition, Transform worldHolder)
     {
         obj.transform.parent = worldHolder;
-        obj.transform.position = dropPosition;
+        //obj.transform.position = dropPosition;
 
         if (obj.GetComponent<Rigidbody>() != null)
             obj.GetComponent<Rigidbody>().isKinematic = false;
