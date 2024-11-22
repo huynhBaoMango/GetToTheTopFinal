@@ -10,13 +10,14 @@ public class AK12Weapon : APlayerWeapon
     float currentDelayBullet = 0;
     int currentAmmo;
     bool isReloading;
+    [SerializeField] private GameObject explosionImpactPref;
     private void Awake()
     {
         currentAmmo = maxAmmo;
     }
     public override void AnimateWeapon()
     {
-        
+        //anim luc ban sung
         transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y -0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
         {
             Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
@@ -88,6 +89,7 @@ public class AK12Weapon : APlayerWeapon
                         zombieHealth.TakeDamage(damage);
                         SpawnImpactEffect(hit.point, hit.normal, bloodImpactPref);
                     }
+                    else if (hit.collider.TryGetComponent<GasTank>(out GasTank gastank)) { gastank.TakeDamage(damage); SpawnImpactEffect(hit.point, hit.normal, explosionImpactPref); }
                     else
                     {
                         Debug.Log($"Hit: {hit.collider.gameObject.name}");

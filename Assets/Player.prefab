@@ -1737,7 +1737,7 @@ Transform:
   m_GameObject: {fileID: 2672774640760261412}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 0.471, z: 1.241}
+  m_LocalPosition: {x: 0.07, y: 0.471, z: 2.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1772,7 +1772,7 @@ Transform:
   m_GameObject: {fileID: 2732996689156266016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20750046, y: 0.19999981, z: 0.37250042}
+  m_LocalPosition: {x: 0.20750046, y: 0.532, z: 0.113}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3315,8 +3315,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7938805121743444670}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15963578, y: -0.062036835, z: 0.06182122, w: 0.98328334}
-  m_LocalPosition: {x: 0.191, y: 0.45, z: 0.161}
+  m_LocalRotation: {x: 0.07133166, y: -0.075898886, z: 0.06676643, w: 0.99231726}
+  m_LocalPosition: {x: 0.17663193, y: 0.48892975, z: 0.2504902}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3340,7 +3340,7 @@ Transform:
   - {fileID: 2085628328048565203}
   - {fileID: 6603591714572526377}
   m_Father: {fileID: 4109607846696017090}
-  m_LocalEulerAnglesHint: {x: 18.76, y: -6.2, z: 6.17}
+  m_LocalEulerAnglesHint: {x: 8.726, y: -8.208, z: 7.071}
 --- !u!114 &314514475900276512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3539,6 +3539,7 @@ MonoBehaviour:
   LeftHandIKTarget: {fileID: 4623817578289761261}
   rightHintIK: {fileID: 4656575769410588910}
   leftHintIK: {fileID: 1338400887863258783}
+  explosionImpactPref: {fileID: 0}
 --- !u!95 &3247723626988390121
 Animator:
   serializedVersion: 5
@@ -3955,7 +3956,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 55
+  <PrefabId>k__BackingField: 58
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 16799108592042421765
   <SceneId>k__BackingField: 0
@@ -4064,6 +4065,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   pickupPosition: {fileID: 544766143749611147}
+  dropDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  transparentMaterial: {fileID: 0}
 --- !u!114 &8563883137832624401
 MonoBehaviour:
   m_ObjectHideFlags: 0
