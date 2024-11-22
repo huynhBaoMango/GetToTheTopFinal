@@ -17,7 +17,7 @@ public class AK12Weapon : APlayerWeapon
     }
     public override void AnimateWeapon()
     {
-        
+        //anim luc ban sung
         transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y -0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
         {
             Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
