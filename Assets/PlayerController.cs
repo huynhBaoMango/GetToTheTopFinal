@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Connection;
 using FishNet.Object;
+using Unity.VisualScripting;
 
 public class PlayerControler : NetworkBehaviour
 {
@@ -45,7 +46,15 @@ public class PlayerControler : NetworkBehaviour
         {
             GetComponent<PlayerControler>().enabled = false;
         }
+        AddPlayer();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    void AddPlayer()
+    {
+        FindAnyObjectByType<InGameManager>().UpdatePlayers();
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();

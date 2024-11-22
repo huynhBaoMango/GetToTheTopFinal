@@ -3232,8 +3232,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -613.841, y: -409}
-  m_SizeDelta: {x: 522.318, y: 100}
+  m_AnchoredPosition: {x: -674, y: -496}
+  m_SizeDelta: {x: 522.318, y: 25.8802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2187140951539896997
 MonoBehaviour:
@@ -3878,6 +3878,7 @@ GameObject:
   - component: {fileID: -604731426567131249}
   - component: {fileID: 665156733392249498}
   - component: {fileID: 338254133484032400}
+  - component: {fileID: 8101985526509853485}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -3956,7 +3957,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 58
+  <PrefabId>k__BackingField: 59
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 16799108592042421765
   <SceneId>k__BackingField: 0
@@ -4009,7 +4010,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 90
   canMove: 1
-  cameraYOffset: 0.7
+  cameraYOffset: 0.75
   anim: {fileID: 7048877235210488549}
   PlayerSelfLayer: 6
 --- !u!143 &9015095330360450717
@@ -4212,6 +4213,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8101985526509853485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066273262268406947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f074a3bed3adb449a9e8b86a63f6aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3223182877490601382}
+  _networkObjectCache: {fileID: 0}
+  progressSlider: {fileID: 0}
 --- !u!1 &9185203698661197352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4270,7 +4287,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0

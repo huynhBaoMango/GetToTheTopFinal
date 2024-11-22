@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DG.Tweening;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using IO.Swagger.Model;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 using Random = UnityEngine.Random;
 
 public class InGameManager : NetworkBehaviour
@@ -24,14 +27,45 @@ public class InGameManager : NetworkBehaviour
     public NetworkObject zombiePrefab;
     public List<Transform> zombieSpawnPosList;
     public ZombieSpawnController zombieSpawnController;
- 
+
+
+    [Header("Game Info")]
+    private readonly SyncVar<float> Timer = new(0);
+    [SerializeField] private Slider progressSlider;
+    public GameObject[] players;
+
+
+    [Header("Cutscene")]
+    public GameObject cutsceneCam;
+    public List<Transform> zombieCamList;
+
 
     private void Start()
     {
         if (!base.IsServerInitialized)
             return;
         level = PlayerPrefs.GetInt("CurrentLevel", 1);
-        
+        Timer.OnChange += OnChangeTimer;
+    }
+
+    public void UpdatePlayers()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+    }
+
+    
+    private void OnChangeTimer(float prev, float next, bool asServer)
+    {
+        if(next >= 0)
+        {
+            UpdateSliderTimer(next);
+        }
+    }
+
+    [ObserversRpc]
+    void UpdateSliderTimer(float next)
+    {
+        progressSlider.value = next;
     }
 
     private void Update()
@@ -41,6 +75,18 @@ public class InGameManager : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             ChangeState(_currentState+1);
+        }
+
+        if (_currentState == GameState.Prepare)
+        {
+            if(Timer.Value > 0)
+            {
+                Timer.Value -= Time.deltaTime;
+            }
+            else
+            {
+                ChangeState(_currentState + 1);
+            }
         }
     }
 
@@ -77,8 +123,6 @@ public class InGameManager : NetworkBehaviour
                 break;
         }
     }
-
-
     
 
     void StartLoading()
@@ -92,7 +136,29 @@ public class InGameManager : NetworkBehaviour
     void StartPreparing()
     {
         Debug.Log("Preparing...");
+        Timer.Value = 120;
         SpawnZombieSpawns();
+ 
+       // StartCutsceneServer();
+    }
+
+    void StartCutsceneServer()
+    {
+        StartCutscene();
+    }
+
+    [ObserversRpc]
+    void StartCutscene()
+    {
+        cutsceneCam.GetComponent<Camera>().enabled = true;
+        cutsceneCam.transform.position = players[0].transform.position + Vector3.up;
+        cutsceneCam.transform.DOMove(zombieSpawnController.zombieSpawns[0].transform.GetChild(1).transform.position, 3f);
+        cutsceneCam.transform.DORotate(zombieSpawnController.zombieSpawns[0].transform.GetChild(1).transform.rotation.eulerAngles, 3f).OnComplete(() =>
+        {
+            //this just work on the host
+            cutsceneCam.GetComponent<Camera>().enabled = false;
+        });
+        
     }
 
     void StartShooting()
@@ -132,23 +198,48 @@ public class InGameManager : NetworkBehaviour
     void SpawnZombieSpawns()
     {
         level = PlayerPrefs.GetInt("CurrentLevel", 0);
-        if(level > 2 && level % 3 == 0)
+
+        cutsceneCam.GetComponent<Camera>().enabled = true;
+        cutsceneCam.transform.position = players[0].transform.position + Vector3.up;
+
+
+        if (level > 2 && level % 3 == 0)
         {
             int maxCount = level / 3;
             for(int i = 0; i < maxCount; i++)
             {
                 int random = Random.Range(0, zombieSpawnController.zombieSpawns.Count);
+
                 zombieSpawnController.EnableGivenSpawn(random);
                 zombieSpawnPosList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(0).transform);
+                zombieCamList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(1).transform);
+
+                cutsceneCam.transform.DOMove(zombieCamList[i].position, 3f);
+                cutsceneCam.transform.DORotate(zombieCamList[i].rotation.eulerAngles, 3f).OnComplete(() =>
+                {
+                    //this just work on the host
+                    zombieSpawnController.EnableGivenSpawn(random);
+                });
+
+                
             }
         }
         else
         {
             int random = Random.Range(0, zombieSpawnController.zombieSpawns.Count);
-            zombieSpawnController.EnableGivenSpawn(random);
             zombieSpawnPosList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(0).transform);
+            zombieCamList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(1).transform);
+
+            cutsceneCam.transform.DOMove(zombieCamList[0].position, 3f);
+            cutsceneCam.transform.DORotate(zombieCamList[0].rotation.eulerAngles, 3f).OnComplete(() =>
+            {
+                //this just work on the host
+                zombieSpawnController.EnableGivenSpawn(random);
+
+                
+            });
         }
-       
+        //cutsceneCam.GetComponent<Camera>().enabled = false;
     }
 
     void SpawnTheHeart()

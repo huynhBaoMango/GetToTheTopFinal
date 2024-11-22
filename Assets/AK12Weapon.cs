@@ -21,9 +21,9 @@ public class AK12Weapon : APlayerWeapon
     {
         //anim luc ban sung
         AnimateWeaponServer();
+        Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
         transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y - 0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
         {
-            Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
             transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.01f, transform.localPosition.z + 0.07f), 0.1f).SetEase(Ease.OutBack);
         });
     }
