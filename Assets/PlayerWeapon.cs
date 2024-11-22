@@ -1,4 +1,4 @@
-using FishNet.Object;
+﻿using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +11,9 @@ public class PlayerWeapon : NetworkBehaviour
     private readonly SyncVar<int> _currentWeaponIndex = new(-1);
 
     [SerializeField] private Transform rightHandTarget, leftHandTarget, rightHint, leftHint;
+
+    // Biến kiểm tra trạng thái tắt/mở bắn súng
+    private bool canFire = true;
 
     private void Awake()
     {
@@ -33,7 +36,8 @@ public class PlayerWeapon : NetworkBehaviour
             currentIndexWeapon = (currentIndexWeapon == weapons.Count - 1) ? 0 : currentIndexWeapon + 1;
             InitializeWeapon(currentIndexWeapon);
         }
-        if (Input.GetKey(KeyCode.Mouse0))
+        // Chỉ bắn nếu canFire là true
+        if (Input.GetKey(KeyCode.Mouse0) && canFire)
         {
             currentWeapon.Fire();
         }
@@ -85,5 +89,11 @@ public class PlayerWeapon : NetworkBehaviour
     public void InitializeWeapon(int weaponIndex)
     {
         SetWeaponIndex(weaponIndex);
+    }
+
+    // Hàm để bật/tắt bắn
+    public void SetCanFire(bool value)
+    {
+        canFire = value;
     }
 }

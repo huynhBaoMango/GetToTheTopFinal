@@ -1,16 +1,18 @@
-﻿using System.Collections;
+﻿using FishNet.Object;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemVendingLoader : MonoBehaviour
+public class ItemVendingLoader : NetworkBehaviour
 {
     public GameObject panel; // Panel chứa các item
     public GameObject itemPrefab; // Prefab của item UI
 
     public List<Item> items = new List<Item>(); // Danh sách các item
+    public PlayerHealth playerHealth;
 
     void Start()
     {
@@ -43,7 +45,7 @@ public class ItemVendingLoader : MonoBehaviour
         });
     }
 
-        void LoadItemsToPanel()
+    void LoadItemsToPanel()
     {
         foreach (Item item in items)
         {
@@ -66,6 +68,37 @@ public class ItemVendingLoader : MonoBehaviour
             if (itemImage != null)
             {
                 itemImage.sprite = item.itemImage;
+            }
+
+            Button buyButton = newItem.GetComponentInChildren<Button>();
+            if(buyButton != null)
+            {
+                buyButton.onClick.AddListener(() =>
+                {
+                    if (playerHealth != null)
+                    {
+                        if (item.itemName == "Health Potion")
+                        {
+                            playerHealth.Heal(20f);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("PlayerHealth is not assigned.");
+                    }
+                    //else if (item.itemName == "Bullet Potion")
+                    //{
+
+                    //}
+                    //else if (item.itemName == "Gun Potion")
+                    //{
+
+                    //}
+                });
+            }
+            else
+            {
+                Debug.LogWarning("Button component not found in itemPrefab.");
             }
         }
     }

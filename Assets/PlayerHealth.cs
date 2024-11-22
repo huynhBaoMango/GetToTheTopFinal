@@ -22,6 +22,25 @@ public class PlayerHealth : NetworkBehaviour
 
     }
 
+    private void Update()
+    {
+        if (!IsOwner) return; // Chỉ kiểm tra phím bấm với chủ sở hữu
+
+        // Nhấn phím O để trừ 10 máu
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            TakeDamage(20f);
+            Debug.Log($"Player took 20 damage. Current health: {currentHealth}");
+        }
+
+        // Nhấn phím P để test hồi máu 10
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Heal(10f);
+            Debug.Log($"Player healed by 10. Current health: {currentHealth}");
+        }
+    }
+
 
 
     [ServerRpc]
@@ -58,6 +77,20 @@ public class PlayerHealth : NetworkBehaviour
             Debug.Log("Player died!");
         }
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void Heal(float healAmount)
+    {
+        // Tăng máu
+        currentHealth += healAmount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Cập nhật máu lên client
+        UpdateHealthClientRpc(base.Owner, currentHealth);
+
+        Debug.Log($"Player healed by {healAmount}. Current health: {currentHealth}");
+    }
+
 
     private void UpdateHealthUI()
     {
