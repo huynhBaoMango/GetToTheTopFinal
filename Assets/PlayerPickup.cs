@@ -72,8 +72,8 @@ public class PlayerPickup : NetworkBehaviour
         if (Input.GetKeyDown(rotateButton))
         {
             currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
-            rotationAmount = 0f;
-            RotateObject(0f);
+            //rotationAmount = 0f;
+            //RotateObject();
         }
 
         if (hasObjectInHand && Input.GetAxis("Mouse ScrollWheel") != 0f)
