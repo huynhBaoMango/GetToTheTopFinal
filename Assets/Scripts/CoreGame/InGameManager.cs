@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using DG.Tweening;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
@@ -137,8 +138,9 @@ public class InGameManager : NetworkBehaviour
     {
         Debug.Log("Preparing...");
         Timer.Value = 120;
-        SpawnZombieSpawns();
- 
+        //SpawnZombieSpawns();
+        StartCoroutine(SpawnZombieSpawns());
+
        // StartCutsceneServer();
     }
 
@@ -195,34 +197,34 @@ public class InGameManager : NetworkBehaviour
         }
     }
 
-    void SpawnZombieSpawns()
+    IEnumerator SpawnZombieSpawns()
     {
-        level = PlayerPrefs.GetInt("CurrentLevel", 0);
-
+        //level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        level = 4;
         cutsceneCam.GetComponent<Camera>().enabled = true;
         cutsceneCam.transform.position = players[0].transform.position + Vector3.up;
 
 
-        if (level > 2 && level % 3 == 0)
+        if (level > 2)
         {
-            int maxCount = level / 3;
+            int maxCount = level / 3 + 1;
             for(int i = 0; i < maxCount; i++)
             {
                 int random = Random.Range(0, zombieSpawnController.zombieSpawns.Count);
-
-                zombieSpawnController.EnableGivenSpawn(random);
                 zombieSpawnPosList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(0).transform);
                 zombieCamList.Add(zombieSpawnController.zombieSpawns[random].transform.GetChild(1).transform);
 
-                cutsceneCam.transform.DOMove(zombieCamList[i].position, 3f);
-                cutsceneCam.transform.DORotate(zombieCamList[i].rotation.eulerAngles, 3f).OnComplete(() =>
+                
+                cutsceneCam.transform.DORotate(zombieCamList[i].rotation.eulerAngles, 1f);
+                cutsceneCam.transform.DOMove(zombieCamList[i].position, 3f).OnComplete(() =>
                 {
-                    //this just work on the host
+                    cutsceneCam.transform.DOShakePosition(1f, 0.5f);
                     zombieSpawnController.EnableGivenSpawn(random);
                 });
 
-                
+                yield return new WaitForSeconds(7f);
             }
+
         }
         else
         {
@@ -237,9 +239,11 @@ public class InGameManager : NetworkBehaviour
                 zombieSpawnController.EnableGivenSpawn(random);
 
                 
-            });
+            }).SetDelay(3f);
         }
-        //cutsceneCam.GetComponent<Camera>().enabled = false;
+
+        yield return new WaitForSeconds(3f);
+        cutsceneCam.GetComponent<Camera>().enabled = false;
     }
 
     void SpawnTheHeart()
