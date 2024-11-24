@@ -81,6 +81,11 @@ public class PlayerHealth : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void Heal(float healAmount)
     {
+        if (!IsServerInitialized)
+        {
+            Debug.LogError("HealServerRpc can only be called on the server.");
+            return;
+        }
         // Tăng máu
         currentHealth += healAmount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
