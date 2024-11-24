@@ -6,16 +6,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemVendingLoader : NetworkBehaviour
+public class ItemVendingLoader : MonoBehaviour
 {
     public GameObject panel; // Panel chứa các item
     public GameObject itemPrefab; // Prefab của item UI
 
     public List<Item> items = new List<Item>(); // Danh sách các item
-    public PlayerHealth playerHealth;
+    private PlayerHealth playerHealth;
 
     void Start()
-    {
+    { 
+        playerHealth = FindObjectOfType<PlayerHealth>();
         InitializeItems();
         LoadItemsToPanel();
     }

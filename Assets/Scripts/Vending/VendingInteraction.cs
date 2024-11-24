@@ -3,7 +3,7 @@ using FishNet.Example.Scened;
 using FishNet.Object;
 using UnityEngine;
 
-public class VendingInteraction : NetworkBehaviour
+public class VendingInteraction : MonoBehaviour
 {
     private Camera playerCamera; // Camera của nhân vật
     [SerializeField] private float cameraYOffset = 0.7f;
@@ -13,19 +13,26 @@ public class VendingInteraction : NetworkBehaviour
 
     private bool isPanelActive = false; // Kiểm tra trạng thái panel
 
-    public override void OnStartClient()
+    //public override void OnStartClient()
+    //{
+    //    base.OnStartClient();
+    //    if (base.IsOwner)
+    //    {
+    //        playerCamera = Camera.main;
+    //        playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+    //        playerCamera.transform.SetParent(transform);
+    //    }
+    //    else
+    //    {
+    //        GetComponent<VendingInteraction>().enabled = false;
+    //    }
+    //}
+    private void Start()
     {
-        base.OnStartClient();
-        if (base.IsOwner)
-        {
-            playerCamera = Camera.main;
-            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
-            playerCamera.transform.SetParent(transform);
-        }
-        else
-        {
-            GetComponent<VendingInteraction>().enabled = false;
-        }
+        playerCamera = Camera.main;
+        playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+        playerCamera.transform.SetParent(transform);
+        playerWeapon =  FindObjectOfType<PlayerWeapon>();
     }
     void Update()
     {
