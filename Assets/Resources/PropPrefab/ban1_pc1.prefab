@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 3624719559166603640}
   - component: {fileID: 7887450799654384984}
   - component: {fileID: 4488524430912548833}
+  - component: {fileID: 1013935441053697071}
   m_Layer: 14
   m_Name: Office chair
   m_TagString: WorldObjects
@@ -558,6 +559,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1013935441053697071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705782724464452306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3624719559166603640}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
 --- !u!1 &705904615501906748
 GameObject:
   m_ObjectHideFlags: 0
@@ -4058,7 +4075,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 3153936127943468123}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 20
 --- !u!1 &9070772210421884825
 GameObject:
   m_ObjectHideFlags: 0

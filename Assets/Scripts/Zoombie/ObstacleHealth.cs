@@ -3,50 +3,42 @@ using FishNet.Object;
 
 public class ObstacleHealth : NetworkBehaviour
 {
-    [SerializeField] public int maxHealth = 5;
+    [SerializeField] private int maxHealth = 50;
     private int _currentHealth;
+    private bool _isDead = false;
 
-    public override void OnStartServer()
+    public int CurrentHealth => _currentHealth; // Thu?c tính ?? l?y máu hi?n t?i
+
+    private void Awake()
     {
-        base.OnStartServer();
         _currentHealth = maxHealth;
     }
 
-    [ServerRpc]
-    public void TakeDamageRpc(int damage)
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamage(int damage)
     {
+        if (_isDead) return;
+
         _currentHealth -= damage;
+        Debug.Log($"Obstacle took {damage} damage. Current health: {_currentHealth}");
 
-        if (_currentHealth <= 0)
+        if (_currentHealth <= 0 && !_isDead)
         {
-            Despawn();
-        }
-
-        
-        ObserversTakeDamage(_currentHealth);
-    }
-
-    [ObserversRpc(ExcludeOwner = true)] 
-    private void ObserversTakeDamage(int health)
-    {
-
-        _currentHealth = health;
-
-
-
-        if (_currentHealth <= 0)
-        {
-
-
-
-           
+            _isDead = true;
+            Die();
         }
     }
 
-    private void Despawn()
+    public bool IsDead()
     {
-        
+        return _isDead;
+    }
 
-        NetworkObject.Despawn();
+    [Server]
+    private void Die()
+    {
+        Debug.Log("Obstacle died and will be despawned.");
+        // Hi?u ?ng phá h?y có th? thêm vào ?ây
+        ServerManager.Despawn(gameObject);
     }
 }

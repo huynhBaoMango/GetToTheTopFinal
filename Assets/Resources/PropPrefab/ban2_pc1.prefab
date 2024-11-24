@@ -1282,7 +1282,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 5794162857367767657}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 20
 --- !u!1 &2664817209692867572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1811,7 @@ GameObject:
   - component: {fileID: 8638246123738778089}
   - component: {fileID: 5107838710512730079}
   - component: {fileID: 5146818579346976620}
+  - component: {fileID: 4079968270623675758}
   m_Layer: 14
   m_Name: Office chair
   m_TagString: WorldObjects
@@ -2058,6 +2059,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4079968270623675758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936378680309808323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 8638246123738778089}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
 --- !u!1 &3816959379198601001
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,6 +5076,7 @@ GameObject:
   - component: {fileID: 3619207488831820170}
   - component: {fileID: 4567218731006421545}
   - component: {fileID: 4282238587435223784}
+  - component: {fileID: 6140608677200702877}
   m_Layer: 14
   m_Name: Office chair
   m_TagString: WorldObjects
@@ -5306,6 +5324,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6140608677200702877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798844154973376236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3619207488831820170}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
 --- !u!1 &7947652774399797818
 GameObject:
   m_ObjectHideFlags: 0

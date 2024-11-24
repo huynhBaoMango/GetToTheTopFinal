@@ -41,7 +41,6 @@ public class ZombieHealth : NetworkBehaviour
         ServerManager.Despawn(gameObject);
     }
 
-
     [ObserversRpc]
     private void RpcEnableRagdoll()
     {
@@ -50,10 +49,13 @@ public class ZombieHealth : NetworkBehaviour
 
     private void EnableRagdoll()
     {
-        ZombieControler zombieControler = GetComponent<ZombieControler>();
-        if (zombieControler != null)
+        if (TryGetComponent<FastZombieController>(out var fastZombie))
         {
-            zombieControler.TriggerRagdoll(Vector3.zero, transform.position);
+            fastZombie.TriggerRagdoll(Vector3.zero, transform.position);
+        }
+        else if (TryGetComponent<ZombieControler>(out var zombieController))
+        {
+            zombieController.TriggerRagdoll(Vector3.zero, transform.position);
         }
     }
 }

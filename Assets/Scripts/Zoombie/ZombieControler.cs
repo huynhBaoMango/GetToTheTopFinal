@@ -20,7 +20,6 @@ public class ZombieControler : NetworkBehaviour
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private string redPillarTag = "RedPillar";
     [SerializeField] private float pillarFollowDistance = 6f;
-    [SerializeField] private string worldObjectTag = "WorldObjects";
     [SerializeField] private float obstacleCheckDistance = 1f;
     [SerializeField] private float obstacleDestroyDelay = 1f;
 
@@ -129,31 +128,15 @@ public class ZombieControler : NetworkBehaviour
         _navMeshAgent.CalculatePath(_currentTarget.position, sentiero);
         if (sentiero.status == NavMeshPathStatus.PathPartial)
         {
-            CheckAndDestroyObstacle();
             _lastObstacleCheckTime = Time.time;
             return;
         }
-  
 
         _navMeshAgent.SetDestination(_currentTarget.position);
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
         _animator.SetFloat("Distance", distanceToTarget);
 
-        if (_currentObstacle != null && _navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial)
-        {
-            _navMeshAgent.isStopped = true;
-            _isAttackingObstacle = true;
-            if (Time.time - _lastAttackTime >= attackCooldown)
-            {
-                AttackObstacle();
-                _lastAttackTime = Time.time;
-            }
-            return;
-        }
-
-        _isAttackingObstacle = false;
         _navMeshAgent.isStopped = false;
-
 
         if (distanceToTarget <= attackRange && _currentTarget == closestPlayer)
         {
@@ -175,45 +158,10 @@ public class ZombieControler : NetworkBehaviour
         return redPillar != null ? redPillar.transform : null;
     }
 
-
-    private void AttackObstacle()
-    {
-
-        if (_currentObstacle != null)
-        {
-
-
-            _currentObstacle.GetComponent<ObstacleHealth>().TakeDamageRpc(1);
-
-        }
-
-
-    }
-
-
-    private void CheckAndDestroyObstacle()
-    {
-        GameObject[] obj = GameObject.FindGameObjectsWithTag(worldObjectTag);
-        float lastDistance = 100f;
-        Transform taretObj = null;
-        foreach (GameObject obj2 in obj)
-        {
-            if(Vector3.Distance(transform.position, obj2.transform.position) < lastDistance)
-            {
-                lastDistance = Vector3.Distance(transform.position, obj2.transform.position);
-                taretObj = obj2.transform;
-            }
-        }
-        if(taretObj != null) _navMeshAgent.SetDestination(taretObj.position);
-    }
-
-
-
     private void AttackingBehaviour()
     {
         AttackingObserver();
     }
-
 
     private void AttackingObserver()
     {
@@ -224,24 +172,15 @@ public class ZombieControler : NetworkBehaviour
             return;
         }
 
-
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
         _animator.SetFloat("Distance", distanceToTarget);
-
-
-
 
         if (distanceToTarget > attackRange)
         {
             _currentState = ZombieState.Walking;
             _navMeshAgent.isStopped = false;
-
             return;
-
         }
-
-
-
 
         if (Time.time - _lastAttackTime >= attackCooldown)
         {
@@ -252,18 +191,13 @@ public class ZombieControler : NetworkBehaviour
             _animator.SetTrigger("Attack");
             _animator2.SetTrigger("Attack");
             _lastAttackTime = Time.time;
-
         }
-
-
 
         Vector3 direction = _currentTarget.position - transform.position;
         direction.y = 0;
         direction.Normalize();
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction, Vector3.up), 20 * Time.deltaTime);
-
-
     }
 
     private void RagdollBehaviour()
@@ -273,41 +207,26 @@ public class ZombieControler : NetworkBehaviour
 
     private Transform GetClosestPlayer()
     {
-
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         if (players.Length == 0)
         {
             return null;
-
         }
 
         Transform closestPlayer = null;
         float closestDistance = Mathf.Infinity;
-
 
         foreach (GameObject player in players)
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
             if (distance < closestDistance)
             {
-
                 closestDistance = distance;
                 closestPlayer = player.transform;
-
-
-
             }
-
-
-
         }
 
-
-
-
         return closestPlayer;
-
-
     }
 }
