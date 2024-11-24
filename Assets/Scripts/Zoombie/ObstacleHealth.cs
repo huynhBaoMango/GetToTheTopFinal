@@ -1,46 +1,62 @@
-using UnityEngine;
+﻿using UnityEngine;
 using FishNet.Object;
 
 public class ObstacleHealth : NetworkBehaviour
 {
-    [SerializeField] private float maxHealth = 50f; // M�u t?i ?a c?a v?t c?n
-    private float currentHealth; // M�u hi?n t?i c?a v?t c?n
+    [SerializeField] private float maxHealth = 50f; // Máu tối đa của vật cản
+    [SerializeField] private GameObject destructionEffectPrefab; // Prefab của hiệu ứng phá hủy
+
+    private float currentHealth; // Máu hiện tại của vật cản
 
     private void Awake()
     {
         currentHealth = maxHealth;
     }
 
-    // Ph??ng th?c ?? g�y s�t th??ng, c� th? ???c g?i t? m?i ph�a
+    // Phương thức để gây sát thương, có thể được gọi từ mọi phía
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(float damage)
     {
         TakeDamage(damage);
     }
 
-    // X? l� s�t th??ng
+    // Xử lý sát thương
     private void TakeDamage(float damage)
     {
-        if (!IsServer) return; // Ch? m�y ch? m?i ???c th?c hi?n logic n�y
+        if (!IsServer) return; // Chỉ máy chủ mới được thực hiện logic này
 
         Debug.Log($"TakeDamage called. Damage: {damage}, Current Health Before: {currentHealth}");
-        currentHealth -= damage; // Tr? m�u c?a v?t c?n
+        currentHealth -= damage; // Trừ máu của vật cản
         Debug.Log($"Obstacle took damage: {damage}, Current Health After: {currentHealth}");
 
-        if (currentHealth <= 0) // N?u m�u <= 0, ph� h?y v?t c?n
+        if (currentHealth <= 0) // Nếu máu <= 0, phá hủy vật cản
         {
             DestroyObstacle();
         }
     }
 
-    // Ph??ng th?c ph� h?y v?t c?n
+    // Phương thức phá hủy vật cản
     [Server]
     private void DestroyObstacle()
     {
         Debug.Log("Destroying obstacle on server");
-        if (IsSpawned) // Ki?m tra xem ??i t??ng ?� ???c spawn hay ch?a
+
+        // Tạo hiệu ứng phá hủy
+        SpawnDestructionEffect();
+
+        if (IsSpawned) // Kiểm tra xem đối tượng đã được spawn hay chưa
         {
-            ServerManager.Despawn(gameObject); // Ph� h?y v?t c?n tr�n t?t c? client
+            ServerManager.Despawn(gameObject); // Phá hủy vật cản trên tất cả client
+        }
+    }
+
+    // Phương thức tạo hiệu ứng phá hủy
+    [ObserversRpc]
+    private void SpawnDestructionEffect()
+    {
+        if (destructionEffectPrefab != null)
+        {
+            Instantiate(destructionEffectPrefab, transform.position, Quaternion.identity);
         }
     }
 }
