@@ -2,12 +2,14 @@
 using UnityEngine.UI;
 using FishNet.Object;
 using FishNet.Connection;
+using System.Collections;
+
 public class PlayerHealth : NetworkBehaviour
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private Slider healthBar;
+    [SerializeField] private GameObject bloodSplatterUI; // Thêm biến cho UI Image của hiệu ứng máu bắn tung tóe
 
-    [SerializeField]
     private float currentHealth;
 
     public override void OnStartClient()
@@ -20,6 +22,10 @@ public class PlayerHealth : NetworkBehaviour
             SetHealthServerRpc(maxHealth);
         }
 
+        if (bloodSplatterUI != null)
+        {
+            bloodSplatterUI.SetActive(false); // Đảm bảo hiệu ứng máu ban đầu bị ẩn
+        }
     }
 
     private void Update()
@@ -41,36 +47,30 @@ public class PlayerHealth : NetworkBehaviour
         }
     }
 
-
-
     [ServerRpc]
     private void SetHealthServerRpc(float health)
     {
         currentHealth = health;
-        UpdateHealthClientRpc(base.Owner, currentHealth);
-
+        UpdateHealthObserversRpc(currentHealth);
     }
 
-    [TargetRpc]
-    private void UpdateHealthClientRpc(NetworkConnection conn, float health)
+    [ObserversRpc]
+    private void UpdateHealthObserversRpc(float health)
     {
-
-
         currentHealth = health;
         UpdateHealthUI();
     }
-
-
-
-
 
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        UpdateHealthClientRpc(base.Owner, currentHealth);
 
+        // Gọi hiệu ứng máu bắn tung tóe
+        SpawnBloodSplatterObserversRpc();
+
+        UpdateHealthObserversRpc(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -92,14 +92,32 @@ public class PlayerHealth : NetworkBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         // Cập nhật máu lên client
-        UpdateHealthClientRpc(base.Owner, currentHealth);
+        UpdateHealthObserversRpc(currentHealth);
 
         Debug.Log($"Player healed by {healAmount}. Current health: {currentHealth}");
     }
 
-
     private void UpdateHealthUI()
     {
         healthBar.value = currentHealth;
+    }
+
+    [ObserversRpc]
+    private void SpawnBloodSplatterObserversRpc()
+    {
+        if (bloodSplatterUI != null)
+        {
+            bloodSplatterUI.SetActive(true); // Hiển thị UI Image của hiệu ứng máu
+            StartCoroutine(HideBloodSplatter()); // Ẩn hiệu ứng sau một khoảng thời gian
+        }
+    }
+
+    private IEnumerator HideBloodSplatter()
+    {
+        yield return new WaitForSeconds(0.5f); // Thời gian hiển thị hiệu ứng máu (ví dụ: 0.5 giây)
+        if (bloodSplatterUI != null)
+        {
+            bloodSplatterUI.SetActive(false); // Ẩn UI Image của hiệu ứng máu
+        }
     }
 }
