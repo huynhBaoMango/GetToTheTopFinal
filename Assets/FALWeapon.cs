@@ -1,67 +1,125 @@
-﻿using FishNet.Object;
+﻿using DG.Tweening;
+using FishNet.Object;
 using TMPro;
 using UnityEngine;
 
+
 public class FALWeapon : APlayerWeapon
 {
-    public int currentAmmo = 30;
-    public int magazineAmmo = 30;
-    public TextMeshProUGUI ammoText;
-
+    float currentDelayBullet = 0;
+    int currentAmmo;
+    bool isReloading;
+    [SerializeField] private GameObject explosionImpactPref;
+    private void Awake()
+    {
+        currentAmmo = maxAmmo;
+    }
     public override void AnimateWeapon()
     {
-        
+        //anim luc ban sung
+        transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y - 0.01f, transform.localPosition.z - 0.07f), 0.001f).OnComplete(() =>
+        {
+            Instantiate(muzzleFlash, muzzleTransform.position, transform.rotation);
+            transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.01f, transform.localPosition.z + 0.07f), 0.1f).SetEase(Ease.OutBack);
+        });
     }
 
-    public override void Fire()
+    public void KeepMagInHand()
     {
-        AnimateWeapon();
-
-        if (IsOwner)
-        {
-            
-            Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-
-            
-            Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
-            {
-                if (hit.collider.TryGetComponent<ZombieHealth>(out ZombieHealth zombieHealth))
-                {
-                    zombieHealth.TakeDamage(damage);
-                }
-                else
-                {
-                    
-                    Debug.Log($"Hit: {hit.collider.gameObject.name}");
-                }
-
-                // Hi?u ?ng b?n trúng (ví d?: sparks) t?i v? trí va ch?m
-                SpawnImpactEffect(hit.point, hit.normal);
-            }
-            Debug.Log("Current Damager: " + damage);
-            Debug.Log("Current Ammo: " + currentAmmo);
-        }
+        MagPref.transform.position = LeftHandIKTarget.position;
     }
 
     public override void Reload()
     {
-        //throw new System.NotImplementedException();
-        if (currentAmmo < magazineAmmo)
+        if (!isReloading)
         {
-            currentAmmo = magazineAmmo; // Refill current ammo
-            maxAmmo -= magazineAmmo; // Reduce max ammo by clip size
+            isReloading = true;
+
+            //xu li tay
+            LeftHandIKTarget.rotation = magHoldPos.rotation;
+            LeftHandIKTarget.DOLocalMove(magHoldPos.transform.localPosition, 0.5f).OnComplete(() =>
+            {
+                InvokeRepeating("KeepMagInHand", 0f, 0.001f);
+                LeftHandIKTarget.rotation = reloadPos.rotation;
+                LeftHandIKTarget.DOLocalMove(reloadPos.transform.localPosition, 1f).OnComplete(() =>
+                {
+                    LeftHandIKTarget.rotation = magHoldPos.rotation;
+                    LeftHandIKTarget.DOLocalMove(magHoldPos.localPosition, 0.5f).OnComplete(() =>
+                    {
+                        MagPref.transform.position = MagPos.position;
+                        CancelInvoke("KeepMagInHand");
+                        LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
+                        LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
+                        currentAmmo = maxAmmo;
+                        isReloading = false;
+                    });
+                });
+            });
+
+            //xu li sung
+            transform.DOLocalRotate(new Vector3(transform.localRotation.x - 75f, transform.localRotation.y, transform.localRotation.z), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                transform.DOLocalRotate(new Vector3(transform.localRotation.x, transform.localRotation.y, transform.localRotation.z), 1f).SetEase(Ease.OutBack).SetDelay(1.5f);
+            });
+            transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.2f, transform.localPosition.z - 0.07f), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+            {
+                transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y - 0.2f, transform.localPosition.z + 0.07f), 1f).SetEase(Ease.OutBack).SetDelay(1.5f);
+            });
         }
-        Debug.Log("IsReloading");
-        //UpdateAmmoDisplay();
+
+    }
+
+    public override void Fire()
+    {
+        if (IsOwner)
+        {
+            currentDelayBullet -= Time.deltaTime;
+            if (currentDelayBullet <= 0 && currentAmmo > 0 && !isReloading)
+            {
+                AnimateWeapon();
+                Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+                Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+
+                if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
+                {
+
+                    if (hit.collider.TryGetComponent<ZombieHealth>(out ZombieHealth zombieHealth))
+                    {
+                        zombieHealth.TakeDamage(damage);
+                        SpawnImpactEffect(hit.point, hit.normal, bloodImpactPref);
+                    }
+                    else if (hit.collider.TryGetComponent<GasTank>(out GasTank gastank)) { gastank.TakeDamage(damage); SpawnImpactEffect(hit.point, hit.normal, explosionImpactPref); }
+                    else
+                    {
+                        Debug.Log($"Hit: {hit.collider.gameObject.name}");
+                        SpawnImpactEffect(hit.point, hit.normal, norImpactPref);
+                    }
+
+                }
+                currentAmmo -= 1;
+                currentDelayBullet = delayBulletTime;
+            }
+            if (currentAmmo <= 0)
+            {
+                Reload();
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnImpactEffect(Vector3 hitPoint, Vector3 hitNormal, GameObject impactEffectPrefab)
+    {
+        SpawnImpactEffectObserver(hitPoint, hitNormal, impactEffectPrefab);
     }
 
     [ObserversRpc]
-    private void SpawnImpactEffect(Vector3 hitPoint, Vector3 hitNormal)
+    private void SpawnImpactEffectObserver(Vector3 hitPoint, Vector3 hitNormal, GameObject impactEffectPrefab)
     {
-        
+        if (impactEffectPrefab != null)
+        {
+            GameObject impactEffect = Instantiate(impactEffectPrefab, hitPoint, Quaternion.LookRotation(hitNormal));
+            ServerManager.Spawn(impactEffect);
+            Destroy(impactEffect, 2f);
+        }
     }
-
-    
 }
