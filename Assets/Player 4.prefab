@@ -103,6 +103,8 @@ MonoBehaviour:
   - {fileID: 5342190654139679100}
   - {fileID: 2171313662497925604}
   - {fileID: 1250910133259143460}
+  - {fileID: 591454995059030426}
+  - {fileID: 6395659016495663657}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -128,7 +130,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 58
+  <PrefabId>k__BackingField: 9
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 2653622917379624973
   <SceneId>k__BackingField: 0
@@ -181,7 +183,7 @@ MonoBehaviour:
   jumpSpeed: 8
   gravity: 20
   lookSpeed: 2
-  lookXLimit: 90
+  lookXLimit: 60
   canMove: 1
   cameraYOffset: 0.7
   anim: {fileID: 7911246420309738133}
@@ -7402,9 +7404,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12c5eda9ddc9eb48940a349ae9d73d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 9
   _addedNetworkObject: {fileID: 8055465683895985816}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 8055465683895985816}
   damage: 15
   delayBulletTime: 0.1
   maxAmmo: 30
@@ -10822,9 +10824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d960894b6ff1d458807090d4617a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 8055465683895985816}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 8055465683895985816}
   damage: 10
   delayBulletTime: 0.2
   maxAmmo: 9
