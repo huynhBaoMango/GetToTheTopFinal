@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using DG.Tweening;
+using FishNet;
+using FishNet.Connection;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
-using IO.Swagger.Model;
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 using Random = UnityEngine.Random;
 
 public class InGameManager : NetworkBehaviour
@@ -36,6 +33,7 @@ public class InGameManager : NetworkBehaviour
     private readonly SyncVar<string> BarName = new("");
     private readonly SyncVar<bool> endBool = new(false);
     [SerializeField] private Slider progressSlider;
+    [SerializeField] private Image SlideFill;
     [SerializeField] private TextMeshProUGUI progressNameText;
     [SerializeField] private GameObject EndUI;
     public GameObject[] players;
@@ -63,16 +61,13 @@ public class InGameManager : NetworkBehaviour
     private void OnChangeEndBool(bool prev, bool next, bool asServer)
     {
         EndUI.SetActive(next);
+        Cursor.lockState = CursorLockMode.None;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject t in players)
         {
             t.GetComponent<PlayerControler>().canMove = false;
         }
-        string[] scenesToClose = new string[]
-       {
-            "NewTest"
-       };
-        BootstrapNetworkManager.ChangeNetworkScene("Menu", scenesToClose);
+        
         _currentState = GameState.End;
     }
 
@@ -122,6 +117,17 @@ public class InGameManager : NetworkBehaviour
                 ChangeState(_currentState + 1);
             }
         }
+        if (_currentState == GameState.Shooting && isCountdown)
+        {
+            if (Timer.Value > 0)
+            {
+                Timer.Value -= Time.deltaTime;
+            }
+            else
+            {
+                GoToNextLevel();
+            }
+        }
     }
 
     public override void OnStartClient()
@@ -165,6 +171,7 @@ public class InGameManager : NetworkBehaviour
     {
         Debug.Log("Loading...");
         zombieSpawnController.DisableAllZombieSpawns();
+        level = PlayerPrefs.GetInt("CurrentLevel", 0);
         SpawnObject();
         SpawnTheHeart();
     }
@@ -179,10 +186,11 @@ public class InGameManager : NetworkBehaviour
         StartCutscene();
     }
 
+
     void StartShooting()
     {
+        StartCountdownShooting();
         Debug.Log("Shooting...");
-        Timer.Value = 60 * (level / 10);
         InvokeTheSpawn();
     }
 
@@ -196,6 +204,14 @@ public class InGameManager : NetworkBehaviour
     {
         Debug.Log("Restarting...");
         ChangeState(GameState.Loading);
+    }
+
+    [ObserversRpc]
+    void StartCountdownShooting()
+    {
+        SlideFill.color = Color.red;
+        progressSlider.maxValue = 120 + (level * 0.1f * 60);
+        Timer.Value = 120 + (level * 0.1f * 60);
     }
 
     void SpawnObject()
@@ -253,6 +269,15 @@ public class InGameManager : NetworkBehaviour
         isCountdown = true;
     }
 
+    void GoToNextLevel()
+    {
+        //giet het zombie
+
+        //hien thi bang diem
+
+        //chuyen scene tiep theo
+    }
+
     void SpawnTheHeart()
     {
         GameObject heart = Instantiate(heartPrefab, floors[UnityEngine.Random.Range(0, floors.Length-1)].position, Quaternion.identity);
@@ -261,7 +286,7 @@ public class InGameManager : NetworkBehaviour
 
     void InvokeTheSpawn()
     {
-        float spawnRate = 5f;
+        float spawnRate = 3f;
         InvokeRepeating("SpawnZombie", 1f, spawnRate);
     }
 
@@ -275,6 +300,22 @@ public class InGameManager : NetworkBehaviour
     public void EndGameTrigger()
     {
         endBool.Value = true;
+    }
+
+    public void OnBackToMenu()
+    {
+        // Ngắt kết nối khỏi FishNet
+        if (InstanceFinder.NetworkManager.IsHost)
+        {
+            InstanceFinder.ServerManager.StopConnection(true);
+        }
+        InstanceFinder.ClientManager.StopConnection();
+
+        // Unload scene hiện tại
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+
+        // Load scene "Boostrap"
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Boostrap");
     }
 
     enum GameState
