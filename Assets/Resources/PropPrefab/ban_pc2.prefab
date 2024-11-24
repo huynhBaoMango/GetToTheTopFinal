@@ -2142,7 +2142,6 @@ GameObject:
   - component: {fileID: 434802323298928508}
   - component: {fileID: 4211913023990169742}
   - component: {fileID: 2332492302333479604}
-  - component: {fileID: 3961803203412886436}
   - component: {fileID: 3787148369462113647}
   - component: {fileID: 1644366138923262999}
   - component: {fileID: 5100227855330125260}
@@ -2242,22 +2241,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &3961803203412886436
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6769106038063896402}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &3787148369462113647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2410,7 +2393,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 3787148369462113647}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &6798424462528826267
 GameObject:
   m_ObjectHideFlags: 0

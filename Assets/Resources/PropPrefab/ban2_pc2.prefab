@@ -1340,12 +1340,10 @@ GameObject:
   - component: {fileID: 2906506072032268857}
   - component: {fileID: 4916649276302687212}
   - component: {fileID: 6253253124133308602}
-  - component: {fileID: 275093507616276942}
   - component: {fileID: 3022244769716518994}
   - component: {fileID: 4914466801696479336}
   - component: {fileID: 5290523060128277451}
   - component: {fileID: 5576620459847090954}
-  - component: {fileID: 992154188204920596}
   m_Layer: 14
   m_Name: Office chair
   m_TagString: WorldObjects
@@ -1440,22 +1438,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &275093507616276942
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887778992258369294}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.003, y: 0.003, z: 0.007}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.007}
-  m_TimeToStationary: 0.5
 --- !u!114 &3022244769716518994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1593,22 +1575,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &992154188204920596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887778992258369294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 4914466801696479336}
-  _networkObjectCache: {fileID: 0}
-  maxHealth: 50
 --- !u!1 &2158080542822648167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,10 +2519,9 @@ GameObject:
   - component: {fileID: 8548269262196496457}
   - component: {fileID: 875839083478459014}
   - component: {fileID: 4567713691657251974}
-  - component: {fileID: 2617505121767468225}
   - component: {fileID: 3114783973330668461}
   - component: {fileID: 2960519467424555735}
-  - component: {fileID: 4668566563198780120}
+  - component: {fileID: 7966209790099209692}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -2693,22 +2658,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!208 &2617505121767468225
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325865520676762846}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &3114783973330668461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2804,7 +2753,7 @@ MonoBehaviour:
     Position: {x: -0.79, y: 0, z: 0}
     Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
     LocalScale: {x: 100, y: 99.99991, z: 99.99991}
---- !u!114 &4668566563198780120
+--- !u!114 &7966209790099209692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2819,7 +2768,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 2960519467424555735}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &3657199203918243861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4578,10 +4527,9 @@ GameObject:
   - component: {fileID: 7097443754358407990}
   - component: {fileID: 8041791151029925096}
   - component: {fileID: 732566577018433384}
-  - component: {fileID: 6249438952191973620}
   - component: {fileID: 5923174049997166415}
   - component: {fileID: 2765407971763258251}
-  - component: {fileID: 1025641280695681258}
+  - component: {fileID: 6796278177689835259}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -4718,22 +4666,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!208 &6249438952191973620
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914045912511661405}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &5923174049997166415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4829,7 +4761,7 @@ MonoBehaviour:
     Position: {x: -0.79, y: 0, z: 0}
     Rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
     LocalScale: {x: 100, y: 99.99991, z: 99.99991}
---- !u!114 &1025641280695681258
+--- !u!114 &6796278177689835259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4844,7 +4776,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 2765407971763258251}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &5977093297532289558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5397,12 +5329,10 @@ GameObject:
   - component: {fileID: 224189012033153501}
   - component: {fileID: 5185929149041753243}
   - component: {fileID: 1775620512573694895}
-  - component: {fileID: 2818184918157191227}
   - component: {fileID: 1752065146540373769}
   - component: {fileID: 137505579219861515}
   - component: {fileID: 3524915201315518013}
   - component: {fileID: 3559145214302742158}
-  - component: {fileID: 5213030885508974760}
   m_Layer: 14
   m_Name: Office chair
   m_TagString: WorldObjects
@@ -5497,22 +5427,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &2818184918157191227
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6830183100869637409}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.003, y: 0.003, z: 0.007}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.007}
-  m_TimeToStationary: 0.5
 --- !u!114 &1752065146540373769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5650,22 +5564,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5213030885508974760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6830183100869637409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 137505579219861515}
-  _networkObjectCache: {fileID: 0}
-  maxHealth: 50
 --- !u!1 &7125781505394549142
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,6 +74,7 @@ public class ZombieControler : NetworkBehaviour
                 break;
         }
     }
+    
 
     public void TriggerRagdoll(Vector3 force, Vector3 hitPoint)
     {

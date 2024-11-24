@@ -2109,7 +2109,6 @@ GameObject:
   - component: {fileID: 326839069739470775}
   - component: {fileID: 517264806313170403}
   - component: {fileID: 471836706968132717}
-  - component: {fileID: 4906814006087102650}
   - component: {fileID: 4014112018699185970}
   - component: {fileID: 261987481947376276}
   - component: {fileID: 2115221496926827352}
@@ -2209,22 +2208,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &4906814006087102650
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636951473391622360}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &4014112018699185970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,7 +2360,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 4014112018699185970}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &4828896473948434110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,7 +3330,6 @@ GameObject:
   - component: {fileID: 2254176595748242517}
   - component: {fileID: 2952429479720993820}
   - component: {fileID: 5129789073919340324}
-  - component: {fileID: 192387366306173607}
   - component: {fileID: 1287682399165174785}
   - component: {fileID: 633653345434774792}
   - component: {fileID: 2484603505513545387}
@@ -3447,22 +3429,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &192387366306173607
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6831398912171794758}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &1287682399165174785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3615,7 +3581,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 1287682399165174785}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &6843871959744341245
 GameObject:
   m_ObjectHideFlags: 0

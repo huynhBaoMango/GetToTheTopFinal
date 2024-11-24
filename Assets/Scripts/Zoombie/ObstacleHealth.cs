@@ -3,42 +3,44 @@ using FishNet.Object;
 
 public class ObstacleHealth : NetworkBehaviour
 {
-    [SerializeField] private int maxHealth = 50;
-    private int _currentHealth;
-    private bool _isDead = false;
-
-    public int CurrentHealth => _currentHealth; // Thu?c tính ?? l?y máu hi?n t?i
+    [SerializeField] private float maxHealth = 50f; // Máu t?i ?a c?a v?t c?n
+    private float currentHealth; // Máu hi?n t?i c?a v?t c?n
 
     private void Awake()
     {
-        _currentHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
+    // Ph??ng th?c ?? gây sát th??ng, có th? ???c g?i t? m?i phía
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamage(int damage)
+    public void TakeDamageServerRpc(float damage)
     {
-        if (_isDead) return;
+        TakeDamage(damage);
+    }
 
-        _currentHealth -= damage;
-        Debug.Log($"Obstacle took {damage} damage. Current health: {_currentHealth}");
+    // X? lý sát th??ng
+    private void TakeDamage(float damage)
+    {
+        if (!IsServer) return; // Ch? máy ch? m?i ???c th?c hi?n logic này
 
-        if (_currentHealth <= 0 && !_isDead)
+        Debug.Log($"TakeDamage called. Damage: {damage}, Current Health Before: {currentHealth}");
+        currentHealth -= damage; // Tr? máu c?a v?t c?n
+        Debug.Log($"Obstacle took damage: {damage}, Current Health After: {currentHealth}");
+
+        if (currentHealth <= 0) // N?u máu <= 0, phá h?y v?t c?n
         {
-            _isDead = true;
-            Die();
+            DestroyObstacle();
         }
     }
 
-    public bool IsDead()
-    {
-        return _isDead;
-    }
-
+    // Ph??ng th?c phá h?y v?t c?n
     [Server]
-    private void Die()
+    private void DestroyObstacle()
     {
-        Debug.Log("Obstacle died and will be despawned.");
-        // Hi?u ?ng phá h?y có th? thêm vào ?ây
-        ServerManager.Despawn(gameObject);
+        Debug.Log("Destroying obstacle on server");
+        if (IsSpawned) // Ki?m tra xem ??i t??ng ?ã ???c spawn hay ch?a
+        {
+            ServerManager.Despawn(gameObject); // Phá h?y v?t c?n trên t?t c? client
+        }
     }
 }
