@@ -142,28 +142,9 @@ public class InGameManager : NetworkBehaviour
         Debug.Log("Preparing...");
         Timer.Value = 120;
         //SpawnZombieSpawns();
-        StartCoroutine(SpawnZombieSpawns());
+        //StartCoroutine(SpawnZombieSpawns());
 
-       // StartCutsceneServer();
-    }
-
-    void StartCutsceneServer()
-    {
         StartCutscene();
-    }
-
-    [ObserversRpc]
-    void StartCutscene()
-    {
-        cutsceneCam.GetComponent<Camera>().enabled = true;
-        cutsceneCam.transform.position = players[0].transform.position + Vector3.up;
-        cutsceneCam.transform.DOMove(zombieSpawnController.zombieSpawns[0].transform.GetChild(1).transform.position, 3f);
-        cutsceneCam.transform.DORotate(zombieSpawnController.zombieSpawns[0].transform.GetChild(1).transform.rotation.eulerAngles, 3f).OnComplete(() =>
-        {
-            //this just work on the host
-            cutsceneCam.GetComponent<Camera>().enabled = false;
-        });
-        
     }
 
     void StartShooting()
@@ -200,6 +181,14 @@ public class InGameManager : NetworkBehaviour
         }
     }
 
+    [ObserversRpc]
+    void StartCutscene()
+    {
+        cutsceneCam.GetComponent<Camera>().enabled = true;
+        cutsceneCam.transform.position = players[0].transform.position + Vector3.up;
+        StartCoroutine(SpawnZombieSpawns());
+    }
+
     IEnumerator SpawnZombieSpawns()
     {
         level = PlayerPrefs.GetInt("CurrentLevel", 0);
@@ -227,7 +216,7 @@ public class InGameManager : NetworkBehaviour
         }
 
         yield return new WaitForSeconds(1f);
-        cutsceneCam.GetComponent<Camera>().enabled = false;
+        ServerManager.Despawn(cutsceneCam);
         isCountdown = true;
     }
 

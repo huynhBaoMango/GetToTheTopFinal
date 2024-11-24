@@ -31,6 +31,7 @@ public class PlayerControler : NetworkBehaviour
         if (base.IsOwner)
         {
             PlayerCamera = Camera.main;
+            //vi tri cam
             PlayerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
             PlayerCamera.transform.SetParent(transform);
 
