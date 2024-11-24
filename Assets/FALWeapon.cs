@@ -1,8 +1,13 @@
-using FishNet.Object;
+ï»¿using FishNet.Object;
+using TMPro;
 using UnityEngine;
 
 public class FALWeapon : APlayerWeapon
 {
+    public int currentAmmo = 30;
+    public int magazineAmmo = 30;
+    public TextMeshProUGUI ammoText;
+
     public override void AnimateWeapon()
     {
         
@@ -22,7 +27,6 @@ public class FALWeapon : APlayerWeapon
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
             {
-                
                 if (hit.collider.TryGetComponent<ZombieHealth>(out ZombieHealth zombieHealth))
                 {
                     zombieHealth.TakeDamage(damage);
@@ -33,15 +37,24 @@ public class FALWeapon : APlayerWeapon
                     Debug.Log($"Hit: {hit.collider.gameObject.name}");
                 }
 
-                // Hi?u ?ng b?n trúng (ví d?: sparks) t?i v? trí va ch?m
+                // Hi?u ?ng b?n trÃºng (vÃ­ d?: sparks) t?i v? trÃ­ va ch?m
                 SpawnImpactEffect(hit.point, hit.normal);
             }
+            Debug.Log("Current Damager: " + damage);
+            Debug.Log("Current Ammo: " + currentAmmo);
         }
     }
 
     public override void Reload()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+        if (currentAmmo < magazineAmmo)
+        {
+            currentAmmo = magazineAmmo; // Refill current ammo
+            maxAmmo -= magazineAmmo; // Reduce max ammo by clip size
+        }
+        Debug.Log("IsReloading");
+        //UpdateAmmoDisplay();
     }
 
     [ObserversRpc]
@@ -50,4 +63,5 @@ public class FALWeapon : APlayerWeapon
         
     }
 
+    
 }
