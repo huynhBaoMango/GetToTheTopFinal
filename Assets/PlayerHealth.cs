@@ -75,6 +75,7 @@ public class PlayerHealth : NetworkBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Player died!");
+            FindObjectOfType<InGameManager>().EndGameTrigger();
         }
     }
 
