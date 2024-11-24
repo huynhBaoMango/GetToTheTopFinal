@@ -3,50 +3,44 @@ using FishNet.Object;
 
 public class ObstacleHealth : NetworkBehaviour
 {
-    [SerializeField] public int maxHealth = 5;
-    private int _currentHealth;
+    [SerializeField] private float maxHealth = 50f; // Máu t?i ?a c?a v?t c?n
+    private float currentHealth; // Máu hi?n t?i c?a v?t c?n
 
-    public override void OnStartServer()
+    private void Awake()
     {
-        base.OnStartServer();
-        _currentHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
-    [ServerRpc]
-    public void TakeDamageRpc(int damage)
+    // Ph??ng th?c ?? gây sát th??ng, có th? ???c g?i t? m?i phía
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(float damage)
     {
-        _currentHealth -= damage;
-
-        if (_currentHealth <= 0)
-        {
-            Despawn();
-        }
-
-        
-        ObserversTakeDamage(_currentHealth);
+        TakeDamage(damage);
     }
 
-    [ObserversRpc(ExcludeOwner = true)] 
-    private void ObserversTakeDamage(int health)
+    // X? lý sát th??ng
+    private void TakeDamage(float damage)
     {
+        if (!IsServer) return; // Ch? máy ch? m?i ???c th?c hi?n logic này
 
-        _currentHealth = health;
+        Debug.Log($"TakeDamage called. Damage: {damage}, Current Health Before: {currentHealth}");
+        currentHealth -= damage; // Tr? máu c?a v?t c?n
+        Debug.Log($"Obstacle took damage: {damage}, Current Health After: {currentHealth}");
 
-
-
-        if (_currentHealth <= 0)
+        if (currentHealth <= 0) // N?u máu <= 0, phá h?y v?t c?n
         {
-
-
-
-           
+            DestroyObstacle();
         }
     }
 
-    private void Despawn()
+    // Ph??ng th?c phá h?y v?t c?n
+    [Server]
+    private void DestroyObstacle()
     {
-        
-
-        NetworkObject.Despawn();
+        Debug.Log("Destroying obstacle on server");
+        if (IsSpawned) // Ki?m tra xem ??i t??ng ?ã ???c spawn hay ch?a
+        {
+            ServerManager.Despawn(gameObject); // Phá h?y v?t c?n trên t?t c? client
+        }
     }
 }

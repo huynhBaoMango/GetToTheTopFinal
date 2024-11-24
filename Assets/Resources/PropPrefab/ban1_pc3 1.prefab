@@ -2038,7 +2038,6 @@ GameObject:
   - component: {fileID: 8646083568837799806}
   - component: {fileID: 6789170033774498640}
   - component: {fileID: 5314267516768572607}
-  - component: {fileID: 1973745716504028906}
   - component: {fileID: 6643802634657855198}
   - component: {fileID: 464345779845667476}
   - component: {fileID: 931917007226331601}
@@ -2137,22 +2136,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300148, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &1973745716504028906
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5562853689727096214}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.004, y: 0.003, z: 0.007}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.007}
-  m_TimeToStationary: 0.5
 --- !u!114 &6643802634657855198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2354,8 +2337,7 @@ GameObject:
   - component: {fileID: 6637968857218092472}
   - component: {fileID: 980061919118274612}
   - component: {fileID: 6356278017066542430}
-  - component: {fileID: 3905662959230900774}
-  - component: {fileID: 2870039245089261005}
+  - component: {fileID: 3311009075400040507}
   m_Layer: 14
   m_Name: Office table
   m_TagString: WorldObjects
@@ -2587,23 +2569,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
---- !u!208 &3905662959230900774
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5700406838510127903}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.009000001, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: -0.003, z: 0.004}
-  m_TimeToStationary: 0.5
---- !u!114 &2870039245089261005
+--- !u!114 &3311009075400040507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2618,7 +2584,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 5861727233412581456}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &6434749144966092515
 GameObject:
   m_ObjectHideFlags: 0

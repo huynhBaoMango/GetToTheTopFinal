@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8958079458951206575}
   - component: {fileID: -2884250314309868127}
   - component: {fileID: 5242882756583526818}
+  - component: {fileID: -5001037208964289267}
   m_Layer: 0
   m_Name: Heart
   m_TagString: RedPillar
@@ -105,10 +106,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.56726325
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.046455026, y: 0, z: -0.02080828}
 --- !u!114 &-2884250314309868127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +171,7 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: -2884250314309868127}
+  - {fileID: -5001037208964289267}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -195,7 +197,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 56
+  <PrefabId>k__BackingField: 62
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 17326242817209569990
   <SceneId>k__BackingField: 0
@@ -203,3 +205,19 @@ MonoBehaviour:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 2, y: 6, z: 2}
+--- !u!114 &-5001037208964289267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272599582106206974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dceec721cb4d57348b47d9b930cdc714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 5242882756583526818}
+  _networkObjectCache: {fileID: 5242882756583526818}
+  maxHealth: 1000

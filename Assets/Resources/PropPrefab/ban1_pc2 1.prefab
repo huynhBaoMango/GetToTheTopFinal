@@ -2310,8 +2310,7 @@ GameObject:
   - component: {fileID: 7023396487061375073}
   - component: {fileID: 3273932286806647684}
   - component: {fileID: 5905270990334370070}
-  - component: {fileID: 1341987723531457784}
-  - component: {fileID: 6961561671475846314}
+  - component: {fileID: 4841228089878371111}
   m_Layer: 14
   m_Name: Office table
   m_TagString: WorldObjects
@@ -2543,23 +2542,7 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
---- !u!208 &1341987723531457784
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7265535456494194578}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.009000001, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: -0.003, z: 0.004}
-  m_TimeToStationary: 0.5
---- !u!114 &6961561671475846314
+--- !u!114 &4841228089878371111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2574,7 +2557,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 241703013251449915}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 50
 --- !u!1 &7334606618837078383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,7 +2666,6 @@ GameObject:
   - component: {fileID: 7678856122671038152}
   - component: {fileID: 5059560138027130236}
   - component: {fileID: 7394494688889528856}
-  - component: {fileID: 5922050023136886404}
   - component: {fileID: 2068017389915704141}
   - component: {fileID: 1018304226930069317}
   - component: {fileID: 6557380443519891432}
@@ -2782,22 +2764,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300148, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &5922050023136886404
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7499005687500958994}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.004, y: 0.003, z: 0.007}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.007}
-  m_TimeToStationary: 0.5
 --- !u!114 &2068017389915704141
 MonoBehaviour:
   m_ObjectHideFlags: 0
