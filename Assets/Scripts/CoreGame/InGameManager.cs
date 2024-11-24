@@ -7,6 +7,7 @@ using DG.Tweening;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using IO.Swagger.Model;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,14 +26,18 @@ public class InGameManager : NetworkBehaviour
 
 
     [Header("Zombie Setup")]
-    public NetworkObject zombiePrefab;
+    public NetworkObject[] zombiePrefabs;
     public List<Transform> zombieSpawnPosList;
     public ZombieSpawnController zombieSpawnController;
 
 
     [Header("Game Info")]
     private readonly SyncVar<float> Timer = new(0);
+    private readonly SyncVar<string> BarName = new("");
+    private readonly SyncVar<bool> endBool = new(false);
     [SerializeField] private Slider progressSlider;
+    [SerializeField] private TextMeshProUGUI progressNameText;
+    [SerializeField] private GameObject EndUI;
     public GameObject[] players;
     public bool isCountdown;
 
@@ -49,7 +54,32 @@ public class InGameManager : NetworkBehaviour
             return;
         level = PlayerPrefs.GetInt("CurrentLevel", 1);
         Timer.OnChange += OnChangeTimer;
+        BarName.OnChange += OnChangeBarName;
+        endBool.OnChange += OnChangeEndBool;
         isCountdown = false;
+    }
+
+    [ObserversRpc]
+    private void OnChangeEndBool(bool prev, bool next, bool asServer)
+    {
+        EndUI.SetActive(next);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject t in players)
+        {
+            t.GetComponent<PlayerControler>().canMove = false;
+        }
+        string[] scenesToClose = new string[]
+       {
+            "NewTest"
+       };
+        BootstrapNetworkManager.ChangeNetworkScene("Menu", scenesToClose);
+        _currentState = GameState.End;
+    }
+
+    [ObserversRpc]
+    private void OnChangeBarName(string prev, string next, bool asServer)
+    {
+        progressNameText.text = next;
     }
 
     public void UpdatePlayers()
@@ -113,9 +143,11 @@ public class InGameManager : NetworkBehaviour
                 break;
             case GameState.Prepare:
                 StartPreparing();
+                BarName.Value = "PREPARING...";
                 break;
             case GameState.Shooting:
                 StartShooting();
+                BarName.Value = "SHOOTING!";
                 break;
             case GameState.End:
                 StartEnd();
@@ -127,7 +159,7 @@ public class InGameManager : NetworkBehaviour
                 break;
         }
     }
-    
+
 
     void StartLoading()
     {
@@ -140,7 +172,7 @@ public class InGameManager : NetworkBehaviour
     void StartPreparing()
     {
         Debug.Log("Preparing...");
-        Timer.Value = 120;
+        Timer.Value = 60;
         //SpawnZombieSpawns();
         //StartCoroutine(SpawnZombieSpawns());
 
@@ -150,13 +182,14 @@ public class InGameManager : NetworkBehaviour
     void StartShooting()
     {
         Debug.Log("Shooting...");
+        Timer.Value = 60 * (level / 10);
         InvokeTheSpawn();
     }
+
 
     void StartEnd()
     {
         Debug.Log("Ending...");
-
     }
 
     void StartRestart()
@@ -235,11 +268,14 @@ public class InGameManager : NetworkBehaviour
     void SpawnZombie()
     {
         Transform pos = zombieSpawnPosList[UnityEngine.Random.Range(0, zombieSpawnPosList.Count)];
-        NetworkObject zombie = Instantiate(zombiePrefab, pos.position, Quaternion.identity);
+        NetworkObject zombie = Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], pos.position, Quaternion.identity);
         ServerManager.Spawn(zombie);
     }
 
-    
+    public void EndGameTrigger()
+    {
+        endBool.Value = true;
+    }
 
     enum GameState
     {
