@@ -18,7 +18,7 @@ public class AK12Weapon : APlayerWeapon
 
     private void Awake()
     {
-        currentAmmo = clipSize;
+        currentAmmo = maxAmmo;
     }
 
     public override void AnimateWeapon()
@@ -74,8 +74,7 @@ public class AK12Weapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        currentAmmo = clipSize;
-                        maxAmmo -= clipSize;
+                        currentAmmo = maxAmmo;
                         UpdateAmmoDisplay();
                         isReloading = false;
                     });
