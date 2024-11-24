@@ -21,6 +21,7 @@ public class FastZombieController : NetworkBehaviour
     [SerializeField] private float attackCooldown = 0.5f;
     [SerializeField] private string redPillarTag = "RedPillar";
     [SerializeField] private float pillarFollowDistance = 8f;
+    [SerializeField] private float pillarAttackRange = 2f;
     [SerializeField] private float obstacleCheckDistance = 1f;
     [SerializeField] private float obstacleDestroyDelay = 0.5f;
     [SerializeField] private string worldObjectsTag = "WorldObjects";
@@ -122,16 +123,25 @@ public class FastZombieController : NetworkBehaviour
             return;
         }
         _currentTarget = target;
-
+        
         _navMeshAgent.SetDestination(_currentTarget.position);
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
         _animator.SetFloat("Distance", distanceToTarget);
 
         _navMeshAgent.isStopped = false;
 
-        if (distanceToTarget <= attackRange)
+        if (distanceToTarget <= attackRange && _currentTarget == closestPlayer)
         {
             _currentState = ZombieState.Attacking;
+            _animator.SetTrigger("Attack");
+            _animator2.SetTrigger("Attack");
+            _lastAttackTime = Time.time;
+        }
+        else if (distanceToTarget <= pillarAttackRange && _currentTarget == GetRedPillar())
+        {
+            _currentState = ZombieState.Attacking;
+            _animator.SetTrigger("Attack");
+            _animator2.SetTrigger("Attack");
             _lastAttackTime = Time.time;
         }
 
@@ -140,13 +150,11 @@ public class FastZombieController : NetworkBehaviour
         direction.Normalize();
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction, Vector3.up), 30 * Time.deltaTime);
 
-        // Kiểm tra chướng ngại vật
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, obstacleCheckDistance))
         {
             if (hit.collider.CompareTag(worldObjectsTag))
             {
-                Debug.Log("Obstacle detected");
                 StartCoroutine(DestroyObstacle(hit.collider.GetComponent<ObstacleHealth>()));
             }
         }
@@ -154,7 +162,6 @@ public class FastZombieController : NetworkBehaviour
 
     private IEnumerator DestroyObstacle(ObstacleHealth obstacleHealth)
     {
-        // Gọi animation tấn công
         _animator.SetTrigger("Attack");
         _animator2.SetTrigger("Attack");
 
@@ -174,57 +181,55 @@ public class FastZombieController : NetworkBehaviour
 
     private void AttackingBehaviour()
     {
+        _currentTarget = GetHighestPriorityTarget();
+
         if (_currentTarget == null)
         {
             _navMeshAgent.isStopped = false;
             _currentState = ZombieState.Walking;
             return;
         }
-
+      
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.position);
         _animator.SetFloat("Distance", distanceToTarget);
 
-        // Nếu mục tiêu ngoài phạm vi, quay lại trạng thái Walking
-        if (distanceToTarget > attackRange)
+        if ((distanceToTarget > attackRange && _currentTarget.CompareTag("Player")) ||
+           (distanceToTarget > pillarAttackRange && _currentTarget.CompareTag(redPillarTag)))
         {
+            
             _currentState = ZombieState.Walking;
             _navMeshAgent.isStopped = false;
             return;
         }
 
-        // Thực hiện tấn công nếu cooldown cho phép
         if (Time.time - _lastAttackTime >= attackCooldown)
         {
-            if (_currentTarget.CompareTag("Player"))
+            Debug.Log("Thực hiện tấn công");
+            if (_currentTarget.CompareTag("Player") && _currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                if (_currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
-                {
-                    playerHealth.TakeDamage(attackDamage);
-                }
+                playerHealth.TakeDamage(attackDamage);
             }
-            else if (_currentTarget.CompareTag(redPillarTag))
+            else if (_currentTarget.CompareTag(redPillarTag) && _currentTarget.TryGetComponent<RedPillarHealth>(out RedPillarHealth pillarHealth))
             {
-               
-                Debug.Log("Zombie đang tấn công cột đỏ!");
-                
+                pillarHealth.TakeDamage(attackDamage);
             }
 
-           
+
             _animator.SetTrigger("Attack");
             _animator2.SetTrigger("Attack");
             _lastAttackTime = Time.time;
         }
 
-        
         Vector3 direction = _currentTarget.position - transform.position;
         direction.y = 0;
         direction.Normalize();
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction, Vector3.up), 20 * Time.deltaTime);
     }
-private void RagdollBehaviour()
+
+    private void RagdollBehaviour()
     {
-        // Thêm hành vi cho trạng thái Ragdoll tại đây nếu cần.
+        // Add ragdoll behavior here.
     }
 
     private Transform GetClosestPlayer()
@@ -250,5 +255,24 @@ private void RagdollBehaviour()
         }
 
         return closestPlayer;
+    }
+
+    private Transform GetHighestPriorityTarget()
+    {
+        Transform closestPlayer = GetClosestPlayer();
+        float distanceToPlayer = closestPlayer != null ? Vector3.Distance(transform.position, closestPlayer.position) : Mathf.Infinity;
+        Transform redPillar = GetRedPillar();
+        float distanceToPillar = redPillar != null ? Vector3.Distance(transform.position, redPillar.position) : Mathf.Infinity;
+
+        if (closestPlayer != null && distanceToPlayer <= attackRange)
+        {
+            return closestPlayer;
+        }
+        else if (redPillar != null && distanceToPillar <= pillarAttackRange) // Use pillarAttackRange here
+        {
+            return redPillar;
+        }
+
+        return distanceToPlayer < distanceToPillar ? closestPlayer : redPillar;
     }
 }
