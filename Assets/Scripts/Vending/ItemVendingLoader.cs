@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Unity.Burst.Intrinsics.X86.Avx;
+using static UnityEditor.Progress;
 
 public class ItemVendingLoader : MonoBehaviour
 {
@@ -28,21 +31,27 @@ public class ItemVendingLoader : MonoBehaviour
         {
             itemName = "Health Potion",
             itemImage = Resources.Load<Sprite>("ImageItem/Health_Potion"), // Load hình từ Resources
-            price = 20
+            price = 20,
+            damageBoost = 0,
+            itemDescription = "Recover 75% of the player's health"
         });
 
         items.Add(new Item
         {
             itemName = "Bullet Potion",
             itemImage = Resources.Load<Sprite>("ImageItem/Bullet_Potion"), // Load hình từ Resources
-            price = 20
+            price = 20,
+            damageBoost = 0,
+            itemDescription = "Increase the player's ammo count by 30"
         });
 
         items.Add(new Item
         {
             itemName = "Gun Potion",
             itemImage = Resources.Load<Sprite>("ImageItem/Gun_Potion"), // Load hình từ Resources
-            price = 20
+            price = 20,
+            damageBoost = 20,
+            itemDescription = "Increase the player's weapon damage by 10"
         });
     }
 
@@ -83,18 +92,23 @@ public class ItemVendingLoader : MonoBehaviour
                             playerHealth.Heal(20f);
                         }
                     }
-                    else
+                    if (item.itemName == "Bullet Potion")
                     {
-                        Debug.LogError("PlayerHealth is not assigned.");
+                        APlayerWeapon currentWeapon = FindObjectOfType<APlayerWeapon>();
+                        if (currentWeapon != null)
+                        {
+                            currentWeapon.maxAmmo = Mathf.Min(currentWeapon.initialMaxAmmo, currentWeapon.maxAmmo + 30);
+                        }
                     }
-                    //else if (item.itemName == "Bullet Potion")
-                    //{
-
-                    //}
-                    //else if (item.itemName == "Gun Potion")
-                    //{
-
-                    //}
+                    if (item.itemName == "Gun Potion")
+                    {
+                        // Tăng sát thương cho tất cả vũ khí của người chơi
+                        foreach (APlayerWeapon weapon in FindObjectsOfType<APlayerWeapon>())
+                        {
+                            weapon.damage += item.damageBoost;
+                            Debug.Log("Damage: " + weapon.damage);
+                        }
+                    }
                 });
             }
             else

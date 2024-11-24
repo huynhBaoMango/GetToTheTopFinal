@@ -2,6 +2,7 @@
 using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -9,11 +10,22 @@ public class AK12Weapon : APlayerWeapon
 {
     float currentDelayBullet = 0;
     int currentAmmo;
+    int clipSize = 30;
     bool isReloading;
+<<<<<<< Updated upstream
+=======
+    public TextMeshProUGUI ammoText;
+    [SerializeField] private GameObject explosionImpactPref;
+>>>>>>> Stashed changes
     private void Awake()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = clipSize;
     }
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     public override void AnimateWeapon()
     {
         
@@ -31,7 +43,7 @@ public class AK12Weapon : APlayerWeapon
 
     public override void Reload()
     {
-        if(!isReloading)
+        if (!isReloading)
         {
             isReloading = true;
 
@@ -50,7 +62,9 @@ public class AK12Weapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        currentAmmo = maxAmmo;
+                        currentAmmo = clipSize;
+                        maxAmmo -= clipSize;
+                        UpdateAmmoDisplay();
                         isReloading = false;
                     });
                 });
@@ -93,12 +107,13 @@ public class AK12Weapon : APlayerWeapon
                         Debug.Log($"Hit: {hit.collider.gameObject.name}");
                         SpawnImpactEffect(hit.point, hit.normal, norImpactPref);
                     }
-                    
+
                 }
                 currentAmmo -= 1;
                 currentDelayBullet = delayBulletTime;
+                UpdateAmmoDisplay();
             }
-            if(currentAmmo <= 0)
+            if (currentAmmo <= 0)
             {
                 Reload();
             }
@@ -120,5 +135,11 @@ public class AK12Weapon : APlayerWeapon
             ServerManager.Spawn(impactEffect);
             Destroy(impactEffect, 2f);
         }
+    }
+
+    public void UpdateAmmoDisplay()
+    {
+        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
+        ammoText.text = currentAmmo + "/" + maxAmmo;
     }
 }
