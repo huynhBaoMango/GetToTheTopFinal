@@ -20,7 +20,8 @@ public class PlayerControler : NetworkBehaviour
     [HideInInspector]
     public bool canMove = true;
     [SerializeField]
-    private float cameraYOffset = 0.4f;
+    private float cameraYOffset = 0.5f;
+    private float cameraZOffset = 0.2f;
     private Camera PlayerCamera;
     [Header("Animator setup")]
     public Animator anim;
@@ -32,7 +33,7 @@ public class PlayerControler : NetworkBehaviour
         {
             PlayerCamera = Camera.main;
             //vi tri cam
-            PlayerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+            PlayerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z + cameraZOffset);
             PlayerCamera.transform.SetParent(transform);
 
             if (TryGetComponent(out PlayerWeapon playerWeapone))
