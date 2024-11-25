@@ -6,8 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
-using static UnityEditor.Progress;
 
 public class ItemVendingLoader : MonoBehaviour
 {
@@ -16,6 +14,8 @@ public class ItemVendingLoader : MonoBehaviour
 
     public List<Item> items = new List<Item>(); // Danh sách các item
     private PlayerHealth playerHealth;
+    public GameObject spikeTrapPrefab;
+    public GameObject gasTankPrefab;
 
     void Start()
     { 
@@ -30,7 +30,7 @@ public class ItemVendingLoader : MonoBehaviour
         items.Add(new Item
         {
             itemName = "Health Potion",
-            itemImage = Resources.Load<Sprite>("ImageItem/Health_Potion"), // Load hình từ Resources
+            itemImage = Resources.Load<Sprite>("ImageItem/Health_potion"), // Load hình từ Resources
             price = 20,
             damageBoost = 0,
             itemDescription = "Recover 75% of the player's health"
@@ -39,7 +39,7 @@ public class ItemVendingLoader : MonoBehaviour
         items.Add(new Item
         {
             itemName = "Bullet Potion",
-            itemImage = Resources.Load<Sprite>("ImageItem/Bullet_Potion"), // Load hình từ Resources
+            itemImage = Resources.Load<Sprite>("ImageItem/Ammo_potion"), // Load hình từ Resources
             price = 20,
             damageBoost = 0,
             itemDescription = "Increase the player's ammo count by 30"
@@ -52,6 +52,23 @@ public class ItemVendingLoader : MonoBehaviour
             price = 20,
             damageBoost = 20,
             itemDescription = "Increase the player's weapon damage by 10"
+        });
+
+        items.Add(new Item
+        {
+            itemName = "Spike Trap",
+            itemImage = Resources.Load<Sprite>("SpikeTrap_potion"), // Load hình từ Resources
+            price = 20,
+            damageBoost = 0,
+            itemDescription = "A deadly trap that damages enemies"
+        });
+        items.Add(new Item
+        {
+            itemName = "Gas Tank",
+            itemImage = Resources.Load<Sprite>("GasTank_potion"), // Load hình từ Resources
+            price = 20,
+            damageBoost = 0,
+            itemDescription = "A deadly trap that damages enemies"
         });
     }
 
@@ -107,6 +124,31 @@ public class ItemVendingLoader : MonoBehaviour
                         {
                             weapon.damage += item.damageBoost;
                             Debug.Log("Damage: " + weapon.damage);
+                        }
+                    }
+                    if (item.itemName == "Spike Trap" || item.itemName == "Gas Tank")
+                    {
+                        GameObject player = GameObject.FindWithTag("Player"); // Giả sử Player có tag "Player"
+                        if (player != null)
+                        {
+                            Vector3 spawnPosition = player.transform.position + player.transform.forward * 1f; // Tạo prefab cách player 1 đơn vị
+
+                            // Raycast để tìm vị trí trên mặt đất
+                            RaycastHit hit;
+                            if (Physics.Raycast(spawnPosition + Vector3.up * 10f, Vector3.down, out hit, Mathf.Infinity))
+                            {
+                                spawnPosition = hit.point; // Lấy điểm tiếp xúc với mặt đất
+                                spawnPosition.y += 0.5f; // Đảm bảo rằng prefab được đặt cách mặt đất 1 đơn vị
+                            }
+
+                            // Khởi tạo prefab tại vị trí tính toán
+                            GameObject trapPrefab = item.itemName == "Spike Trap" ? spikeTrapPrefab : gasTankPrefab;
+                            GameObject trap = Instantiate(trapPrefab, spawnPosition, Quaternion.identity);
+                            trap.SetActive(true); // Đảm bảo prefab được kích hoạt
+                        }
+                        else
+                        {
+                            Debug.LogError("Player không được tìm thấy.");
                         }
                     }
                 });

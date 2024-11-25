@@ -1,4 +1,5 @@
 ﻿using FishNet.Object;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerPickup : NetworkBehaviour
@@ -141,6 +142,11 @@ public class PlayerPickup : NetworkBehaviour
     [ObserversRpc]
     void SetObjectInHandObserver(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
     {
+        if (PrefabUtility.IsPartOfPrefabAsset(obj))
+        {
+            obj = Instantiate(obj); // Tạo một bản sao nếu là prefab
+        }
+
         obj.transform.position = position;
         obj.transform.rotation = rotation;
         obj.transform.parent = player.transform;
