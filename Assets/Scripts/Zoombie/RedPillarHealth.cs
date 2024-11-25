@@ -5,6 +5,7 @@ using FishNet.Object;
 public class RedPillarHealth : NetworkBehaviour
 {
     [SerializeField] private float maxHealth = 500f;
+    [SerializeField] private GameObject Fx;
     private float currentHealth;
 
     private void Awake()
@@ -17,7 +18,9 @@ public class RedPillarHealth : NetworkBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0f)
         {
+            
             StartCoroutine(DestroyPillar());
+            FindAnyObjectByType<InGameManager>().EndGameTrigger();
         }
     }
 
@@ -29,8 +32,10 @@ public class RedPillarHealth : NetworkBehaviour
 
     private IEnumerator DestroyPillar()
     {
-        ServerManager.Despawn(gameObject);
-        yield return new WaitForSeconds(2f);
-        FindAnyObjectByType<InGameManager>().EndGameTrigger();
+        ServerManager.Spawn(Instantiate(Fx, transform.position, Quaternion.identity));
+
+        yield return new WaitForSeconds(3f);
+
+        
     }
 }

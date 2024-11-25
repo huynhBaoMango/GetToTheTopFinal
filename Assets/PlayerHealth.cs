@@ -59,6 +59,7 @@ public class PlayerHealth : NetworkBehaviour
         if (currentHealth <= 0)
         {
             // Xử lý khi chết
+            FindAnyObjectByType<InGameManager>().EndGameTrigger();
         }
 
         if (value < 0)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using FishNet;
 using FishNet.Connection;
+using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using TMPro;
@@ -35,7 +36,7 @@ public class InGameManager : NetworkBehaviour
     [SerializeField] private Slider progressSlider;
     [SerializeField] private Image SlideFill;
     [SerializeField] private TextMeshProUGUI progressNameText;
-    [SerializeField] private GameObject EndUI;
+    [SerializeField] private GameObject EndUI, WinUI;
     public GameObject[] players;
     public bool isCountdown;
 
@@ -125,7 +126,7 @@ public class InGameManager : NetworkBehaviour
             }
             else
             {
-                _currentState = GameState.End;
+                ChangeState(GameState.End);
                 GoToNextLevel();
             }
         }
@@ -275,11 +276,19 @@ public class InGameManager : NetworkBehaviour
     void GoToNextLevel()
     {
         //giet het zombie
+        ZombieHealth[] allZombieHealths = FindObjectsOfType<ZombieHealth>();
+
+        foreach (ZombieHealth zombieHealth in allZombieHealths)
+        {
+            zombieHealth.TakeDamage(500);
+        }
 
         //hien thi bang diem
-
-        //chuyen scene tiep theo
+        int level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        PlayerPrefs.SetInt("CurrentLevel", level + 1);
+        WinUI.SetActive(true);
     }
+
 
     void SpawnTheHeart()
     {
@@ -300,9 +309,21 @@ public class InGameManager : NetworkBehaviour
         ServerManager.Spawn(zombie);
     }
 
+    [ServerRpc(RequireOwnership = false)]
     public void EndGameTrigger()
     {
         endBool.Value = true;
+    }
+
+    public void OnNextLevel()
+    {
+        SceneLoadData sld = new SceneLoadData("EmptyScene");
+        sld.ReplaceScenes = ReplaceOption.All;
+        NetworkManager.SceneManager.LoadGlobalScenes(sld);
+
+        sld = new SceneLoadData("NewTest");
+        sld.ReplaceScenes = ReplaceOption.All;
+        NetworkManager.SceneManager.LoadGlobalScenes(sld);
     }
 
     public void OnBackToMenu()

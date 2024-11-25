@@ -981,11 +981,11 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 2735697818092752835}
   MagPos: {fileID: 6030533423030597572}
   MagPref: {fileID: 2785181506406678145}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 3644490676048838711}
   LeftHandIKTarget: {fileID: 8746837602657696151}
   rightHintIK: {fileID: 8514941574452198382}
   leftHintIK: {fileID: 4610542700923494130}
-  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
 --- !u!114 &3356364065021069014
 MonoBehaviour:
@@ -3063,6 +3063,7 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 3477093769825811775}
   MagPos: {fileID: 2775609962599337619}
   MagPref: {fileID: 1662998887465758641}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 8841811273469996291}
   LeftHandIKTarget: {fileID: 9075663881066839987}
   rightHintIK: {fileID: 3700933299570572582}
@@ -3489,6 +3490,7 @@ GameObject:
   - component: {fileID: 2941330516343734173}
   - component: {fileID: 6355838497346854830}
   - component: {fileID: 7587579334621656663}
+  - component: {fileID: 6540881691273210082}
   m_Layer: 7
   m_Name: Player 5
   m_TagString: Player
@@ -3569,7 +3571,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 50
+  <PrefabId>k__BackingField: 52
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 14345551719696659443
   <SceneId>k__BackingField: 0
@@ -3803,7 +3805,10 @@ MonoBehaviour:
   _componentIndexCache: 5
   _addedNetworkObject: {fileID: 139575205643624700}
   _networkObjectCache: {fileID: 139575205643624700}
+  maxHealth: 100
+  currentHealth: 0
   bloodSplatterUI: {fileID: 3449529967374526795}
+  healthBar: {fileID: 0}
 --- !u!95 &7587579334621656663
 Animator:
   serializedVersion: 5
@@ -3825,6 +3830,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6540881691273210082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2448707724021528601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e051d5ec8c293e49bfbc9a5398cadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 139575205643624700}
+  _networkObjectCache: {fileID: 0}
+  currentMoney: 3000
+  moneyText: {fileID: 0}
+  storeUI: {fileID: 0}
+  healthBoostButton: {fileID: 0}
+  ammoBoostButton: {fileID: 0}
+  damageBoostButton: {fileID: 0}
+  buyTrapButton: {fileID: 0}
+  buyGasButton: {fileID: 0}
+  prefabToBuy: {fileID: 0}
+  gasPrefab: {fileID: 0}
+  healthBoostButtonTag: HealthBoostButton
+  ammoBoostButtonTag: AmmoBoostButton
+  damageBoostButtonTag: DamageBoostButton
+  buyTrapButtonTag: BuyTrapButton
+  buyGasButtonTag: BuyGasButton
 --- !u!1 &2449303853006236997
 GameObject:
   m_ObjectHideFlags: 0
@@ -6047,11 +6082,11 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 5659144027224628740}
   MagPos: {fileID: 3186755400909055903}
   MagPref: {fileID: 7278666495071752671}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 2031470898584889447}
   LeftHandIKTarget: {fileID: 4697945227606072602}
   rightHintIK: {fileID: 5457991344610367032}
   leftHintIK: {fileID: 8251632805856551343}
-  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
 --- !u!95 &2076130354732079388
 Animator:
@@ -6389,6 +6424,7 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 5329660111766322782}
   MagPos: {fileID: 941351808171512137}
   MagPref: {fileID: 4647576505734913437}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 2727735357414755184}
   LeftHandIKTarget: {fileID: 177074092637494636}
   rightHintIK: {fileID: 7596938348138948730}
