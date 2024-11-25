@@ -10,7 +10,6 @@ public class AK12Weapon : APlayerWeapon
 {
     float currentDelayBullet = 0;
     int currentAmmo;
-    int clipSize = 30;
     bool isReloading;
 
     public TextMeshProUGUI ammoText;
@@ -18,7 +17,8 @@ public class AK12Weapon : APlayerWeapon
 
     private void Awake()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = 30;
+        UpdateAmmoDisplay();
     }
 
     public override void AnimateWeapon()
@@ -74,7 +74,8 @@ public class AK12Weapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        currentAmmo = maxAmmo;
+                        maxAmmo = maxAmmo + currentAmmo - 30;
+                        currentAmmo = 30;
                         UpdateAmmoDisplay();
                         isReloading = false;
                     });
@@ -187,7 +188,7 @@ public class AK12Weapon : APlayerWeapon
         }
     }
 
-    public void UpdateAmmoDisplay()
+    void UpdateAmmoDisplay()
     {
         //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
         ammoText.text = currentAmmo + "/" + maxAmmo;

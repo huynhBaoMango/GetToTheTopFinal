@@ -50,7 +50,7 @@ public class ItemVendingLoader : MonoBehaviour
             itemName = "Gun Potion",
             itemImage = Resources.Load<Sprite>("ImageItem/Gun_Potion"), // Load hình từ Resources
             price = 20,
-            damageBoost = 20,
+            damageBoost = 5,
             itemDescription = "Increase the player's weapon damage by 10"
         });
     }
@@ -89,7 +89,7 @@ public class ItemVendingLoader : MonoBehaviour
                     {
                         if (item.itemName == "Health Potion")
                         {
-                            playerHealth.Heal(20f);
+                            playerHealth.Heal(50f);
                         }
                     }
                     if (item.itemName == "Bullet Potion")
@@ -98,6 +98,7 @@ public class ItemVendingLoader : MonoBehaviour
                         if (currentWeapon != null)
                         {
                             currentWeapon.maxAmmo = Mathf.Min(currentWeapon.initialMaxAmmo, currentWeapon.maxAmmo + 30);
+                            
                         }
                     }
                     if (item.itemName == "Gun Potion")

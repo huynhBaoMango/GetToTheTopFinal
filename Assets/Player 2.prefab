@@ -1880,6 +1880,7 @@ MonoBehaviour:
   LeftHandIKTarget: {fileID: 5759508998776645323}
   rightHintIK: {fileID: 3536186340311649714}
   leftHintIK: {fileID: 7611076520629803417}
+  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
 --- !u!1 &1345403247734626103
 GameObject:
@@ -2806,7 +2807,7 @@ Transform:
   - {fileID: 2588263913535955845}
   - {fileID: 4132309321861920610}
   - {fileID: 4924466036812901962}
-  - {fileID: 6676853733943436546}
+  - {fileID: 5206297340235266685}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8491002545578316078
@@ -3097,7 +3098,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 8491002545578316078}
   maxHealth: 100
   healthBar: {fileID: 5574250077057130029}
-  currentHealth: 0
+  bloodSplatterUI: {fileID: 0}
 --- !u!95 &2539423620536157687
 Animator:
   serializedVersion: 5
@@ -3933,6 +3934,38 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00016328692, y: 0.64565337, z: 0.0828387}
     m_Extent: {x: 0.025185475, y: 0.018506825, z: 0.032390382}
   m_DirtyAABB: 0
+--- !u!1 &2856260010096127132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5206297340235266685}
+  m_Layer: 7
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5206297340235266685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856260010096127132}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6676853733943436546}
+  m_Father: {fileID: 8558551985576767463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2894305046883924413
 GameObject:
   m_ObjectHideFlags: 0
@@ -12048,7 +12081,7 @@ RectTransform:
   m_Children:
   - {fileID: 3319490842699734700}
   - {fileID: 3245457592178085922}
-  m_Father: {fileID: 8558551985576767463}
+  m_Father: {fileID: 5206297340235266685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

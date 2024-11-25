@@ -39,21 +39,23 @@ public class VendingInteraction : MonoBehaviour
         if (!isPanelActive) // Chỉ xử lý input khi panel chưa mở
         {
             // Kiểm tra khi nhấn phím E
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetMouseButtonDown(1))
             {
-                Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-                RaycastHit hit;
+                Debug.Log("Show Panel");
+                ShowPanel();
+                //Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+                //RaycastHit hit;
 
-                // Nếu raycast trúng một đối tượng
-                if (Physics.Raycast(ray, out hit, interactionRange))
-                {
-                    // Kiểm tra nếu đối tượng là Vending
-                    if (hit.collider.CompareTag("Vending"))
-                    {
-                        Debug.Log("Open Panel");
-                        ShowPanel(); // Hiển thị panel
-                    }
-                }
+                //// Nếu raycast trúng một đối tượng
+                //if (Physics.Raycast(ray, out hit, interactionRange))
+                //{
+                //    // Kiểm tra nếu đối tượng là Vending
+                //    if (hit.collider.CompareTag("Vending"))
+                //    {
+                //        Debug.Log("Open Panel");
+                //        ShowPanel(); // Hiển thị panel
+                //    }
+                //}
             }
         }
 

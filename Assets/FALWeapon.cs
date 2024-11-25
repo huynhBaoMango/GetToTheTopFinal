@@ -9,10 +9,12 @@ public class FALWeapon : APlayerWeapon
     float currentDelayBullet = 0;
     int currentAmmo;
     bool isReloading;
+    public TextMeshProUGUI ammoText;
     [SerializeField] private GameObject explosionImpactPref;
     private void Awake()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = 30;
+        UpdateAmmoDisplay();
     }
     public override void AnimateWeapon()
     {
@@ -50,8 +52,11 @@ public class FALWeapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
+                        maxAmmo = maxAmmo + currentAmmo - 30;
                         currentAmmo = maxAmmo;
+                        UpdateAmmoDisplay();
                         isReloading = false;
+
                     });
                 });
             });
@@ -98,6 +103,7 @@ public class FALWeapon : APlayerWeapon
                 }
                 currentAmmo -= 1;
                 currentDelayBullet = delayBulletTime;
+                UpdateAmmoDisplay();
             }
             if (currentAmmo <= 0)
             {
@@ -121,5 +127,11 @@ public class FALWeapon : APlayerWeapon
             ServerManager.Spawn(impactEffect);
             Destroy(impactEffect, 2f);
         }
+    }
+
+    void UpdateAmmoDisplay()
+    {
+        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
+        ammoText.text = currentAmmo + "/" + maxAmmo;
     }
 }
