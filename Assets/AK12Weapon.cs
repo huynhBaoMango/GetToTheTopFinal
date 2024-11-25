@@ -12,11 +12,11 @@ public class AK12Weapon : APlayerWeapon
     int currentAmmo;
     bool isReloading;
 
-    public TextMeshProUGUI ammoText;
     [SerializeField] private GameObject explosionImpactPref;
 
     private void Awake()
     {
+        ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
         currentAmmo = 30;
         UpdateAmmoDisplay();
     }

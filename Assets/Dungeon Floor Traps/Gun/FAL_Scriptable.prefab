@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 8168925754410136635}
   - component: {fileID: 2897317859814786550}
   - component: {fileID: 1598510204579339788}
+  - component: {fileID: 4817919772240623063}
   m_Layer: 7
   m_Name: FAL_Scriptable
   m_TagString: Untagged
@@ -733,7 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 0}
+  _addedNetworkObject: {fileID: 4817919772240623063}
   _networkObjectCache: {fileID: 0}
   damage: 20
   delayBulletTime: 0.1
@@ -755,9 +756,60 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 6410456446198210888}
   MagPos: {fileID: 3364576730787404111}
   MagPref: {fileID: 6604336806150295562}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 5733775508851027644}
   LeftHandIKTarget: {fileID: 315991890909189916}
   rightHintIK: {fileID: 804601412931982693}
   leftHintIK: {fileID: 4826260862415908985}
   ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
+--- !u!114 &4817919772240623063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630193936194950863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsNested>k__BackingField: 0
+  <ComponentIndex>k__BackingField: 0
+  <PredictedSpawn>k__BackingField: {fileID: 0}
+  <PredictedOwner>k__BackingField: {fileID: 0}
+  NetworkBehaviours: []
+  InitializedParentNetworkBehaviour: {fileID: 0}
+  InitializedNestedNetworkObjects: []
+  RuntimeParentNetworkBehaviour: {fileID: 0}
+  RuntimeChildNetworkBehaviours: []
+  _isNetworked: 1
+  _isSpawnable: 1
+  _isGlobal: 0
+  _initializeOrder: 0
+  _preventDespawnOnDisconnect: 0
+  _defaultDespawnType: 0
+  _initializedValusSet: 0
+  NetworkObserver: {fileID: 0}
+  _enablePrediction: 0
+  _predictionType: 0
+  _graphicalObject: {fileID: 0}
+  _detachGraphicalObject: 0
+  _enableStateForwarding: 1
+  _networkTransform: {fileID: 0}
+  _ownerInterpolation: 1
+  _ownerSmoothedProperties: 255
+  _adaptiveInterpolation: 3
+  _spectatorSmoothedProperties: 255
+  _spectatorInterpolation: 2
+  _enableTeleport: 0
+  _teleportThreshold: 1
+  <PrefabId>k__BackingField: 65535
+  <SpawnableCollectionId>k__BackingField: 0
+  <AssetPathHash>k__BackingField: 2207067125896988175
+  <SceneId>k__BackingField: 0
+  SerializedTransformProperties:
+    Position: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 0}
+    LocalScale: {x: 0, y: 0, z: 0}

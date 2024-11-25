@@ -1,4 +1,5 @@
 ﻿using FishNet.Object;
+using TMPro;
 using UnityEngine;
 
 public abstract class APlayerWeapon : NetworkBehaviour
@@ -19,6 +20,7 @@ public abstract class APlayerWeapon : NetworkBehaviour
 
     public Transform MagPos;
     public GameObject MagPref;
+    public TextMeshProUGUI ammoText;
 
     private void Awake()
     {

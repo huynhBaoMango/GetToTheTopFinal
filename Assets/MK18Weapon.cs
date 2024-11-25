@@ -2,6 +2,7 @@ using DG.Tweening;
 using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -14,6 +15,7 @@ public class MK18Weapon : APlayerWeapon
     private void Awake()
     {
         currentAmmo = maxAmmo;
+        ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
     }
     public override void AnimateWeapon()
     {

@@ -9,11 +9,11 @@ public class FALWeapon : APlayerWeapon
     float currentDelayBullet = 0;
     int currentAmmo;
     bool isReloading;
-    public TextMeshProUGUI ammoText;
     [SerializeField] private GameObject explosionImpactPref;
     private void Awake()
     {
         currentAmmo = 30;
+        ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
         UpdateAmmoDisplay();
     }
     public override void AnimateWeapon()
