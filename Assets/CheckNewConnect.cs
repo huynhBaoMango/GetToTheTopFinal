@@ -11,6 +11,6 @@ public sealed class CheckNewConnect : NetworkBehaviour
 
     public override void OnSpawnServer(NetworkConnection connection)
     {
-        Spawn(Instantiate(CharacterPrefab), connection, gameObject.scene);
+        Spawn(Instantiate(CharacterPrefab, spawnPointStatic.instance.transform.position, Quaternion.identity), connection, gameObject.scene);
     }
 }
