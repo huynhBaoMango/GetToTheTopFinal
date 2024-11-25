@@ -38,6 +38,8 @@ public class PlayerHealth : NetworkBehaviour
 
     private void currentHealthOnChange(float prev, float next, bool asServer)
     {
+        if (!IsOwner) return;
+
         healthBar.value = next;
         if (next <= 0)
         {
@@ -53,7 +55,7 @@ public class PlayerHealth : NetworkBehaviour
 
         }
 
-        if(next < prev)
+        if (next < prev)
         {
             //nhận damage
             Debug.Log("Nhan damage " + next);
