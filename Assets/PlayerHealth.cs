@@ -9,57 +9,55 @@ using System;
 public class PlayerHealth : NetworkBehaviour
 {
     private float maxHealth = 100;
-    private readonly SyncVar<float> currentHealth = new(100);
+    public float currentHealth;
     [SerializeField] private GameObject bloodSplatterUI; // Thêm biến cho UI Image của hiệu ứng máu bắn tung tóe
-    private Slider healthBar;
-    
+    [SerializeField] private Slider healthBar;
+
+    private void Awake()
+    {
+        
+        bloodSplatterUI.SetActive(false);
+        currentHealth = 100;
+    }
 
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (IsOwner)
+        if (!IsOwner)
         {
-            healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Slider>();
-            healthBar.value = currentHealth.Value;
-            if (bloodSplatterUI != null)
-            {
-                bloodSplatterUI.SetActive(false); // Đảm bảo hiệu ứng máu ban đầu bị ẩn
-            }
-            currentHealth.OnChange += currentHealthOnChange;
+            enabled = false;
+            return;
         }
-
-        
-    }
-    
-    public void ChangeHealthPlayer(float value)
-    {
-        currentHealth.Value += value;
+        healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Slider>();
     }
 
-    private void currentHealthOnChange(float prev, float next, bool asServer)
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeCurrentHealth(float value)
     {
-        if (!IsOwner) return;
+        ChangeCurrentHealthObserver(value);
+    }
 
-        healthBar.value = next;
-        if (next <= 0)
+    [ObserversRpc]
+    public void ChangeCurrentHealthObserver(float value)
+    {
+        currentHealth += value;
+        healthBar.value = currentHealth;
+        Debug.Log(currentHealth);
+        if (currentHealth <= 0)
         {
             //trigger death
-            Debug.Log("Chet");
 
         }
 
-        if (next > prev)
+        if(value < 0)
         {
-            //hiệu ứng heal
-            Debug.Log("Heal " + next);
+            //trigger damage
 
         }
 
-        if (next < prev)
+        if(value > 0)
         {
-            //nhận damage
-            Debug.Log("Nhan damage " + next);
-
+            //trigger heal
         }
     }
 
@@ -70,15 +68,13 @@ public class PlayerHealth : NetworkBehaviour
         // Nhấn phím O để trừ 10 máu
         if (Input.GetKeyDown(KeyCode.O))
         {
-            currentHealth.Value -= 10;
-            Debug.Log($"Player took 20 damage. Current health: {currentHealth}");
+            ChangeCurrentHealth(-10);
         }
 
         // Nhấn phím P để test hồi máu 10
         if (Input.GetKeyDown(KeyCode.P))
         {
-            currentHealth.Value += 10;
-            Debug.Log($"Player healed by 10. Current health: {currentHealth}");
+            ChangeCurrentHealth(10);
         }
     }
 
@@ -87,7 +83,7 @@ public class PlayerHealth : NetworkBehaviour
         yield return new WaitForSeconds(0.5f); // Thời gian hiển thị hiệu ứng máu (ví dụ: 0.5 giây)
         if (bloodSplatterUI != null)
         {
-            bloodSplatterUI.SetActive(false); // Ẩn UI Image của hiệu ứng máu
+            bloodSplatterUI.GetComponent<Image>().enabled = false;
         }
     }
 }
