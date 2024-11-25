@@ -125,6 +125,7 @@ public class InGameManager : NetworkBehaviour
             }
             else
             {
+                _currentState = GameState.End;
                 GoToNextLevel();
             }
         }
@@ -198,6 +199,8 @@ public class InGameManager : NetworkBehaviour
     void StartEnd()
     {
         Debug.Log("Ending...");
+        CancelInvoke("SpawnZombie");
+
     }
 
     void StartRestart()

@@ -52,7 +52,8 @@ public class PlayerHealth : NetworkBehaviour
         if(value < 0)
         {
             //trigger damage
-
+            bloodSplatterUI.SetActive(true);
+            HideBloodSplatter();
         }
 
         if(value > 0)
@@ -83,7 +84,7 @@ public class PlayerHealth : NetworkBehaviour
         yield return new WaitForSeconds(0.5f); // Thời gian hiển thị hiệu ứng máu (ví dụ: 0.5 giây)
         if (bloodSplatterUI != null)
         {
-            bloodSplatterUI.GetComponent<Image>().enabled = false;
+            bloodSplatterUI.SetActive(false);
         }
     }
 }
