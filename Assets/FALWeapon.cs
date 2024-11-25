@@ -14,7 +14,7 @@ public class FALWeapon : APlayerWeapon
     {
         currentAmmo = 30;
         ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
-        UpdateAmmoDisplay();
+        UpdateAmmoDisplay(); 
     }
     public override void AnimateWeapon()
     {
@@ -52,8 +52,18 @@ public class FALWeapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        maxAmmo = maxAmmo + currentAmmo - 30;
-                        currentAmmo = maxAmmo;
+
+                        if(maxAmmo + currentAmmo >= 30)
+                        {
+                            maxAmmo = maxAmmo + currentAmmo - 30;
+                            currentAmmo = 30;
+                        }
+                        else
+                        {
+                            maxAmmo = 0;
+                            currentAmmo = maxAmmo + currentAmmo;
+                        }
+
                         UpdateAmmoDisplay();
                         isReloading = false;
 

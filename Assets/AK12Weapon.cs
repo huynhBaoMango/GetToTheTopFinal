@@ -74,8 +74,16 @@ public class AK12Weapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        maxAmmo = maxAmmo + currentAmmo - 30;
-                        currentAmmo = 30;
+                        if (maxAmmo + currentAmmo >= 30)
+                        {
+                            maxAmmo = maxAmmo + currentAmmo - 30;
+                            currentAmmo = 30;
+                        }
+                        else { 
+                            maxAmmo = 0;
+                            currentAmmo = currentAmmo + maxAmmo;
+                        }
+                        
                         UpdateAmmoDisplay();
                         isReloading = false;
                     });

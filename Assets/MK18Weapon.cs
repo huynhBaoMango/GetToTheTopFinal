@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using FishNet.Object;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +16,7 @@ public class MK18Weapon : APlayerWeapon
     {
         currentAmmo = maxAmmo;
         ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
+        UpdateAmmoDisplay();
     }
     public override void AnimateWeapon()
     {
@@ -53,7 +54,21 @@ public class MK18Weapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        currentAmmo = maxAmmo;
+
+
+                        if (maxAmmo + currentAmmo >= 30)
+                        {
+                            maxAmmo = maxAmmo + currentAmmo - 30;
+                            currentAmmo = 30;
+                        }
+                        else
+                        {
+                            maxAmmo = 0;
+                            currentAmmo = maxAmmo + currentAmmo;
+                        }
+
+                        UpdateAmmoDisplay();
+
                         isReloading = false;
                     });
                 });
@@ -101,6 +116,7 @@ public class MK18Weapon : APlayerWeapon
                 }
                 currentAmmo -= 1;
                 currentDelayBullet = delayBulletTime;
+                UpdateAmmoDisplay();
             }
             if (currentAmmo <= 0)
             {
@@ -124,5 +140,11 @@ public class MK18Weapon : APlayerWeapon
             ServerManager.Spawn(impactEffect);
             Destroy(impactEffect, 2f);
         }
+    }
+
+    void UpdateAmmoDisplay()
+    {
+        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
+        ammoText.text = currentAmmo + "/" + maxAmmo;
     }
 }
