@@ -6,8 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Unity.Burst.Intrinsics.X86.Avx;
-using static UnityEditor.Progress;
 
 public class ItemVendingLoader : MonoBehaviour
 {
@@ -89,7 +87,7 @@ public class ItemVendingLoader : MonoBehaviour
                     {
                         if (item.itemName == "Health Potion")
                         {
-                            playerHealth.Heal(50f);
+                            //playerHealth.Heal(50f);
                         }
                     }
                     if (item.itemName == "Bullet Potion")

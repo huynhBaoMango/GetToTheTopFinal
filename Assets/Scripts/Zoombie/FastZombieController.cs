@@ -207,7 +207,7 @@ public class FastZombieController : NetworkBehaviour
             Debug.Log("Thực hiện tấn công");
             if (_currentTarget.CompareTag("Player") && _currentTarget.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
             {
-                playerHealth.TakeDamage(attackDamage);
+                playerHealth.ChangeHealthPlayer(-20f);
             }
             else if (_currentTarget.CompareTag(redPillarTag) && _currentTarget.TryGetComponent<RedPillarHealth>(out RedPillarHealth pillarHealth))
             {
