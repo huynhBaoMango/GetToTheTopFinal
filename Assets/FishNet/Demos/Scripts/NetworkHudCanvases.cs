@@ -4,15 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+
 namespace FishNet.Example
 {
-
     public class NetworkHudCanvases : MonoBehaviour
     {
         #region Types.
-        /// <summary>
-        /// Ways the HUD will automatically start a connection.
-        /// </summary>
         private enum AutoStartType
         {
             Disabled,
@@ -23,70 +20,39 @@ namespace FishNet.Example
         #endregion
 
         #region Serialized.
-        /// <summary>
-        /// What connections to automatically start on play.
-        /// </summary>
         [Tooltip("What connections to automatically start on play.")]
         [SerializeField]
         private AutoStartType _autoStartType = AutoStartType.Disabled;
-        /// <summary>
-        /// Color when socket is stopped.
-        /// </summary>
+
         [Tooltip("Color when socket is stopped.")]
         [SerializeField]
         private Color _stoppedColor;
-        /// <summary>
-        /// Color when socket is changing.
-        /// </summary>
+
         [Tooltip("Color when socket is changing.")]
         [SerializeField]
         private Color _changingColor;
-        /// <summary>
-        /// Color when socket is started.
-        /// </summary>
+
         [Tooltip("Color when socket is started.")]
         [SerializeField]
         private Color _startedColor;
+
         [Header("Indicators")]
-        /// <summary>
-        /// Indicator for server state.
-        /// </summary>
         [Tooltip("Indicator for server state.")]
         [SerializeField]
         private Image _serverIndicator;
-        /// <summary>
-        /// Indicator for client state.
-        /// </summary>
+
         [Tooltip("Indicator for client state.")]
         [SerializeField]
         private Image _clientIndicator;
-        [Header("Loading")]
-        [SerializeField]
-        private GameObject _loadingPanel;
-        [SerializeField]
-        private Slider _loadingSlider;
-        [SerializeField]
-        private float _connectionDelay = 2f;
         #endregion
 
         #region Private.
-        /// <summary>
-        /// Found NetworkManager.
-        /// </summary>
         private NetworkManager _networkManager;
-        /// <summary>
-        /// Current state of client socket.
-        /// </summary>
         private LocalConnectionState _clientState = LocalConnectionState.Stopped;
-        /// <summary>
-        /// Current state of server socket.
-        /// </summary>
         private LocalConnectionState _serverState = LocalConnectionState.Stopped;
+
 #if !ENABLE_INPUT_SYSTEM
-    /// <summary>
-    /// EventSystem for the project.
-    /// </summary>
-    private EventSystem _eventSystem;
+        private EventSystem _eventSystem;
 #endif
         #endregion
 
@@ -116,7 +82,8 @@ namespace FishNet.Example
 
             Vector2 buttonSize = new Vector2(165f, 42f);
             style.fontSize = 26;
-            //Server button.
+
+            // Server button
             if (Application.platform != RuntimePlatform.WebGLPlayer)
             {
                 if (GUILayout.Button($"{GetNextStateText(_serverState)} Server", GUILayout.Width(buttonSize.x), GUILayout.Height(buttonSize.y)))
@@ -124,7 +91,7 @@ namespace FishNet.Example
                 GUILayout.Space(10f);
             }
 
-            //Client button.
+            // Client button
             if (GUILayout.Button($"{GetNextStateText(_clientState)} Client", GUILayout.Width(buttonSize.x), GUILayout.Height(buttonSize.y)))
                 OnClick_Client();
 
@@ -137,10 +104,10 @@ namespace FishNet.Example
         private void Start()
         {
 #if !ENABLE_INPUT_SYSTEM
-        SetEventSystem();
-        BaseInputModule inputModule = FindObjectOfType<BaseInputModule>();
-        if (inputModule == null)
-            gameObject.AddComponent<StandaloneInputModule>();
+            SetEventSystem();
+            BaseInputModule inputModule = FindObjectOfType<BaseInputModule>();
+            if (inputModule == null)
+                gameObject.AddComponent<StandaloneInputModule>();
 #else
             _serverIndicator.transform.gameObject.SetActive(false);
             _clientIndicator.transform.gameObject.SetActive(false);
@@ -159,13 +126,12 @@ namespace FishNet.Example
                 _networkManager.ServerManager.OnServerConnectionState += ServerManager_OnServerConnectionState;
                 _networkManager.ClientManager.OnClientConnectionState += ClientManager_OnClientConnectionState;
             }
-            _loadingPanel.SetActive(false);
+
             if (_autoStartType == AutoStartType.Host || _autoStartType == AutoStartType.Server)
                 OnClick_Server();
             if (!Application.isBatchMode && (_autoStartType == AutoStartType.Host || _autoStartType == AutoStartType.Client))
                 OnClick_Client();
         }
-
 
         private void OnDestroy()
         {
@@ -176,11 +142,6 @@ namespace FishNet.Example
             _networkManager.ClientManager.OnClientConnectionState -= ClientManager_OnClientConnectionState;
         }
 
-        /// <summary>
-        /// Updates img color baased on state.
-        /// </summary>
-        /// <param name="state"></param>
-        /// <param name="img"></param>
         private void UpdateColor(LocalConnectionState state, ref Image img)
         {
             Color c;
@@ -194,7 +155,6 @@ namespace FishNet.Example
             img.color = c;
         }
 
-
         private void ClientManager_OnClientConnectionState(ClientConnectionStateArgs obj)
         {
             _clientState = obj.ConnectionState;
@@ -202,24 +162,15 @@ namespace FishNet.Example
 
             if (obj.ConnectionState == LocalConnectionState.Started)
             {
-                StopCoroutine(ShowLoading()); // Make sure to stop coroutine if connected
-                _loadingPanel.SetActive(false);
-                StartCoroutine(DelayedGameEntry());
-            }
-            else if (obj.ConnectionState == LocalConnectionState.Stopped)
-            {
-                StopCoroutine(ShowLoading()); // Stop if connection fails/stops
-                _loadingPanel.SetActive(false);
+                
             }
         }
-
 
         private void ServerManager_OnServerConnectionState(ServerConnectionStateArgs obj)
         {
             _serverState = obj.ConnectionState;
             UpdateColor(obj.ConnectionState, ref _serverIndicator);
         }
-
 
         public void OnClick_Server()
         {
@@ -234,7 +185,6 @@ namespace FishNet.Example
             DeselectButtons();
         }
 
-
         public void OnClick_Client()
         {
             if (_networkManager == null)
@@ -243,56 +193,34 @@ namespace FishNet.Example
             if (_clientState != LocalConnectionState.Stopped)
             {
                 _networkManager.ClientManager.StopConnection();
-                _loadingPanel.SetActive(false);
             }
             else
+            {
                 _networkManager.ClientManager.OnClientConnectionState += ClientManager_OnClientConnectionState;
-            _networkManager.ClientManager.StartConnection();
-            StartCoroutine(ShowLoading());
+                _networkManager.ClientManager.StartConnection();
+            }
 
             DeselectButtons();
         }
-        private IEnumerator ShowLoading()
-        {
-            _loadingPanel.SetActive(true);
-            _loadingSlider.value = 0;
 
-            while (_clientState == LocalConnectionState.Starting)
-            {
-                _loadingSlider.value += Time.deltaTime; // Or a more relevant progress indicator
-                yield return null;
-            }
-
-            _loadingPanel.SetActive(false);
-        }
-        private IEnumerator DelayedGameEntry()
-        {
-            yield return new WaitForSeconds(_connectionDelay);
-
-            // Put your game entry logic here.  For example:
-            Debug.Log("Game Entry After Delay");
-            // Load a new scene, activate game objects, etc.
-        }
-
-
+ 
         private void SetEventSystem()
         {
 #if !ENABLE_INPUT_SYSTEM
-        if (_eventSystem != null)
-            return;
-        _eventSystem = FindObjectOfType<EventSystem>();
-        if (_eventSystem == null)
-            _eventSystem = gameObject.AddComponent<EventSystem>();
+            if (_eventSystem != null)
+                return;
+            _eventSystem = FindObjectOfType<EventSystem>();
+            if (_eventSystem == null)
+                _eventSystem = gameObject.AddComponent<EventSystem>();
 #endif
         }
 
         private void DeselectButtons()
         {
 #if !ENABLE_INPUT_SYSTEM
-        SetEventSystem();
-        _eventSystem?.SetSelectedGameObject(null);
+            SetEventSystem();
+            _eventSystem?.SetSelectedGameObject(null);
 #endif
         }
     }
-
 }
