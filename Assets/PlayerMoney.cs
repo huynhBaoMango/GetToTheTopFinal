@@ -8,10 +8,21 @@ public class PlayerMoney : NetworkBehaviour
 {
     private float currentMoney;
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private GameObject storeUI;
+    private bool isStoreOpening;
 
     private void Awake()
     {
         currentMoney = 300;
+        isStoreOpening = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            OpenStore();
+        }
     }
 
     public override void OnStartClient()
@@ -23,7 +34,9 @@ public class PlayerMoney : NetworkBehaviour
             return;
         }
         moneyText = GameObject.FindWithTag("MoneyText").GetComponent<TextMeshProUGUI>();
+        storeUI = GameObject.FindWithTag("StoreUI");
         moneyText.text = currentMoney.ToString();
+        storeUI.SetActive(false);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -40,5 +53,20 @@ public class PlayerMoney : NetworkBehaviour
         
         currentMoney = temp;
         moneyText.text = temp.ToString();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OpenStore()
+    {
+        OpenStoreObserver();
+    }
+
+    [ObserversRpc]
+    void OpenStoreObserver()
+    {
+        isStoreOpening = !isStoreOpening;
+        storeUI.SetActive(isStoreOpening);
+        if (isStoreOpening) Cursor.lockState = CursorLockMode.None;
+        else Cursor.lockState = CursorLockMode.Locked;
     }
 }
