@@ -15510,6 +15510,7 @@ GameObject:
   - component: {fileID: 470755750156759233}
   - component: {fileID: 6989814770344035246}
   - component: {fileID: 6989814770344035247}
+  - component: {fileID: 6989814770344035248}
   m_Layer: 0
   m_Name: gamemanager
   m_TagString: Untagged
@@ -15943,7 +15944,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 6989814770344035246}
   _networkObjectCache: {fileID: 0}
-  heartPrefab: {fileID: 6272599582106206974, guid: 80a6c0ef319888046a25d1dc82ab6841,
+  heartPrefab: {fileID: 1450820566250488, guid: 7eb8fdc17a0999e4cbef5b0851975be0,
     type: 3}
   floors:
   - {fileID: 1589896313}
@@ -15965,6 +15966,23 @@ MonoBehaviour:
   cutsceneCam: {fileID: 678629149}
   zombieCamList: []
   ExplodeFX: {fileID: 3352391191284423565, guid: 9571e0e1b1e65834cbba759493c171d3,
+    type: 3}
+--- !u!114 &6989814770344035248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396591832711773508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbcb8c14384f074e91cf9b841d72cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6989814770344035246}
+  _networkObjectCache: {fileID: 0}
+  CharacterPrefab: {fileID: 8055465683895985816, guid: a7ce4395bb5ae1c46acd57772fa73536,
     type: 3}
 --- !u!114 &6993888275165578959
 MonoBehaviour:

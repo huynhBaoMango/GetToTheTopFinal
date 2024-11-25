@@ -17,18 +17,20 @@ public class RedPillarHealth : NetworkBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0f)
         {
-            DestroyPillar();
+            StartCoroutine(DestroyPillar());
         }
     }
 
-    [Server]
+    [ServerRpc]
     public void TakeDamageServerRpc(float damage)
     {
         TakeDamage(damage);
     }
 
-    private void DestroyPillar()
+    private IEnumerator DestroyPillar()
     {
         ServerManager.Despawn(gameObject);
+        yield return new WaitForSeconds(2f);
+        FindAnyObjectByType<InGameManager>().EndGameTrigger();
     }
 }
