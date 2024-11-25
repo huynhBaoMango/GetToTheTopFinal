@@ -1,100 +1,99 @@
-﻿using FishNet.Example.ColliderRollbacks;
-using FishNet.Example.Scened;
-using FishNet.Object;
+﻿using FishNet.Object;
 using UnityEngine;
 
-public class VendingInteraction : MonoBehaviour
+public class VendingInteraction : NetworkBehaviour
 {
-    private Camera playerCamera; // Camera của nhân vật
+    private Camera playerCamera;
     [SerializeField] private float cameraYOffset = 0.7f;
-    [SerializeField] private float interactionRange = 1f; // Khoảng cách để tương tác
-    [SerializeField] private GameObject vendingPanel; // Panel cần hiển thị
+    [SerializeField] private float interactionRange = 1f;
+    [SerializeField] private GameObject vendingPanel;
     private PlayerWeapon playerWeapon;
 
-    private bool isPanelActive = false; // Kiểm tra trạng thái panel
+    private bool isPanelActive = false;
 
-    //public override void OnStartClient()
-    //{
-    //    base.OnStartClient();
-    //    if (base.IsOwner)
-    //    {
-    //        playerCamera = Camera.main;
-    //        playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
-    //        playerCamera.transform.SetParent(transform);
-    //    }
-    //    else
-    //    {
-    //        GetComponent<VendingInteraction>().enabled = false;
-    //    }
-    //}
-    private void Start()
+    public override void OnStartClient()
     {
-        playerCamera = Camera.main;
-        playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
-        playerCamera.transform.SetParent(transform);
-        playerWeapon =  FindObjectOfType<PlayerWeapon>();
+        base.OnStartClient();
+        if (base.IsOwner)
+        {
+            playerCamera = Camera.main;
+            playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y + cameraYOffset, transform.position.z);
+            playerCamera.transform.SetParent(transform);
+            playerWeapon = FindObjectOfType<PlayerWeapon>();
+
+        }
     }
+
     void Update()
     {
-        if (!isPanelActive) // Chỉ xử lý input khi panel chưa mở
-        {
-            // Kiểm tra khi nhấn phím E
-            if (Input.GetMouseButtonDown(1))
-            {
-                Debug.Log("Show Panel");
-                ShowPanel();
-                //Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-                //RaycastHit hit;
+        if (!IsOwner) return;
 
-                //// Nếu raycast trúng một đối tượng
-                //if (Physics.Raycast(ray, out hit, interactionRange))
-                //{
-                //    // Kiểm tra nếu đối tượng là Vending
-                //    if (hit.collider.CompareTag("Vending"))
-                //    {
-                //        Debug.Log("Open Panel");
-                //        ShowPanel(); // Hiển thị panel
-                //    }
-                //}
-            }
+        if (!isPanelActive && Input.GetMouseButtonDown(1))
+        {
+            ShowPanel();
         }
 
-        // Ẩn panel nếu nhấn phím ESC
         if (isPanelActive && Input.GetKeyDown(KeyCode.Escape))
         {
-            HidePanel(); // Tắt panel
+            HidePanel();
+        }
+    }
+
+    [ServerRpc]
+    private void ShowPanelServerRpc()
+    {
+        ShowPanelClientRpc();
+    }
+
+    [ObserversRpc]
+    private void ShowPanelClientRpc()
+    {
+        if (IsOwner)
+        {
+            vendingPanel.SetActive(true);
+            isPanelActive = true;
+
+            if (playerWeapon != null)
+            {
+                playerWeapon.SetCanFire(false);
+            }
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    [ServerRpc]
+    private void HidePanelServerRpc()
+    {
+        HidePanelClientRpc();
+    }
+
+    [ObserversRpc]
+    private void HidePanelClientRpc()
+    {
+        if (IsOwner)
+        {
+            vendingPanel.SetActive(false);
+            isPanelActive = false;
+
+            if (playerWeapon != null)
+            {
+                playerWeapon.SetCanFire(true);
+            }
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
     private void ShowPanel()
     {
-        vendingPanel.SetActive(true);
-        isPanelActive = true;
-
-        // Vô hiệu hóa script bắn súng
-        if (playerWeapon != null)
-        {
-            playerWeapon.SetCanFire(false);
-        }
-
-        // Khóa chuột (nếu cần)
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        ShowPanelServerRpc();
     }
 
     private void HidePanel()
     {
-        vendingPanel.SetActive(false);
-        isPanelActive = false;
-
-        // Bật lại script bắn súng
-        if (playerWeapon != null)
-        {
-            playerWeapon.SetCanFire(true);
-        }
-
-        // Ẩn chuột (nếu cần)
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        HidePanelServerRpc();
     }
 }
