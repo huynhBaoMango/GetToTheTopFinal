@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
-
+using FishNet.Object;
 namespace Roundbeargames
 {
-    public class Spike : MonoBehaviour
+    public class Spike : NetworkBehaviour
     {
         public void Shoot()
         {
