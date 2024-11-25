@@ -286,6 +286,7 @@ public class InGameManager : NetworkBehaviour
         //hien thi bang diem
         int level = PlayerPrefs.GetInt("CurrentLevel", 0);
         PlayerPrefs.SetInt("CurrentLevel", level + 1);
+        Cursor.lockState = CursorLockMode.None;
         WinUI.SetActive(true);
     }
 
