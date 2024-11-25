@@ -35,7 +35,5 @@ public abstract class APlayerWeapon : NetworkBehaviour
     public abstract void Reload();
 
     public abstract void AnimateWeapon();
-
-
-
+    
 }

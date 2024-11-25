@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerWeapon : NetworkBehaviour
 {
     [SerializeField] private List<APlayerWeapon> weapons = new List<APlayerWeapon>();
-    [SerializeField] private APlayerWeapon currentWeapon;
+    [SerializeField] public APlayerWeapon currentWeapon;
     private int currentIndexWeapon = 0;
     private readonly SyncVar<int> _currentWeaponIndex = new(-1);
 
@@ -112,4 +112,5 @@ public class PlayerWeapon : NetworkBehaviour
     {
         canFire = value;
     }
+
 }

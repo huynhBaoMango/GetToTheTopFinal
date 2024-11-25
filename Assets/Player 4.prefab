@@ -102,6 +102,7 @@ MonoBehaviour:
   - {fileID: 6068595045611337609}
   - {fileID: 7943651313262186809}
   - {fileID: 5342190654139679100}
+  - {fileID: 2589604499305785762}
   - {fileID: 2171313662497925604}
   - {fileID: 1250910133259143460}
   - {fileID: 591454995059030426}
@@ -365,6 +366,7 @@ MonoBehaviour:
   _componentIndexCache: 5
   _addedNetworkObject: {fileID: 8055465683895985816}
   _networkObjectCache: {fileID: 8055465683895985816}
+  maxHealth: 100
   currentHealth: 0
   bloodSplatterUI: {fileID: 8304495013087965529}
   healthBar: {fileID: 0}
@@ -401,6 +403,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e051d5ec8c293e49bfbc9a5398cadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 6
+  _addedNetworkObject: {fileID: 8055465683895985816}
+  _networkObjectCache: {fileID: 8055465683895985816}
+  currentMoney: 30000
+  moneyText: {fileID: 0}
+  storeUI: {fileID: 0}
+  healthBoostButton: {fileID: 0}
+  ammoBoostButton: {fileID: 0}
+  damageBoostButton: {fileID: 0}
+  buyTrapButton: {fileID: 0}
+  buyGasButton: {fileID: 0}
+  prefabToBuy: {fileID: 4504840144500689385, guid: ce24d9eb4cf33b34b875c0e4540e44b8,
+    type: 3}
+  gasPrefab: {fileID: 3099910936969714008, guid: 98842e50facde3e4a950b9a04f9ff2f2,
+    type: 3}
+  healthBoostButtonTag: HealthBoostButton
+  ammoBoostButtonTag: AmmoBoostButton
+  damageBoostButtonTag: DamageBoostButton
+  buyTrapButtonTag: BuyTrapButton
+  buyGasButtonTag: BuyGasButton
 --- !u!1 &344034213139661012
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,7 +5288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c9df79e4136da47bcbad3ca19329f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 8055465683895985816}
   _networkObjectCache: {fileID: 8055465683895985816}
   damage: 15
@@ -5289,11 +5311,11 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 3135163143966252103}
   MagPos: {fileID: 2808595896179688006}
   MagPref: {fileID: 8705525549191275195}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 3494855628838860924}
   LeftHandIKTarget: {fileID: 4392418020907936273}
   rightHintIK: {fileID: 8474311447004202188}
   leftHintIK: {fileID: 2436584470833847416}
-  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
 --- !u!95 &6679994087490749083
 Animator:
@@ -7253,7 +7275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12c5eda9ddc9eb48940a349ae9d73d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 9
+  _componentIndexCache: 10
   _addedNetworkObject: {fileID: 8055465683895985816}
   _networkObjectCache: {fileID: 8055465683895985816}
   damage: 15
@@ -7276,6 +7298,7 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 8103368801924160033}
   MagPos: {fileID: 3571128580842630633}
   MagPref: {fileID: 1998989733953673170}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 4502711118715279311}
   LeftHandIKTarget: {fileID: 5671895720177822206}
   rightHintIK: {fileID: 8630879753037219046}
@@ -9321,7 +9344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633481e4e494bd6408e815783b3c96d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 7
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 8055465683895985816}
   _networkObjectCache: {fileID: 8055465683895985816}
   damage: 20
@@ -9344,11 +9367,11 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 5237196491546829554}
   MagPos: {fileID: 1437885131805124557}
   MagPref: {fileID: 6134613127583412018}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 5008981045706386921}
   LeftHandIKTarget: {fileID: 5676885772398093469}
   rightHintIK: {fileID: 3634886709565757242}
   leftHintIK: {fileID: 2712281320846293940}
-  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
 --- !u!1 &8026620703026798710
 GameObject:
@@ -10674,7 +10697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d960894b6ff1d458807090d4617a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 8
+  _componentIndexCache: 9
   _addedNetworkObject: {fileID: 8055465683895985816}
   _networkObjectCache: {fileID: 8055465683895985816}
   damage: 10
@@ -10697,6 +10720,7 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 6430646258627716228}
   MagPos: {fileID: 4758387959661832932}
   MagPref: {fileID: 1810548161271364777}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 8641679930168840511}
   LeftHandIKTarget: {fileID: 941066651044988163}
   rightHintIK: {fileID: 6791758089003983956}

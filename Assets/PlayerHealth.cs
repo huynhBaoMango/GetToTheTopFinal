@@ -1,25 +1,34 @@
-﻿using UnityEngine;
+﻿using FishNet.Object;
+using UnityEngine;
 using UnityEngine.UI;
-using FishNet.Object;
-using FishNet.Connection;
 using System.Collections;
-using FishNet.Object.Synchronizing;
-using System;
 
 public class PlayerHealth : NetworkBehaviour
 {
-    private float maxHealth = 100;
-    public float currentHealth;
-    [SerializeField] private GameObject bloodSplatterUI; // Thêm biến cho UI Image của hiệu ứng máu bắn tung tóe
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private GameObject bloodSplatterUI;
     [SerializeField] private Slider healthBar;
 
     private void Awake()
     {
-        
         bloodSplatterUI.SetActive(false);
-        currentHealth = 100;
+        currentHealth = maxHealth;
     }
+    private void Update()
+    {
+        if (!IsOwner) return; // Chỉ thực hiện trên máy chủ sở hữu player
 
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ChangeCurrentHealth(-10);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ChangeCurrentHealth(10);
+        }
+    }
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -28,10 +37,13 @@ public class PlayerHealth : NetworkBehaviour
             enabled = false;
             return;
         }
-        healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Slider>();
+
+        healthBar = GameObject.FindWithTag("HealthBar").GetComponent<Slider>(); // Make sure "HealthBar" tag is set
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void ChangeCurrentHealth(float value)
     {
         ChangeCurrentHealthObserver(value);
@@ -41,50 +53,37 @@ public class PlayerHealth : NetworkBehaviour
     public void ChangeCurrentHealthObserver(float value)
     {
         currentHealth += value;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBar.value = currentHealth;
-        Debug.Log(currentHealth);
+
         if (currentHealth <= 0)
         {
-            //trigger death
-
+            // Xử lý khi chết
         }
 
-        if(value < 0)
+        if (value < 0)
         {
-            //trigger damage
             bloodSplatterUI.SetActive(true);
-            HideBloodSplatter();
-        }
-
-        if(value > 0)
-        {
-            //trigger heal
+            StartCoroutine(HideBloodSplatter());
         }
     }
 
-    private void Update()
+    public void IncreaseHealth(float percentageIncrease)
     {
-        if (!IsOwner) return; // Chỉ kiểm tra phím bấm với chủ sở hữu
+        maxHealth *= (1 + percentageIncrease);
+        currentHealth = Mathf.Min(currentHealth + (maxHealth * percentageIncrease), maxHealth);
 
-        // Nhấn phím O để trừ 10 máu
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ChangeCurrentHealth(-10);
-        }
+        
+        healthBar.maxValue = maxHealth;
+        healthBar.value = currentHealth;
 
-        // Nhấn phím P để test hồi máu 10
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ChangeCurrentHealth(10);
-        }
+        ChangeCurrentHealth(0); 
     }
+
 
     private IEnumerator HideBloodSplatter()
     {
-        yield return new WaitForSeconds(0.5f); // Thời gian hiển thị hiệu ứng máu (ví dụ: 0.5 giây)
-        if (bloodSplatterUI != null)
-        {
-            bloodSplatterUI.SetActive(false);
-        }
+        yield return new WaitForSeconds(0.5f);
+        bloodSplatterUI.SetActive(false);
     }
 }
