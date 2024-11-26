@@ -38,7 +38,7 @@ public class InGameManager : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI progressNameText;
     [SerializeField] private GameObject EndUI, WinUI;
     public GameObject[] players;
-    public bool isCountdown;
+    public bool isCountdown, isShooting;
 
 
     [Header("Cutscene")]
@@ -56,6 +56,7 @@ public class InGameManager : NetworkBehaviour
         BarName.OnChange += OnChangeBarName;
         endBool.OnChange += OnChangeEndBool;
         isCountdown = false;
+        isShooting = false;
     }
 
     [ObserversRpc]
@@ -118,7 +119,7 @@ public class InGameManager : NetworkBehaviour
                 ChangeState(_currentState + 1);
             }
         }
-        if (_currentState == GameState.Shooting && isCountdown)
+        if (_currentState == GameState.Shooting && isShooting)
         {
             if (Timer.Value > 0)
             {
@@ -216,6 +217,7 @@ public class InGameManager : NetworkBehaviour
         SlideFill.color = Color.red;
         progressSlider.maxValue = 120 + (level * 0.1f * 60);
         Timer.Value = 120 + (level * 0.1f * 60);
+        isShooting = true;
     }
 
     void SpawnObject()
