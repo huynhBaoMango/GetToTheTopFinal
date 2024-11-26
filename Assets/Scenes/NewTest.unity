@@ -5028,7 +5028,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 149.125, y: -25}
-  m_SizeDelta: {x: 64.99, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013883256
 MonoBehaviour:
@@ -13174,6 +13174,7 @@ MonoBehaviour:
   WinUI: {fileID: 957285471}
   players: []
   isCountdown: 0
+  isShooting: 0
   cutsceneCam: {fileID: 678629149}
   zombieCamList: []
   ExplodeFX: {fileID: 3352391191284423565, guid: 9571e0e1b1e65834cbba759493c171d3,
@@ -13305,7 +13306,7 @@ MonoBehaviour:
   _startInOffline: 0
   _offlineScene: Assets/Scenes/Menu.unity
   _onlineScene: Assets/Scenes/NewTest.unity
-  _replaceScenes: 0
+  _replaceScenes: 1
 --- !u!222 &7515190914010905696
 CanvasRenderer:
   m_ObjectHideFlags: 0

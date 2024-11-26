@@ -27,7 +27,7 @@ public class BoostrapSceneManager : MonoBehaviour
         UnLoadScene("Menu");
     }
 
-    void LoadScene(string sceneName)
+    public void LoadScene(string sceneName)
     {
         if (!InstanceFinder.IsServerStarted)
         {
@@ -37,7 +37,7 @@ public class BoostrapSceneManager : MonoBehaviour
         SceneLoadData sld = new SceneLoadData(sceneName);
         InstanceFinder.SceneManager.LoadGlobalScenes(sld);
     }
-    void UnLoadScene(string sceneName)
+    public void UnLoadScene(string sceneName)
     {
         if (!InstanceFinder.IsServerStarted)
         {

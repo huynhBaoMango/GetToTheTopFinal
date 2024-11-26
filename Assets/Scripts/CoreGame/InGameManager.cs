@@ -342,7 +342,7 @@ public class InGameManager : NetworkBehaviour
         //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 
         // Load scene "Boostrap"
-       // UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
     }
 
     enum GameState
