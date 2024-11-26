@@ -260,6 +260,7 @@ public class PlayerMoney : NetworkBehaviour
         isStoreOpening = !isStoreOpening;
         storeUI.SetActive(isStoreOpening);
 
+
         if (IsOwner)
         {
             Cursor.lockState = isStoreOpening ? CursorLockMode.None : CursorLockMode.Locked;
