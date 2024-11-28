@@ -10,6 +10,10 @@ public class PlayerHealth : NetworkBehaviour
     [SerializeField] private GameObject bloodSplatterUI;
     [SerializeField] private Slider healthBar;
 
+    [Header("Sounds")]
+    public AudioClip heat;
+    public AudioClip dead;
+
     private void Awake()
     {
         bloodSplatterUI.SetActive(false);
@@ -46,6 +50,7 @@ public class PlayerHealth : NetworkBehaviour
     [ServerRpc]
     public void ChangeCurrentHealth(float value)
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(heat);
         ChangeCurrentHealthObserver(value);
     }
 
@@ -60,6 +65,7 @@ public class PlayerHealth : NetworkBehaviour
         {
             // Xử lý khi chết
             FindAnyObjectByType<InGameManager>().EndGameTrigger();
+            gameObject.GetComponent<AudioSource>().PlayOneShot(dead);
         }
 
         if (value < 0)

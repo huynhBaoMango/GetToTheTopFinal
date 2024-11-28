@@ -41,11 +41,11 @@ public class MK18Weapon : APlayerWeapon
 
     public override void Reload()
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(reloadSound);
+        
         if (!isReloading)
         {
             isReloading = true;
-
+            gameObject.GetComponent<AudioSource>().PlayOneShot(reloadSound);
             //xu li tay
             LeftHandIKTarget.rotation = magHoldPos.rotation;
             LeftHandIKTarget.DOLocalMove(magHoldPos.transform.localPosition, 0.5f).OnComplete(() =>
