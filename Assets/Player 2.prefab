@@ -1876,11 +1876,11 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 3652870190335732662}
   MagPos: {fileID: 8273631740900904368}
   MagPref: {fileID: 1721564229507744001}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 8303492630936369293}
   LeftHandIKTarget: {fileID: 5759508998776645323}
   rightHintIK: {fileID: 3536186340311649714}
   leftHintIK: {fileID: 7611076520629803417}
-  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
 --- !u!1 &1345403247734626103
 GameObject:
@@ -3097,8 +3097,9 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   maxHealth: 100
-  healthBar: {fileID: 5574250077057130029}
+  currentHealth: 0
   bloodSplatterUI: {fileID: 0}
+  healthBar: {fileID: 5574250077057130029}
 --- !u!95 &2539423620536157687
 Animator:
   serializedVersion: 5
@@ -3668,6 +3669,7 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 6468566853559515928}
   MagPos: {fileID: 1448921617183248219}
   MagPref: {fileID: 4966367115905656273}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 878604047196427424}
   LeftHandIKTarget: {fileID: 235840361668115396}
   rightHintIK: {fileID: 7991915874262658349}
@@ -6858,6 +6860,7 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 1583523619969373004}
   MagPos: {fileID: 2814774711165589353}
   MagPref: {fileID: 4026216484735707980}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 1768722313996628799}
   LeftHandIKTarget: {fileID: 986944549006482271}
   rightHintIK: {fileID: 1115700323382083981}
@@ -8600,12 +8603,14 @@ MonoBehaviour:
   tempLeftHandIK: {fileID: 9055384748585119976}
   MagPos: {fileID: 5576320847305986518}
   MagPref: {fileID: 1312236134857005536}
+  ammoText: {fileID: 0}
   RightHandIKTarget: {fileID: 4470230993755000033}
   LeftHandIKTarget: {fileID: 8584482710097280459}
   rightHintIK: {fileID: 9219233083359073282}
   leftHintIK: {fileID: 3767556568408329139}
-  ammoText: {fileID: 0}
   explosionImpactPref: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: e17de642f33488e429523b58a3d7da45, type: 3}
+  reloadSound: {fileID: 8300000, guid: 7ec4f80dbb84a2a49a3ccad93242118b, type: 3}
 --- !u!95 &7577801601795734755
 Animator:
   serializedVersion: 5

@@ -10,6 +10,12 @@ public class FALWeapon : APlayerWeapon
     int currentAmmo;
     bool isReloading;
     [SerializeField] private GameObject explosionImpactPref;
+
+    [Header("Sounds")]
+    public AudioClip fireSound;
+    public AudioClip reloadSound;
+    Coroutine lastRoutine = null;
+
     private void Awake()
     {
         currentAmmo = 30;
@@ -33,6 +39,7 @@ public class FALWeapon : APlayerWeapon
 
     public override void Reload()
     {
+        gameObject.GetComponent<AudioSource>().PlayOneShot(reloadSound);
         if (!isReloading)
         {
             isReloading = true;
@@ -94,6 +101,7 @@ public class FALWeapon : APlayerWeapon
                 AnimateWeapon();
                 Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
                 Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+                gameObject.GetComponent<AudioSource>().PlayOneShot(fireSound);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
                 {
