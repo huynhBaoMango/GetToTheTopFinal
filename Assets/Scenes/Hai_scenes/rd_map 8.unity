@@ -4517,7 +4517,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.13333334
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -8000,7 +8000,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.13333334
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -9358,7 +9358,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.13333334
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -10102,7 +10102,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.13333334
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -11082,7 +11082,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.13333334
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
@@ -13337,9 +13337,6 @@ MonoBehaviour:
   _startedColor: {r: 0, g: 0.5882353, b: 0.64705884, a: 1}
   _serverIndicator: {fileID: 2082126326}
   _clientIndicator: {fileID: 2082126324}
-  _loadingPanel: {fileID: 0}
-  _loadingSlider: {fileID: 0}
-  _connectionDelay: 2
 --- !u!114 &4393252310794793816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13667,10 +13664,20 @@ MonoBehaviour:
   - {fileID: 1295321007}
   - {fileID: 1503212356}
   - {fileID: 1705213153}
-  zombiePrefab: {fileID: 9144481623995990232, guid: 2975d75c13aba4749a16f07dec8ba01a,
-    type: 3}
+  zombiePrefabs: []
   zombieSpawnPosList: []
   zombieSpawnController: {fileID: 0}
+  progressSlider: {fileID: 0}
+  SlideFill: {fileID: 0}
+  progressNameText: {fileID: 0}
+  EndUI: {fileID: 0}
+  WinUI: {fileID: 0}
+  players: []
+  isCountdown: 0
+  isShooting: 0
+  cutsceneCam: {fileID: 0}
+  zombieCamList: []
+  ExplodeFX: {fileID: 0}
 --- !u!114 &6993888275165578959
 MonoBehaviour:
   m_ObjectHideFlags: 0
