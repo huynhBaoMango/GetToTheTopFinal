@@ -52,20 +52,23 @@ public class PlayerHealth : NetworkBehaviour
     [ObserversRpc]
     public void ChangeCurrentHealthObserver(float value)
     {
-        currentHealth += value;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        healthBar.value = currentHealth;
-
-        if (currentHealth <= 0)
+        if(IsOwner)
         {
-            // Xử lý khi chết
-            FindAnyObjectByType<InGameManager>().EndGameTrigger();
-        }
+            currentHealth += value;
+            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+            healthBar.value = currentHealth;
 
-        if (value < 0)
-        {
-            bloodSplatterUI.SetActive(true);
-            StartCoroutine(HideBloodSplatter());
+            if (currentHealth <= 0)
+            {
+                // Xử lý khi chết
+                FindAnyObjectByType<InGameManager>().EndGameTrigger();
+            }
+
+            if (value < 0)
+            {
+                bloodSplatterUI.SetActive(true);
+                StartCoroutine(HideBloodSplatter());
+            }
         }
     }
 
