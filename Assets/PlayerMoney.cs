@@ -72,7 +72,7 @@ public class PlayerMoney : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && IsOwner)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !IsOwner)
         {
             OpenStore();
         }
@@ -251,12 +251,14 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void OpenStore()
     {
-        OpenStoreObserver();
+        OpenStoreObserver(Owner);
     }
 
     [ObserversRpc]
-    private void OpenStoreObserver()
+    private void OpenStoreObserver(NetworkConnection clientOwner)
     {
+        if (clientOwner != Owner) return;
+
         isStoreOpening = !isStoreOpening;
 
         if (storeUI == null)
@@ -276,5 +278,4 @@ public class PlayerMoney : NetworkBehaviour
             Cursor.lockState = isStoreOpening ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
-
 }
