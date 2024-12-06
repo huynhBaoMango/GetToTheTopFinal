@@ -36,6 +36,7 @@ public class PlayerMoney : NetworkBehaviour
 
         // Khởi tạo UI
         moneyText = GameObject.FindWithTag("MoneyText").GetComponent<TextMeshProUGUI>();
+        if (moneyText == null) { Debug.LogError("Không tìm thấy MoneyText component!"); return; }
         storeUI = GameObject.FindWithTag("StoreUI");
         healthBoostButton = GameObject.FindWithTag(healthBoostButtonTag)?.GetComponent<Button>();
         ammoBoostButton = GameObject.FindWithTag(ammoBoostButtonTag)?.GetComponent<Button>();
@@ -72,7 +73,7 @@ public class PlayerMoney : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !IsOwner)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && IsOwner)
         {
             OpenStore();
         }
@@ -129,6 +130,8 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc]
     private void CmdPurchaseAmmoBoost()
     {
+        if (!IsOwner)
+            return;
         if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-50);
@@ -251,30 +254,15 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void OpenStore()
     {
-        OpenStoreObserver(Owner);
+        OpenStoreObserver();
     }
-
     [ObserversRpc]
-    private void OpenStoreObserver(NetworkConnection clientOwner)
+    private void OpenStoreObserver()
     {
-        if (clientOwner != Owner) return;
-
-        isStoreOpening = !isStoreOpening;
-
-        if (storeUI == null)
-        {
-            storeUI = GameObject.FindWithTag("StoreUI");
-            if (storeUI == null)
-            {
-                Debug.LogError("StoreUI không tồn tại trên client!");
-                return;
-            }
-        }
-
-        storeUI.SetActive(isStoreOpening);
-
         if (IsOwner)
         {
+            isStoreOpening = !isStoreOpening;
+            storeUI.SetActive(isStoreOpening);
             Cursor.lockState = isStoreOpening ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
