@@ -258,12 +258,23 @@ public class PlayerMoney : NetworkBehaviour
     private void OpenStoreObserver()
     {
         isStoreOpening = !isStoreOpening;
-        storeUI.SetActive(isStoreOpening);
 
+        if (storeUI == null)
+        {
+            storeUI = GameObject.FindWithTag("StoreUI");
+            if (storeUI == null)
+            {
+                Debug.LogError("StoreUI không tồn tại trên client!");
+                return;
+            }
+        }
+
+        storeUI.SetActive(isStoreOpening);
 
         if (IsOwner)
         {
             Cursor.lockState = isStoreOpening ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
+
 }
