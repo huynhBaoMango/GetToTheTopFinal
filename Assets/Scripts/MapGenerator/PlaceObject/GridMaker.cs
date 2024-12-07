@@ -7,6 +7,7 @@ using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GridMaker : NetworkBehaviour
 {
@@ -137,7 +138,7 @@ public class GridMaker : NetworkBehaviour
             Transform stile = tilesMatrix[pos.x, pos.y].transform;
             Vector3 cornerPos = new Vector3(stile.position.x - 0.5f, stile.position.y+0.2f, stile.position.z - 0.5f);
             NetworkObject newz = NetworkManager.GetPooledInstantiated(newProp.gameObject, cornerPos, Quaternion.identity, gameObject.transform);
-            ServerManager.Spawn(newz.gameObject);
+            ServerManager.Spawn(newz.gameObject, LocalConnection, gameObject.scene);
             for (int x = pos.x; x < pos.x + newProp.x; x++)
             {
                 for (int y = pos.y; y < pos.y + newProp.y; y++)

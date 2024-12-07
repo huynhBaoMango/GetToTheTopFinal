@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using FishNet;
-using FishNet.Connection;
 using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
@@ -106,6 +105,10 @@ public class InGameManager : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             ChangeState(_currentState+1);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            OnNextLevel();
         }
 
         if (_currentState == GameState.Prepare && isCountdown)
@@ -320,29 +323,17 @@ public class InGameManager : NetworkBehaviour
 
     public void OnNextLevel()
     {
-        SceneLoadData sld = new SceneLoadData("EmptyScene");
-        sld.ReplaceScenes = ReplaceOption.All;
-        NetworkManager.SceneManager.LoadGlobalScenes(sld);
+        string[] scenesToClose = new string[]
+        {
+            "NewTest"
+        };
 
-        sld = new SceneLoadData("NewTest");
-        sld.ReplaceScenes = ReplaceOption.All;
-        NetworkManager.SceneManager.LoadGlobalScenes(sld);
+        BootstrapNetworkManager.ChangeNetworkScene("Loading", scenesToClose);
     }
 
     public void OnBackToMenu()
     {
-        // Ngắt kết nối khỏi FishNet
-        if (InstanceFinder.NetworkManager.IsHost)
-        {
-            InstanceFinder.ServerManager.StopConnection(true);
-        }
-        InstanceFinder.ClientManager.StopConnection();
-
-        // Unload scene hiện tại
-        //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-
-        // Load scene "Boostrap"
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        BootstrapManager.BackToMenu();
     }
 
     enum GameState

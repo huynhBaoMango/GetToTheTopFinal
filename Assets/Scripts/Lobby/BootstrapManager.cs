@@ -30,6 +30,14 @@ public class BootstrapManager : MonoBehaviour
         SceneManager.LoadScene(menuName, LoadSceneMode.Additive);
     }
 
+    public static void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        Cursor.lockState = CursorLockMode.None;
+
+        LeaveLobby();
+    }
+
     public static void CreateLobby()
     {
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
