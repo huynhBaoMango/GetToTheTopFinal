@@ -96,6 +96,6 @@ public class MainMenuManager : MonoBehaviour
             "Menu"
         };
 
-        BootstrapNetworkManager.ChangeNetworkScene("NewTest", scenesToClose);
+        BootstrapNetworkManager.ChangeNetworkScene("Loading", scenesToClose);
     }
 }
