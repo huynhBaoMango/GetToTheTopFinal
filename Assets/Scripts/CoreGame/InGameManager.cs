@@ -265,7 +265,7 @@ public class InGameManager : NetworkBehaviour
             cutsceneCam.transform.DOMove(zombieCamList[i].position, 3f).OnComplete(() =>
             {
                 GameObject explode = Instantiate(ExplodeFX, zombieSpawnPosList[i].position + new Vector3(0, 1.5f, 0), Quaternion.identity);
-                ServerManager.Spawn(explode);
+                ServerManager.Spawn(explode, null, gameObject.scene);
                 cutsceneCam.transform.DOShakePosition(1f, 0.5f);
                 zombieSpawnController.EnableGivenSpawn(random);
             });
