@@ -299,7 +299,7 @@ public class InGameManager : NetworkBehaviour
     void SpawnTheHeart()
     {
         GameObject heart = Instantiate(heartPrefab, floors[UnityEngine.Random.Range(0, floors.Length-1)].position, Quaternion.identity);
-        ServerManager.Spawn(heart);
+        ServerManager.Spawn(heart, null, gameObject.scene);
     }
 
     void InvokeTheSpawn()
@@ -312,7 +312,7 @@ public class InGameManager : NetworkBehaviour
     {
         Transform pos = zombieSpawnPosList[UnityEngine.Random.Range(0, zombieSpawnPosList.Count)];
         NetworkObject zombie = Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], pos.position, Quaternion.identity);
-        ServerManager.Spawn(zombie);
+        ServerManager.Spawn(zombie, null, gameObject.scene);
     }
 
     [ServerRpc(RequireOwnership = false)]
