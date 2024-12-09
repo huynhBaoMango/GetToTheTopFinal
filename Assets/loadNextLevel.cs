@@ -18,6 +18,9 @@ public class loadNextLevel : NetworkBehaviour
             "Loading"
         };
 
-        BootstrapNetworkManager.ChangeNetworkScene("NewTest", scenesToClose);
+        string sceneToLoad = "NewTest";
+
+        PlayerPrefs.SetString("sceneToLoad", sceneToLoad);
+        BootstrapNetworkManager.ChangeNetworkScene(sceneToLoad, scenesToClose);
     }
 }
