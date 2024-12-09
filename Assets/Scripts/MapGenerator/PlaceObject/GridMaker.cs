@@ -29,19 +29,22 @@ public class GridMaker : NetworkBehaviour
         tiles = new List<tileInfo>();     
     }
     [Button]
-    [Server]
     public void DotheSpawn()
     {
-        if (tilePrefab != null)
+        if (base.IsServer)
         {
-            CreateGrid();
-            PlaceRandomObject();
-            
+            if (tilePrefab != null)
+            {
+                CreateGrid();
+                PlaceRandomObject();
+
+            }
+            else
+            {
+                Debug.Log("no tile");
+            }
         }
-        else
-        {
-            Debug.Log("no tile");
-        }
+        
     }
 
     public void BuidNavMesh()
