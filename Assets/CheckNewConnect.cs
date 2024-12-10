@@ -11,7 +11,7 @@ public sealed class CheckNewConnect : NetworkBehaviour
 
     public override void OnSpawnServer(NetworkConnection connection)
     {
-        Spawn(Instantiate(CharacterPrefab, spawnPointStatic.instance.transform.position, Quaternion.identity), connection);
+        Spawn(Instantiate(CharacterPrefab, spawnPointStatic.instance.transform.position, Quaternion.identity), connection, UnityEngine.SceneManagement.SceneManager.GetSceneByName(PlayerPrefs.GetString("sceneToLoad", gameObject.scene.name)));
     }
 
     private void Start()
