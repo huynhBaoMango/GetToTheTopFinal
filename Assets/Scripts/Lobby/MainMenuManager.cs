@@ -91,6 +91,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.SetInt("CurrentLevel", 1);
         string[] scenesToClose = new string[]
         {
             "Menu"
