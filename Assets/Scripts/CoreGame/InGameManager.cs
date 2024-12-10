@@ -325,7 +325,7 @@ public class InGameManager : NetworkBehaviour
     {
         string[] scenesToClose = new string[]
         {
-            "NewTest"
+            gameObject.scene.name
         };
 
         BootstrapNetworkManager.ChangeNetworkScene("Loading", scenesToClose);
