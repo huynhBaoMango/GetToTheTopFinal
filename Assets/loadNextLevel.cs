@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class loadNextLevel : NetworkBehaviour
 {
-    void Awake()
+    public void Awake()
     {
         Invoke("waitSec", 3f);
     }
-
     void waitSec()
     {
         Debug.Log("AAAAAAAAAAAAA");
