@@ -13,15 +13,5 @@ public sealed class CheckNewConnect : NetworkBehaviour
     {
         Spawn(Instantiate(CharacterPrefab, spawnPointStatic.instance.transform.position, Quaternion.identity), connection, UnityEngine.SceneManagement.SceneManager.GetSceneByName(PlayerPrefs.GetString("sceneToLoad", gameObject.scene.name)));
     }
-
-    private void Start()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach(GameObject player in players)
-        {
-            player.transform.position = spawnPointStatic.instance.transform.position;
-        }
-    }
 }
 
