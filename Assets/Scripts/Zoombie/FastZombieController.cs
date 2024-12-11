@@ -153,9 +153,9 @@ public class FastZombieController : NetworkBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, obstacleCheckDistance))
         {
-            if (hit.collider.CompareTag(worldObjectsTag))
+            if (hit.collider.TryGetComponent<ObstacleHealth>(out ObstacleHealth obstacleHealth))
             {
-                StartCoroutine(DestroyObstacle(hit.collider.GetComponent<ObstacleHealth>()));
+                StartCoroutine(DestroyObstacle(obstacleHealth));
             }
         }
     }

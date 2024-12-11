@@ -304,7 +304,7 @@ public class InGameManager : NetworkBehaviour
 
     void InvokeTheSpawn()
     {
-        float spawnRate = 3f;
+        float spawnRate = 5f - (5f / 10 * level);
         InvokeRepeating("SpawnZombie", 1f, spawnRate);
     }
 
