@@ -14,7 +14,7 @@ public class ZombieTank : NetworkBehaviour
     [SerializeField] private float attackCooldown = 0.5f;
     [SerializeField] private string redPillarTag = "RedPillar";
     [SerializeField] private float pillarFollowDistance = 8f;
-    [SerializeField] private float pillarAttackRange = 2f;
+    [SerializeField] private float pillarAttackRange = 1f;
     [SerializeField] private float obstacleCheckDistance = 1f;
     [SerializeField] private float obstacleDestroyDelay = 1f;
     [SerializeField] private string worldObjectsTag = "WorldObjects";

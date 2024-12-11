@@ -20,7 +20,8 @@ public class GasTank : NetworkBehaviour
 
         if (explosionEffect != null)
         {
-            Instantiate(explosionEffect, transform.position, transform.rotation);
+            // G?i ObserversRpc ?? t?o hi?u ?ng n? trên t?t c? các client
+            TriggerExplosionEffect();
         }
 
         ServerManager.Despawn(gameObject);
@@ -30,5 +31,14 @@ public class GasTank : NetworkBehaviour
     public void TakeDamage(int damage)
     {
         Explode();
+    }
+
+    [ObserversRpc]
+    private void TriggerExplosionEffect()
+    {
+        if (explosionEffect != null)
+        {
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+        }
     }
 }
