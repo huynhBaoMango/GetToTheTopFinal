@@ -32,9 +32,13 @@ public class InGameManager : NetworkBehaviour
     private readonly SyncVar<float> Timer = new(0);
     private readonly SyncVar<string> BarName = new("");
     private readonly SyncVar<bool> endBool = new(false);
+    private readonly SyncVar<int> floor = new(0);
+    private readonly SyncVar<float> heartHealth = new(0);
     [SerializeField] private Slider progressSlider;
+    [SerializeField] private Slider heartHealthBar;
     [SerializeField] private Image SlideFill;
     [SerializeField] private TextMeshProUGUI progressNameText;
+    [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private GameObject EndUI, WinUI;
     public GameObject[] players;
     public bool isCountdown, isShooting;
@@ -51,11 +55,32 @@ public class InGameManager : NetworkBehaviour
         if (!base.IsServerInitialized)
             return;
         level = PlayerPrefs.GetInt("CurrentLevel", 1);
+        floor.OnChange += OnChangeFloor;
         Timer.OnChange += OnChangeTimer;
         BarName.OnChange += OnChangeBarName;
         endBool.OnChange += OnChangeEndBool;
+        heartHealth.OnChange += OnChangeHeartHealth;
         isCountdown = false;
         isShooting = false;
+
+        floor.Value = level;
+    }
+
+    [ObserversRpc]
+    private void OnChangeHeartHealth(float prev, float next, bool asServer)
+    {
+        heartHealthBar.value = next;
+    }
+
+    public void ChangeHeartHealthValue(float value)
+    {
+        heartHealth.Value = value;
+    }
+
+    [ObserversRpc]
+    private void OnChangeFloor(int prev, int next, bool asServer)
+    {
+        levelText.text = "Floor " + next;
     }
 
     [ObserversRpc]
@@ -289,8 +314,7 @@ public class InGameManager : NetworkBehaviour
         }
 
         //hien thi bang diem
-        int level = PlayerPrefs.GetInt("CurrentLevel", 0);
-        PlayerPrefs.SetInt("CurrentLevel", level + 1);
+        
         Cursor.lockState = CursorLockMode.None;
         WinUI.SetActive(true);
     }
@@ -323,6 +347,8 @@ public class InGameManager : NetworkBehaviour
 
     public void OnNextLevel()
     {
+        int level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        PlayerPrefs.SetInt("CurrentLevel", level + 1);
         string[] scenesToClose = new string[]
         {
             gameObject.scene.name

@@ -13,9 +13,11 @@ public class RedPillarHealth : NetworkBehaviour
         currentHealth = maxHealth;
     }
 
+    [ObserversRpc]
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        FindAnyObjectByType<InGameManager>().ChangeHeartHealthValue(currentHealth);
         if (currentHealth <= 0f)
         {
             
