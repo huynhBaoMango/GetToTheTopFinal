@@ -20,7 +20,7 @@ public class loadNextLevel : NetworkBehaviour
 
     void waitSecObserver()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         string[] mapsName =
         {
             "map0",
