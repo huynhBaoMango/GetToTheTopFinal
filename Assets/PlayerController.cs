@@ -22,6 +22,7 @@ public class PlayerControler : NetworkBehaviour
     [SerializeField]
     private float cameraYOffset = 0.5f;
     private float cameraZOffset = 0.2f;
+    
     private Camera PlayerCamera;
     [Header("Animator setup")]
     public Animator anim;
@@ -68,8 +69,13 @@ public class PlayerControler : NetworkBehaviour
 
     void Update()
     {
-        bool isRunning = false;
+        move();
+    }
 
+    private void move()
+    {
+        bool isRunning = false;
+        
         isRunning = Input.GetKey(KeyCode.LeftShift);
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -104,4 +110,5 @@ public class PlayerControler : NetworkBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
     }
+
 }

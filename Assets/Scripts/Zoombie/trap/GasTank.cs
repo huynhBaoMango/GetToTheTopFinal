@@ -6,6 +6,8 @@ public class GasTank : NetworkBehaviour
     [SerializeField] private int explosionDamage = 100;
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private GameObject explosionEffect;
+    [SerializeField] private AudioClip explosionSound;
+
 
     public void Explode()
     {
@@ -22,6 +24,11 @@ public class GasTank : NetworkBehaviour
         {
             // G?i ObserversRpc ?? t?o hi?u ?ng n? trên t?t c? các client
             TriggerExplosionEffect();
+        }
+
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
         }
 
         ServerManager.Despawn(gameObject);

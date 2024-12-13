@@ -14,6 +14,11 @@ public class AK12Weapon : APlayerWeapon
 
     [SerializeField] private GameObject explosionImpactPref;
 
+    [Header("Sounds")]
+    public AudioClip fireSound; 
+    public AudioClip reloadSound;
+    Coroutine lastRoutine = null;
+
     private void Awake()
     {
         ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
@@ -57,6 +62,7 @@ public class AK12Weapon : APlayerWeapon
     {
         if (!isReloading)
         {
+            gameObject.GetComponent<AudioSource>().PlayOneShot(reloadSound);
             isReloading = true;
             ReloadServer();
             //xu li tay
@@ -151,7 +157,8 @@ public class AK12Weapon : APlayerWeapon
                 AnimateWeapon();
                 Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
                 Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-
+                gameObject.GetComponent<AudioSource>().PlayOneShot(fireSound);
+              
                 if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
                 {
 
