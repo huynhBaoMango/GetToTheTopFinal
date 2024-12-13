@@ -311,9 +311,9 @@ GameObject:
   - component: {fileID: 7499896499248471491}
   - component: {fileID: 7297766501802731378}
   - component: {fileID: 4971019130337342630}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Kitchen Chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -623,6 +623,9 @@ GameObject:
   - component: {fileID: 3273841579205562137}
   - component: {fileID: 7896161740592129751}
   - component: {fileID: 7695303105823440658}
+  - component: {fileID: 3368482745275661407}
+  - component: {fileID: 5161484043432675634}
+  - component: {fileID: 7963426715279219080}
   m_Layer: 14
   m_Name: Couch office 2
   m_TagString: WorldObjects
@@ -870,6 +873,58 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 1683068925085519037}
   _networkObjectCache: {fileID: 1683068925085519037}
+--- !u!114 &3368482745275661407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202481967704442400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1683068925085519037}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
+--- !u!114 &5161484043432675634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202481967704442400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1683068925085519037}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 500
+  destructionEffectPrefab: {fileID: 0}
+--- !u!114 &7963426715279219080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202481967704442400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 1683068925085519037}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 500
+  destructionEffectPrefab: {fileID: 0}
 --- !u!1 &1203258629132132116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,9 +1284,9 @@ GameObject:
   - component: {fileID: 9200092219980386664}
   - component: {fileID: 8286457253084589017}
   - component: {fileID: 6000251074358753293}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Kitchen Chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1250,7 +1305,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1963851570486885287}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &1955830049313697667
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2471,9 +2526,9 @@ GameObject:
   - component: {fileID: 5549096371457624332}
   - component: {fileID: 4634338609119425469}
   - component: {fileID: 7055520009630457961}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Kitchen Chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2735,6 +2790,7 @@ GameObject:
   - component: {fileID: 6649199833894695872}
   - component: {fileID: 2878682712436606721}
   - component: {fileID: 5364885311389132113}
+  - component: {fileID: 6243924059825070289}
   m_Layer: 14
   m_Name: Kindergarten cupboard A
   m_TagString: WorldObjects
@@ -2750,13 +2806,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3266237090054772069}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0.000013083217, z: 0.000013083217, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 99.99997, z: 99.99997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3268853213844826143}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0.002}
 --- !u!33 &3252805277389728395
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2982,6 +3038,24 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 9108291916341299265}
   _networkObjectCache: {fileID: 9108291916341299265}
+--- !u!114 &6243924059825070289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3266237090054772069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 9108291916341299265}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &3266469107444027767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4581,9 +4655,9 @@ GameObject:
   - component: {fileID: 6440922534188028331}
   - component: {fileID: 6066598552493288218}
   - component: {fileID: 8469765966813542606}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Kitchen Chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5851,6 +5925,8 @@ GameObject:
   - component: {fileID: 8295418739413935241}
   - component: {fileID: 7014692507652046056}
   - component: {fileID: 5272577303338859262}
+  - component: {fileID: 7774906554103742278}
+  - component: {fileID: 4617395436994631612}
   m_Layer: 14
   m_Name: lobby table
   m_TagString: WorldObjects
@@ -6099,6 +6175,41 @@ MonoBehaviour:
     Position: {x: 0, y: -0, z: 0}
     Rotation: {x: -0.7071069, y: -0, z: -0, w: 0.70710677}
     LocalScale: {x: 100, y: 99.99996, z: 100}
+--- !u!114 &7774906554103742278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758731607671942725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5272577303338859262}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
+--- !u!114 &4617395436994631612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758731607671942725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5272577303338859262}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 500
+  destructionEffectPrefab: {fileID: 0}
 --- !u!1 &7817232534957887118
 GameObject:
   m_ObjectHideFlags: 0
@@ -6164,6 +6275,8 @@ GameObject:
   - component: {fileID: 5882179786207469187}
   - component: {fileID: 1250447704343230285}
   - component: {fileID: 1586819220941991560}
+  - component: {fileID: 8328018753123640452}
+  - component: {fileID: 4859825409712455740}
   m_Layer: 14
   m_Name: Couch office 2
   m_TagString: WorldObjects
@@ -6411,6 +6524,41 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 7752314052032470311}
   _networkObjectCache: {fileID: 7752314052032470311}
+--- !u!114 &8328018753123640452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817866534248028090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 7752314052032470311}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
+--- !u!114 &4859825409712455740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817866534248028090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 7752314052032470311}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 500
+  destructionEffectPrefab: {fileID: 0}
 --- !u!1 &8232586039417980549
 GameObject:
   m_ObjectHideFlags: 0
@@ -6422,7 +6570,7 @@ GameObject:
   - component: {fileID: 8235821993540323229}
   - component: {fileID: 8228872184634660063}
   - component: {fileID: 8220777808568987221}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: water dispenser.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6505,7 +6653,7 @@ GameObject:
   - component: {fileID: 8235829739859996349}
   - component: {fileID: 8228770143357897807}
   - component: {fileID: 8221010277960401281}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: water dispenser bin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6642,9 +6790,9 @@ GameObject:
   - component: {fileID: 2980432447959535880}
   - component: {fileID: 4125697912327171161}
   - component: {fileID: 6514750067094831019}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: water dispenser
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -6908,9 +7056,9 @@ GameObject:
   - component: {fileID: 1325997834189471324}
   - component: {fileID: 2248641843142591725}
   - component: {fileID: 4507685068130998073}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Kitchen Chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

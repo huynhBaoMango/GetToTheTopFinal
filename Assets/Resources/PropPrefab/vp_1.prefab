@@ -108,11 +108,11 @@ GameObject:
   - component: {fileID: 6212028589254279180}
   - component: {fileID: 5686043120028399410}
   - component: {fileID: 31466101883545761}
-  - component: {fileID: 5246010543530298823}
   - component: {fileID: 707123070565448724}
   - component: {fileID: 970235607087477176}
   - component: {fileID: 7827067891304692892}
   - component: {fileID: 3754192990004927016}
+  - component: {fileID: 1079534546718216662}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -207,22 +207,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &5246010543530298823
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179400865456540029}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &707123070565448724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +344,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1079534546718216662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179400865456540029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 707123070565448724}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &182741559373122378
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,11 +374,11 @@ GameObject:
   - component: {fileID: 5872183829345917418}
   - component: {fileID: 3764851980248833256}
   - component: {fileID: 8283852791882486788}
-  - component: {fileID: 4089050793387261675}
   - component: {fileID: 7715840710021213676}
   - component: {fileID: 1828993164369543542}
   - component: {fileID: 8710804795900120242}
   - component: {fileID: 5300281093587492644}
+  - component: {fileID: 9039016336884315479}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -471,22 +473,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &4089050793387261675
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182741559373122378}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &7715840710021213676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +610,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9039016336884315479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182741559373122378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 7715840710021213676}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &300834779689082138
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,9 +837,9 @@ GameObject:
   - component: {fileID: 3382290902184918314}
   - component: {fileID: 5203209016257272204}
   - component: {fileID: 9096753510908114655}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Office chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3660,7 +3664,7 @@ GameObject:
   - component: {fileID: 158705245806585358}
   - component: {fileID: 6093809683278953971}
   - component: {fileID: 4660817178491840522}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: water dispenser.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3797,9 +3801,9 @@ GameObject:
   - component: {fileID: 5145033399602281707}
   - component: {fileID: 5176166491008424796}
   - component: {fileID: 3703548496475693087}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Office chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4200,11 +4204,11 @@ GameObject:
   - component: {fileID: 6465477477645339302}
   - component: {fileID: 2727368066342656369}
   - component: {fileID: 5213667386280467082}
-  - component: {fileID: 3571073801142355298}
   - component: {fileID: 4204707304829194191}
   - component: {fileID: 6995947290473734635}
   - component: {fileID: 8521847686409551265}
   - component: {fileID: 2839619048892343045}
+  - component: {fileID: 7046795505442877108}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -4299,22 +4303,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &3571073801142355298
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2706279864758289583}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &4204707304829194191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4452,6 +4440,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7046795505442877108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706279864758289583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 4204707304829194191}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &2840819671039359840
 GameObject:
   m_ObjectHideFlags: 0
@@ -6883,11 +6889,11 @@ GameObject:
   - component: {fileID: 1887324042365736333}
   - component: {fileID: 7699055752788912337}
   - component: {fileID: 6967993434922633082}
-  - component: {fileID: 4896568866875903103}
   - component: {fileID: 207519378205060215}
   - component: {fileID: 477544434223506302}
   - component: {fileID: 8519933095220606758}
   - component: {fileID: 8121226861126727990}
+  - component: {fileID: 5156643009739675750}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -6982,22 +6988,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &4896568866875903103
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223738932967051404}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &207519378205060215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7135,6 +7125,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5156643009739675750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223738932967051404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 207519378205060215}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &4226065936729927502
 GameObject:
   m_ObjectHideFlags: 0
@@ -8464,6 +8472,7 @@ GameObject:
   - component: {fileID: 1016932668311474361}
   - component: {fileID: 7428255858021367899}
   - component: {fileID: 5626922693044911811}
+  - component: {fileID: 5011399944788908238}
   m_Layer: 14
   m_Name: Couch office 2
   m_TagString: WorldObjects
@@ -8711,6 +8720,24 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 3886095069082595581}
   _networkObjectCache: {fileID: 3886095069082595581}
+--- !u!114 &5011399944788908238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619823810281875735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3886095069082595581}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &4642158700111417156
 GameObject:
   m_ObjectHideFlags: 0
@@ -9160,7 +9187,7 @@ GameObject:
   - component: {fileID: 4914877247446994277}
   - component: {fileID: 3493811176811984555}
   - component: {fileID: 8594091371496202873}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: water dispenser bin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9591,6 +9618,7 @@ GameObject:
   - component: {fileID: 4179513234829596755}
   - component: {fileID: 5989093879571659775}
   - component: {fileID: 6666157768808949167}
+  - component: {fileID: 9077007934480507005}
   m_Layer: 14
   m_Name: Couch office 1
   m_TagString: WorldObjects
@@ -9838,6 +9866,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9077007934480507005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351428863199530611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 4179513234829596755}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &5400572557725330606
 GameObject:
   m_ObjectHideFlags: 0
@@ -10101,9 +10147,9 @@ GameObject:
   - component: {fileID: 3594060129323091445}
   - component: {fileID: 1406392453213931846}
   - component: {fileID: 2889760591414478889}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Office chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -11281,6 +11327,7 @@ GameObject:
   - component: {fileID: 5060402664407166655}
   - component: {fileID: 1471313084101560882}
   - component: {fileID: 8368838551618655871}
+  - component: {fileID: 4044691096419233374}
   m_Layer: 14
   m_Name: lobby table
   m_TagString: WorldObjects
@@ -11529,6 +11576,24 @@ MonoBehaviour:
     Position: {x: 0, y: -0, z: 0}
     Rotation: {x: -0.7071069, y: -0, z: -0, w: 0.70710677}
     LocalScale: {x: 100, y: 99.99996, z: 100}
+--- !u!114 &4044691096419233374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6276118275033554147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 8368838551618655871}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &6285926119246993702
 GameObject:
   m_ObjectHideFlags: 0
@@ -12332,6 +12397,7 @@ GameObject:
   - component: {fileID: 3734180614637246609}
   - component: {fileID: 1975982586628000724}
   - component: {fileID: 6802763084300730743}
+  - component: {fileID: 3132694821965773746}
   m_Layer: 14
   m_Name: Fridge
   m_TagString: WorldObjects
@@ -12579,6 +12645,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3132694821965773746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6452059538820303081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3734180614637246609}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &6505689341433952193
 GameObject:
   m_ObjectHideFlags: 0
@@ -12986,9 +13070,9 @@ GameObject:
   - component: {fileID: 1203547407475493599}
   - component: {fileID: 6997911504376459635}
   - component: {fileID: 5014819491774930972}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: water dispenser
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -13990,9 +14074,9 @@ GameObject:
   - component: {fileID: 5998163050171216527}
   - component: {fileID: 5690403691162430435}
   - component: {fileID: 3261170936578412253}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Office chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -14302,9 +14386,9 @@ GameObject:
   - component: {fileID: 5314251041253845743}
   - component: {fileID: 7511819063790845259}
   - component: {fileID: 7769311317980632317}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Office chair
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -15426,9 +15510,9 @@ GameObject:
   - component: {fileID: 3853849501138867143}
   - component: {fileID: 2853232827890768911}
   - component: {fileID: 2775910920446625722}
-  - component: {fileID: 3990950761997033365}
   - component: {fileID: 2475530064236723740}
   - component: {fileID: 2253448114384354196}
+  - component: {fileID: 5361049604381805832}
   m_Layer: 14
   m_Name: Couch office 2
   m_TagString: WorldObjects
@@ -15618,22 +15702,6 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
---- !u!208 &3990950761997033365
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8046432738464327775}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.003, y: 0.009000001, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.003}
-  m_TimeToStationary: 0.5
 --- !u!54 &2475530064236723740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15676,6 +15744,24 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 2853232827890768911}
   _networkObjectCache: {fileID: 2853232827890768911}
+--- !u!114 &5361049604381805832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8046432738464327775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2853232827890768911}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &8176591452313958832
 GameObject:
   m_ObjectHideFlags: 0
@@ -16570,11 +16656,11 @@ GameObject:
   - component: {fileID: 4715333802554952040}
   - component: {fileID: 5720480934833275883}
   - component: {fileID: 5893437336617096208}
-  - component: {fileID: 4430215488162429788}
   - component: {fileID: 4476372341029499306}
   - component: {fileID: 153715945231581397}
   - component: {fileID: 3723239867260486160}
   - component: {fileID: 6290418005664263885}
+  - component: {fileID: 8747228413864725103}
   m_Layer: 14
   m_Name: Metal cupboard
   m_TagString: WorldObjects
@@ -16669,22 +16755,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300116, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &4430215488162429788
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8442614584856827685}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.008, y: 0.003, z: 0.006}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.003, y: 0.002, z: 0.006}
-  m_TimeToStationary: 0.5
 --- !u!114 &4476372341029499306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16822,6 +16892,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8747228413864725103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442614584856827685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 153715945231581397}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &8456929942599145050
 GameObject:
   m_ObjectHideFlags: 0
@@ -18735,11 +18823,11 @@ GameObject:
   - component: {fileID: 5918397253487659400}
   - component: {fileID: 7968840459956450056}
   - component: {fileID: 3991313801377589868}
-  - component: {fileID: 3488401765731598682}
   - component: {fileID: 6375527405485545420}
   - component: {fileID: 684491608384225497}
   - component: {fileID: 5361541779101363937}
   - component: {fileID: 1198963833256568068}
+  - component: {fileID: 8971209055115219146}
   m_Layer: 14
   m_Name: table B
   m_TagString: WorldObjects
@@ -18834,22 +18922,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300100, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &3488401765731598682
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9000862172865316650}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.004, z: 0.004}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_TimeToStationary: 0.5
 --- !u!114 &6375527405485545420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18987,6 +19059,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8971209055115219146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000862172865316650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 6375527405485545420}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &9025211482859769541
 GameObject:
   m_ObjectHideFlags: 0

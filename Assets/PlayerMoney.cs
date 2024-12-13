@@ -12,15 +12,18 @@ public class PlayerMoney : NetworkBehaviour
     [SerializeField] private Button healthBoostButton;
     [SerializeField] private Button ammoBoostButton;
     [SerializeField] private Button damageBoostButton;
-    [SerializeField] private Button buyTrapButton; // Đổi tên thành buyTrapButton
-    [SerializeField] private Button buyGasButton; // Thêm button mua gas
-    [SerializeField] private GameObject prefabToBuy; // Prefab cần mua
-    [SerializeField] private GameObject gasPrefab; // Prefab gas
+    [SerializeField] private Button buyTrapButton;
+    [SerializeField] private Button buyGasButton;
+    [SerializeField] private Button buyTurretButton; // Thêm button mua turret
+    [SerializeField] private GameObject prefabToBuy;
+    [SerializeField] private GameObject gasPrefab;
+    [SerializeField] private GameObject turretPrefab; // Prefab turret
     [SerializeField] private string healthBoostButtonTag = "HealthBoostButton";
     [SerializeField] private string ammoBoostButtonTag = "AmmoBoostButton";
     [SerializeField] private string damageBoostButtonTag = "DamageBoostButton";
-    [SerializeField] private string buyTrapButtonTag = "BuyTrapButton"; // Đổi tên thành buyTrapButtonTag
-    [SerializeField] private string buyGasButtonTag = "BuyGasButton"; // Tag của button mua gas
+    [SerializeField] private string buyTrapButtonTag = "BuyTrapButton";
+    [SerializeField] private string buyGasButtonTag = "BuyGasButton";
+    [SerializeField] private string buyTurretButtonTag = "BuyTurretButton"; // Tag của button mua turret
 
     private bool isStoreOpening;
     private PlayerWeapon playerWeaponManager;
@@ -43,6 +46,7 @@ public class PlayerMoney : NetworkBehaviour
         damageBoostButton = GameObject.FindWithTag(damageBoostButtonTag)?.GetComponent<Button>();
         buyTrapButton = GameObject.FindWithTag(buyTrapButtonTag)?.GetComponent<Button>();
         buyGasButton = GameObject.FindWithTag(buyGasButtonTag)?.GetComponent<Button>();
+        buyTurretButton = GameObject.FindWithTag(buyTurretButtonTag)?.GetComponent<Button>();
 
         // Kiểm tra và lắng nghe sự kiện click cho các button
         if (healthBoostButton == null) Debug.LogError($"Không tìm thấy Health Boost Button! Tag: {healthBoostButtonTag}");
@@ -59,6 +63,9 @@ public class PlayerMoney : NetworkBehaviour
 
         if (buyGasButton == null) Debug.LogError($"Không tìm thấy Buy Gas Button! Tag: {buyGasButtonTag}");
         else buyGasButton.onClick.AddListener(OnBuyGasButtonClicked);
+
+        if (buyTurretButton == null) Debug.LogError($"Không tìm thấy Buy Turret Button! Tag: {buyTurretButtonTag}");
+        else buyTurretButton.onClick.AddListener(OnBuyTurretButtonClicked);
 
         playerWeaponManager = GetComponent<PlayerWeapon>();
         if (playerWeaponManager == null)
@@ -127,7 +134,7 @@ public class PlayerMoney : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void CmdPurchaseAmmoBoost()
     {
         if (!IsOwner)
@@ -157,9 +164,12 @@ public class PlayerMoney : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+
+    [ServerRpc(RequireOwnership = false)]
     private void CmdPurchaseDamageBoost()
     {
+        if (!IsOwner)
+            return;
         if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-150);
@@ -237,6 +247,38 @@ public class PlayerMoney : NetworkBehaviour
         }
     }
 
+    public void OnBuyTurretButtonClicked()
+    {
+        if (currentMoney >= 300 && IsOwner) // Giả sử giá mua turret là 300
+        {
+            CmdPurchaseTurret();
+        }
+        else
+        {
+            Debug.Log("Không đủ tiền!");
+        }
+    }
+
+    [ServerRpc]
+    private void CmdPurchaseTurret()
+    {
+        if (currentMoney >= 300)
+        {
+            ChangeCurrentMoney(-300);
+            Vector3 spawnPosition = transform.position + transform.forward * 2;
+            GameObject instantiatedTurret = Instantiate(turretPrefab, spawnPosition, Quaternion.identity);
+            NetworkObject networkObject = instantiatedTurret.GetComponent<NetworkObject>();
+            if (networkObject != null)
+            {
+                Spawn(networkObject);
+            }
+            else
+            {
+                Debug.LogError("Turret prefab không có thành phần NetworkObject!");
+            }
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void ChangeCurrentMoney(float value)
     {
@@ -254,6 +296,7 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void OpenStore()
     {
+
         OpenStoreObserver();
     }
     [ObserversRpc]

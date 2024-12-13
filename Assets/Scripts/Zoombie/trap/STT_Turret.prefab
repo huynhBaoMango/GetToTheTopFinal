@@ -108,8 +108,10 @@ MonoBehaviour:
   firePoint: {fileID: 4822253877191706}
   flameParticles: {fileID: 8891297334280618237, guid: c4ed38c72957f2241ad144a1614956d9,
     type: 3}
+  destroyEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
   rotationSpeed: 5
-  detectionRange: 10
+  detectionRange: 5
   damage: 40
 --- !u!114 &168544035713557841
 MonoBehaviour:
@@ -493,6 +495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: autoRandomSeed
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891297334280618237, guid: c4ed38c72957f2241ad144a1614956d9,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2.7444077
       objectReference: {fileID: 0}
     - target: {fileID: 8891797935737724255, guid: c4ed38c72957f2241ad144a1614956d9,
         type: 3}
