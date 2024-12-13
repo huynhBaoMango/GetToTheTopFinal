@@ -28,6 +28,7 @@ public class MK23Weapon : APlayerWeapon
             transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.01f, transform.localPosition.z + 0.07f), 0.1f).SetEase(Ease.OutBack);
         });
     }
+
     [ServerRpc(RequireOwnership = false)]
     void AnimateWeaponServer()
     {
@@ -43,6 +44,7 @@ public class MK23Weapon : APlayerWeapon
             transform.DOLocalMove(new Vector3(transform.localPosition.x, transform.localPosition.y + 0.01f, transform.localPosition.z + 0.07f), 0.1f).SetEase(Ease.OutBack);
         });
     }
+
     public void KeepMagInHand()
     {
         MagPref.transform.position = LeftHandIKTarget.position;

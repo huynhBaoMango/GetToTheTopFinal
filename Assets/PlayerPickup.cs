@@ -1,4 +1,5 @@
 ﻿using FishNet.Object;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerPickup : NetworkBehaviour
@@ -86,6 +87,8 @@ public class PlayerPickup : NetworkBehaviour
         }
     }
 
+
+
     private void PickUp()
     {
         // Kiểm tra nếu đã có vật phẩm trong tay thì thả trước khi nhặt mới
@@ -94,11 +97,7 @@ public class PlayerPickup : NetworkBehaviour
             Drop(); // Thả vật phẩm đang cầm trước
         }
 
-        // Cast ray từ tâm màn hình thay vì từ vị trí người chơi
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = cam.ScreenPointToRay(screenCenter);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, pickUpRange, pickUpLayers))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickUpRange, pickUpLayers))
         {
             if (hit.transform.TryGetComponent(out GroundWeapon weapon))
             {
@@ -107,7 +106,7 @@ public class PlayerPickup : NetworkBehaviour
             }
         }
 
-        if (Physics.Raycast(ray, out RaycastHit hitObj, raycastDistance, pickupLayer))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitObj, raycastDistance, pickupLayer))
         {
             SetObjectInHand(hitObj.transform.gameObject);
         }
@@ -121,12 +120,9 @@ public class PlayerPickup : NetworkBehaviour
         // Tách vật phẩm khỏi người chơi
         objInHand.transform.parent = null;
 
-        // Cast ray từ tâm màn hình để tìm vị trí thả trên sàn
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = cam.ScreenPointToRay(screenCenter);
+        // Tìm vị trí thả
         Vector3 dropPosition;
-
-        if (Physics.Raycast(ray, out RaycastHit hit, dropDistance, groundLayer))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, dropDistance, groundLayer))
         {
             dropPosition = hit.point + Vector3.up * groundOffset; // Offset để đảm bảo vật phẩm không bị lún
         }
@@ -145,6 +141,7 @@ public class PlayerPickup : NetworkBehaviour
         objInHand = null;
         hasObjectInHand = false;
     }
+
 
     private void RestoreObjectProperties()
     {
@@ -196,6 +193,7 @@ public class PlayerPickup : NetworkBehaviour
         // Đảm bảo vật phẩm không bị lún vào mặt đất
         PositionObjectOnGround();
     }
+
 
     private void RotateObject(float amount)
     {
@@ -278,4 +276,5 @@ public class PlayerPickup : NetworkBehaviour
             objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Offset để tránh lún
         }
     }
+
 }
