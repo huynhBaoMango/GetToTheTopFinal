@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using FishNet;
-using FishNet.Connection;
 using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
@@ -33,9 +32,13 @@ public class InGameManager : NetworkBehaviour
     private readonly SyncVar<float> Timer = new(0);
     private readonly SyncVar<string> BarName = new("");
     private readonly SyncVar<bool> endBool = new(false);
+    private readonly SyncVar<int> floor = new(0);
+    private readonly SyncVar<float> heartHealth = new(0);
     [SerializeField] private Slider progressSlider;
+    [SerializeField] private Slider heartHealthBar;
     [SerializeField] private Image SlideFill;
     [SerializeField] private TextMeshProUGUI progressNameText;
+    [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private GameObject EndUI, WinUI;
     public GameObject[] players;
     public bool isCountdown, isShooting;
@@ -52,11 +55,32 @@ public class InGameManager : NetworkBehaviour
         if (!base.IsServerInitialized)
             return;
         level = PlayerPrefs.GetInt("CurrentLevel", 1);
+        floor.OnChange += OnChangeFloor;
         Timer.OnChange += OnChangeTimer;
         BarName.OnChange += OnChangeBarName;
         endBool.OnChange += OnChangeEndBool;
+        heartHealth.OnChange += OnChangeHeartHealth;
         isCountdown = false;
         isShooting = false;
+
+        floor.Value = level;
+    }
+
+    [ObserversRpc]
+    private void OnChangeHeartHealth(float prev, float next, bool asServer)
+    {
+        heartHealthBar.value = next;
+    }
+
+    public void ChangeHeartHealthValue(float value)
+    {
+        heartHealth.Value = value;
+    }
+
+    [ObserversRpc]
+    private void OnChangeFloor(int prev, int next, bool asServer)
+    {
+        levelText.text = "Floor " + next;
     }
 
     [ObserversRpc]
@@ -106,6 +130,10 @@ public class InGameManager : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             ChangeState(_currentState+1);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            OnNextLevel();
         }
 
         if (_currentState == GameState.Prepare && isCountdown)
@@ -262,7 +290,7 @@ public class InGameManager : NetworkBehaviour
             cutsceneCam.transform.DOMove(zombieCamList[i].position, 3f).OnComplete(() =>
             {
                 GameObject explode = Instantiate(ExplodeFX, zombieSpawnPosList[i].position + new Vector3(0, 1.5f, 0), Quaternion.identity);
-                ServerManager.Spawn(explode);
+                ServerManager.Spawn(explode, null, gameObject.scene);
                 cutsceneCam.transform.DOShakePosition(1f, 0.5f);
                 zombieSpawnController.EnableGivenSpawn(random);
             });
@@ -286,8 +314,7 @@ public class InGameManager : NetworkBehaviour
         }
 
         //hien thi bang diem
-        int level = PlayerPrefs.GetInt("CurrentLevel", 0);
-        PlayerPrefs.SetInt("CurrentLevel", level + 1);
+        
         Cursor.lockState = CursorLockMode.None;
         WinUI.SetActive(true);
     }
@@ -296,12 +323,12 @@ public class InGameManager : NetworkBehaviour
     void SpawnTheHeart()
     {
         GameObject heart = Instantiate(heartPrefab, floors[UnityEngine.Random.Range(0, floors.Length-1)].position, Quaternion.identity);
-        ServerManager.Spawn(heart);
+        ServerManager.Spawn(heart, null, gameObject.scene);
     }
 
     void InvokeTheSpawn()
     {
-        float spawnRate = 3f;
+        float spawnRate = 5f - (5f / 10 * level);
         InvokeRepeating("SpawnZombie", 1f, spawnRate);
     }
 
@@ -309,7 +336,7 @@ public class InGameManager : NetworkBehaviour
     {
         Transform pos = zombieSpawnPosList[UnityEngine.Random.Range(0, zombieSpawnPosList.Count)];
         NetworkObject zombie = Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], pos.position, Quaternion.identity);
-        ServerManager.Spawn(zombie);
+        ServerManager.Spawn(zombie, null, gameObject.scene);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -320,29 +347,19 @@ public class InGameManager : NetworkBehaviour
 
     public void OnNextLevel()
     {
-        SceneLoadData sld = new SceneLoadData("EmptyScene");
-        sld.ReplaceScenes = ReplaceOption.All;
-        NetworkManager.SceneManager.LoadGlobalScenes(sld);
+        int level = PlayerPrefs.GetInt("CurrentLevel", 0);
+        PlayerPrefs.SetInt("CurrentLevel", level + 1);
+        string[] scenesToClose = new string[]
+        {
+            gameObject.scene.name
+        };
 
-        sld = new SceneLoadData("NewTest");
-        sld.ReplaceScenes = ReplaceOption.All;
-        NetworkManager.SceneManager.LoadGlobalScenes(sld);
+        BootstrapNetworkManager.ChangeNetworkScene("Loading", scenesToClose);
     }
 
     public void OnBackToMenu()
     {
-        // Ngắt kết nối khỏi FishNet
-        if (InstanceFinder.NetworkManager.IsHost)
-        {
-            InstanceFinder.ServerManager.StopConnection(true);
-        }
-        InstanceFinder.ClientManager.StopConnection();
-
-        // Unload scene hiện tại
-        //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-
-        // Load scene "Boostrap"
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        BootstrapManager.BackToMenu();
     }
 
     enum GameState

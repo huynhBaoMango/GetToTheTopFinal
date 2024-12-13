@@ -87,8 +87,16 @@ public class PlayerPickup : NetworkBehaviour
         }
     }
 
+
+
     private void PickUp()
     {
+        // Kiểm tra nếu đã có vật phẩm trong tay thì thả trước khi nhặt mới
+        if (hasObjectInHand)
+        {
+            Drop(); // Thả vật phẩm đang cầm trước
+        }
+
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, pickUpRange, pickUpLayers))
         {
             if (hit.transform.TryGetComponent(out GroundWeapon weapon))
@@ -100,25 +108,71 @@ public class PlayerPickup : NetworkBehaviour
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hitObj, raycastDistance, pickupLayer))
         {
-            if (!hasObjectInHand)
-            {
-                SetObjectInHand(hitObj.transform.gameObject);
-            }
-            else
-            {
-                Drop();
-                SetObjectInHand(hitObj.transform.gameObject);
-            }
+            SetObjectInHand(hitObj.transform.gameObject);
         }
+    }
+
+    private void Drop()
+    {
+        if (!hasObjectInHand)
+            return;
+
+        // Tách vật phẩm khỏi người chơi
+        objInHand.transform.parent = null;
+
+        // Tìm vị trí thả
+        Vector3 dropPosition;
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, dropDistance, groundLayer))
+        {
+            dropPosition = hit.point + Vector3.up * groundOffset; // Offset để đảm bảo vật phẩm không bị lún
+        }
+        else
+        {
+            dropPosition = cameraTransform.position + cameraTransform.forward * dropDistance + Vector3.up * groundOffset;
+        }
+
+        // Gọi hàm thả trên server
+        DropObjectServer(objInHand, dropPosition, worldObjectHolder);
+
+        // Khôi phục thuộc tính ban đầu
+        RestoreObjectProperties();
+
+        // Xóa tham chiếu đến vật phẩm
+        objInHand = null;
+        hasObjectInHand = false;
+    }
+
+
+    private void RestoreObjectProperties()
+    {
+        if (objInHand == null)
+            return;
+
+        // Đặt lại parent về null trước khi khôi phục các thuộc tính khác
+        objInHand.transform.parent = null;
+
+        objInHand.GetComponent<Renderer>().material = originalMaterial;
+
+        if (objInHand.GetComponent<Rigidbody>() != null)
+            objInHand.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (objInHand.GetComponent<Collider>() != null)
+            objInHand.GetComponent<Collider>().isTrigger = originalIsTrigger;
     }
 
     private void SetObjectInHand(GameObject obj)
     {
-        SetObjectInHandServer(obj, pickupPosition.position, pickupPosition.rotation, gameObject);
+        // Nếu đã có vật phẩm trong tay, hủy liên kết với vật phẩm đó
+        if (objInHand != null)
+        {
+            RestoreObjectProperties();
+        }
+
+        // Gán vật phẩm mới vào tay
         objInHand = obj;
         hasObjectInHand = true;
-        rotationAmount = 0;
 
+        // Lưu các thuộc tính ban đầu
         originalMaterial = objInHand.GetComponent<Renderer>().material;
         objInHand.GetComponent<Renderer>().material = transparentMaterial;
 
@@ -131,42 +185,15 @@ public class PlayerPickup : NetworkBehaviour
             objInHand.GetComponent<Collider>().isTrigger = true;
         }
 
+        // Đặt vật phẩm tại vị trí tay
+        objInHand.transform.parent = pickupPosition;
+        objInHand.transform.localPosition = Vector3.zero; // Căn chỉnh về vị trí gốc
+        objInHand.transform.localRotation = Quaternion.identity;
+
+        // Đảm bảo vật phẩm không bị lún vào mặt đất
         PositionObjectOnGround();
     }
 
-    private void Drop()
-    {
-        if (!hasObjectInHand)
-            return;
-
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, dropDistance, groundLayer))
-        {
-            DropObjectServer(objInHand, hit.point + Vector3.up, worldObjectHolder); // Thêm offset
-        }
-        else
-        {
-            Vector3 dropPosition = cameraTransform.position + cameraTransform.forward * dropDistance;
-            DropObjectServer(objInHand, dropPosition + Vector3.up, worldObjectHolder); // Thêm offset
-        }
-
-        RestoreObjectProperties();
-        hasObjectInHand = false;
-        objInHand = null;
-    }
-
-    private void RestoreObjectProperties()
-    {
-        if (objInHand == null)
-            return;
-
-        objInHand.GetComponent<Renderer>().material = originalMaterial;
-
-        if (objInHand.GetComponent<Rigidbody>() != null)
-            objInHand.GetComponent<Rigidbody>().isKinematic = false;
-
-        if (objInHand.GetComponent<Collider>() != null)
-            objInHand.GetComponent<Collider>().isTrigger = originalIsTrigger;
-    }
 
     private void RotateObject(float amount)
     {
@@ -244,9 +271,10 @@ public class PlayerPickup : NetworkBehaviour
 
     private void PositionObjectOnGround()
     {
-        if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, groundOffset * 2, groundLayer))
         {
-            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Thêm offset để đảm bảo vật phẩm không lún vào mặt đất
+            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Offset để tránh lún
         }
     }
+
 }

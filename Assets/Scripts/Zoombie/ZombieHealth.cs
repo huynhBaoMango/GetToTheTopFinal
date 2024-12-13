@@ -57,5 +57,9 @@ public class ZombieHealth : NetworkBehaviour
         {
             zombieController.TriggerRagdoll(Vector3.zero, transform.position);
         }
+        else if(TryGetComponent<ZombieTank>(out var ZombieTank))
+        {
+            ZombieTank.TriggerRagdoll(Vector3.zero, transform.position);
+        }    
     }
 }

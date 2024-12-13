@@ -30,6 +30,14 @@ public class BootstrapManager : MonoBehaviour
         SceneManager.LoadScene(menuName, LoadSceneMode.Additive);
     }
 
+    public static void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        Cursor.lockState = CursorLockMode.None;
+
+        LeaveLobby();
+    }
+
     public static void CreateLobby()
     {
         SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
@@ -57,9 +65,7 @@ public class BootstrapManager : MonoBehaviour
     private void OnLobbyEnter(LobbyEnter_t callback) 
     {
         CurrentLobbyID = callback.m_ulSteamIDLobby;
-
-        if (networkManager.IsServerStarted)
-            MainMenuManager.LobbyEntered(SteamMatchmaking.GetLobbyData(new CSteamID(CurrentLobbyID), "name"), networkManager.IsServerStarted);
+        MainMenuManager.LobbyEntered(SteamMatchmaking.GetLobbyData(new CSteamID(CurrentLobbyID), "name"), networkManager.IsServerStarted);
 
         fishySteamworks.SetClientAddress(SteamMatchmaking.GetLobbyData(new CSteamID(CurrentLobbyID), "HostAddress"));
         fishySteamworks.StartConnection(false);
