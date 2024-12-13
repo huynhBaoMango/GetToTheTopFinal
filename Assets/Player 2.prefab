@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633481e4e494bd6408e815783b3c96d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 7
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   damage: 20
@@ -2834,6 +2834,7 @@ MonoBehaviour:
   - {fileID: 7315302791391763460}
   - {fileID: 3611600815014880757}
   - {fileID: 8864338101887738001}
+  - {fileID: 7088322443672725368}
   - {fileID: 1275884998430641130}
   - {fileID: 3306059293743305354}
   - {fileID: 6136981361826209408}
@@ -2863,7 +2864,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 47
+  <PrefabId>k__BackingField: 50
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 13811868997820554745
   <SceneId>k__BackingField: 0
@@ -2892,7 +2893,6 @@ MonoBehaviour:
   - {fileID: 985867574682911144}
   - {fileID: 6136981361826209408}
   currentWeapon: {fileID: 3306059293743305354}
-  ownedWeapon: 0000000000000000
   rightHandTarget: {fileID: 5831679186362622791}
   leftHandTarget: {fileID: 5675465053726677669}
   rightHint: {fileID: 3288343809916297581}
@@ -3096,12 +3096,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 5
-  _addedNetworkObject: {fileID: 8491002545578316078}
-  _networkObjectCache: {fileID: 8491002545578316078}
+  _addedNetworkObject: {fileID: 8055465683895985816, guid: a7ce4395bb5ae1c46acd57772fa73536,
+    type: 3}
+  _networkObjectCache: {fileID: 8055465683895985816, guid: a7ce4395bb5ae1c46acd57772fa73536,
+    type: 3}
   maxHealth: 100
   currentHealth: 0
-  bloodSplatterUI: {fileID: 0}
-  healthBar: {fileID: 5574250077057130029}
+  bloodSplatterUI: {fileID: 8304495013087965529, guid: a7ce4395bb5ae1c46acd57772fa73536,
+    type: 3}
+  healthBar: {fileID: 0}
 --- !u!95 &2539423620536157687
 Animator:
   serializedVersion: 5
@@ -3135,9 +3138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e051d5ec8c293e49bfbc9a5398cadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 8491002545578316078}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 8491002545578316078}
   currentMoney: 3000
   moneyText: {fileID: 0}
   storeUI: {fileID: 0}
@@ -3146,15 +3149,19 @@ MonoBehaviour:
   damageBoostButton: {fileID: 0}
   buyTrapButton: {fileID: 0}
   buyGasButton: {fileID: 0}
+  buyTurretButton: {fileID: 0}
   prefabToBuy: {fileID: 4504840144500689385, guid: ce24d9eb4cf33b34b875c0e4540e44b8,
     type: 3}
   gasPrefab: {fileID: 3099910936969714008, guid: 98842e50facde3e4a950b9a04f9ff2f2,
+    type: 3}
+  turretPrefab: {fileID: 1178177964436236, guid: 2fafc82d17757493ca36f1cfb64b683d,
     type: 3}
   healthBoostButtonTag: HealthBoostButton
   ammoBoostButtonTag: AmmoBoostButton
   damageBoostButtonTag: DamageBoostButton
   buyTrapButtonTag: BuyTrapButton
   buyGasButtonTag: BuyGasButton
+  buyTurretButtonTag: BuyTurretButton
 --- !u!1 &2112849859337584399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,7 +3687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12c5eda9ddc9eb48940a349ae9d73d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 9
+  _componentIndexCache: 10
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   damage: 15
@@ -6871,7 +6878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d960894b6ff1d458807090d4617a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 8
+  _componentIndexCache: 9
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   damage: 10
@@ -8614,7 +8621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c9df79e4136da47bcbad3ca19329f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   damage: 15
@@ -8643,6 +8650,8 @@ MonoBehaviour:
   rightHintIK: {fileID: 9219233083359073282}
   leftHintIK: {fileID: 3767556568408329139}
   explosionImpactPref: {fileID: 0}
+  fireSound: {fileID: 0}
+  reloadSound: {fileID: 0}
 --- !u!95 &7577801601795734755
 Animator:
   serializedVersion: 5
