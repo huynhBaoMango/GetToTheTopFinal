@@ -44,6 +44,6 @@ public class CharacterSelection : NetworkBehaviour
     void SpawnPlayer(int id, NetworkConnection conn)
     {
         GameObject player = Instantiate(players[id], spawnPointStatic.instance.transform.position, Quaternion.identity);
-        Spawn(player, conn);
+        Spawn(player, conn, UnityEngine.SceneManagement.SceneManager.GetSceneByName(PlayerPrefs.GetString("sceneToLoad", gameObject.scene.name)));
     }
 }

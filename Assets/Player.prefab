@@ -4252,7 +4252,7 @@ Transform:
   m_GameObject: {fileID: 2605222116370729672}
   serializedVersion: 2
   m_LocalRotation: {x: -0.023376651, y: -0.007875934, z: -0.06910616, w: 0.9973043}
-  m_LocalPosition: {x: 0.04834546, y: -0.05339002, z: 0.075420395}
+  m_LocalPosition: {x: -0.005, y: -0.001, z: -0.092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4546,7 +4546,7 @@ Transform:
   m_GameObject: {fileID: 2732996689156266016}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0065181777, y: -0.0132244155, z: -0.055820983, w: 0.99833196}
-  m_LocalPosition: {x: -0.019318875, y: 0.0022078361, z: -0.061010383}
+  m_LocalPosition: {x: -0.053, y: 0.001, z: -0.181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6746,7 +6746,7 @@ Transform:
   m_GameObject: {fileID: 5078925678206148975}
   serializedVersion: 2
   m_LocalRotation: {x: 0.010405197, y: -0.006921135, z: -0.07419228, w: 0.99716574}
-  m_LocalPosition: {x: 0.008848631, y: -0.00086756144, z: -0.025342979}
+  m_LocalPosition: {x: -0.053, y: 0.001, z: -0.181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9480,7 +9480,7 @@ Transform:
   m_GameObject: {fileID: 7938805121743444670}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -9.3132246e-10, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.053, y: 0.001, z: -0.181}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9706,6 +9706,8 @@ MonoBehaviour:
   rightHintIK: {fileID: 4656575769410588910}
   leftHintIK: {fileID: 1338400887863258783}
   explosionImpactPref: {fileID: 0}
+  fireSound: {fileID: 0}
+  reloadSound: {fileID: 0}
 --- !u!95 &3247723626988390121
 Animator:
   serializedVersion: 5
@@ -11191,10 +11193,10 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   weapons:
+  - {fileID: 6864409496639939978}
   - {fileID: 2825791884901909521}
   - {fileID: 1204734830371986350}
   - {fileID: 5412819235334243043}
-  - {fileID: 6864409496639939978}
   currentWeapon: {fileID: 2278846135839522763, guid: 67a8c4b50e6e35640a8ff7a4ff88379d,
     type: 3}
   ownedWeapon: 0000000000000000
@@ -11451,15 +11453,18 @@ MonoBehaviour:
   damageBoostButton: {fileID: 0}
   buyTrapButton: {fileID: 0}
   buyGasButton: {fileID: 0}
+  buyTurretButton: {fileID: 0}
   prefabToBuy: {fileID: 4504840144500689385, guid: ce24d9eb4cf33b34b875c0e4540e44b8,
     type: 3}
   gasPrefab: {fileID: 3099910936969714008, guid: 98842e50facde3e4a950b9a04f9ff2f2,
     type: 3}
+  turretPrefab: {fileID: 0}
   healthBoostButtonTag: HealthBoostButton
   ammoBoostButtonTag: AmmoBoostButton
   damageBoostButtonTag: DamageBoostButton
   buyTrapButtonTag: BuyTrapButton
   buyGasButtonTag: BuyGasButton
+  buyTurretButtonTag: BuyTurretButton
 --- !u!1 &9109961104819833257
 GameObject:
   m_ObjectHideFlags: 0

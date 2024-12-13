@@ -7,7 +7,6 @@ public class PlayerWeapon : NetworkBehaviour
 {
     [SerializeField] private List<APlayerWeapon> weapons = new List<APlayerWeapon>();
     [SerializeField] public APlayerWeapon currentWeapon;
-    [SerializeField] private int[] ownedWeapon = new int[2];
     private int currentIndexWeapon = 0;
     private readonly SyncVar<int> _currentWeaponIndex = new(-1);
 
@@ -19,8 +18,6 @@ public class PlayerWeapon : NetworkBehaviour
     private void Awake()
     {
         _currentWeaponIndex.OnChange += OnCurrentWeaponIndexChange;
-        ownedWeapon[0] = 0;
-        ownedWeapon[1] = -1;
     }
 
     public override void OnStartClient()
@@ -37,11 +34,8 @@ public class PlayerWeapon : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (ownedWeapon[0] != -1 && ownedWeapon[1] != -1)
-            {
-                currentIndexWeapon = currentIndexWeapon == 1 ? 0 : 1;
-                InitializeWeapon(ownedWeapon[currentIndexWeapon]);
-            }
+            currentIndexWeapon = (currentIndexWeapon == weapons.Count - 1) ? 0 : currentIndexWeapon + 1;
+            InitializeWeapon(currentIndexWeapon);
         }
         // Chỉ bắn nếu canFire là true
         if (Input.GetKey(KeyCode.Mouse0) && canFire)
