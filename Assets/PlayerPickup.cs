@@ -72,6 +72,7 @@ public class PlayerPickup : NetworkBehaviour
 
         if (Input.GetKeyDown(rotateButton))
         {
+            if (!IsOwner) return;
             currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
         }
 
@@ -88,6 +89,8 @@ public class PlayerPickup : NetworkBehaviour
 
     private void PickUp()
     {
+        if (!IsOwner) return;
+
         // Kiểm tra nếu đã có vật phẩm trong tay thì thả trước khi nhặt mới
         if (hasObjectInHand)
         {
@@ -106,6 +109,8 @@ public class PlayerPickup : NetworkBehaviour
 
     private void Drop()
     {
+        if (!IsOwner) return;
+
         if (!hasObjectInHand)
             return;
 
