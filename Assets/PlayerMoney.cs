@@ -104,12 +104,12 @@ public class PlayerMoney : NetworkBehaviour
         if (currentMoney >= 100)
         {
             ChangeCurrentMoney(-100);
-            TargetApplyHealthBoost(Owner);
+            TargetApplyHealthBoost();
         }
     }
 
-    [TargetRpc]
-    private void TargetApplyHealthBoost(NetworkConnection target)
+    [ObserversRpc]
+    private void TargetApplyHealthBoost()
     {
         PlayerHealth playerHealth = GetComponent<PlayerHealth>();
         if (playerHealth != null)
@@ -142,12 +142,12 @@ public class PlayerMoney : NetworkBehaviour
         if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-50);
-            TargetApplyAmmoBoost(Owner);
+            ApplyAmmoBoost();
         }
     }
 
-    [TargetRpc]
-    private void TargetApplyAmmoBoost(NetworkConnection target)
+    [ObserversRpc]
+    private void ApplyAmmoBoost()
     {
         playerWeaponManager.currentWeapon.maxAmmo += 30;
     }
@@ -173,13 +173,13 @@ public class PlayerMoney : NetworkBehaviour
         if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-150);
-            TargetApplyDamageBoost(Owner);
+            ApplyDamageBoost();
         }
     }
 
-    [TargetRpc]
-    private void TargetApplyDamageBoost(NetworkConnection target)
-    {
+    [ObserversRpc]
+    private void ApplyDamageBoost()
+    { 
         playerWeaponManager.currentWeapon.damage += 5;
     }
 
