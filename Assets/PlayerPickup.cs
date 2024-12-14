@@ -1,4 +1,6 @@
 ﻿using FishNet.Object;
+using System.Globalization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerPickup : NetworkBehaviour
@@ -39,65 +41,55 @@ public class PlayerPickup : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        if (!IsOwner)
-        {
-            enabled = false;
-            return;
-        }
 
         cameraTransform = Camera.main.transform;
         cam = Camera.main;
-        if (GameObject.FindGameObjectWithTag("WorldObjects") != null)
-        {
-            worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
-        }
-
-        if (TryGetComponent(out PlayerWeapon plWeapon))
-        {
-            _playerWeapon = plWeapon;
-        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(pickUpKey))
+        if (IsOwner)
         {
-            PickUp();
+            if (Input.GetKeyDown(pickUpKey))
+            {
+                PickUp();
+            }
+
+            if (Input.GetKeyDown(dropButton))
+            {
+                Drop();
+            }
+
+            if (Input.GetKeyDown(rotateButton))
+            {
+                if (!IsOwner) return;
+                currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
+            }
+
+            if (hasObjectInHand)
+            {
+                UpdateObjectPosition();
+            }
         }
 
-        if (Input.GetKeyDown(dropButton))
+        
+    }
+
+    [ServerRpc]
+    private void PickUp()
+    {
+        PickUpOb();
+    }
+
+    [ObserversRpc]
+    void PickUpOb()
+    {
+        if (hasObjectInHand)
         {
             Drop();
         }
 
-        if (Input.GetKeyDown(rotateButton))
-        {
-            if (!IsOwner) return;
-            currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
-        }
 
-        if (hasObjectInHand && Input.GetAxis("Mouse ScrollWheel") != 0f)
-        {
-            RotateObject(Input.GetAxis("Mouse ScrollWheel") * 90f);
-        }
-
-        if (hasObjectInHand)
-        {
-            UpdateObjectPosition();
-        }
-    }
-
-    private void PickUp()
-    {
-        if (!IsOwner) return;
-
-        // Kiểm tra nếu đã có vật phẩm trong tay thì thả trước khi nhặt mới
-        if (hasObjectInHand)
-        {
-            Drop(); // Thả vật phẩm đang cầm trước
-        }
-
-        // Cast ray từ tâm màn hình thay vì từ vị trí người chơi
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = cam.ScreenPointToRay(screenCenter);
 
@@ -107,80 +99,85 @@ public class PlayerPickup : NetworkBehaviour
         }
     }
 
+
+    [ServerRpc]
     private void Drop()
     {
-        if (!IsOwner) return;
+        DropOb();
+    }
 
+    [ObserversRpc]
+    void DropOb()
+    {
         if (!hasObjectInHand)
             return;
 
-        // Tách vật phẩm khỏi người chơi
-
-        // Cast ray từ tâm màn hình để tìm vị trí thả trên sàn
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = cam.ScreenPointToRay(screenCenter);
-        Vector3 dropPosition;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, dropDistance, groundLayer))
-        {
-            dropPosition = hit.point + Vector3.up * groundOffset; // Offset để đảm bảo vật phẩm không bị lún
-        }
-        else
-        {
-            dropPosition = cameraTransform.position + cameraTransform.forward * dropDistance + Vector3.up * groundOffset;
-        }
+        RestoreObjectProperties(objInHand);
 
-        // Gọi hàm thả trên server
-        DropObjectServer(objInHand, dropPosition, worldObjectHolder);
-
-        // Khôi phục thuộc tính ban đầu
-        RestoreObjectProperties();
-
-        // Xóa tham chiếu đến vật phẩm
-        objInHand = null;
-        hasObjectInHand = false;
+        
     }
 
-    private void RestoreObjectProperties()
+    [ServerRpc(RequireOwnership = false)]
+    void RestoreObjectProperties(GameObject objInHand)
+    {
+        RestoreObjectPropertiesOb(objInHand);
+    }
+
+    [ObserversRpc]
+    private void RestoreObjectPropertiesOb(GameObject objInHand)
     {
         if (objInHand == null)
             return;
 
-        // Đặt lại parent về null trước khi khôi phục các thuộc tính khác
+        if(objInHand.TryGetComponent<Renderer>(out Renderer renderer))
+        {
+            renderer.material = originalMaterial; 
+        }
 
-        objInHand.GetComponent<Renderer>().material = originalMaterial;
+        if (objInHand.TryGetComponent<Rigidbody>(out Rigidbody rg))
+            rg.isKinematic = false;
 
-        if (objInHand.GetComponent<Rigidbody>() != null)
-            objInHand.GetComponent<Rigidbody>().isKinematic = false;
+        if (objInHand.TryGetComponent<Collider>(out Collider cl))
+        {
+            cl.isTrigger = false;
+        }
 
-        if (objInHand.GetComponent<Collider>() != null)
-            objInHand.GetComponent<Collider>().isTrigger = originalIsTrigger;
+        objInHand = null;
+        hasObjectInHand = false;
     }
 
     private void SetObjectInHand(GameObject obj)
     {
-        // Gán vật phẩm mới vào tay
         objInHand = obj;
         hasObjectInHand = true;
+        SetObjectProperties(objInHand);
+    }
 
-        // Lưu các thuộc tính ban đầu
+    [ServerRpc(RequireOwnership = false)]
+    void SetObjectProperties(GameObject objInHand)
+    {
+        SetPropertiesOb(objInHand);
+    }
+
+    [ObserversRpc]
+    void SetPropertiesOb(GameObject objInHand)
+    {
         originalMaterial = objInHand.GetComponent<Renderer>().material;
         objInHand.GetComponent<Renderer>().material = transparentMaterial;
 
-        if (objInHand.GetComponent<Rigidbody>() != null)
-            objInHand.GetComponent<Rigidbody>().isKinematic = true;
+        if (objInHand.TryGetComponent<Rigidbody>(out Rigidbody rg))
+            rg.isKinematic = true;
 
-        if (objInHand.GetComponent<Collider>() != null)
+        if (objInHand.TryGetComponent<Collider>(out Collider cl))
         {
-            originalIsTrigger = objInHand.GetComponent<Collider>().isTrigger;
-            objInHand.GetComponent<Collider>().isTrigger = true;
+            cl.isTrigger = true;
         }
 
-        // Đặt vật phẩm tại vị trí tay
-        objInHand.transform.localPosition = Vector3.zero; // Căn chỉnh về vị trí gốc
+        objInHand.transform.localPosition = Vector3.zero;
         objInHand.transform.rotation = Quaternion.Euler(Vector3.zero);
-        // Đảm bảo vật phẩm không bị lún vào mặt đất
-        PositionObjectOnGround();
     }
 
     private void RotateObject(float amount)
@@ -192,25 +189,25 @@ public class PlayerPickup : NetworkBehaviour
         RotateObjectServer(objInHand, rotationAmount, currentRotationAxis);
     }
 
-    [ObserversRpc]
+    [ServerRpc(RequireOwnership =false)]
     private void UpdateObjectPosition()
     {
-        Vector3 dropPosition;
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 6f, groundLayer))
         {
-            objInHand.transform.position = hit.point + new Vector3(0, objInHand.GetComponent<Collider>().bounds.size.y, 0);
-        }
-        else
-        {
-            //objInHand.transform.position = cameraTransform.position + cameraTransform.forward * dropDistance + Vector3.up * groundOffset;
+            UpdatePosObj(objInHand, hit.point);
         }
     }
-    private void OnDrawGizmos()
+
+    void UpdatePosObj(GameObject objInHand, Vector3 hit)
     {
-        Gizmos.DrawLine(cam.transform.position, cam.transform.forward);
+        objInHand.transform.position = hit + new Vector3(0, objInHand.GetComponent<Collider>().bounds.size.y, 0);
     }
+
+
+   
+
 
     [ServerRpc(RequireOwnership = false)]
     void RotateObjectServer(GameObject obj, float amount, RotationAxis axis)
@@ -229,50 +226,5 @@ public class PlayerPickup : NetworkBehaviour
         {
             obj.transform.localRotation = Quaternion.Euler(0f, amount, 0f);
         }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void SetObjectInHandServer(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
-    {
-        SetObjectInHandObserver(obj, position, rotation, player);
-    }
-
-    [ObserversRpc]
-    void SetObjectInHandObserver(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
-    {
-        obj.transform.position = position;
-        obj.transform.rotation = rotation;
-
-        if (obj.GetComponent<Rigidbody>() != null)
-            obj.GetComponent<Rigidbody>().isKinematic = true;
-
-        if (obj.GetComponent<Collider>() != null)
-            obj.GetComponent<Collider>().isTrigger = true;
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void DropObjectServer(GameObject obj, Vector3 dropPosition, Transform worldHolder)
-    {
-        DropObjectObserver(obj, dropPosition, worldHolder);
-    }
-
-    [ObserversRpc]
-    void DropObjectObserver(GameObject obj, Vector3 dropPosition, Transform worldHolder)
-    {
-        if (obj.GetComponent<Rigidbody>() != null)
-            obj.GetComponent<Rigidbody>().isKinematic = false;
-
-        if (obj.GetComponent<Collider>() != null)
-            obj.GetComponent<Collider>().isTrigger = originalIsTrigger; // Sửa đổi: Đặt lại trạng thái isTrigger ban đầu
-    }
-
-    private void PositionObjectOnGround()
-    {
-        /*
-        if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, pickUpRange, groundLayer))
-        {
-            objInHand.transform.position = hit.point + new Vector3(0, objInHand.GetComponent<Collider>().bounds.size.y, 0); // Offset để tránh lún
-        }
-        */
     }
 }
