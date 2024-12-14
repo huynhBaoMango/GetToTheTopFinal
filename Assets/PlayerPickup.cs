@@ -75,7 +75,7 @@ public class PlayerPickup : NetworkBehaviour
         
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void PickUp()
     {
         PickUpOb();
@@ -100,7 +100,7 @@ public class PlayerPickup : NetworkBehaviour
     }
 
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void Drop()
     {
         DropOb();
