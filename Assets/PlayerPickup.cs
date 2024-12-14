@@ -88,13 +88,11 @@ public class PlayerPickup : NetworkBehaviour
 
     private void PickUp()
     {
-        // Kiểm tra nếu đã có vật phẩm trong tay thì thả trước khi nhặt mới
         if (hasObjectInHand)
         {
-            Drop(); // Thả vật phẩm đang cầm trước
+            Drop();
         }
 
-        // Cast ray từ tâm màn hình thay vì từ vị trí người chơi
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = cam.ScreenPointToRay(screenCenter);
 
@@ -118,30 +116,25 @@ public class PlayerPickup : NetworkBehaviour
         if (!hasObjectInHand)
             return;
 
-        // Tách vật phẩm khỏi người chơi
         objInHand.transform.parent = null;
 
-        // Cast ray từ tâm màn hình để tìm vị trí thả trên sàn
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = cam.ScreenPointToRay(screenCenter);
         Vector3 dropPosition;
 
         if (Physics.Raycast(ray, out RaycastHit hit, dropDistance, groundLayer))
         {
-            dropPosition = hit.point + Vector3.up * groundOffset; // Offset để đảm bảo vật phẩm không bị lún
+            dropPosition = hit.point + Vector3.up * groundOffset;
         }
         else
         {
             dropPosition = cameraTransform.position + cameraTransform.forward * dropDistance + Vector3.up * groundOffset;
         }
 
-        // Gọi hàm thả trên server
-        DropObjectServer(objInHand, dropPosition, worldObjectHolder);
+        DropObjectServerRpc(objInHand, dropPosition, worldObjectHolder);
 
-        // Khôi phục thuộc tính ban đầu
         RestoreObjectProperties();
 
-        // Xóa tham chiếu đến vật phẩm
         objInHand = null;
         hasObjectInHand = false;
     }
@@ -151,7 +144,6 @@ public class PlayerPickup : NetworkBehaviour
         if (objInHand == null)
             return;
 
-        // Đặt lại parent về null trước khi khôi phục các thuộc tính khác
         objInHand.transform.parent = null;
 
         objInHand.GetComponent<Renderer>().material = originalMaterial;
@@ -165,17 +157,14 @@ public class PlayerPickup : NetworkBehaviour
 
     private void SetObjectInHand(GameObject obj)
     {
-        // Nếu đã có vật phẩm trong tay, hủy liên kết với vật phẩm đó
         if (objInHand != null)
         {
             RestoreObjectProperties();
         }
 
-        // Gán vật phẩm mới vào tay
         objInHand = obj;
         hasObjectInHand = true;
 
-        // Lưu các thuộc tính ban đầu
         originalMaterial = objInHand.GetComponent<Renderer>().material;
         objInHand.GetComponent<Renderer>().material = transparentMaterial;
 
@@ -188,12 +177,10 @@ public class PlayerPickup : NetworkBehaviour
             objInHand.GetComponent<Collider>().isTrigger = true;
         }
 
-        // Đặt vật phẩm tại vị trí tay
         objInHand.transform.parent = pickupPosition;
-        objInHand.transform.localPosition = Vector3.zero; // Căn chỉnh về vị trí gốc
+        objInHand.transform.localPosition = Vector3.zero;
         objInHand.transform.localRotation = Quaternion.identity;
 
-        // Đảm bảo vật phẩm không bị lún vào mặt đất
         PositionObjectOnGround();
     }
 
@@ -203,25 +190,25 @@ public class PlayerPickup : NetworkBehaviour
             return;
 
         rotationAmount += amount;
-        RotateObjectServer(objInHand, rotationAmount, currentRotationAxis);
+        RotateObjectServerRpc(objInHand, rotationAmount, currentRotationAxis);
     }
 
     private void UpdateObjectPosition()
     {
         if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
         {
-            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Thêm offset để đảm bảo vật phẩm không lún vào mặt đất
+            objInHand.transform.position = hit.point + Vector3.up * groundOffset;
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void RotateObjectServer(GameObject obj, float amount, RotationAxis axis)
+    private void RotateObjectServerRpc(GameObject obj, float amount, RotationAxis axis)
     {
-        RotateObjectObserver(obj, amount, axis);
+        RotateObjectClientRpc(obj, amount, axis);
     }
 
-    [ObserversRpc]
-    void RotateObjectObserver(GameObject obj, float amount, RotationAxis axis)
+    [ClientRpc]
+    private void RotateObjectClientRpc(GameObject obj, float amount, RotationAxis axis)
     {
         if (axis == RotationAxis.X)
         {
@@ -234,13 +221,13 @@ public class PlayerPickup : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void SetObjectInHandServer(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
+    private void SetObjectInHandServerRpc(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
     {
-        SetObjectInHandObserver(obj, position, rotation, player);
+        SetObjectInHandClientRpc(obj, position, rotation, player);
     }
 
-    [ObserversRpc]
-    void SetObjectInHandObserver(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
+    [ClientRpc]
+    private void SetObjectInHandClientRpc(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
     {
         obj.transform.position = position;
         obj.transform.rotation = rotation;
@@ -254,13 +241,13 @@ public class PlayerPickup : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void DropObjectServer(GameObject obj, Vector3 dropPosition, Transform worldHolder)
+    private void DropObjectServerRpc(GameObject obj, Vector3 dropPosition, Transform worldHolder)
     {
-        DropObjectObserver(obj, dropPosition, worldHolder);
+        DropObjectClientRpc(obj, dropPosition, worldHolder);
     }
 
-    [ObserversRpc]
-    void DropObjectObserver(GameObject obj, Vector3 dropPosition, Transform worldHolder)
+    [ClientRpc]
+    private void DropObjectClientRpc(GameObject obj, Vector3 dropPosition, Transform worldHolder)
     {
         obj.transform.parent = worldHolder;
 
@@ -268,14 +255,14 @@ public class PlayerPickup : NetworkBehaviour
             obj.GetComponent<Rigidbody>().isKinematic = false;
 
         if (obj.GetComponent<Collider>() != null)
-            obj.GetComponent<Collider>().isTrigger = originalIsTrigger; // Sửa đổi: Đặt lại trạng thái isTrigger ban đầu
+            obj.GetComponent<Collider>().isTrigger = originalIsTrigger;
     }
 
     private void PositionObjectOnGround()
     {
         if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, groundOffset * 2, groundLayer))
         {
-            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Offset để tránh lún
+            objInHand.transform.position = hit.point + Vector3.up * groundOffset;
         }
     }
 }

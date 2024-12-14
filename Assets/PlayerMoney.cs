@@ -126,7 +126,7 @@ public class PlayerMoney : NetworkBehaviour
     {
         if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null && IsOwner)
         {
-            CmdPurchaseAmmoBoost(base.Owner);
+            CmdPurchaseAmmoBoost();
         }
         else
         {
@@ -134,28 +134,31 @@ public class PlayerMoney : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void CmdPurchaseAmmoBoost(NetworkConnection conn)
+    [ServerRpc]
+    private void CmdPurchaseAmmoBoost()
     {
-
-        if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
-        {
-            ChangeCurrentMoney(-50);
-            TargetApplyAmmoBoost(conn);
-        }
+        TargetApplyAmmoBoost();
     }
 
-    [TargetRpc]
-    private void TargetApplyAmmoBoost(NetworkConnection conn)
+    [ObserversRpc]
+    private void TargetApplyAmmoBoost()
     {
-        playerWeaponManager.currentWeapon.maxAmmo += 30;
+        if (IsOwner)
+        {
+            playerWeaponManager.currentWeapon.maxAmmo += 30;
+            if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
+            {
+                ChangeCurrentMoney(-50);
+
+            }
+        }
     }
 
     public void OnDamageBoostButtonClicked()
     {
         if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null && IsOwner)
         {
-            CmdPurchaseDamageBoost(base.Owner);
+            CmdPurchaseDamageBoost();
         }
         else
         {
@@ -164,21 +167,23 @@ public class PlayerMoney : NetworkBehaviour
     }
 
 
-    [ServerRpc(RequireOwnership = false)]
-    private void CmdPurchaseDamageBoost(NetworkConnection conn)
+    [ServerRpc]
+    private void CmdPurchaseDamageBoost()
     {
-
-        if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
-        {
-            ChangeCurrentMoney(-150);
-            TargetApplyDamageBoost(conn);
-        }
+        TargetApplyDamageBoost();
     }
 
-    [TargetRpc]
-    private void TargetApplyDamageBoost(NetworkConnection conn)
+    [ObserversRpc]
+    private void TargetApplyDamageBoost()
     {
-        playerWeaponManager.currentWeapon.damage += 5;
+        if (IsOwner)
+        {
+            playerWeaponManager.currentWeapon.damage += 5;
+            if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
+            {
+                ChangeCurrentMoney(-150);
+            }
+        }
     }
 
     public void OnBuyTrapButtonClicked()
