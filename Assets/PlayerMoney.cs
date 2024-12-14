@@ -137,8 +137,7 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void CmdPurchaseAmmoBoost()
     {
-        if (!IsOwner)
-            return;
+        
         if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-50);
@@ -168,8 +167,7 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void CmdPurchaseDamageBoost()
     {
-        if (!IsOwner)
-            return;
+        
         if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-150);
