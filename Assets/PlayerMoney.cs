@@ -126,7 +126,7 @@ public class PlayerMoney : NetworkBehaviour
     {
         if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null && IsOwner)
         {
-            CmdPurchaseAmmoBoost();
+            CmdPurchaseAmmoBoost(base.Owner);
         }
         else
         {
@@ -135,18 +135,18 @@ public class PlayerMoney : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void CmdPurchaseAmmoBoost()
+    private void CmdPurchaseAmmoBoost(NetworkConnection conn)
     {
-        
+
         if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-50);
-            ApplyAmmoBoost();
+            TargetApplyAmmoBoost(conn);
         }
     }
 
-    [ObserversRpc]
-    private void ApplyAmmoBoost()
+    [TargetRpc]
+    private void TargetApplyAmmoBoost(NetworkConnection conn)
     {
         playerWeaponManager.currentWeapon.maxAmmo += 30;
     }
@@ -155,7 +155,7 @@ public class PlayerMoney : NetworkBehaviour
     {
         if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null && IsOwner)
         {
-            CmdPurchaseDamageBoost();
+            CmdPurchaseDamageBoost(base.Owner);
         }
         else
         {
@@ -165,19 +165,19 @@ public class PlayerMoney : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = false)]
-    private void CmdPurchaseDamageBoost()
+    private void CmdPurchaseDamageBoost(NetworkConnection conn)
     {
-        
+
         if (currentMoney >= 150 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
         {
             ChangeCurrentMoney(-150);
-            ApplyDamageBoost();
+            TargetApplyDamageBoost(conn);
         }
     }
 
-    [ObserversRpc]
-    private void ApplyDamageBoost()
-    { 
+    [TargetRpc]
+    private void TargetApplyDamageBoost(NetworkConnection conn)
+    {
         playerWeaponManager.currentWeapon.damage += 5;
     }
 
