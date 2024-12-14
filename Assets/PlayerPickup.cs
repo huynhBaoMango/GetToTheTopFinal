@@ -34,7 +34,7 @@ public class PlayerPickup : NetworkBehaviour
     private Material originalMaterial;
     private bool originalIsTrigger;
 
-    private float groundOffset = 1f;
+    private float groundOffset = 1f; // Thêm một offset nhỏ để đảm bảo vật phẩm nằm trên mặt đất
 
     public override void OnStartClient()
     {
@@ -77,7 +77,6 @@ public class PlayerPickup : NetworkBehaviour
 
         if (hasObjectInHand && Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
-            //Gọi RotateObjectServer thay vì RotateObject
             RotateObject(Input.GetAxis("Mouse ScrollWheel") * 90f);
         }
 
@@ -99,46 +98,9 @@ public class PlayerPickup : NetworkBehaviour
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = cam.ScreenPointToRay(screenCenter);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, pickUpRange, pickUpLayers))
-        {
-            if (hit.transform.TryGetComponent(out GroundWeapon weapon))
-            {
-                _playerWeapon.InitializeWeapon(weapon.PickUpWeapon());
-                return;
-            }
-        }
-
         if (Physics.Raycast(ray, out RaycastHit hitObj, raycastDistance, pickupLayer))
         {
-            PickupObjectServer(hitObj.transform.gameObject);
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void PickupObjectServer(GameObject obj)
-    {
-
-        SetObjectInHandObserver(obj, pickupPosition.position, pickupPosition.rotation, gameObject);
-
-        // Store initial properties on server
-        originalMaterial = obj.GetComponent<Renderer>().material;
-        originalIsTrigger = obj.GetComponent<Collider>() != null ? obj.GetComponent<Collider>().isTrigger : false;
-
-        // Make changes for the visuals on pickup
-        SetPickupVisualsObserver(obj);
-    }
-
-    [ObserversRpc]
-    private void SetPickupVisualsObserver(GameObject obj)
-    {
-        obj.GetComponent<Renderer>().material = transparentMaterial;
-
-        if (obj.GetComponent<Rigidbody>() != null)
-            obj.GetComponent<Rigidbody>().isKinematic = true;
-
-        if (obj.GetComponent<Collider>() != null)
-        {
-            obj.GetComponent<Collider>().isTrigger = true;
+            SetObjectInHand(hitObj.transform.gameObject);
         }
     }
 
@@ -147,6 +109,8 @@ public class PlayerPickup : NetworkBehaviour
         if (!hasObjectInHand)
             return;
 
+        // Tách vật phẩm khỏi người chơi
+
         // Cast ray từ tâm màn hình để tìm vị trí thả trên sàn
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = cam.ScreenPointToRay(screenCenter);
@@ -154,7 +118,7 @@ public class PlayerPickup : NetworkBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, dropDistance, groundLayer))
         {
-            dropPosition = hit.point + Vector3.up * groundOffset;
+            dropPosition = hit.point + Vector3.up * groundOffset; // Offset để đảm bảo vật phẩm không bị lún
         }
         else
         {
@@ -164,32 +128,85 @@ public class PlayerPickup : NetworkBehaviour
         // Gọi hàm thả trên server
         DropObjectServer(objInHand, dropPosition, worldObjectHolder);
 
-        // Reset local properties
+        // Khôi phục thuộc tính ban đầu
+        RestoreObjectProperties();
+
+        // Xóa tham chiếu đến vật phẩm
         objInHand = null;
         hasObjectInHand = false;
     }
 
-    private void RestoreObjectProperties(GameObject obj)
+    private void RestoreObjectProperties()
     {
-        if (obj == null)
+        if (objInHand == null)
             return;
 
-        // Revert changes made during pickup
-        obj.GetComponent<Renderer>().material = originalMaterial;
+        // Đặt lại parent về null trước khi khôi phục các thuộc tính khác
 
-        if (obj.GetComponent<Rigidbody>() != null)
-            obj.GetComponent<Rigidbody>().isKinematic = false;
+        objInHand.GetComponent<Renderer>().material = originalMaterial;
 
-        if (obj.GetComponent<Collider>() != null)
-            obj.GetComponent<Collider>().isTrigger = originalIsTrigger;
+        if (objInHand.GetComponent<Rigidbody>() != null)
+            objInHand.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (objInHand.GetComponent<Collider>() != null)
+            objInHand.GetComponent<Collider>().isTrigger = originalIsTrigger;
     }
+
+    private void SetObjectInHand(GameObject obj)
+    {
+        // Gán vật phẩm mới vào tay
+        objInHand = obj;
+        hasObjectInHand = true;
+
+        // Lưu các thuộc tính ban đầu
+        originalMaterial = objInHand.GetComponent<Renderer>().material;
+        objInHand.GetComponent<Renderer>().material = transparentMaterial;
+
+        if (objInHand.GetComponent<Rigidbody>() != null)
+            objInHand.GetComponent<Rigidbody>().isKinematic = true;
+
+        if (objInHand.GetComponent<Collider>() != null)
+        {
+            originalIsTrigger = objInHand.GetComponent<Collider>().isTrigger;
+            objInHand.GetComponent<Collider>().isTrigger = true;
+        }
+
+        // Đặt vật phẩm tại vị trí tay
+        objInHand.transform.localPosition = Vector3.zero; // Căn chỉnh về vị trí gốc
+        objInHand.transform.rotation = Quaternion.Euler(Vector3.zero);
+        // Đảm bảo vật phẩm không bị lún vào mặt đất
+        PositionObjectOnGround();
+    }
+
     private void RotateObject(float amount)
     {
         if (!hasObjectInHand)
             return;
+
         rotationAmount += amount;
         RotateObjectServer(objInHand, rotationAmount, currentRotationAxis);
     }
+
+    [ObserversRpc]
+    private void UpdateObjectPosition()
+    {
+        Vector3 dropPosition;
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, 6f, groundLayer))
+        {
+            objInHand.transform.position = hit.point + new Vector3(0, objInHand.GetComponent<Collider>().bounds.size.y, 0);
+        }
+        else
+        {
+            //objInHand.transform.position = cameraTransform.position + cameraTransform.forward * dropDistance + Vector3.up * groundOffset;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(cam.transform.position, cam.transform.forward);
+    }
+
     [ServerRpc(RequireOwnership = false)]
     void RotateObjectServer(GameObject obj, float amount, RotationAxis axis)
     {
@@ -209,23 +226,23 @@ public class PlayerPickup : NetworkBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    void SetObjectInHandServer(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
+    {
+        SetObjectInHandObserver(obj, position, rotation, player);
+    }
+
     [ObserversRpc]
     void SetObjectInHandObserver(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
     {
-        if (obj == null) return;
-
         obj.transform.position = position;
         obj.transform.rotation = rotation;
-        obj.transform.parent = player.transform;
 
         if (obj.GetComponent<Rigidbody>() != null)
             obj.GetComponent<Rigidbody>().isKinematic = true;
 
         if (obj.GetComponent<Collider>() != null)
             obj.GetComponent<Collider>().isTrigger = true;
-
-        objInHand = obj;
-        hasObjectInHand = true;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -237,20 +254,20 @@ public class PlayerPickup : NetworkBehaviour
     [ObserversRpc]
     void DropObjectObserver(GameObject obj, Vector3 dropPosition, Transform worldHolder)
     {
-        if (obj == null) return;
+        if (obj.GetComponent<Rigidbody>() != null)
+            obj.GetComponent<Rigidbody>().isKinematic = false;
 
-        obj.transform.parent = worldHolder;
-        obj.transform.position = dropPosition;
-
-        // Restore object properties on drop
-        RestoreObjectProperties(obj);
+        if (obj.GetComponent<Collider>() != null)
+            obj.GetComponent<Collider>().isTrigger = originalIsTrigger; // Sửa đổi: Đặt lại trạng thái isTrigger ban đầu
     }
 
-    private void UpdateObjectPosition()
+    private void PositionObjectOnGround()
     {
-        if (objInHand != null && Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        /*
+        if (Physics.Raycast(objInHand.transform.position, Vector3.down, out RaycastHit hit, pickUpRange, groundLayer))
         {
-            objInHand.transform.position = hit.point + Vector3.up * groundOffset; // Thêm offset để đảm bảo vật phẩm không lún vào mặt đất
+            objInHand.transform.position = hit.point + new Vector3(0, objInHand.GetComponent<Collider>().bounds.size.y, 0); // Offset để tránh lún
         }
+        */
     }
 }

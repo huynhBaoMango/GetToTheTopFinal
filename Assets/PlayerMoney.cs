@@ -142,6 +142,7 @@ public class PlayerMoney : NetworkBehaviour
 
     [ObserversRpc]
     private void TargetApplyAmmoBoost()
+
     {
         if (IsOwner)
         {
