@@ -674,9 +674,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d960894b6ff1d458807090d4617a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 9
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 3223182877490601382}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3223182877490601382}
   damage: 10
   delayBulletTime: 0.2
   maxAmmo: 9
@@ -6770,7 +6770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c9df79e4136da47bcbad3ca19329f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
   damage: 20
@@ -7409,10 +7409,9 @@ MonoBehaviour:
   - {fileID: 8563883137832624401}
   - {fileID: 6767924222955539542}
   - {fileID: 665156733392249498}
+  - {fileID: 453802332542352335}
   - {fileID: 2825791884901909521}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8273122486411741831}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -7438,7 +7437,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 5
+  <PrefabId>k__BackingField: 66
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 16799108592042421765
   <SceneId>k__BackingField: 0
@@ -7551,7 +7550,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
-  transparentMaterial: {fileID: 0}
+  transparentMaterial: {fileID: 2100000, guid: 24593ce27ec0d3840bcf5f2a3e33ef4f, type: 2}
 --- !u!114 &8563883137832624401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7707,9 +7706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e051d5ec8c293e49bfbc9a5398cadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 6
   _addedNetworkObject: {fileID: 3223182877490601382}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 3223182877490601382}
   currentMoney: 3000
   moneyText: {fileID: 0}
   storeUI: {fileID: 0}

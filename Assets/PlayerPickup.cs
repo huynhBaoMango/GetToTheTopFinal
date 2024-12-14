@@ -36,195 +36,90 @@ public class PlayerPickup : NetworkBehaviour
     private Material originalMaterial;
     private bool originalIsTrigger;
 
-    private float groundOffset = 1f; // Thêm một offset nhỏ để đảm bảo vật phẩm nằm trên mặt đất
-
     public override void OnStartClient()
     {
         base.OnStartClient();
 
-        cameraTransform = Camera.main.transform;
+        if (!base.IsOwner)
+            enabled = false;
+
         cam = Camera.main;
+        worldObjectHolder = GameObject.FindGameObjectWithTag("WorldObjects").transform;
     }
 
-    void Update()
+    private void Update()
     {
-        if (IsOwner)
-        {
-            if (Input.GetKeyDown(pickUpKey))
-            {
-                PickUp();
-            }
+        if (Input.GetKeyDown(pickUpKey))
+            Pickup();
 
-            if (Input.GetKeyDown(dropButton))
+        if (Input.GetKeyDown(dropButton))
+            Drop();
+    }
+
+    void Pickup()
+    {
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, raycastDistance, pickupLayer))
+        {
+            if (!hasObjectInHand)
+            {
+                SetObjectInHandServer(hit.transform.gameObject, hit.transform.gameObject.transform.position, hit.transform.gameObject.transform.rotation, gameObject);
+                objInHand = hit.transform.gameObject;
+                hasObjectInHand = true;
+            }
+            else if (hasObjectInHand)
             {
                 Drop();
-            }
 
-            if (Input.GetKeyDown(rotateButton))
-            {
-                if (!IsOwner) return;
-                currentRotationAxis = (currentRotationAxis == RotationAxis.Y) ? RotationAxis.X : RotationAxis.Y;
-            }
-
-            if (hasObjectInHand)
-            {
-                UpdateObjectPosition();
+                SetObjectInHandServer(hit.transform.gameObject, pickupPosition.position, pickupPosition.rotation, gameObject);
+                objInHand = hit.transform.gameObject;
+                hasObjectInHand = true;
             }
         }
-
-        
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void PickUp()
+    void SetObjectInHandServer(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
     {
-        PickUpOb();
+        SetObjectInHandObserver(obj, position, rotation, player);
     }
 
     [ObserversRpc]
-    void PickUpOb()
+    void SetObjectInHandObserver(GameObject obj, Vector3 position, Quaternion rotation, GameObject player)
     {
-        if (hasObjectInHand)
-        {
-            Drop();
-        }
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        obj.transform.parent = player.transform;
 
-
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = cam.ScreenPointToRay(screenCenter);
-
-        if (Physics.Raycast(ray, out RaycastHit hitObj, raycastDistance, pickupLayer))
-        {
-            SetObjectInHand(hitObj.transform.gameObject);
-        }
+        if (obj.GetComponent<Rigidbody>() != null)
+            obj.GetComponent<Rigidbody>().isKinematic = true;
+        if(obj.GetComponent<Collider>() != null)
+            obj.GetComponent<Collider>().isTrigger = true;
     }
 
-
-    [ServerRpc(RequireOwnership = false)]
-    private void Drop()
-    {
-        DropOb();
-    }
-
-    [ObserversRpc]
-    void DropOb()
+    void Drop()
     {
         if (!hasObjectInHand)
             return;
 
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = cam.ScreenPointToRay(screenCenter);
-
-        RestoreObjectProperties(objInHand);
-
-        
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    void RestoreObjectProperties(GameObject objInHand)
-    {
-        RestoreObjectPropertiesOb(objInHand);
-    }
-
-    [ObserversRpc]
-    private void RestoreObjectPropertiesOb(GameObject objInHand)
-    {
-        if (objInHand == null)
-            return;
-
-        if(objInHand.TryGetComponent<Renderer>(out Renderer renderer))
-        {
-            renderer.material = originalMaterial; 
-        }
-
-        if (objInHand.TryGetComponent<Rigidbody>(out Rigidbody rg))
-            rg.isKinematic = false;
-
-        if (objInHand.TryGetComponent<Collider>(out Collider cl))
-        {
-            cl.isTrigger = false;
-        }
-
-        objInHand = null;
+        DropObjectServer(objInHand, worldObjectHolder);
         hasObjectInHand = false;
-    }
-
-    private void SetObjectInHand(GameObject obj)
-    {
-        objInHand = obj;
-        hasObjectInHand = true;
-        SetObjectProperties(objInHand);
+        objInHand = null;
     }
 
     [ServerRpc(RequireOwnership = false)]
-    void SetObjectProperties(GameObject objInHand)
+    void DropObjectServer(GameObject obj, Transform worldHolder)
     {
-        SetPropertiesOb(objInHand);
+        DropObjectObserver(obj, worldHolder);
     }
 
     [ObserversRpc]
-    void SetPropertiesOb(GameObject objInHand)
+    void DropObjectObserver(GameObject obj, Transform worldHolder)
     {
-        originalMaterial = objInHand.GetComponent<Renderer>().material;
-        objInHand.GetComponent<Renderer>().material = transparentMaterial;
+        obj.transform.parent = worldHolder;
 
-        if (objInHand.TryGetComponent<Rigidbody>(out Rigidbody rg))
-            rg.isKinematic = true;
-
-        if (objInHand.TryGetComponent<Collider>(out Collider cl))
-        {
-            cl.isTrigger = true;
-        }
-
-        objInHand.transform.localPosition = Vector3.zero;
-        objInHand.transform.rotation = Quaternion.Euler(Vector3.zero);
-    }
-
-    private void RotateObject(float amount)
-    {
-        if (!hasObjectInHand)
-            return;
-
-        rotationAmount += amount;
-        RotateObjectServer(objInHand, rotationAmount, currentRotationAxis);
-    }
-
-    [ServerRpc(RequireOwnership =false)]
-    private void UpdateObjectPosition()
-    {
-        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, 6f, groundLayer))
-        {
-            UpdatePosObj(objInHand, hit.point);
-        }
-    }
-
-    void UpdatePosObj(GameObject objInHand, Vector3 hit)
-    {
-        objInHand.transform.position = hit + new Vector3(0, objInHand.GetComponent<Collider>().bounds.size.y, 0);
-    }
-
-
-   
-
-
-    [ServerRpc(RequireOwnership = false)]
-    void RotateObjectServer(GameObject obj, float amount, RotationAxis axis)
-    {
-        RotateObjectObserver(obj, amount, axis);
-    }
-
-    [ObserversRpc]
-    void RotateObjectObserver(GameObject obj, float amount, RotationAxis axis)
-    {
-        if (axis == RotationAxis.X)
-        {
-            obj.transform.localRotation = Quaternion.Euler(amount, 0f, 0f);
-        }
-        else
-        {
-            obj.transform.localRotation = Quaternion.Euler(0f, amount, 0f);
-        }
+        if (obj.GetComponent<Rigidbody>() != null)
+            obj.GetComponent<Rigidbody>().isKinematic = false;
+        if (obj.GetComponent<Collider>() != null)
+            obj.GetComponent<Collider>().isTrigger = false;
     }
 }

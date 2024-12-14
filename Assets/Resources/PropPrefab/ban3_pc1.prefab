@@ -948,13 +948,13 @@ GameObject:
   - component: {fileID: 7498495433717516003}
   - component: {fileID: 888973625685639615}
   - component: {fileID: 5483554594647238453}
-  - component: {fileID: 4018281682762073374}
   - component: {fileID: 7700672297428298370}
   - component: {fileID: 5689570054347522919}
   - component: {fileID: 6439125575670327689}
+  - component: {fileID: 1286277919865391451}
   m_Layer: 14
   m_Name: partition wall
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1119,22 +1119,6 @@ MonoBehaviour:
     Position: {x: 1.9070001, y: 0, z: 1.36}
     Rotation: {x: -0.50000006, y: 0.49999997, z: 0.50000006, w: 0.49999997}
     LocalScale: {x: 100.000015, y: 99.99998, z: 99.99996}
---- !u!208 &4018281682762073374
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686188652506198361}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.010000001, y: 0.00001, z: 0.009000001}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.009000001}
-  m_TimeToStationary: 0.5
 --- !u!54 &7700672297428298370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1199,6 +1183,24 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300096, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
+--- !u!114 &1286277919865391451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686188652506198361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5483554594647238453}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 20
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &1725909581028843727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2451,7 @@ GameObject:
   - component: {fileID: 4359772021563084163}
   m_Layer: 14
   m_Name: table B
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2716,7 +2718,7 @@ GameObject:
   - component: {fileID: 5313630299504984726}
   m_Layer: 14
   m_Name: table B
-  m_TagString: WorldObjects
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

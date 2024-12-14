@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633481e4e494bd6408e815783b3c96d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 8
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   damage: 25
@@ -1934,10 +1934,8 @@ MonoBehaviour:
   - {fileID: 3611600815014880757}
   - {fileID: 8864338101887738001}
   - {fileID: 7088322443672725368}
-  - {fileID: 0}
   - {fileID: 3306059293743305354}
   - {fileID: 6136981361826209408}
-  - {fileID: 0}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -1963,7 +1961,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 50
+  <PrefabId>k__BackingField: 52
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 13811868997820554745
   <SceneId>k__BackingField: 0
@@ -2076,7 +2074,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 4096
-  transparentMaterial: {fileID: 0}
+  transparentMaterial: {fileID: 2100000, guid: 24593ce27ec0d3840bcf5f2a3e33ef4f, type: 2}
 --- !u!114 &7315302791391763460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2195,8 +2193,7 @@ MonoBehaviour:
   _componentIndexCache: 5
   _addedNetworkObject: {fileID: 8055465683895985816, guid: a7ce4395bb5ae1c46acd57772fa73536,
     type: 3}
-  _networkObjectCache: {fileID: 8055465683895985816, guid: a7ce4395bb5ae1c46acd57772fa73536,
-    type: 3}
+  _networkObjectCache: {fileID: 8491002545578316078}
   maxHealth: 100
   currentHealth: 0
   bloodSplatterUI: {fileID: 8304495013087965529, guid: a7ce4395bb5ae1c46acd57772fa73536,
@@ -4736,7 +4733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d960894b6ff1d458807090d4617a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 9
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 8491002545578316078}
   _networkObjectCache: {fileID: 8491002545578316078}
   damage: 10
