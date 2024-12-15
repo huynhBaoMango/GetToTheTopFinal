@@ -34,7 +34,7 @@ public class RedPillarHealth : NetworkBehaviour
 
     private IEnumerator DestroyPillar()
     {
-        ServerManager.Spawn(Instantiate(Fx, transform.position, Quaternion.identity));
+        ServerManager.Spawn(Instantiate(Fx, transform.position, Quaternion.identity), null, UnityEngine.SceneManagement.SceneManager.GetSceneByName(PlayerPrefs.GetString("sceneToLoad", gameObject.scene.name)));
 
         yield return new WaitForSeconds(3f);
 

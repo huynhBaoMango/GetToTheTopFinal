@@ -152,9 +152,9 @@ public class ZombieTank : NetworkBehaviour
         RaycastHit hit;
         if (Physics.SphereCast(transform.position, 2, transform.forward, out hit, obstacleCheckDistance))
         {
-            if (hit.collider.CompareTag(worldObjectsTag))
+            if (hit.collider.TryGetComponent<ObstacleHealth>(out ObstacleHealth obH))
             {
-                StartCoroutine(DestroyObstacle(hit.collider.GetComponent<ObstacleHealth>()));
+                StartCoroutine(DestroyObstacle(obH));
             }
         }
     }

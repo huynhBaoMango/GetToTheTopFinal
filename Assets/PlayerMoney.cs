@@ -33,9 +33,12 @@ public class PlayerMoney : NetworkBehaviour
         base.OnStartClient();
         if (!IsOwner)
         {
+            
             enabled = false;
             return;
         }
+
+        currentMoney = PlayerPrefs.GetInt("currentMoney", 3000);
 
         // Khởi tạo UI
         moneyText = GameObject.FindWithTag("MoneyText").GetComponent<TextMeshProUGUI>();
@@ -322,6 +325,13 @@ public class PlayerMoney : NetworkBehaviour
             isStoreOpening = !isStoreOpening;
             storeUI.SetActive(isStoreOpening);
             Cursor.lockState = isStoreOpening ? CursorLockMode.None : CursorLockMode.Locked;
+            GetComponent<PlayerWeapon>().canFire = !isStoreOpening;
+            GetComponent<PlayerControler>().canLook = !isStoreOpening;
         }
+    }
+
+    public void SaveMoney()
+    {
+        PlayerPrefs.SetInt("currentMoney", (int)currentMoney);
     }
 }

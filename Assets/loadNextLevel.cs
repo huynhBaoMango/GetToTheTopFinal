@@ -36,7 +36,6 @@ public class loadNextLevel : NetworkBehaviour
             "Loading"
         };
 
-        PlayerPrefs.SetInt("currentMoney", 3000);
         PlayerPrefs.SetString("sceneToLoad", sceneToLoad);
         BootstrapNetworkManager.ChangeNetworkScene(sceneToLoad, scenesToClose);
     }

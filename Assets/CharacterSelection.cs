@@ -24,18 +24,21 @@ public class CharacterSelection : NetworkBehaviour
     public void SpawnSkin1()
     {
         characterSelectPanel.SetActive(false);
+        PlayerPrefs.SetInt("prevCharacterId", 0);
         SpawnPlayer(0, LocalConnection);
     }
 
     public void SpawnSkin2()
     {
         characterSelectPanel.SetActive(false);
+        PlayerPrefs.SetInt("prevCharacterId", 1);
         SpawnPlayer(1, LocalConnection);
     }
 
     public void SpawnSkin3()
     {
         characterSelectPanel.SetActive(false);
+        PlayerPrefs.SetInt("prevCharacterId", 2);
         SpawnPlayer(2, LocalConnection);
     }
 

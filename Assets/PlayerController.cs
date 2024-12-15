@@ -19,6 +19,7 @@ public class PlayerControler : NetworkBehaviour
     float rotationX = 0f;
     [HideInInspector]
     public bool canMove = true;
+    public bool canLook = true;
     [SerializeField]
     private float cameraYOffset = 0.5f;
     private float cameraZOffset = 0.2f;
@@ -102,7 +103,7 @@ public class PlayerControler : NetworkBehaviour
         anim.SetFloat("VelocityX", localVelocity.x);
         anim.SetFloat("VelocityZ", localVelocity.z);
 
-        if (canMove && PlayerCamera != null)
+        if (canMove && PlayerCamera != null && canLook)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);

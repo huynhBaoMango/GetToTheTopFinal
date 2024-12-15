@@ -13,7 +13,7 @@ public class PlayerWeapon : NetworkBehaviour
     [SerializeField] private Transform rightHandTarget, leftHandTarget, rightHint, leftHint;
 
     // Biến kiểm tra trạng thái tắt/mở bắn súng
-    private bool canFire = true;
+    public bool canFire = true;
 
     private void Awake()
     {

@@ -35,6 +35,8 @@ public class MainMenuManager : MonoBehaviour
                 OpenMainMenu(); // Mặc định quay về MainMenu
                 break;
         }
+
+
     }
 
     public void CreateLobby()

@@ -7,6 +7,7 @@ using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -209,6 +210,7 @@ public class InGameManager : NetworkBehaviour
 
     void StartPreparing()
     {
+        UnableThis();
         Debug.Log("Preparing...");
         Timer.Value = 60;
         //SpawnZombieSpawns();
@@ -246,6 +248,18 @@ public class InGameManager : NetworkBehaviour
         progressSlider.maxValue = 120 + (level * 0.1f * 60);
         Timer.Value = 120 + (level * 0.1f * 60);
         isShooting = true;
+    }
+
+    [ServerRpc]
+    void UnableThis()
+    {
+        UnbleThisOb();
+    }
+
+    [ObserversRpc]
+    void UnbleThisOb()
+    {
+        FindObjectOfType<DestroyColiObj>().enabled = false;
     }
 
     void SpawnObject()
@@ -313,8 +327,8 @@ public class InGameManager : NetworkBehaviour
             zombieHealth.TakeDamage(500);
         }
 
-        //hien thi bang diem
-        
+
+      
         Cursor.lockState = CursorLockMode.None;
         WinUI.SetActive(true);
     }
@@ -349,6 +363,10 @@ public class InGameManager : NetworkBehaviour
     {
         int level = PlayerPrefs.GetInt("CurrentLevel", 0);
         PlayerPrefs.SetInt("CurrentLevel", level + 1);
+        foreach (GameObject go in players)
+        {
+            go.GetComponent<PlayerMoney>().SaveMoney();
+        }
         string[] scenesToClose = new string[]
         {
             gameObject.scene.name
