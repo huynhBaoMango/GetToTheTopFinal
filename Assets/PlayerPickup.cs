@@ -31,8 +31,6 @@ public class PlayerPickup : NetworkBehaviour
     private GameObject objInHand;
     private Transform worldObjectHolder;
     private float rotationAmount = 0f;
-    private enum RotationAxis { X, Y }
-    private RotationAxis currentRotationAxis = RotationAxis.Y;
     private Material originalMaterial;
     private bool originalIsTrigger;
 
@@ -54,6 +52,9 @@ public class PlayerPickup : NetworkBehaviour
 
         if (Input.GetKeyDown(dropButton))
             Drop();
+
+        if (hasObjectInHand && Input.GetAxis("Mouse ScrollWheel") != 0f)
+            RotateObject(Input.GetAxis("Mouse ScrollWheel") * 90f);
     }
 
     void Pickup()
@@ -92,7 +93,7 @@ public class PlayerPickup : NetworkBehaviour
 
         if (obj.GetComponent<Rigidbody>() != null)
             obj.GetComponent<Rigidbody>().isKinematic = true;
-        if(obj.GetComponent<Collider>() != null)
+        if (obj.GetComponent<Collider>() != null)
             obj.GetComponent<Collider>().isTrigger = true;
     }
 
@@ -121,5 +122,26 @@ public class PlayerPickup : NetworkBehaviour
             obj.GetComponent<Rigidbody>().isKinematic = false;
         if (obj.GetComponent<Collider>() != null)
             obj.GetComponent<Collider>().isTrigger = false;
+    }
+
+    void RotateObject(float amount)
+    {
+        if (!hasObjectInHand)
+            return;
+
+        rotationAmount += amount;
+        RotateObjectServer(objInHand, rotationAmount);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void RotateObjectServer(GameObject obj, float amount)
+    {
+        RotateObjectObserver(obj, amount);
+    }
+
+    [ObserversRpc]
+    void RotateObjectObserver(GameObject obj, float amount)
+    {
+        obj.transform.localRotation = Quaternion.Euler(obj.transform.localRotation.eulerAngles.x, amount, obj.transform.localRotation.eulerAngles.z);
     }
 }
