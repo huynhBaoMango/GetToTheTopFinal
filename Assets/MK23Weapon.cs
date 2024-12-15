@@ -9,13 +9,13 @@ using UnityEngine.Animations.Rigging;
 public class MK23Weapon : APlayerWeapon
 {
     float currentDelayBullet = 0;
-    int currentAmmo;
     bool isReloading;
     [SerializeField] private GameObject explosionImpactPref;
     private void Awake()
     {
         currentAmmo = maxAmmo;
         ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
+        ammoText.text = null;
         UpdateAmmoDisplay();
     }
     public override void AnimateWeapon()
@@ -71,15 +71,15 @@ public class MK23Weapon : APlayerWeapon
                         CancelInvoke("KeepMagInHand");
                         LeftHandIKTarget.DOLocalMove(tempLeftHandIK.localPosition, 1f);
                         LeftHandIKTarget.rotation = tempLeftHandIK.rotation;
-                        if (maxAmmo + currentAmmo >= 30)
+                        if (maxAmmo + currentAmmo >= 9)
                         {
-                            maxAmmo = maxAmmo + currentAmmo - 30;
-                            currentAmmo = 30;
+                            maxAmmo = maxAmmo + currentAmmo - 9;
+                            currentAmmo = 9;
                         }
                         else
                         {
-                            maxAmmo = 0;
                             currentAmmo = currentAmmo + maxAmmo;
+                            maxAmmo = 0;
                         }
 
                         UpdateAmmoDisplay();
@@ -164,11 +164,10 @@ public class MK23Weapon : APlayerWeapon
                         Debug.Log($"Hit: {hit.collider.gameObject.name}");
                         SpawnImpactEffect(hit.point, hit.normal, norImpactPref);
                     }
-
                 }
                 currentAmmo -= 1;
-                currentDelayBullet = delayBulletTime;
                 UpdateAmmoDisplay();
+                currentDelayBullet = delayBulletTime;
             }
             if (currentAmmo <= 0)
             {
@@ -192,11 +191,5 @@ public class MK23Weapon : APlayerWeapon
             ServerManager.Spawn(impactEffect);
             Destroy(impactEffect, 2f);
         }
-    }
-
-    void UpdateAmmoDisplay()
-    {
-        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
-        ammoText.text = currentAmmo + "/" + maxAmmo;
     }
 }

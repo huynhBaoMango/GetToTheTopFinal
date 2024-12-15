@@ -7,13 +7,13 @@ using UnityEngine;
 public class FALWeapon : APlayerWeapon
 {
     float currentDelayBullet = 0;
-    int currentAmmo;
     bool isReloading;
     [SerializeField] private GameObject explosionImpactPref;
     private void Awake()
     {
-        currentAmmo = 30;
+        currentAmmo = maxAmmo;
         ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
+        ammoText.text = null;
         UpdateAmmoDisplay(); 
     }
     public override void AnimateWeapon()
@@ -76,8 +76,8 @@ public class FALWeapon : APlayerWeapon
                         }
                         else
                         {
-                            maxAmmo = 0;
                             currentAmmo = currentAmmo + maxAmmo;
+                            maxAmmo = 0;
                         }
 
                         UpdateAmmoDisplay();
@@ -165,8 +165,8 @@ public class FALWeapon : APlayerWeapon
 
                 }
                 currentAmmo -= 1;
-                currentDelayBullet = delayBulletTime;
                 UpdateAmmoDisplay();
+                currentDelayBullet = delayBulletTime;
             }
             if (currentAmmo <= 0)
             {
@@ -190,11 +190,5 @@ public class FALWeapon : APlayerWeapon
             ServerManager.Spawn(impactEffect);
             Destroy(impactEffect, 2f);
         }
-    }
-
-    void UpdateAmmoDisplay()
-    {
-        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
-        ammoText.text = currentAmmo + "/" + maxAmmo;
     }
 }

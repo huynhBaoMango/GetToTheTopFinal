@@ -146,11 +146,22 @@ public class PlayerMoney : NetworkBehaviour
     {
         if (IsOwner)
         {
-            playerWeaponManager.currentWeapon.maxAmmo += 30;
             if (currentMoney >= 50 && playerWeaponManager != null && playerWeaponManager.currentWeapon != null)
             {
                 ChangeCurrentMoney(-50);
 
+                // Kiểm tra xem vũ khí hiện tại có phải là MK23
+                if (playerWeaponManager.currentWeapon is MK23Weapon) // Nếu MK23Weapon là lớp của MK23
+                {
+                    playerWeaponManager.currentWeapon.maxAmmo += 9; // Cộng 9 viên
+                    playerWeaponManager.currentWeapon.ammoText.text = playerWeaponManager.currentWeapon.currentAmmo + "/" + playerWeaponManager.currentWeapon.maxAmmo;
+      
+                }
+                else
+                {
+                    playerWeaponManager.currentWeapon.maxAmmo += 30; // Các vũ khí khác cộng 30 viên
+                    playerWeaponManager.currentWeapon.ammoText.text = playerWeaponManager.currentWeapon.currentAmmo + "/" + playerWeaponManager.currentWeapon.maxAmmo;
+                }
             }
         }
     }

@@ -9,7 +9,6 @@ using UnityEngine.Animations.Rigging;
 public class AK12Weapon : APlayerWeapon
 {
     float currentDelayBullet = 0;
-    int currentAmmo;
     bool isReloading;
 
     [SerializeField] private GameObject explosionImpactPref;
@@ -21,8 +20,9 @@ public class AK12Weapon : APlayerWeapon
 
     private void Awake()
     {
-        ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
         currentAmmo = 30;
+        ammoText = GameObject.FindWithTag("AmmoText").GetComponent<TextMeshProUGUI>();
+        ammoText.text = null;
         UpdateAmmoDisplay();
     }
 
@@ -85,9 +85,9 @@ public class AK12Weapon : APlayerWeapon
                             maxAmmo = maxAmmo + currentAmmo - 30;
                             currentAmmo = 30;
                         }
-                        else { 
-                            maxAmmo = 0;
+                        else {
                             currentAmmo = currentAmmo + maxAmmo;
+                            maxAmmo = 0;  
                         }
                         
                         UpdateAmmoDisplay();
@@ -176,8 +176,8 @@ public class AK12Weapon : APlayerWeapon
 
                 }
                 currentAmmo -= 1;
-                currentDelayBullet = delayBulletTime;
                 UpdateAmmoDisplay();
+                currentDelayBullet = delayBulletTime;
             }
             if (currentAmmo <= 0)
             {
@@ -201,11 +201,5 @@ public class AK12Weapon : APlayerWeapon
             ServerManager.Spawn(impactEffect);
             Destroy(impactEffect, 2f);
         }
-    }
-
-    void UpdateAmmoDisplay()
-    {
-        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
-        ammoText.text = currentAmmo + "/" + maxAmmo;
     }
 }

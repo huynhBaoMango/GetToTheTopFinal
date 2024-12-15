@@ -7,6 +7,7 @@ public abstract class APlayerWeapon : NetworkBehaviour
     public int damage;
     public float delayBulletTime;
     public int maxAmmo;
+    public int currentAmmo;
     public int initialMaxAmmo = 90;
     public Transform muzzleTransform;
     private Transform _cameraTransform;
@@ -35,5 +36,10 @@ public abstract class APlayerWeapon : NetworkBehaviour
     public abstract void Reload();
 
     public abstract void AnimateWeapon();
-    
+
+    public void UpdateAmmoDisplay()
+    {
+        //Cập nhật UI hiển thị số lượng đạn hiện tại và tối đa
+        ammoText.text = currentAmmo + "/" + maxAmmo;
+    }
 }
