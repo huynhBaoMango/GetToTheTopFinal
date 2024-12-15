@@ -7305,7 +7305,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 66
+  <PrefabId>k__BackingField: 69
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 16799108592042421765
   <SceneId>k__BackingField: 0
@@ -7336,6 +7336,7 @@ MonoBehaviour:
   leftHandTarget: {fileID: 2296355715141852061}
   rightHint: {fileID: 6754391161773828814}
   leftHint: {fileID: 6453167232362824439}
+  canFire: 1
 --- !u!114 &1508157167747765952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7351,13 +7352,14 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 3223182877490601382}
   _networkObjectCache: {fileID: 3223182877490601382}
-  walkingSpeed: 7.5
-  runningSpeed: 11.5
-  jumpSpeed: 8
+  walkingSpeed: 4
+  runningSpeed: 5
+  jumpSpeed: 5
   gravity: 20
   lookSpeed: 2
   lookXLimit: 60
   canMove: 1
+  canLook: 1
   cameraYOffset: 0.7
   anim: {fileID: 7048877235210488549}
   PlayerSelfLayer: 6
