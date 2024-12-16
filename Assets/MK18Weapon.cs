@@ -11,6 +11,12 @@ public class MK18Weapon : APlayerWeapon
     float currentDelayBullet = 0;
     bool isReloading;
     [SerializeField] private GameObject explosionImpactPref;
+
+    [Header("Sounds")]
+    public AudioClip fireSound;
+    public AudioClip reloadSound;
+    Coroutine lastRoutine = null;
+
     private void Awake()
     {
         currentAmmo = maxAmmo;

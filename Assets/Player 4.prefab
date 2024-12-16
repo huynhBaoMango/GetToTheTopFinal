@@ -161,6 +161,7 @@ MonoBehaviour:
   leftHandTarget: {fileID: 7690349221339623502}
   rightHint: {fileID: 6057461529880248809}
   leftHint: {fileID: 4886620414138642260}
+  canFire: 1
 --- !u!114 &3388505104244497646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   lookSpeed: 2
   lookXLimit: 60
   canMove: 1
+  canLook: 1
   cameraYOffset: 0.7
   anim: {fileID: 7911246420309738133}
   PlayerSelfLayer: 6
@@ -4854,6 +4856,8 @@ MonoBehaviour:
   rightHintIK: {fileID: 8630879753037219046}
   leftHintIK: {fileID: 1890072000174749312}
   explosionImpactPref: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 591a7a75423b03f449c2c4c109b56ac9, type: 3}
+  reloadSound: {fileID: 8300000, guid: 7ec4f80dbb84a2a49a3ccad93242118b, type: 3}
 --- !u!82 &2722778063178855664
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7748,6 +7752,8 @@ MonoBehaviour:
   rightHintIK: {fileID: 6791758089003983956}
   leftHintIK: {fileID: 6952714987480714152}
   explosionImpactPref: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 0e249c225c116d84ca9a3d33ea7f4cc2, type: 3}
+  reloadSound: {fileID: 8300000, guid: 7ec4f80dbb84a2a49a3ccad93242118b, type: 3}
 --- !u!82 &5355739334023590088
 AudioSource:
   m_ObjectHideFlags: 0
