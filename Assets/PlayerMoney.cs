@@ -203,7 +203,7 @@ public class PlayerMoney : NetworkBehaviour
 
     public void OnBuyTrapButtonClicked()
     {
-        if (currentMoney >= 200 && IsOwner)
+        if (currentMoney >= 100 && IsOwner)
         {
             CmdPurchaseTrap();
         }
@@ -216,9 +216,9 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc]
     private void CmdPurchaseTrap()
     {
-        if (currentMoney >= 200)
+        if (currentMoney >= 100)
         {
-            ChangeCurrentMoney(-200);
+            ChangeCurrentMoney(-100);
             Vector3 spawnPosition = transform.position + transform.forward * 2;
             GameObject instantiatedTrap = Instantiate(prefabToBuy, spawnPosition, Quaternion.identity);
             NetworkObject networkObject = instantiatedTrap.GetComponent<NetworkObject>();
