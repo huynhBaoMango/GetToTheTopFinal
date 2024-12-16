@@ -305,6 +305,7 @@ public class InGameManager : NetworkBehaviour
             {
                 GameObject explode = Instantiate(ExplodeFX, zombieSpawnPosList[i].position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                 ServerManager.Spawn(explode, null, gameObject.scene);
+                //cho nay
                 cutsceneCam.transform.DOShakePosition(1f, 0.5f);
                 zombieSpawnController.EnableGivenSpawn(random);
             });
