@@ -188,7 +188,8 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 8854423220736909319}
-  InitializedParentNetworkBehaviour: {fileID: 0}
+  - {fileID: 8229180605704979504}
+  InitializedParentNetworkBehaviour: {fileID: 8246991883289348293}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
@@ -233,9 +234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 5608833669888865828}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 5608833669888865828}
 --- !u!54 &5917641260563770350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -272,6 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8467980744669376782}
+  - component: {fileID: 8246991883289348293}
   m_Layer: 0
   m_Name: tu5
   m_TagString: Untagged
@@ -295,6 +297,21 @@ Transform:
   - {fileID: 8593327350425529237}
   m_Father: {fileID: 5436470109232471260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8246991883289348293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098503998613813780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 1241895901234353465}
+  _networkObjectCache: {fileID: 1241895901234353465}
 --- !u!1 &7979277263416555191
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,9 +359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 1241895901234353465}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 1241895901234353465}
   _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:
@@ -389,9 +406,12 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
+  NetworkBehaviours:
+  - {fileID: 3663038509063773246}
+  - {fileID: 8246991883289348293}
   InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
+  InitializedNestedNetworkObjects:
+  - {fileID: 5608833669888865828}
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -400,7 +420,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedValusSet: 0
+  _initializedValusSet: 1
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -415,14 +435,14 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
+  <PrefabId>k__BackingField: 68
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 17078412569195347803
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    LocalScale: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    LocalScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1588648429106552519
 MonoBehaviour:
   m_ObjectHideFlags: 0

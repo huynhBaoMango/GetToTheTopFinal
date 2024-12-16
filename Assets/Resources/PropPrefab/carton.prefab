@@ -165,12 +165,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsNested>k__BackingField: 1
-  <ComponentIndex>k__BackingField: 1
+  <ComponentIndex>k__BackingField: 2
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 6951411845635248626}
-  InitializedParentNetworkBehaviour: {fileID: 0}
+  - {fileID: 4054208684782293233}
+  InitializedParentNetworkBehaviour: {fileID: -8573473148539101492}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
@@ -242,9 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 8689211304036911200}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 8689211304036911200}
 --- !u!1 &3076780988642705720
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3213256723772520999}
+  - component: {fileID: -8573473148539101492}
   m_Layer: 0
   m_Name: thungcarton (1)
   m_TagString: Untagged
@@ -277,6 +279,21 @@ Transform:
   - {fileID: 3080579042713580716}
   m_Father: {fileID: 1629836384850658099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8573473148539101492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076780988642705720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 2
+  _addedNetworkObject: {fileID: 7992322414395503491}
+  _networkObjectCache: {fileID: 7992322414395503491}
 --- !u!1 &4561769410164853036
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2078573434642748789}
+  - component: {fileID: 2647711611940048807}
   m_Layer: 0
   m_Name: thungcarton
   m_TagString: Untagged
@@ -309,6 +327,21 @@ Transform:
   - {fileID: 3889684123404816045}
   m_Father: {fileID: 1629836384850658099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2647711611940048807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561769410164853036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 7992322414395503491}
+  _networkObjectCache: {fileID: 7992322414395503491}
 --- !u!1 &5504341898723618690
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 599641058447721662}
+  - component: {fileID: -7816294037299750717}
   m_Layer: 0
   m_Name: thungcarton (2)
   m_TagString: Untagged
@@ -341,6 +375,21 @@ Transform:
   - {fileID: 4452141742389558688}
   m_Father: {fileID: 1629836384850658099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7816294037299750717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5504341898723618690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 3
+  _addedNetworkObject: {fileID: 7992322414395503491}
+  _networkObjectCache: {fileID: 7992322414395503491}
 --- !u!1 &5764531951605320006
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,12 +555,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsNested>k__BackingField: 1
-  <ComponentIndex>k__BackingField: 1
+  <ComponentIndex>k__BackingField: 3
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 4496914574885813602}
-  InitializedParentNetworkBehaviour: {fileID: 0}
+  - {fileID: 1640127896011908388}
+  InitializedParentNetworkBehaviour: {fileID: -7816294037299750717}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
@@ -583,9 +633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 8582262255194267669}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 8582262255194267669}
 --- !u!1 &7006958295200437651
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +806,8 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 2116363307485197860}
-  InitializedParentNetworkBehaviour: {fileID: 0}
+  - {fileID: 2729116868194495265}
+  InitializedParentNetworkBehaviour: {fileID: 2647711611940048807}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
@@ -828,9 +879,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: 6922587196340946394}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6922587196340946394}
 --- !u!1 &7627941685465759854
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,9 +931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 7992322414395503491}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 7992322414395503491}
   _componentConfiguration: 0
   _synchronizeParent: 0
   _packing:
@@ -927,9 +978,16 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
+  NetworkBehaviours:
+  - {fileID: -7305296523364231958}
+  - {fileID: 2647711611940048807}
+  - {fileID: -8573473148539101492}
+  - {fileID: -7816294037299750717}
   InitializedParentNetworkBehaviour: {fileID: 0}
-  InitializedNestedNetworkObjects: []
+  InitializedNestedNetworkObjects:
+  - {fileID: 6922587196340946394}
+  - {fileID: 8689211304036911200}
+  - {fileID: 8582262255194267669}
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -938,7 +996,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedValusSet: 0
+  _initializedValusSet: 1
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -953,14 +1011,14 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
+  <PrefabId>k__BackingField: 22
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 6930474514896878821
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    LocalScale: {x: 0, y: 0, z: 0}
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    LocalScale: {x: 1, y: 1, z: 1}
 --- !u!114 &8185057731341625818
 MonoBehaviour:
   m_ObjectHideFlags: 0
