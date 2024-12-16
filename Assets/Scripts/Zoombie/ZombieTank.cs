@@ -7,6 +7,9 @@ using System.Collections;
 
 public class ZombieTank : NetworkBehaviour
 {
+
+    public AudioClip zoombiehet;
+
     [SerializeField] private float walkSpeed = 2f;
     [SerializeField] private float attackSpeed = 0f; // Tốc độ khi tấn công (0 để đứng yên)
     [SerializeField] private float attackRange = 1.5f;
@@ -41,6 +44,7 @@ public class ZombieTank : NetworkBehaviour
         _animator2 = GetComponent<NetworkAnimator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         DisableRagdoll();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(zoombiehet);
     }
 
     public override void OnStartClient()
