@@ -7,6 +7,8 @@ using FishNet.Component.Animating;
 
 public class FastZombieController : NetworkBehaviour
 {
+    public AudioClip zoombiehet;
+
     private enum ZombieState
     {
         Walking,
@@ -42,6 +44,8 @@ public class FastZombieController : NetworkBehaviour
         _animator2 = GetComponent<NetworkAnimator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         DisableRagdoll();
+        gameObject.GetComponent<AudioSource>().PlayOneShot(zoombiehet);
+
     }
 
     public override void OnStartClient()
