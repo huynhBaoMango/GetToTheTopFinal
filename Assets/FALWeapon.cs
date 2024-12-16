@@ -163,6 +163,11 @@ public class FALWeapon : APlayerWeapon
                     {
                         zombieHealth.TakeDamage(damage);
                         SpawnImpactEffect(hit.point, hit.normal, bloodImpactPref);
+
+                        if (zombieHealth._currentHealth <= damage && zombieHealth.isAlive)
+                        {
+                            transform.root.GetComponent<PlayerMoney>().ChangeCurrentMoney(20);
+                        }
                     }
                     else if (hit.collider.TryGetComponent<GasTank>(out GasTank gastank)) { gastank.TakeDamage(damage); SpawnImpactEffect(hit.point, hit.normal, explosionImpactPref); }
                     else

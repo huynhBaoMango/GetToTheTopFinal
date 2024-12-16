@@ -32,6 +32,7 @@ public class BootstrapManager : MonoBehaviour
 
     public static void BackToMenu()
     {
+        SceneManager.UnloadScene(SceneManager.GetSceneByName(PlayerPrefs.GetString("sceneToLoad", null)));
         SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
         Cursor.lockState = CursorLockMode.None;
 

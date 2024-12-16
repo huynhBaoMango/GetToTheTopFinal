@@ -314,7 +314,6 @@ public class PlayerMoney : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void OpenStore()
     {
-
         OpenStoreObserver();
     }
     [ObserversRpc]
@@ -330,6 +329,7 @@ public class PlayerMoney : NetworkBehaviour
         }
     }
 
+    [ObserversRpc]
     public void SaveMoney()
     {
         PlayerPrefs.SetInt("currentMoney", (int)currentMoney);

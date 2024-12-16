@@ -1,4 +1,6 @@
 ﻿using FishNet.Object;
+using FishNet.Object.Synchronizing;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +8,26 @@ using UnityEngine;
 public class ZombieHealth : NetworkBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    private int _currentHealth;
+    public int _currentHealth;
+    public bool isAlive;
+
 
     private void Awake()
     {
         _currentHealth = maxHealth;
+        isAlive = true;
     }
+
+   
 
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamage(int damage)
+    {
+        TakeDamageOb(damage);
+    }
+
+    [ObserversRpc]
+    void TakeDamageOb(int damage)
     {
         _currentHealth -= damage;
         Debug.Log($"Zombie current health: {_currentHealth}");
@@ -28,6 +41,7 @@ public class ZombieHealth : NetworkBehaviour
     [Server]
     private void Die()
     {
+        isAlive = false;
         Debug.Log("Zombie is dead");
         // Gọi Rpc để kích hoạt ragdoll trên client
         RpcEnableRagdoll();
