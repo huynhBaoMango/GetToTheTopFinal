@@ -2183,7 +2183,6 @@ GameObject:
   - component: {fileID: 8548269262196496457}
   - component: {fileID: 875839083478459014}
   - component: {fileID: 4567713691657251974}
-  - component: {fileID: 3114783973330668461}
   - component: {fileID: 2960519467424555735}
   - component: {fileID: 7966209790099209692}
   m_Layer: 14
@@ -2322,49 +2321,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3114783973330668461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325865520676762846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 1
-  _addedNetworkObject: {fileID: 2960519467424555735}
-  _networkObjectCache: {fileID: 2960519467424555735}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &2960519467424555735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2383,7 +2339,7 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 875839083478459014}
-  - {fileID: 3114783973330668461}
+  - {fileID: 0}
   - {fileID: 7966209790099209692}
   InitializedParentNetworkBehaviour: {fileID: -8036660670526358518}
   InitializedNestedNetworkObjects: []
@@ -3864,7 +3820,6 @@ GameObject:
   - component: {fileID: 7097443754358407990}
   - component: {fileID: 8041791151029925096}
   - component: {fileID: 732566577018433384}
-  - component: {fileID: 5923174049997166415}
   - component: {fileID: 2765407971763258251}
   - component: {fileID: 6796278177689835259}
   m_Layer: 14
@@ -4003,49 +3958,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5923174049997166415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914045912511661405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 1
-  _addedNetworkObject: {fileID: 2765407971763258251}
-  _networkObjectCache: {fileID: 2765407971763258251}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &2765407971763258251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4064,7 +3976,7 @@ MonoBehaviour:
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
   - {fileID: 8041791151029925096}
-  - {fileID: 5923174049997166415}
+  - {fileID: 0}
   - {fileID: 6796278177689835259}
   InitializedParentNetworkBehaviour: {fileID: -8036660670526358518}
   InitializedNestedNetworkObjects: []

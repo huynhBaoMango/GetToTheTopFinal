@@ -1596,7 +1596,7 @@ MonoBehaviour:
   - {fileID: 722641052516231594}
   - {fileID: 871978774358584566}
   - {fileID: 931917007226331601}
-  - {fileID: 5861727233412581456}
+  - {fileID: 0}
   RuntimeParentNetworkBehaviour: {fileID: 0}
   RuntimeChildNetworkBehaviours: []
   _isNetworked: 1
@@ -1901,10 +1901,8 @@ GameObject:
   - component: {fileID: 231297546414131950}
   - component: {fileID: 1297452531509570579}
   - component: {fileID: 3155719168881330736}
-  - component: {fileID: 5861727233412581456}
   - component: {fileID: 6637968857218092472}
   - component: {fileID: 980061919118274612}
-  - component: {fileID: 6356278017066542430}
   - component: {fileID: 3311009075400040507}
   m_Layer: 14
   m_Name: Office table
@@ -2000,59 +1998,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300120, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &5861727233412581456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5700406838510127903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsNested>k__BackingField: 1
-  <ComponentIndex>k__BackingField: 12
-  <PredictedSpawn>k__BackingField: {fileID: 0}
-  <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours:
-  - {fileID: 980061919118274612}
-  - {fileID: 6356278017066542430}
-  - {fileID: 3311009075400040507}
-  InitializedParentNetworkBehaviour: {fileID: 8672937092622421317}
-  InitializedNestedNetworkObjects: []
-  RuntimeParentNetworkBehaviour: {fileID: 0}
-  RuntimeChildNetworkBehaviours: []
-  _isNetworked: 1
-  _isSpawnable: 1
-  _isGlobal: 0
-  _initializeOrder: 0
-  _preventDespawnOnDisconnect: 0
-  _defaultDespawnType: 0
-  _initializedValusSet: 1
-  NetworkObserver: {fileID: 0}
-  _enablePrediction: 0
-  _predictionType: 0
-  _graphicalObject: {fileID: 0}
-  _detachGraphicalObject: 0
-  _enableStateForwarding: 1
-  _networkTransform: {fileID: 0}
-  _ownerInterpolation: 1
-  _ownerSmoothedProperties: 255
-  _adaptiveInterpolation: 3
-  _spectatorSmoothedProperties: 255
-  _spectatorInterpolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
-  <SpawnableCollectionId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 0
-  <SceneId>k__BackingField: 0
-  SerializedTransformProperties:
-    Position: {x: 2.245245, y: 0, z: 1.5768209}
-    Rotation: {x: -0.50195426, y: -0.49803808, z: -0.49803808, w: 0.50195426}
-    LocalScale: {x: 100.00002, y: 100.0001, z: 100.00008}
 --- !u!54 &6637968857218092472
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2093,51 +2038,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 5861727233412581456}
-  _networkObjectCache: {fileID: 5861727233412581456}
---- !u!114 &6356278017066542430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5700406838510127903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 1
-  _addedNetworkObject: {fileID: 5861727233412581456}
-  _networkObjectCache: {fileID: 5861727233412581456}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
+  _addedNetworkObject: {fileID: 1708593852811523421}
+  _networkObjectCache: {fileID: 0}
 --- !u!114 &3311009075400040507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2151,8 +2053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 2
-  _addedNetworkObject: {fileID: 5861727233412581456}
-  _networkObjectCache: {fileID: 5861727233412581456}
+  _addedNetworkObject: {fileID: 1708593852811523421}
+  _networkObjectCache: {fileID: 0}
   maxHealth: 50
   destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
     type: 3}
