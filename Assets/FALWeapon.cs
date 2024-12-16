@@ -58,6 +58,7 @@ public class FALWeapon : APlayerWeapon
     {
         if (!isReloading)
         {
+            gameObject.GetComponent<AudioSource>().PlayOneShot(reloadSound);
             isReloading = true;
             ReloadServer();
             //xu li tay
@@ -114,7 +115,6 @@ public class FALWeapon : APlayerWeapon
     [ObserversRpc(ExcludeOwner = true)]
     void ReloadObserver()
     {
-        gameObject.GetComponent<AudioSource>().PlayOneShot(reloadSound);
         LeftHandIKTarget.rotation = magHoldPos.rotation;
         LeftHandIKTarget.DOLocalMove(magHoldPos.transform.localPosition, 0.5f).OnComplete(() =>
         {
@@ -154,7 +154,7 @@ public class FALWeapon : APlayerWeapon
                 AnimateWeapon();
                 Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
                 Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-               
+                gameObject.GetComponent<AudioSource>().PlayOneShot(fireSound);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
                 {

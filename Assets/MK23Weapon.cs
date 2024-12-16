@@ -156,7 +156,7 @@ public class MK23Weapon : APlayerWeapon
                 AnimateWeapon();
                 Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
                 Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-                
+                gameObject.GetComponent<AudioSource>().PlayOneShot(fireSound);
 
                 if (Physics.Raycast(ray, out RaycastHit hit, maxRange))
                 {
