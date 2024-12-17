@@ -49,6 +49,7 @@ public class InGameManager : NetworkBehaviour
     public GameObject cutsceneCam;
     public List<Transform> zombieCamList;
     public GameObject ExplodeFX;
+    public AudioClip explosionSound;
 
 
     private void Start()
@@ -88,6 +89,7 @@ public class InGameManager : NetworkBehaviour
     private void OnChangeEndBool(bool prev, bool next, bool asServer)
     {
         EndUI.SetActive(next);
+        PlayerPrefs.SetInt("HighScore", level);
         Cursor.lockState = CursorLockMode.None;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject t in players)
@@ -305,7 +307,7 @@ public class InGameManager : NetworkBehaviour
             {
                 GameObject explode = Instantiate(ExplodeFX, zombieSpawnPosList[i].position + new Vector3(0, 1.5f, 0), Quaternion.identity);
                 ServerManager.Spawn(explode, null, gameObject.scene);
-                //cho nay
+                AudioSource.PlayClipAtPoint(explosionSound, transform.position);
                 cutsceneCam.transform.DOShakePosition(1f, 0.5f);
                 zombieSpawnController.EnableGivenSpawn(random);
             });
