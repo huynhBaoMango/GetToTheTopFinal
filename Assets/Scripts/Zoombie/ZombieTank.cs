@@ -215,7 +215,6 @@ public class ZombieTank : NetworkBehaviour
     private IEnumerator DestroyObstacle(ObstacleHealth obstacleHealth)
     {
 
-
         yield return new WaitForSeconds(obstacleDestroyDelay);
 
         if (obstacleHealth != null)

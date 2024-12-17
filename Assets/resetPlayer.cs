@@ -7,6 +7,6 @@ public class resetPlayer : MonoBehaviour
     void Start()
     {
         PlayerPrefs.SetInt("prevCharacterId", -1);
-        PlayerPrefs.SetInt("currentMoney", 3000);
+        PlayerPrefs.SetInt("currentMoney", 1000);
     }
 }

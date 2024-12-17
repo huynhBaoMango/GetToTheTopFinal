@@ -83,21 +83,6 @@ namespace SlimUI.ModernMenu{
 				fullscreentext.GetComponent<TMP_Text>().text = "off";
 			}
 
-			// check hud value
-			if(PlayerPrefs.GetInt("ShowHUD")==0){
-				showhudtext.GetComponent<TMP_Text>().text = "off";
-			}
-			else{
-				showhudtext.GetComponent<TMP_Text>().text = "on";
-			}
-
-			// check tool tip value
-			if(PlayerPrefs.GetInt("ToolTips")==0){
-				tooltipstext.GetComponent<TMP_Text>().text = "off";
-			}
-			else{
-				tooltipstext.GetComponent<TMP_Text>().text = "on";
-			}
 
 			// check shadow distance/enabled
 			if(platform == Platform.Desktop){
@@ -144,39 +129,6 @@ namespace SlimUI.ModernMenu{
 					mobileShadowlowtextLINE.gameObject.SetActive(false);
 					mobileShadowhightextLINE.gameObject.SetActive(true);
 				}
-			}
-
-
-			// check vsync
-			if(QualitySettings.vSyncCount == 0){
-				vsynctext.GetComponent<TMP_Text>().text = "off";
-			}
-			else if(QualitySettings.vSyncCount == 1){
-				vsynctext.GetComponent<TMP_Text>().text = "on";
-			}
-
-			// check mouse inverse
-			if(PlayerPrefs.GetInt("Inverted")==0){
-				invertmousetext.GetComponent<TMP_Text>().text = "off";
-			}
-			else if(PlayerPrefs.GetInt("Inverted")==1){
-				invertmousetext.GetComponent<TMP_Text>().text = "on";
-			}
-
-			// check motion blur
-			if(PlayerPrefs.GetInt("MotionBlur")==0){
-				motionblurtext.GetComponent<TMP_Text>().text = "off";
-			}
-			else if(PlayerPrefs.GetInt("MotionBlur")==1){
-				motionblurtext.GetComponent<TMP_Text>().text = "on";
-			}
-
-			// check ambient occlusion
-			if(PlayerPrefs.GetInt("AmbientOcclusion")==0){
-				ambientocclusiontext.GetComponent<TMP_Text>().text = "off";
-			}
-			else if(PlayerPrefs.GetInt("AmbientOcclusion")==1){
-				ambientocclusiontext.GetComponent<TMP_Text>().text = "on";
 			}
 
 			// check texture quality
@@ -234,18 +186,6 @@ namespace SlimUI.ModernMenu{
 		public void SensitivitySmoothing (){
 			PlayerPrefs.SetFloat("MouseSmoothing", sliderValueSmoothing);
 			Debug.Log(PlayerPrefs.GetFloat("MouseSmoothing"));
-		}
-
-		// the playerprefs variable that is checked to enable hud while in game
-		public void ShowHUD (){
-			if(PlayerPrefs.GetInt("ShowHUD")==0){
-				PlayerPrefs.SetInt("ShowHUD",1);
-				showhudtext.GetComponent<TMP_Text>().text = "on";
-			}
-			else if(PlayerPrefs.GetInt("ShowHUD")==1){
-				PlayerPrefs.SetInt("ShowHUD",0);
-				showhudtext.GetComponent<TMP_Text>().text = "off";
-			}
 		}
 
 		// the playerprefs variable that is checked to enable mobile sfx while in game

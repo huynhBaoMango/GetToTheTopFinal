@@ -12,6 +12,7 @@ public class PlayerMenu : MonoBehaviour
     [SerializeField] private Button settingButton;
     [SerializeField] private Button backtomenuButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private GameObject settingUI;
 
     [SerializeField] private string resumeButtonTag = "resumeButton";
     [SerializeField] private string settingButtonTag = "settingButton";
@@ -19,6 +20,7 @@ public class PlayerMenu : MonoBehaviour
     [SerializeField] private string exitButtonTag = "exitButton";
 
     private bool isMenuOpening;
+    private bool isSettingOpening;
 
     public void Start()
     {
@@ -43,6 +45,8 @@ public class PlayerMenu : MonoBehaviour
         else exitButton.onClick.AddListener(OnExitButton);
 
         menuUI.SetActive(false);
+
+        isSettingOpening = false;
     }
 
     private void Update()
@@ -70,7 +74,8 @@ public class PlayerMenu : MonoBehaviour
 
     public void OnSettingButton()
     {
-        
+        isSettingOpening = !isSettingOpening;
+        settingUI.SetActive(isSettingOpening);
     }
 
     public void OnBackButton()
