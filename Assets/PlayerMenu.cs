@@ -70,7 +70,7 @@ public class PlayerMenu : MonoBehaviour
 
     public void OnSettingButton()
     {
-
+        
     }
 
     public void OnBackButton()

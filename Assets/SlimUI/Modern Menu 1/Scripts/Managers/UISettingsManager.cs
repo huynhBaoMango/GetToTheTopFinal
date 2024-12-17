@@ -40,6 +40,7 @@ namespace SlimUI.ModernMenu{
 		public GameObject difficultynormaltextLINE;
 		public GameObject difficultyhardcoretext;
 		public GameObject difficultyhardcoretextLINE;
+		public Toggle showFullScreen;
 
 		[Header("CONTROLS SETTINGS")]
 		public GameObject invertmousetext;
@@ -59,12 +60,12 @@ namespace SlimUI.ModernMenu{
 		public void  Start (){
 			// check difficulty
 			if(PlayerPrefs.GetInt("NormalDifficulty") == 1){
-				difficultynormaltextLINE.gameObject.SetActive(true);
+				difficultynormaltextLINE.gameObject.SetActive(false);
 				difficultyhardcoretextLINE.gameObject.SetActive(false);
 			}
 			else
 			{
-				difficultyhardcoretextLINE.gameObject.SetActive(true);
+				difficultyhardcoretextLINE.gameObject.SetActive(false);
 				difficultynormaltextLINE.gameObject.SetActive(false);
 			}
 

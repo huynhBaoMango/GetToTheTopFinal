@@ -2735,7 +2735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &90825349
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2749,7 +2749,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1098215540}
-  m_Father: {fileID: 1867832192}
+  m_Father: {fileID: 175998176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4695,6 +4695,7 @@ MonoBehaviour:
   difficultynormaltextLINE: {fileID: 1882453031}
   difficultyhardcoretext: {fileID: 1712510722}
   difficultyhardcoretextLINE: {fileID: 1107064167}
+  showFullScreen: {fileID: 0}
   invertmousetext: {fileID: 730783215}
   musicSlider: {fileID: 901013631}
   sensitivityXSlider: {fileID: 579906361}
@@ -8202,6 +8203,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174870967}
   m_CullTransparentMesh: 0
+--- !u!224 &175998176 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 575373938050363842, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+    type: 3}
+  m_PrefabInstance: {fileID: 459121481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &179344238
 GameObject:
   m_ObjectHideFlags: 0
@@ -18489,6 +18496,16 @@ PrefabInstance:
       propertyPath: logoutMenu
       value: 
       objectReference: {fileID: 1303038733}
+    - target: {fileID: 393724386806664306, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
+      propertyPath: showhudtext
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 393724386806664306, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
+      propertyPath: tooltipstext
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 394417343945989782, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
       propertyPath: m_Spacing
@@ -19465,6 +19482,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 4
       addedObject: {fileID: 1303038734}
+    - targetCorrespondingSourceObject: {fileID: 575373938050363842, guid: 0a68be1bd13d8694e8d8fe85574ac075,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 90825349}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 352696004450694496, guid: 0a68be1bd13d8694e8d8fe85574ac075,
         type: 3}
@@ -22224,6 +22245,7 @@ MonoBehaviour:
   difficultynormaltextLINE: {fileID: 99507185}
   difficultyhardcoretext: {fileID: 960025728}
   difficultyhardcoretextLINE: {fileID: 1785608239}
+  showFullScreen: {fileID: 0}
   invertmousetext: {fileID: 1942665388}
   musicSlider: {fileID: 1182745268}
   sensitivityXSlider: {fileID: 1570882710}
@@ -27236,6 +27258,7 @@ MonoBehaviour:
   difficultynormaltextLINE: {fileID: 1406297184}
   difficultyhardcoretext: {fileID: 291414418}
   difficultyhardcoretextLINE: {fileID: 2006758115}
+  showFullScreen: {fileID: 0}
   invertmousetext: {fileID: 1829386035}
   musicSlider: {fileID: 1644431696}
   sensitivityXSlider: {fileID: 766079403}
@@ -60613,7 +60636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1498070978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74994,7 +75017,6 @@ RectTransform:
   - {fileID: 1498070978}
   - {fileID: 1789225989}
   - {fileID: 1250869387}
-  - {fileID: 90825349}
   - {fileID: 1403063039}
   m_Father: {fileID: 499926208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
