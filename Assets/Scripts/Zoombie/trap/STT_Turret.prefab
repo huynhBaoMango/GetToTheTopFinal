@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 168544035713557841}
   - component: {fileID: 366857204785017891}
   - component: {fileID: 8462725233320130886}
+  - component: {fileID: -1777118465846995637}
   m_Layer: 14
   m_Name: STT_Turret
   m_TagString: WorldObjects
@@ -108,8 +109,6 @@ MonoBehaviour:
   firePoint: {fileID: 4822253877191706}
   flameParticles: {fileID: 8891297334280618237, guid: c4ed38c72957f2241ad144a1614956d9,
     type: 3}
-  destroyEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
-    type: 3}
   rotationSpeed: 5
   detectionRange: 5
   damage: 40
@@ -156,7 +155,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 1
+  <PrefabId>k__BackingField: 3
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 594749938822423568
   <SceneId>k__BackingField: 0
@@ -213,6 +212,23 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: eed7916300c624e82b306f40e5fb87aa, type: 3}
+--- !u!114 &-1777118465846995637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178177964436236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e03830c10b62c4f983707fb1e42e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 168544035713557841}
+  _networkObjectCache: {fileID: 0}
+  m_Delay: 15
+  fx: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!1 &1188880905027522
 GameObject:
   m_ObjectHideFlags: 0
