@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5854703002082348453}
   - component: {fileID: 6497256910856224156}
   - component: {fileID: 3195440335506763768}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 2284823616053896411}
   - component: {fileID: 8282196524316658326}
   - component: {fileID: 5529120878644652693}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 5664751298913020280}
   - component: {fileID: 5243409811705484605}
   - component: {fileID: 8420611380574654707}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 2212899111234397038}
   - component: {fileID: 1139747303628316325}
   - component: {fileID: 4090590260673564018}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Noteblock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1223,7 +1223,7 @@ GameObject:
   - component: {fileID: 5407461515227891643}
   - component: {fileID: 5717062425663908644}
   - component: {fileID: 8189114266689315417}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1469,7 +1469,7 @@ GameObject:
   - component: {fileID: 2542665352029654487}
   - component: {fileID: 2110839678640499212}
   - component: {fileID: 1967109145118752467}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1715,7 +1715,7 @@ GameObject:
   - component: {fileID: 7184464884689801488}
   - component: {fileID: 9111502197968038889}
   - component: {fileID: 5284936019007321684}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pen holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1957,11 +1957,11 @@ GameObject:
   - component: {fileID: 7420590250143079583}
   - component: {fileID: 7412860803010057355}
   - component: {fileID: 7380262205507901613}
-  - component: {fileID: 5096755629399543788}
   - component: {fileID: 6705095864523131409}
   - component: {fileID: 159038462578363953}
   - component: {fileID: 5839672443197379720}
-  m_Layer: 0
+  - component: {fileID: 1999668994595848288}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2055,49 +2055,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &5096755629399543788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7389192800842095035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 6705095864523131409}
-  _networkObjectCache: {fileID: 6705095864523131409}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &6705095864523131409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2115,7 +2072,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 5096755629399543788}
+  - {fileID: 0}
   - {fileID: 159038462578363953}
   InitializedParentNetworkBehaviour: {fileID: 3677527414854848306}
   InitializedNestedNetworkObjects: []
@@ -2192,6 +2149,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1999668994595848288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389192800842095035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 6705095864523131409}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &7971146806075154038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,7 +2183,7 @@ GameObject:
   - component: {fileID: 7549283037136052483}
   - component: {fileID: 396712377181933390}
   - component: {fileID: 4308326570650496845}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

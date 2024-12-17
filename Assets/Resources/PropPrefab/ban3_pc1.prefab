@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4781449769271193045}
   - component: {fileID: 8920159806278684997}
   - component: {fileID: 6927137936975740737}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Cupboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 7873088869731333316}
   - component: {fileID: 7717969813541128321}
   - component: {fileID: 6270115388614102351}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 4980999947749205122}
   - component: {fileID: 3576385664816225746}
   - component: {fileID: 3889916337549636004}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Little cactus 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 3459241167568952819}
   - component: {fileID: 1708862269288939193}
   - component: {fileID: 3366679256984858003}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1463,7 +1463,8 @@ GameObject:
   - component: {fileID: 1950878179214092771}
   - component: {fileID: 4911919575489179075}
   - component: {fileID: 1663252483866146682}
-  m_Layer: 0
+  - component: {fileID: 5015227454345924090}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,6 +1695,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5015227454345924090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347518640973904457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 1950878179214092771}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 30
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &2698628414612091921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1729,7 @@ GameObject:
   - component: {fileID: 8938409900619695134}
   - component: {fileID: 8602277239465505831}
   - component: {fileID: 77675136737109571}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1956,7 +1975,7 @@ GameObject:
   - component: {fileID: 7478838566234808561}
   - component: {fileID: 2901928787094200035}
   - component: {fileID: 7283609341136806438}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Little cactus 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2202,7 +2221,7 @@ GameObject:
   - component: {fileID: 5955999347626672723}
   - component: {fileID: 569075346914119184}
   - component: {fileID: 7276758139111956550}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2894,7 +2913,7 @@ GameObject:
   - component: {fileID: 7088022478842164826}
   - component: {fileID: 8865233763989534554}
   - component: {fileID: 631924138972276313}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: paper box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3140,7 +3159,7 @@ GameObject:
   - component: {fileID: 6295302294899153469}
   - component: {fileID: 2820544651792076657}
   - component: {fileID: 544941885767568575}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3386,7 +3405,7 @@ GameObject:
   - component: {fileID: 6477184056012558355}
   - component: {fileID: 6755303722019781772}
   - component: {fileID: 7155420481857484273}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3632,7 +3651,7 @@ GameObject:
   - component: {fileID: 4191460185765108927}
   - component: {fileID: 8561981881125526629}
   - component: {fileID: 861693355301273626}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Coffee cup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3878,7 +3897,8 @@ GameObject:
   - component: {fileID: 1108240193935482752}
   - component: {fileID: 6795509989813582347}
   - component: {fileID: 7423191379698537413}
-  m_Layer: 0
+  - component: {fileID: 6348048301447183809}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4109,6 +4129,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6348048301447183809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623790702567130359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 1108240193935482752}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 30
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &6766935449694137899
 GameObject:
   m_ObjectHideFlags: 0
@@ -4125,7 +4163,7 @@ GameObject:
   - component: {fileID: 5676940323204358251}
   - component: {fileID: 4004228557726017245}
   - component: {fileID: 7251034599480676811}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4371,7 +4409,7 @@ GameObject:
   - component: {fileID: 950649280988306963}
   - component: {fileID: 7084371238202649655}
   - component: {fileID: 9195514576248854521}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4617,7 +4655,7 @@ GameObject:
   - component: {fileID: 1187823540938892919}
   - component: {fileID: 3348872845211140524}
   - component: {fileID: 4670439547325107620}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

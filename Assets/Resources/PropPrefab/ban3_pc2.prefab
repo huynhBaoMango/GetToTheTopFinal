@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3946510063083199130}
   - component: {fileID: 6567604908222846742}
   - component: {fileID: 2010712916666086802}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Little cactus 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 2666147432756175117}
   - component: {fileID: 5815782077925435539}
   - component: {fileID: 2884256914866549861}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 471747084475951399}
   - component: {fileID: 2058796747861817459}
   - component: {fileID: 3170821766814010350}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 16187099599118736}
   - component: {fileID: 5474888953147012277}
   - component: {fileID: 2984940019956324286}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,12 +996,11 @@ GameObject:
   - component: {fileID: 4967033509040483998}
   - component: {fileID: 3959712292453122328}
   - component: {fileID: 803574843109373419}
-  - component: {fileID: 6551369649024474104}
-  - component: {fileID: 1081536934988090938}
   - component: {fileID: 3898199351278521416}
   - component: {fileID: 1163031803229452451}
   - component: {fileID: 3054067111354425299}
-  m_Layer: 0
+  - component: {fileID: 3895714112653834183}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,65 +1094,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!208 &6551369649024474104
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3339062050534691505}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.003, y: 0.003, z: 0.007}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.007}
-  m_TimeToStationary: 0.5
---- !u!114 &1081536934988090938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3339062050534691505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 3898199351278521416}
-  _networkObjectCache: {fileID: 3898199351278521416}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &3898199351278521416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,7 +1111,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 1081536934988090938}
+  - {fileID: 0}
   - {fileID: 1163031803229452451}
   InitializedParentNetworkBehaviour: {fileID: 2520059538747950676}
   InitializedNestedNetworkObjects: []
@@ -1248,6 +1188,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3895714112653834183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339062050534691505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 3898199351278521416}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &3923490849303954065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,7 +1222,7 @@ GameObject:
   - component: {fileID: 6584116834393076675}
   - component: {fileID: 2024670337568481732}
   - component: {fileID: 4804991840249168931}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1733,7 +1691,7 @@ GameObject:
   - component: {fileID: 1221204820193063576}
   - component: {fileID: 503872753926622205}
   - component: {fileID: 1839446682690512985}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1979,7 +1937,7 @@ GameObject:
   - component: {fileID: 6272090617812013411}
   - component: {fileID: 6168272783726588266}
   - component: {fileID: 8626844353800853350}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Little cactus 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2694,7 +2652,7 @@ GameObject:
   - component: {fileID: 2638509937692766275}
   - component: {fileID: 2075340085311878662}
   - component: {fileID: 1658838465368791936}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Coffee cup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2936,11 +2894,11 @@ GameObject:
   - component: {fileID: 7492532840005113514}
   - component: {fileID: 3325458968847969373}
   - component: {fileID: 1769085718498417387}
-  - component: {fileID: 5713117347599768885}
   - component: {fileID: 6702423713494029603}
   - component: {fileID: 5131326696211675223}
   - component: {fileID: 4159831661600486530}
-  m_Layer: 0
+  - component: {fileID: 3531866204174767039}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3034,49 +2992,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &5713117347599768885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7301993060567385379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 6702423713494029603}
-  _networkObjectCache: {fileID: 6702423713494029603}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &6702423713494029603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3094,7 +3009,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 5713117347599768885}
+  - {fileID: 0}
   - {fileID: 5131326696211675223}
   InitializedParentNetworkBehaviour: {fileID: 2520059538747950676}
   InitializedNestedNetworkObjects: []
@@ -3171,6 +3086,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3531866204174767039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301993060567385379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 3898199351278521416}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &7337692862803175587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,7 +3120,7 @@ GameObject:
   - component: {fileID: 1820509605365260611}
   - component: {fileID: 5230878206005246780}
   - component: {fileID: 1188901257333610897}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3433,7 +3366,7 @@ GameObject:
   - component: {fileID: 723999397257763757}
   - component: {fileID: 751288583467617631}
   - component: {fileID: 2220066461235714792}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3679,7 +3612,7 @@ GameObject:
   - component: {fileID: 1408356661063393743}
   - component: {fileID: 5888210614841937039}
   - component: {fileID: 2626383402916063186}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: paper box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4371,7 +4304,7 @@ GameObject:
   - component: {fileID: 1152340490565758886}
   - component: {fileID: 4716409786043895917}
   - component: {fileID: 6355539541613602997}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Cupboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4617,7 +4550,7 @@ GameObject:
   - component: {fileID: 5502802252658974393}
   - component: {fileID: 6587527961482761870}
   - component: {fileID: 9211930953538966512}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
