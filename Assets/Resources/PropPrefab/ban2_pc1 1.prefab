@@ -48,7 +48,6 @@ Transform:
   - {fileID: 4110933685364234894}
   - {fileID: 3561693778543248514}
   - {fileID: 7648239047996549263}
-  - {fileID: 6391527261215978094}
   - {fileID: 7026044088844951200}
   - {fileID: 7852702401462280359}
   m_Father: {fileID: 0}
@@ -195,7 +194,7 @@ GameObject:
   - component: {fileID: 1791449542467439709}
   - component: {fileID: 2087418330547611282}
   - component: {fileID: 415256958670656193}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +440,7 @@ GameObject:
   - component: {fileID: 164068821717795255}
   - component: {fileID: 6470710320032511579}
   - component: {fileID: 9084858588388291897}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +909,7 @@ GameObject:
   - component: {fileID: 6573800167529677381}
   - component: {fileID: 2099567418267532599}
   - component: {fileID: 8521993292347081701}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,12 +1151,11 @@ GameObject:
   - component: {fileID: 2924986570218558418}
   - component: {fileID: 4569072407405441398}
   - component: {fileID: 1255593739646678758}
-  - component: {fileID: 1418105591357471501}
   - component: {fileID: 345120940402504314}
   - component: {fileID: 6079579905460306762}
   - component: {fileID: 8732011490384031239}
-  - component: {fileID: 7785221061306879181}
-  m_Layer: 0
+  - component: {fileID: 1995830344233362495}
+  m_Layer: 14
   m_Name: Plant 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,7 +1174,8 @@ Transform:
   m_LocalPosition: {x: 0.42660916, y: 0, z: 0.50328875}
   m_LocalScale: {x: 123.00727, y: 123.0072, z: 123.0072}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6391527261215978094}
   m_Father: {fileID: 617514790526267967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2924986570218558418
@@ -1251,49 +1250,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 69c26a941c079874988f990a50c935be, type: 3}
---- !u!114 &1418105591357471501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2796918288260983355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 4782389442660108339}
-  _networkObjectCache: {fileID: 345120940402504314}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &345120940402504314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,7 +1267,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 1418105591357471501}
+  - {fileID: 0}
   - {fileID: 8732011490384031239}
   InitializedParentNetworkBehaviour: {fileID: -7346391462382677532}
   InitializedNestedNetworkObjects: []
@@ -1388,22 +1344,24 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 345120940402504314}
   _networkObjectCache: {fileID: 345120940402504314}
---- !u!208 &7785221061306879181
-NavMeshObstacle:
+--- !u!114 &1995830344233362495
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2796918288260983355}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.002, y: 0.002, z: 0.006}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0.006}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 345120940402504314}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 30
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &2936378680309808323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,11 +1374,11 @@ GameObject:
   - component: {fileID: 8436870729958989887}
   - component: {fileID: 3598847346972734841}
   - component: {fileID: 7975302091562986061}
-  - component: {fileID: 7951428923755151083}
   - component: {fileID: 8638246123738778089}
   - component: {fileID: 5107838710512730079}
   - component: {fileID: 5146818579346976620}
-  m_Layer: 0
+  - component: {fileID: 2351810998609905009}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1514,49 +1472,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &7951428923755151083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2936378680309808323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 4782389442660108339}
-  _networkObjectCache: {fileID: 8638246123738778089}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &8638246123738778089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1574,7 +1489,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 7951428923755151083}
+  - {fileID: 0}
   - {fileID: 5107838710512730079}
   InitializedParentNetworkBehaviour: {fileID: -7346391462382677532}
   InitializedNestedNetworkObjects: []
@@ -1651,6 +1566,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2351810998609905009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936378680309808323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 8638246123738778089}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 30
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &3816959379198601001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1600,7 @@ GameObject:
   - component: {fileID: 600024711678811754}
   - component: {fileID: 8824774695921480787}
   - component: {fileID: 2921077888794741939}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1908,7 +1841,7 @@ GameObject:
   - component: {fileID: 6391527261215978094}
   - component: {fileID: 7596082838181752281}
   - component: {fileID: 3752348461927629413}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1923,12 +1856,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4066496197121821535}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.42660916, y: 0, z: 0.50328875}
-  m_LocalScale: {x: 123.00727, y: 123.0072, z: 123.0072}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 617514790526267967}
+  m_Father: {fileID: 7026044088844951200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7596082838181752281
 MeshFilter:
@@ -1996,7 +1929,7 @@ GameObject:
   - component: {fileID: 8649488605193035531}
   - component: {fileID: 4726792934730294171}
   - component: {fileID: 6516731152777842079}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Cupboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2242,7 +2175,7 @@ GameObject:
   - component: {fileID: 1885639935129050604}
   - component: {fileID: 3425349931827353805}
   - component: {fileID: 248616029354879818}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2488,7 +2421,7 @@ GameObject:
   - component: {fileID: 3685358156355373776}
   - component: {fileID: 2769448559361641225}
   - component: {fileID: 9181831362202861570}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2734,7 +2667,7 @@ GameObject:
   - component: {fileID: 3557532337640521841}
   - component: {fileID: 7316903113109060921}
   - component: {fileID: 2769244762059738372}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3203,7 +3136,7 @@ GameObject:
   - component: {fileID: 7402599015647717965}
   - component: {fileID: 8898416681822572724}
   - component: {fileID: 5501381570692091145}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pen holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3449,7 +3382,7 @@ GameObject:
   - component: {fileID: 9161260704850985320}
   - component: {fileID: 2334751528492237353}
   - component: {fileID: 4855675550540739114}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: computer mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3695,7 +3628,7 @@ GameObject:
   - component: {fileID: 5292022352826225991}
   - component: {fileID: 7726656461780949101}
   - component: {fileID: 3474966046976396391}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Keyboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3937,11 +3870,11 @@ GameObject:
   - component: {fileID: 6799389054634777563}
   - component: {fileID: 3617166730702582286}
   - component: {fileID: 2360368994789212504}
-  - component: {fileID: 6915444450247100848}
   - component: {fileID: 3619207488831820170}
   - component: {fileID: 4567218731006421545}
   - component: {fileID: 4282238587435223784}
-  m_Layer: 0
+  - component: {fileID: 8787762105748963390}
+  m_Layer: 14
   m_Name: Office chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4035,49 +3968,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300118, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &6915444450247100848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7798844154973376236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 4782389442660108339}
-  _networkObjectCache: {fileID: 3619207488831820170}
-  _componentConfiguration: 0
-  _synchronizeParent: 0
-  _packing:
-    Position: 1
-    Rotation: 1
-    Scale: 0
-  _interpolation: 2
-  _extrapolation: 2
-  _enableTeleport: 0
-  _teleportThreshold: 1
-  _clientAuthoritative: 1
-  _sendToOwner: 1
-  _interval: 1
-  _synchronizePosition: 1
-  _positionSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeRotation: 1
-  _rotationSnapping:
-    X: 0
-    Y: 0
-    Z: 0
-  _synchronizeScale: 1
-  _scaleSnapping:
-    X: 0
-    Y: 0
-    Z: 0
 --- !u!114 &3619207488831820170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4095,7 +3985,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 6915444450247100848}
+  - {fileID: 0}
   - {fileID: 4567218731006421545}
   InitializedParentNetworkBehaviour: {fileID: -7346391462382677532}
   InitializedNestedNetworkObjects: []
@@ -4172,6 +4062,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8787762105748963390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798844154973376236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 3619207488831820170}
+  _networkObjectCache: {fileID: 0}
+  maxHealth: 30
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &7947652774399797818
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,7 +4096,7 @@ GameObject:
   - component: {fileID: 8266755923927744116}
   - component: {fileID: 3345377922083119679}
   - component: {fileID: 489039126980378094}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4434,7 +4342,7 @@ GameObject:
   - component: {fileID: 88967214114065337}
   - component: {fileID: 7952740481064319389}
   - component: {fileID: 8327286036532576851}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
