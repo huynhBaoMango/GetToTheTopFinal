@@ -55,7 +55,7 @@ public class PlayerMenu : MonoBehaviour
     }
     public void OpenMenu()
     {
-        isMenuOpening = true;
+        isMenuOpening = !isMenuOpening;
         menuUI.SetActive(isMenuOpening);
         Cursor.lockState = isMenuOpening ? CursorLockMode.None : CursorLockMode.Locked;
         //GetComponent<PlayerWeapon>().canFire = false;
