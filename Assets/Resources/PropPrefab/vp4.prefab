@@ -2014,7 +2014,6 @@ GameObject:
   - component: {fileID: 5816847581243259761}
   - component: {fileID: 3715755405354223378}
   - component: {fileID: 3172153684170057146}
-  - component: {fileID: 3950633304024801552}
   - component: {fileID: 484668503790963959}
   - component: {fileID: 2268065646527089198}
   - component: {fileID: 2119147354602139236}
@@ -2113,18 +2112,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300142, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &3950633304024801552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5216586030526965824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d359d6ef33641f41a2ae67d1abdfdd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &484668503790963959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2230,11 +2217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45548a7da081a7448d43a7b1f680291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 484668503790963959}
   _networkObjectCache: {fileID: 0}
-  maxHealth: 500
-  destructionEffectPrefab: {fileID: 0}
+  maxHealth: 50
+  destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
+    type: 3}
 --- !u!1 &5313796562021092223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,7 +2972,6 @@ GameObject:
   - component: {fileID: 2307495322909428134}
   - component: {fileID: 7847335314507440306}
   - component: {fileID: 3487231223404491905}
-  - component: {fileID: 446633741340704449}
   - component: {fileID: 6935037699506162801}
   - component: {fileID: 5132704445471350703}
   - component: {fileID: 2912908549318744540}
@@ -3083,18 +3070,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300142, guid: 18cd780e6948a554a850b2d047ebf8fb, type: 3}
---- !u!114 &446633741340704449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5819191409424500851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d359d6ef33641f41a2ae67d1abdfdd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6935037699506162801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3203,7 +3178,7 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 6708656442521084594}
   _networkObjectCache: {fileID: 6708656442521084594}
-  maxHealth: 30
+  maxHealth: 50
   destructionEffectPrefab: {fileID: 7187393024123294025, guid: 5f2bc166e68df974bb952c4ec5c43454,
     type: 3}
 --- !u!1 &6009571033992868876
