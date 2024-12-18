@@ -83,13 +83,17 @@ public class InGameManager : NetworkBehaviour
     private void OnChangeFloor(int prev, int next, bool asServer)
     {
         levelText.text = "Floor " + next;
+        int prevlevel = PlayerPrefs.GetInt("HighScore", 0);
+        if(next > prevlevel)
+        {
+            PlayerPrefs.SetInt("HighScore", next);
+        }
     }
 
     [ObserversRpc]
     private void OnChangeEndBool(bool prev, bool next, bool asServer)
     {
         EndUI.SetActive(next);
-        PlayerPrefs.SetInt("HighScore", level);
         Cursor.lockState = CursorLockMode.None;
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject t in players)
